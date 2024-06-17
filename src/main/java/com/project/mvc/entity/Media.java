@@ -19,4 +19,5 @@ public class Media {
     private int rating;
     private String mediaDesc;
     private LocalDateTime createdAt;
+    private String imageUrl;
 }

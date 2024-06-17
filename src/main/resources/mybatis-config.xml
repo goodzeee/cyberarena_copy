@@ -10,10 +10,12 @@
 
     <typeAliases>
         <typeAlias type="com.project.mvc.entity.Media" alias="media"/>
+        <typeAlias type="com.project.mvc.entity.Discussion" alias="discussion"/>
     </typeAliases>
 
     <mappers>
         <mapper resource="mappers/MediaMapper.xml" />
+        <mapper resource="mappers/kibeom/DiscussionMapper.xml" />
     </mappers>
 
 

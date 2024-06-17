@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.project.mvc.mapper.kibeom.DiscussionMapper">
+
+
+<!--
+  insert into review (email, media_no, review_text, user_rating, discussion_status)
+    values ('hgb@naver.com', 10, '봉준호의 연기가 인상적이였습니다.', 10, 'true');
+-->
+
+
+    <select id="findAll" resultType="discussion">
+        SELECT *
+        FROM discussion
+    </select>
+
+</mapper>

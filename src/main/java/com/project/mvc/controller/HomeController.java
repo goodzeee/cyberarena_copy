@@ -18,12 +18,11 @@ import java.util.List;
 public class HomeController {
 
 
-    private final MediaMapper mediaMapper;
+
 
     @GetMapping("/index")
-    public String index(Model model) {
-        List<Media> all = mediaMapper.findAll();
-        model.addAttribute("mediaList", all);
+    public String index() {
+
         return "index";
     }
 }

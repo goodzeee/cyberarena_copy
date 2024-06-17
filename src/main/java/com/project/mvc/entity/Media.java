@@ -2,6 +2,8 @@ package com.project.mvc.entity;
 
 import lombok.*;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 
 @Getter
@@ -16,8 +18,8 @@ public class Media {
     private int categoryNo;
     private String mediaTitle;
     private String creator;
-    private int rating;
+    private double rating;
     private String mediaDesc;
-    private LocalDateTime createdAt;
+    private int createdAt;
     private String imageUrl;
 }

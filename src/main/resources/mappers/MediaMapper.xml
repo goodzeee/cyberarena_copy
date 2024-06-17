@@ -5,10 +5,41 @@
 
 <mapper namespace="com.project.mvc.mapper.MediaMapper">
 
+    <!--  동적 SQL 조건을 분리  -->
+    <sql id="search">
+        <if test="searchType == 'title'">
+            WHERE media_title LIKE CONCAT('%', #{keyword}, '%')
+        </if>
+        <if test="searchType == 'creator'">
+            WHERE creator LIKE CONCAT('%', #{keyword}, '%')
+        </if>
+        <if test="orderBy == 'rating'">
+            ORDER BY rating
+            <if test="order == 'DESC'">
+                DESC
+            </if>
+        </if>
+        <if test="orderBy == 'date'">
+
+            ORDER BY created_at
+            <if test="order == 'DESC'">
+                DESC
+            </if>
+        </if>
+    </sql>
+
     <select id="findAll" resultType="media">
         SELECT
         *
         FROM media
+        <include refid="search" />
+    </select>
+
+    <select id="findOne" parameterType="long" resultType="media">
+        SELECT
+        *
+        FROM media
+        WHERE media_no = #{mediaNo}
     </select>
 
 </mapper>

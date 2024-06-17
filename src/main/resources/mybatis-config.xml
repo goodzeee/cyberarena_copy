@@ -10,11 +10,14 @@
 
     <typeAliases>
         <typeAlias type="com.project.mvc.entity.Media" alias="media"/>
+        <typeAlias type="com.project.mvc.entity.User" alias="user"/>
     </typeAliases>
 
     <mappers>
         <mapper resource="mappers/MediaMapper.xml" />
+        <mapper resource="mappers/UserMapper.xml"/>
     </mappers>
+
 
 
 

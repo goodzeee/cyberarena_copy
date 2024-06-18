@@ -108,7 +108,13 @@
 <div class="list-wrap">
   <h1>토론 리스트</h1>
   <c:forEach var="d" items= "${dList}">
-    <div>${d} </div>
+    <div class="card">
+<%--      <div >${d.nickname}</div>--%>
+      <div >${d.discussionTitle}</div>
+      <div >${d.discussionOffer}</div>
+      <div >${d.discussionCreatedAt}</div>
+      <%--   user랑 조인해서(이메일로) 닉네임 가져온다.    --%>
+    </div>
   </c:forEach>
   <button class="make-discussion">토론 생성하기</button>
 </div>

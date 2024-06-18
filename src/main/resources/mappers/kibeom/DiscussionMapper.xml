@@ -6,15 +6,27 @@
 <mapper namespace="com.project.mvc.mapper.kibeom.DiscussionMapper">
 
 
-<!--
-  insert into review (email, media_no, review_text, user_rating, discussion_status)
-    values ('hgb@naver.com', 10, '봉준호의 연기가 인상적이였습니다.', 10, 'true');
--->
+    <insert id="insert">
 
+    </insert>
 
     <select id="findAll" resultType="discussion">
         SELECT *
         FROM discussion
     </select>
+
+<!--       dto 만들어서 받아야 함       -->
+<!--    <select id="findAll" resultType="">-->
+<!--        SELECT-->
+<!--        U.nickname AS nickname,-->
+<!--        D.discussion_title,-->
+<!--        D.discussion_offer,-->
+<!--        D.discussion_created_at,-->
+<!--        D.review_no,-->
+<!--        D.discussion_no-->
+<!--        FROM-->
+<!--        discussion D INNER JOIN user U-->
+<!--        ON U.email = #{email}-->
+<!--    </select>-->
 
 </mapper>

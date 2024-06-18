@@ -29,7 +29,7 @@
             <li><a href="#">영화</a></li>
             <li><a href="#">시리즈</a></li>
             <li><a href="#">도서</a></li>
-            <li><a href="#">토론 게시판</a></li>
+            <li><a href="discussion/list">토론 게시판</a></li>
             <!--
             <li><a href="#">마이페이지</a></li>
             <li><a href="#">영화</a></li>

@@ -7,8 +7,9 @@
     <%@ include file="include/static-head.jsp"%>
 </head>
 
-<body>
 
+<body>
+<div id="backdrop" class="none"></div>
 <%@ include file="include/header.jsp" %>
 
 

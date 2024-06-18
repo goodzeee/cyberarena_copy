@@ -3,12 +3,53 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.project.mvc.mapper.MediaMapper">
+<mapper namespace="com.project.mvc.mapper.zyo.MediaMapper">
+    <sql id="category">
+        <if test="categoryNo == 1">
+            AND category_no = 1
+        </if>
+        <if test="categoryNo == 2">
+            AND category_no = 2
+        </if>
+        <if test="categoryNo == 3">
+            AND category_no = 3
+        </if>
+    </sql>
+    <!--  동적 SQL 조건을 분리  -->
+    <sql id="search">
+        <if test="searchType == 'title'">
+            AND media_title LIKE CONCAT('%', #{keyword}, '%')
+        </if>
+        <if test="searchType == 'creator'">
+            AND creator LIKE CONCAT('%', #{keyword}, '%')
+        </if>
+            <include refid="category"/>
+        <if test="orderBy == 'rating'">
+            ORDER BY rating
+            <if test="order == 'DESC'">
+                DESC
+            </if>
+        </if>
+        <if test="orderBy == 'date'">
+            ORDER BY created_at
+            <if test="order == 'DESC'">
+                DESC
+            </if>
+        </if>
+    </sql>
 
     <select id="findAll" resultType="media">
         SELECT
         *
         FROM media
+        WHERE 1=1
+        <include refid="search" />
     </select>
 
+    <select id="findMedia" parameterType="long" resultType="media">
+        SELECT
+        *
+        FROM media
+        WHERE media_no = #{mediaNo}
+    </select>
 </mapper>

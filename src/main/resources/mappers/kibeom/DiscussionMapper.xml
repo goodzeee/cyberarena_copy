@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.project.mvc.mapper.kibeom.DiscussionMapper">
+
+
+    <insert id="insert">
+        INSERT INTO
+        discussion
+        (email, media_no, review_no, discussion_title, discussion_offer)
+        VALUES
+        (#{email}, #{mediaNo}, #{reviewNo}, #{discussionTitle}, #{discussionOffer})
+    </insert>
+
+    <select id="findAll" resultType="com.project.mvc.dto.response.kibeom.DiscussFindAllDto">
+                SELECT
+                U.nickname AS nickname,
+                D.discussion_title,
+                D.discussion_offer,
+                D.discussion_created_at,
+                D.review_no,
+                D.discussion_no
+                FROM
+                discussion D INNER JOIN user U
+                ON U.email = D.email
+    </select>
+
+    <delete id="delete">
+        DELETE FROM
+        discussion
+        WHERE discussion_no = #{discussionNo}
+    </delete>
+
+    <select id="findOne" resultType="discussion">
+        SELECT *
+        FROM discussion
+        WHERE discussion_no = #{discussionNo}
+    </select>
+
+
+
+</mapper>

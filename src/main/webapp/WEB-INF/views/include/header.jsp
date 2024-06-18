@@ -25,7 +25,7 @@
         </a>
         <ul>
             <li><a href="#">회원 가입</a></li>
-            <li><a href="#">로그인</a></li>
+            <li><a href="/user/sign-in">로그인</a></li>
             <li><a href="#">영화</a></li>
             <li><a href="#">시리즈</a></li>
             <li><a href="#">도서</a></li>

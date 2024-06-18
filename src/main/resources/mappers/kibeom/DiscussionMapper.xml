@@ -10,23 +10,19 @@
 
     </insert>
 
-    <select id="findAll" resultType="discussion">
-        SELECT *
-        FROM discussion
+    <select id="findAll" resultType="com.project.mvc.dto.response.kibeom.DiscussFindAllDto">
+                SELECT
+                U.nickname AS nickname,
+                D.discussion_title,
+                D.discussion_offer,
+                D.discussion_created_at,
+                D.review_no,
+                D.discussion_no
+                FROM
+                discussion D INNER JOIN user U
+                ON U.email = D.email
     </select>
 
-<!--       dto 만들어서 받아야 함       -->
-<!--    <select id="findAll" resultType="">-->
-<!--        SELECT-->
-<!--        U.nickname AS nickname,-->
-<!--        D.discussion_title,-->
-<!--        D.discussion_offer,-->
-<!--        D.discussion_created_at,-->
-<!--        D.review_no,-->
-<!--        D.discussion_no-->
-<!--        FROM-->
-<!--        discussion D INNER JOIN user U-->
-<!--        ON U.email = #{email}-->
-<!--    </select>-->
+
 
 </mapper>

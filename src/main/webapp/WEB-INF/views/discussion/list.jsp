@@ -111,8 +111,9 @@
     <div class="card">
 <%--      <div >${d.nickname}</div>--%>
       <div >${d.discussionTitle}</div>
+      <div >${d.nickname}</div>
       <div >${d.discussionOffer}</div>
-      <div >${d.discussionCreatedAt}</div>
+      <div >${d.formattedDiscussionCreatedAt}</div>
       <%--   user랑 조인해서(이메일로) 닉네임 가져온다.    --%>
     </div>
   </c:forEach>

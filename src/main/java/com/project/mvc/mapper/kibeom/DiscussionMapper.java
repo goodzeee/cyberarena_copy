@@ -1,6 +1,6 @@
 package com.project.mvc.mapper.kibeom;
 
-import com.project.mvc.entity.Discussion;
+import com.project.mvc.dto.response.kibeom.DiscussFindAllDto;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -15,5 +15,5 @@ public interface DiscussionMapper {
 //    - 세부내용 입력
 //    - 토론 생성 버튼 클릭
 
-    List<Discussion> findAll();
+    List<DiscussFindAllDto> findAll();
 }

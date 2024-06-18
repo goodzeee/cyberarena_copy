@@ -12,8 +12,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.util.WebUtils;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.time.LocalDateTime;
@@ -44,7 +46,7 @@ public class UserService {
         if (!passwordEncoder.matches(dto.getPassword(), foundUser.getPassword())) {
             return LoginResult.NO_PW;
         }
-        if(dto.isAutoLogin()) {
+        if (dto.isAutoLogin()) {
             String sessionId = session.getId();
             Cookie autoLoginCookie = new Cookie("auto", sessionId);
 
@@ -72,5 +74,28 @@ public class UserService {
         session.setAttribute("login", new LoginUserInfoDto(loginUser));
     }
 
+    public void autoLoginClear(HttpServletRequest request, HttpServletResponse response) {
+
+        // 1. 쿠키 제거하기
+        Cookie c = WebUtils.getCookie(request, "auto");
+        if (c != null) {
+            c.setPath("/");
+            c.setMaxAge(0);
+            response.addCookie(c);
+        }
+        // 2. DB에 자동로그인 컬럼들을 원래대로 돌려놓음
+        String email = "";
+        LoginUserInfoDto loginUser = (LoginUserInfoDto) request.getSession().getAttribute("login");
+        if (loginUser != null) {
+            email = loginUser.getEmail();
+        }
+        userMapper.updateAutoLoginSession(
+                AutoLoginDto.builder()
+                        .email(email)
+                        .sessionId("none")
+                        .limitTime(LocalDateTime.now())
+                        .build()
+        );
+    }
 
 }

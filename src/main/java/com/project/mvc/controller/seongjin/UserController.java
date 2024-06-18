@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.util.WebUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -45,8 +46,14 @@ public class UserController {
     @GetMapping("/sign-out")
     public String signOutGet(HttpServletRequest request, HttpServletResponse response) {
 
+        HttpSession session = request.getSession();
+        if(WebUtils.getCookie(request, "auto") != null) {
+            userService.autoLoginClear(request, response);
+        }
+        session.removeAttribute("login");
+        session.invalidate();
 
-        return "";
+        return "redirect:/index";
     }
 
 

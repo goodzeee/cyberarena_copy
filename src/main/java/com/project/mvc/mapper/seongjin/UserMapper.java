@@ -17,9 +17,10 @@ public interface UserMapper {
     // 이메일 혹은 아이디 중복여부 확인
     boolean isExist(@Param("type") String type, @Param("keyword") String keyword);
 
-    // 자동 로그인 세션 정보 추가
+    // 자동 로그인 세션 정보 추가 및 삭제
     void updateAutoLoginSession(AutoLoginDto autoLoginDto);
 
     // 세션 아이디를 통해 유저 조회
     User findBySessionId(String sessionId);
+
 }

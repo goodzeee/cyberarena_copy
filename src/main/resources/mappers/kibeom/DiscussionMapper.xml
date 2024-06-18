@@ -7,7 +7,11 @@
 
 
     <insert id="insert">
-
+        INSERT INTO
+        discussion
+        (email, media_no, review_no, discussion_title, discussion_offer)
+        VALUES
+        (#{email}, #{mediaNo}, #{reviewNo}, #{discussionTitle}, #{discussionOffer})
     </insert>
 
     <select id="findAll" resultType="com.project.mvc.dto.response.kibeom.DiscussFindAllDto">
@@ -21,6 +25,18 @@
                 FROM
                 discussion D INNER JOIN user U
                 ON U.email = D.email
+    </select>
+
+    <delete id="delete">
+        DELETE FROM
+        discussion
+        WHERE discussion_no = #{discussionNo}
+    </delete>
+
+    <select id="findOne" resultType="discussion">
+        SELECT *
+        FROM discussion
+        WHERE discussion_no = #{discussionNo}
     </select>
 
 

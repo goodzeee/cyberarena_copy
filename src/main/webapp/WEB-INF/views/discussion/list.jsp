@@ -77,6 +77,7 @@
       width: 100%;
       border-top: 1px solid #000;
       margin-top: 30px;
+      display: flex;
     }
 
     .none {
@@ -92,6 +93,39 @@
       z-index: 10;
       background: rgba(0, 0, 0, 0.75);
     }
+
+    .modal-left {
+      width: 50%;
+    }
+
+    .modal-right {
+      width: 50%;
+    }
+
+    .modal-right-wrap {
+      display: flex;
+    }
+    .modal-media-wrap  {
+      width: 47%;
+    }
+    .modal-media-wrap img {
+      width: 80%;
+      height: 80%;
+      background: center/cover no-repeat fixed;
+      overflow: hidden;
+    }
+    .modal-media-left {
+      width: 50%;
+    }
+    .modal-search {
+      position: fixed;
+      top: 10px;
+      /*left: 10px;*/
+      right: 20px;
+      display: flex;
+      justify-content: space-between;
+    }
+
   </style>
 </head>
 <body>
@@ -109,7 +143,7 @@
   <h1>토론 리스트</h1>
   <c:forEach var="d" items= "${dList}">
     <div class="card">
-<%--      <div >${d.nickname}</div>--%>
+
       <div >${d.discussionTitle}</div>
       <div >${d.nickname}</div>
       <div >${d.discussionOffer}</div>
@@ -123,26 +157,55 @@
 <%@ include file="../include/footer.jsp"%>
 <%--modal--%>
 <div class="modal-wrap none">
-  <h1>토론 등록</h1>
-  <form action="/discussion/register" method="POST">
-    <label>
-      # 이메일 : <input type="text" name="email">
-    </label>
-    <label>
-      # 미디어 : <input type="text" name="mediaName">
-    </label>
-    <label>
-      # 주제 : <input type="text" name="discussionTitle">
-    </label>
-    <label>
-      # 세부 내용 : <input type="text" name="discussionOffer">
-    </label>
-    <label>
-      <button type="submit">작성 완료</button>
-      <button id="cancle" type="button">작성 취소</button>
-    </label>
-  </form>
-  <div class="modal-close">닫기</div>
+  <div class="modal-left">
+    <h1>토론 등록</h1>
+    <form action="/discussion/register" method="POST">
+      <label>
+        # 이메일 : <input type="text" name="email">
+      </label>
+      <label>
+        # 미디어 : <input type="text" name="mediaName">
+      </label>
+      <label>
+        # 주제 : <input type="text" name="discussionTitle">
+      </label>
+      <label>
+        # 세부 내용 : <input type="text" name="discussionOffer">
+      </label>
+      <label>
+        <button type="submit">작성 완료</button>
+        <button id="cancle" type="button">작성 취소</button>
+      </label>
+    </form>
+    <div class="modal-close">닫기</div>
+  </div>
+  <div class="modal-right">
+
+    <form class="modal-search">
+      <label>
+        <input type="text" name="searchMedia">
+      </label>
+      <label>
+        <button type="submit">검색</button>
+      </label>
+    </form>
+
+      <c:forEach var="m" items="${mList}">
+        <div class="modal-right-wrap">
+          <div class="modal-media-left">
+            <div class="modal-media-wrap">
+              <img src="${m.imageUrl}" alt="모달 이미지">
+            </div>
+          </div>
+          <div class="modal-media-right">
+            <div class="modal-media-title">${m.mediaTitle}</div>
+            <div class="modal-media-rating">${m.rating}</div>
+          </div>
+        </div>
+
+      </c:forEach>
+<%--  필요한 정보만 빼서 레이아웃 잡고 렌더링  --%>
+  </div>
 </div>
 
 

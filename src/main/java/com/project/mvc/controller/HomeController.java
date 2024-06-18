@@ -1,5 +1,6 @@
 package com.project.mvc.controller;
 
+import com.project.mvc.common.zyo.Search;
 import com.project.mvc.entity.Media;
 import com.project.mvc.mapper.MediaMapper;
 import lombok.AllArgsConstructor;
@@ -18,11 +19,12 @@ import java.util.List;
 public class HomeController {
 
 
-
+    private final MediaMapper mediaMapper;
 
     @GetMapping("/index")
-    public String index() {
-
+    public String index(Search media, Model model) {
+        List<Media> all = mediaMapper.findAll(media);
+        model.addAttribute("mediaList", all);
         return "index";
     }
 }

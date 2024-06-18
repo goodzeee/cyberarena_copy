@@ -1,26 +1,24 @@
-package com.project.mvc.entity;
+package com.project.mvc.dto.response.jihye;
 
+import com.project.mvc.entity.DiscussionStatus;
 import lombok.*;
 
 import java.time.LocalDateTime;
 
-@Getter @Setter @ToString
-@EqualsAndHashCode
+@Getter
+@ToString
 @AllArgsConstructor
-@NoArgsConstructor @Builder
-public class Review {
+@EqualsAndHashCode
+@NoArgsConstructor
+@Builder
+public class ReviewFindAllDto {
 
     private long reviewNo;
-    private String email;
-    private long mediaNo;
-    @Setter
     private String reviewText;
     private double userRating;
     private DiscussionStatus discussionStatus;
     private LocalDateTime reviewCreatedAt;
 
-    private User user;
-
-    private Media media;
-
+    private long mediaNo;
+    private String email;
 }

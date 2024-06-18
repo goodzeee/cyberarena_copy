@@ -10,10 +10,12 @@
 
     <typeAliases>
         <typeAlias type="com.project.mvc.entity.Media" alias="media"/>
+        <typeAlias type="com.project.mvc.entity.Review" alias="review"/>
     </typeAliases>
 
     <mappers>
         <mapper resource="mappers/MediaMapper.xml" />
+        <mapper resource="mappers/jihye/ReviewMapper.xml" />
     </mappers>
 
 

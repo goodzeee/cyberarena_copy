@@ -7,6 +7,9 @@ import com.project.mvc.dto.seongjin.SignUpDto;
 import com.project.mvc.entity.User;
 import com.project.mvc.mapper.seongjin.UserMapper;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +23,7 @@ import java.time.LocalDateTime;
 @RequiredArgsConstructor
 public class UserService {
 
+    private static final Logger log = LoggerFactory.getLogger(UserService.class);
     private final UserMapper userMapper;
     private final PasswordEncoder passwordEncoder;
 
@@ -64,7 +68,6 @@ public class UserService {
         // 세션의 수명 : 설정된 시간 OR 브라우저를 닫기 전까지
         int maxInactiveInterval = session.getMaxInactiveInterval();
         session.setMaxInactiveInterval(60 * 60); // 세션 수명 1시간 설정
-
         // 세션에 로그인한 회원 정보 세팅
         session.setAttribute("login", new LoginUserInfoDto(loginUser));
     }

@@ -17,4 +17,6 @@ public class User {
     private String password;
     private String auth;
     private LocalDateTime regDate;
+    private String sessionId;
+    private LocalDateTime limitTime;
 }

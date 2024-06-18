@@ -16,8 +16,8 @@ public class Media {
     private int categoryNo;
     private String mediaTitle;
     private String creator;
-    private int rating;
+    private double rating;
     private String mediaDesc;
-    private LocalDateTime createdAt;
+    private int createdAt;
     private String imageUrl;
 }

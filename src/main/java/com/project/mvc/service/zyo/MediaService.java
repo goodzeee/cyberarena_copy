@@ -1,8 +1,9 @@
 package com.project.mvc.service.zyo;
 
 import com.project.mvc.common.zyo.Search;
+import com.project.mvc.entity.Category;
 import com.project.mvc.entity.Media;
-import com.project.mvc.mapper.MediaMapper;
+import com.project.mvc.mapper.zyo.MediaMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

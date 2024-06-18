@@ -9,6 +9,7 @@ import lombok.*;
 @Builder
 public class Search {
 
+    private int categoryNo;
     private String keyword;
     private String searchType;
     private String orderBy;

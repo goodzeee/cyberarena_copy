@@ -1,4 +1,4 @@
-package com.project.mvc.mapper;
+package com.project.mvc.mapper.zyo;
 
 import com.project.mvc.common.zyo.Search;
 import com.project.mvc.entity.Media;

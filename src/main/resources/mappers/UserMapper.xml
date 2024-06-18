@@ -49,7 +49,7 @@
         ,   nickname
         ,   auth
         ,   limit_time
-        WHERE session_id = #{session_id}
+        WHERE session_id = #{sessionId}
     </select>
 
 

@@ -36,7 +36,7 @@
             <li><a href="#">시리즈</a></li>
             <li><a href="#">도서</a></li>
             <li><a href="#">토론 게시판</a></li>
-            <li><a href="#">로그아웃</a></li>
+            <li><a href="/user/sign-out">로그아웃</a></li>
             -->
         </ul>
     </nav>

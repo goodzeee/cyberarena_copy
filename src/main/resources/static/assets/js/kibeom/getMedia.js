@@ -34,7 +34,7 @@ const renderReplies = (mediaResponse) => {
     } else {
         mediaResponse.forEach(media => {
             tag += `
-                <div class="modal-right-wrap" onclick="selectMedia('${media.mediaTitle}')">
+                 <div class="modal-right-wrap" onclick="selectMedia('${media.mediaTitle}')">
                     <div class="modal-media-left">
                         <div class="modal-media-wrap">
                             <img src="${media.imageUrl || 'default-image.png'}" alt="모달 이미지">
@@ -49,8 +49,8 @@ const renderReplies = (mediaResponse) => {
         });
     }
 
-    const fetchWrap = document.querySelector('.fetch-wrap');
-    fetchWrap.innerHTML = tag;
+    const $fetchWrap = document.querySelector('.fetch-wrap');
+    $fetchWrap.innerHTML = tag;
 };
 
 // 미디어 선택 함수 정의

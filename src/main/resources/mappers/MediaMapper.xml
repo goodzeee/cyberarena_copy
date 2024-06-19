@@ -57,6 +57,8 @@
         SELECT
         *
         FROM media
-        WHERE media_title = #{mediaName}
+        WHERE media_title LIKE CONCAT('%', #{mediaName}, '%')
     </select>
+
+
 </mapper>

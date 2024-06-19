@@ -2,6 +2,7 @@ package com.project.mvc.mapper;
 
 import com.project.mvc.common.zyo.Search;
 import com.project.mvc.entity.Media;
+import com.project.mvc.mapper.zyo.MediaMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,10 +23,7 @@ class MediaMapperTest {
     @DisplayName("전체조회")
     void findAll() {
         //given
-        List<Media> all = mediaMapper.findAll(Search.builder()
-                        .keyword("도깨비")
-                        .searchType("title")
-                .build());
+        List<Media> all = mediaMapper.findAll(null);
         //when
         System.out.println("all = " + all);
 
@@ -36,11 +34,24 @@ class MediaMapperTest {
     @DisplayName("findOne test")
     void findOne() {
         //given
-        Media one = mediaMapper.findOne(10);
+        Media one = mediaMapper.findMedia(10);
         //when
         System.out.println(one);
         //then
     }
+
+
+    @Test
+    @DisplayName("findByTitle test")
+    void findByTitle() {
+        //given
+        String title = "암살";
+        //when
+        Media byTitle = mediaMapper.findByTitle(title);
+        //then
+        System.out.println(byTitle);
+    }
+
     
     
 }

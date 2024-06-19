@@ -127,6 +127,7 @@
     }
 
   </style>
+
 </head>
 <body>
 <div id="backdrop" class="none"></div>
@@ -186,41 +187,43 @@
 
     <form class="modal-search">
       <label>
-        <input type="text" name="searchMedia">
+        <input class="modal-input" type="text" name="searchMedia" id="searchMediaInput">
       </label>
       <label>
         <button type="submit">검색</button>
       </label>
     </form>
 
-      <c:forEach var="m" items="${mList}">
-        <div class="modal-right-wrap">
-          <div class="modal-media-left">
-            <div class="modal-media-wrap">
-              <img src="${m.imageUrl}" alt="모달 이미지">
-            </div>
-          </div>
-          <div class="modal-media-right">
-            <div class="modal-media-title">${m.mediaTitle}</div>
-            <div class="modal-media-rating">${m.rating}</div>
-          </div>
+<%--      <c:forEach var="m" items="${mList}">--%>
+        <div class="fetch-wrap">
+<%--          <div class="modal-right-wrap">--%>
+<%--            <div class="modal-media-left">--%>
+<%--              <div class="modal-media-wrap">--%>
+<%--                <img src="${m.imageUrl}" alt="모달 이미지">--%>
+<%--              </div>--%>
+<%--            </div>--%>
+<%--            <div class="modal-media-right">--%>
+<%--              <div class="modal-media-title">${m.mediaTitle}</div>--%>
+<%--              <div class="modal-media-rating">${m.rating}</div>--%>
+<%--            </div>--%>
+<%--          </div>--%>
         </div>
 
-      </c:forEach>
+<%--      </c:forEach>--%>
 <%--  필요한 정보만 빼서 레이아웃 잡고 렌더링  --%>
   </div>
 </div>
 
 
 
-
+<script type="module" src="/assets/js/kibeom/getMedia.js"></script>
 <script>
   const $media = document.querySelector('.make-discussion')
-  console.log($media);
+
   const $modal = document.querySelector('.modal-wrap')
   const $closeBtn = document.querySelector('.modal-close')
   // const $backdrop = document.getElementById('backdrop')
-  console.log($closeBtn)
+
 
   $media.addEventListener('click', e => {
     console.log("버튼 클릭함!")

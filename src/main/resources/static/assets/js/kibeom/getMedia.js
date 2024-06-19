@@ -5,7 +5,7 @@ const callApi = async (url, method = 'GET', payload = null) => {
     };
 
     if (payload) {
-        requestInfo.headers = {'content-type': 'application/json'};
+        requestInfo.headers = { 'content-type': 'application/json' };
         requestInfo.body = JSON.stringify(payload);
     }
 
@@ -28,33 +28,34 @@ const fetchMedia = async (url) => {
 // renderReplies 함수 정의
 const renderReplies = (mediaResponse) => {
     let tag = '';
-    // 데이터 들고왔으니 if문 생략
-    // if (mediaResponse && mediaResponse.length > 0) {
 
-    if (!mediaResponse) {
-
+    if (!mediaResponse || mediaResponse.length === 0) {
         tag = `<div>검색 결과가 없습니다.</div>`;
-
     } else {
-
-        tag += `
-                <div class="modal-right-wrap">
+        mediaResponse.forEach(media => {
+            tag += `
+                <div class="modal-right-wrap" onclick="selectMedia('${media.mediaTitle}')">
                     <div class="modal-media-left">
                         <div class="modal-media-wrap">
-                            <img src="${mediaResponse.imageUrl}" alt="모달 이미지">
+                            <img src="${media.imageUrl || 'default-image.png'}" alt="모달 이미지">
                         </div>
                     </div>
                     <div class="modal-media-right">
-                        <div class="modal-media-title">${mediaResponse.mediaTitle}</div>
-                        <div class="modal-media-rating">${mediaResponse.rating}</div>
+                        <div class="modal-media-title">${media.mediaTitle || '제목 없음'}</div>
+                        <div class="modal-media-rating">${media.rating || '평점 없음'}</div>
                     </div>
                 </div>
             `;
-
+        });
     }
-    const fetchWrap = document.querySelector('.fetch-wrap');
 
+    const fetchWrap = document.querySelector('.fetch-wrap');
     fetchWrap.innerHTML = tag;
+};
+
+// 미디어 선택 함수 정의
+const selectMedia = (mediaTitle) => {
+    document.querySelector('input[name="mediaName"]').value = mediaTitle;
 };
 
 // 디바운스 함수 정의
@@ -77,7 +78,7 @@ const handleInput = async (event) => {
 
     // URL에 쿼리 파라미터 추가
     const url = `http://localhost:8989/api/v1/media/mediaList/${encodedQuery}`;
-                    //   http://localhost:8989/api/v1/media/mediaList/%EC%95%94%EC%82%B4
+
     // 서버로 fetch 요청 보내기
     const mediaResponse = await fetchMedia(url);
 
@@ -85,7 +86,9 @@ const handleInput = async (event) => {
     renderReplies(mediaResponse);
 };
 
-
 const debouncedHandleInput = debounce(handleInput, 300);
 
 document.getElementById('searchMediaInput').addEventListener('input', debouncedHandleInput);
+
+// 글로벌 함수로 selectMedia를 정의하여 onclick 속성에서 사용할 수 있도록 함
+window.selectMedia = selectMedia;

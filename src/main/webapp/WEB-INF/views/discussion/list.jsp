@@ -104,6 +104,7 @@
 
     .modal-right-wrap {
       display: flex;
+      border: 1px solid black;
     }
     .modal-media-wrap  {
       width: 47%;
@@ -168,7 +169,7 @@
         # 닉네임 : <input type="text" value="${login.nickName}" readonly>
       </label>
       <label>
-        # 미디어 : <input type="text" name="mediaName">
+        # 미디어 : <input type="text" name="mediaName" readonly>
       </label>
       <label>
         # 주제 : <input type="text" name="discussionTitle">
@@ -194,23 +195,11 @@
       </label>
     </form>
 
-<%--      <c:forEach var="m" items="${mList}">--%>
+
         <div class="fetch-wrap">
-<%--          <div class="modal-right-wrap">--%>
-<%--            <div class="modal-media-left">--%>
-<%--              <div class="modal-media-wrap">--%>
-<%--                <img src="${m.imageUrl}" alt="모달 이미지">--%>
-<%--              </div>--%>
-<%--            </div>--%>
-<%--            <div class="modal-media-right">--%>
-<%--              <div class="modal-media-title">${m.mediaTitle}</div>--%>
-<%--              <div class="modal-media-rating">${m.rating}</div>--%>
-<%--            </div>--%>
-<%--          </div>--%>
+
         </div>
 
-<%--      </c:forEach>--%>
-<%--  필요한 정보만 빼서 레이아웃 잡고 렌더링  --%>
   </div>
 </div>
 
@@ -218,11 +207,13 @@
 
 <script type="module" src="/assets/js/kibeom/getMedia.js"></script>
 <script>
+
+  // backdrop 해야함
+
   const $media = document.querySelector('.make-discussion')
 
   const $modal = document.querySelector('.modal-wrap')
   const $closeBtn = document.querySelector('.modal-close')
-  // const $backdrop = document.getElementById('backdrop')
 
 
   $media.addEventListener('click', e => {
@@ -237,14 +228,6 @@
     // $backdrop.classList.add('none')
   })
 
-
-  // document.addEventListener('click', e => {
-
-  //   if (!e.target.closest('.modal-wrap') && !e.target.closest('.media-card')) {
-  //     $modal.classList.add('none');
-  //     $backdrop.classList.add('none')
-  //   }
-  // });
 
 </script>
 </body>

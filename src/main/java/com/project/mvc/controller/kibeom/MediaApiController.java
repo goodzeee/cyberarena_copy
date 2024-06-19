@@ -24,7 +24,7 @@ public class MediaApiController {
     @GetMapping("/mediaList/{title}")
     public ResponseEntity<?> mediaList(@PathVariable String title) {
 
-        Media all =  mediaMapper.findByTitle(title);
+        List<Media> all =  mediaMapper.findByTitle(title);
 
         if (all == null) {
             String message = "찾는 미디어가 없습니다.";

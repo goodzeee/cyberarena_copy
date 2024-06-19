@@ -52,4 +52,11 @@
         FROM media
         WHERE media_no = #{mediaNo}
     </select>
+
+    <select id="findByTitle" resultType="media">
+        SELECT
+        *
+        FROM media
+        WHERE media_title = #{mediaName}
+    </select>
 </mapper>

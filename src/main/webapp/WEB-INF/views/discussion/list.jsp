@@ -161,7 +161,10 @@
     <h1>토론 등록</h1>
     <form action="/discussion/register" method="POST">
       <label>
-        # 이메일 : <input type="text" name="email">
+        <input type="hidden" name="email" value="${login.email}">
+      </label>
+      <label>
+        # 닉네임 : <input type="text" value="${login.nickName}" readonly>
       </label>
       <label>
         # 미디어 : <input type="text" name="mediaName">

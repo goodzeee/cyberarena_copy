@@ -7,6 +7,7 @@ pageEncoding="UTF-8"%>
         <title>로그인</title>
         <link rel="stylesheet" href="/assets/css/sign-in.css" />
         <link rel="stylesheet" href="/assets/css/common.css" />
+        <%@ include file="../include/static-head.jsp"%>
     </head>
     <body>
         <div class="login-container">

@@ -55,4 +55,12 @@ public class DiscussionController {
             return "redirect:/index";
         }
     }
+
+    @GetMapping("/detail")
+    public String discussionDetail(Model model, long dno) {
+
+        log.debug("dno: {}", dno);
+        return "discussion/detail";
+    }
+
 }

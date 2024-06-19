@@ -82,6 +82,7 @@ main {
     border: 1px solid #ddd;
     border-radius: 5px;
     background-color: #fafafa;
+    cursor: pointer;
 }
 
 .card div {

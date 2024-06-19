@@ -16,11 +16,11 @@
 <div class="list-wrap">
   <h1>토론 리스트</h1>
   <c:forEach var="d" items="${dList}">
-    <div class="card">
-      <div class="discussion-title">${d.discussionTitle}</div>
-      <div class="nickname">${d.nickname}</div>
-      <div class="discussion-offer">${d.discussionOffer}</div>
-      <div class="discussion-created-at">${d.formattedDiscussionCreatedAt}</div>
+    <div class="card" data-dno="${d.discussionNo}">
+      <p class="discussion-title">${d.discussionTitle}</p>
+      <p class="nickname">${d.nickname}</p>
+      <p class="discussion-offer">${d.discussionOffer}</p>
+      <p class="discussion-created-at">${d.formattedDiscussionCreatedAt}</p>
     </div>
   </c:forEach>
   <button class="make-discussion">토론 생성하기</button>
@@ -76,24 +76,6 @@
 
   // backdrop 해야함
 
-  // const $media = document.querySelector('.make-discussion')
-  //
-  // const $modal = document.querySelector('.modal-wrap')
-  // const $closeBtn = document.querySelector('.modal-close')
-  //
-  //
-  // $media.addEventListener('click', e => {
-  //   console.log("버튼 클릭함!")
-  //     $modal.classList.remove('none');
-  //     // $backdrop.classList.remove('none')
-  //
-  // });
-  //
-  // $closeBtn.addEventListener('click', e => {
-  //   $modal.classList.add('none')
-  //   // $backdrop.classList.add('none')
-  // })
-
   const $makeBtn = document.querySelector('.make-discussion')
   const $modal = document.getElementById('modal');
   const $backdrop = document.getElementById('backdrop')
@@ -101,6 +83,14 @@
     $modal.classList.remove('none')
     $backdrop.classList.remove('none')
   })
+
+  const $detail = document.querySelector('.list-wrap')
+  document.addEventListener('click', e => {
+    if (!e.target.closest('.card')) return;
+    const dno = e.target.closest('.card').dataset.dno;
+    window.location.href = '/discussion/detail?dno=' + dno;
+  })
+
 
 
 

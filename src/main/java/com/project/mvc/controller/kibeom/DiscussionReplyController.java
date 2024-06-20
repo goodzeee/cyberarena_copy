@@ -19,9 +19,14 @@ public class DiscussionReplyController {
     @PostMapping("/reply/register")
     public String replyToDiscussion(DiscussionCommentRequestDto dto) {
 
+        long discussionNo = dto.getDiscussionNo();
         discussionReplyService.insert(dto);
 
-        return null;
+            return "redirect:/discussion/detail?dno=" + discussionNo;
+
+
+
     }
+
 
 }

@@ -8,6 +8,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -22,4 +25,12 @@ public class DiscussionReplyService {
             log.info("등록 성공 : {}", dto);
         }
     }
+
+    // 날짜 포매팅
+    public String dateFormatting(LocalDateTime regDateTime) {
+        DateTimeFormatter pattern = DateTimeFormatter.ofPattern("yyyy. MM. dd a HH:mm");
+        return regDateTime.format(pattern);
+    }
+
+
 }

@@ -1,10 +1,13 @@
 package com.project.mvc.mapper.kibeom;
 
 import com.project.mvc.dto.request.kibeom.DiscussionCommentRequestDto;
+import com.project.mvc.entity.DiscussReply;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -30,6 +33,23 @@ class DiscussReplyMapperTest {
         System.out.println("dto = " + dto);
         assertTrue(flag);
     }
+
+
+    @Test
+    @DisplayName("전체 조회")
+    void findAllTest() {
+        //given
+        long no = 5;
+        //when
+        List<DiscussReply> all = discussReplyMapper.findAll(no);
+        //then
+        System.out.println("all = " + all);
+        assertTrue(all.size() > 0);
+    }
+
+
+
+
 
 
 }

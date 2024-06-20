@@ -1,12 +1,14 @@
 package com.project.mvc.controller.kibeom;
 
 
+import com.project.mvc.dto.request.kibeom.DiscussionCommentRequestDto;
 import com.project.mvc.entity.Media;
+import com.project.mvc.mapper.kibeom.DiscussReplyMapper;
 import com.project.mvc.mapper.zyo.MediaMapper;
-import com.project.mvc.service.kibeom.DiscussionService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,6 +21,7 @@ import java.util.List;
 public class MediaApiController {
 
     private final MediaMapper mediaMapper;
+    private final DiscussReplyMapper discussReplyMapper;
 
 
     @GetMapping("/mediaList/{title}")

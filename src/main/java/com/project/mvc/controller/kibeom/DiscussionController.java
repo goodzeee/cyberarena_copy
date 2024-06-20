@@ -49,7 +49,6 @@ public class DiscussionController {
 
     @PostMapping("/register")
     public String makeDiscussion(MakeDiscussionDto dto) {
-        log.debug("makeDiscussion: {}", dto);
         MakeDiscussionDto insertDto = discussionService.getMediaNo(dto);
         boolean flag = discussionMapper.insert(insertDto);
         if (flag) {

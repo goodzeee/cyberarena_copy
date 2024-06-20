@@ -37,7 +37,7 @@ public class DiscussionDetailResponseDto {
     }
 
     private String dateFormatting(LocalDateTime regDateTime) {
-        DateTimeFormatter pattern = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        DateTimeFormatter pattern = DateTimeFormatter.ofPattern("yyyy. MM. dd a HH:mm");
         return pattern.format(regDateTime);
     }
 

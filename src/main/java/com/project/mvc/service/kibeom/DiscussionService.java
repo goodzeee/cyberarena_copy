@@ -3,8 +3,12 @@ package com.project.mvc.service.kibeom;
 import com.project.mvc.dto.request.kibeom.MakeDiscussionDto;
 import com.project.mvc.dto.response.kibeom.DiscussFindAllDto;
 import com.project.mvc.dto.response.kibeom.DiscussResponseDto;
+import com.project.mvc.dto.response.kibeom.DiscussionDetailResponseDto;
+import com.project.mvc.entity.Discussion;
 import com.project.mvc.entity.Media;
+import com.project.mvc.entity.User;
 import com.project.mvc.mapper.kibeom.DiscussionMapper;
+import com.project.mvc.mapper.seongjin.UserMapper;
 import com.project.mvc.mapper.zyo.MediaMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -24,6 +28,7 @@ public class DiscussionService {
 
     private final DiscussionMapper discussionMapper;
     private final MediaMapper mediaMapper;
+    private final UserMapper userMapper;
 
     public List<DiscussResponseDto> findAll() {
         List<DiscussFindAllDto> list = discussionMapper.findAll();
@@ -53,6 +58,15 @@ public class DiscussionService {
             dto.setMediaNo(media.getMediaNo());
         }
 //        dto.setMediaNo(byTitle.getMediaNo());
+        return dto;
+    }
+
+    public DiscussionDetailResponseDto findOne(long discussionNo) {
+        Discussion d = discussionMapper.findOne(discussionNo);
+        DiscussionDetailResponseDto dto = new DiscussionDetailResponseDto(d);
+        User foundEmail = userMapper.findOne(d.getEmail());
+        dto.setNickname(foundEmail.getNickname());
+
         return dto;
     }
 

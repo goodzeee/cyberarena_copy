@@ -25,4 +25,7 @@ public class DiscussFindAllDto {
     private long reviewNo;
     private long discussionNo;
 
+    private long mediaNo;
+
+
 }

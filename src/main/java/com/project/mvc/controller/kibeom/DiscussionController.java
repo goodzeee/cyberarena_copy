@@ -3,6 +3,8 @@ package com.project.mvc.controller.kibeom;
 import com.project.mvc.dto.request.kibeom.MakeDiscussionDto;
 import com.project.mvc.dto.response.kibeom.DiscussFindAllDto;
 import com.project.mvc.dto.response.kibeom.DiscussResponseDto;
+import com.project.mvc.dto.response.kibeom.DiscussionDetailResponseDto;
+import com.project.mvc.entity.Discussion;
 import com.project.mvc.entity.Media;
 import com.project.mvc.mapper.kibeom.DiscussionMapper;
 import com.project.mvc.mapper.zyo.MediaMapper;
@@ -58,8 +60,8 @@ public class DiscussionController {
 
     @GetMapping("/detail")
     public String discussionDetail(Model model, long dno) {
-
-        log.debug("dno: {}", dno);
+        DiscussionDetailResponseDto foundDsc = discussionService.findOne(dno);
+        model.addAttribute("found", foundDsc);
         return "discussion/detail";
     }
 

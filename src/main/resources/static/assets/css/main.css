@@ -18,6 +18,10 @@ header {
     background-color: #222;
     color: white;
 }
+header .login-user {
+    position: absolute;
+    left: 15%;
+}
 
 header a {
     text-decoration-line: none;

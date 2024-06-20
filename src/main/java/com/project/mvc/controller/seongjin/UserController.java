@@ -8,6 +8,7 @@ import com.project.mvc.service.seongjin.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +19,7 @@ import org.springframework.web.util.WebUtils;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.PushBuilder;
 
 @Controller
 @RequestMapping("/user")
@@ -30,8 +32,7 @@ public class UserController {
     public String signInGet() {
 
 
-
-        return "user/sign-in";
+        return "user/login-page";
     }
 
     @PostMapping("/sign-in")
@@ -39,18 +40,19 @@ public class UserController {
 
         LoginResult result = userService.validateLogin(dto, session, response);
 
-        if(result == LoginResult.SUCCESS) {
+        if (result == LoginResult.SUCCESS) {
 
             return "redirect:/index";
         } else {
             return "redirect:/user/sign-in";
         }
     }
+
     @GetMapping("/sign-out")
     public String signOutGet(HttpServletRequest request, HttpServletResponse response) {
 
         HttpSession session = request.getSession();
-        if(WebUtils.getCookie(request, "auto") != null) {
+        if (WebUtils.getCookie(request, "auto") != null) {
             userService.autoLoginClear(request, response);
         }
         session.removeAttribute("login");
@@ -58,11 +60,15 @@ public class UserController {
 
         return "redirect:/index";
     }
-    @GetMapping("/sign-up")
-    public String signUpGet() {
 
-        return "user/sign-up";
+    @GetMapping("/sign-up")
+    public String signUpGet(Model model) {
+
+        model.addAttribute("enterType", "signUp");
+
+        return "user/login-page";
     }
+
     @PostMapping("/sign-up")
     public String signUpPost(SignUpDto dto) {
         boolean flag = userService.join(dto);
@@ -80,5 +86,4 @@ public class UserController {
                 .body(flag);
 
     }
-
 }

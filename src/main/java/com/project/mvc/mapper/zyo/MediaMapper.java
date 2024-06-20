@@ -13,5 +13,7 @@ public interface MediaMapper {
     List<Media> findAll(Search media);
 
     // 미디어 상세 조회
-    Media findOne(long mediaNo);
+    Media findMedia(long mediaNo);
+
+    List<Media> findByTitle(String mediaName);
 }

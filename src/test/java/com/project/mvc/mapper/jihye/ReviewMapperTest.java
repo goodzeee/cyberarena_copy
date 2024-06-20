@@ -2,7 +2,7 @@ package com.project.mvc.mapper.jihye;
 
 import com.project.mvc.entity.DiscussionStatus;
 import com.project.mvc.entity.Review;
-import com.project.mvc.mapper.MediaMapper;
+import com.project.mvc.mapper.zyo.MediaMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.project.mvc.mapper.kibeom.DiscussReplyMapper">
+
+<!--insert into discuss_reply
+(discussion_no, email, discussion_reply_content)
+values (5, 'abc2@def.com', '과연 그럴까요?');-->
+
+    <insert id="insert">
+        INSERT INTO discuss_reply
+        (discussion_no, email, discussion_reply_content)
+        values (#{discussionNo}, #{email}, #{discussionReplyContent})
+    </insert>
+
+
+</mapper>
+

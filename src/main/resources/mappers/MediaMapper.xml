@@ -52,4 +52,13 @@
         FROM media
         WHERE media_no = #{mediaNo}
     </select>
+
+    <select id="findByTitle" resultType="media">
+        SELECT
+        *
+        FROM media
+        WHERE media_title LIKE CONCAT('%', #{mediaName}, '%')
+    </select>
+
+
 </mapper>

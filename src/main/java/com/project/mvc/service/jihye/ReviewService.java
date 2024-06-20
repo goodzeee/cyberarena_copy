@@ -24,7 +24,7 @@ public class ReviewService {
     private final ReviewMapper reviewMapper;
 
     public List<ReviewListDto> findAllMediaWithReviews() {
-        List<Media> mediaList = mediaMapper.findAll(Search.builder().build());
+        List<Media> mediaList = mediaMapper.findAll(null);
 
         return mediaList.stream()
                 .map(media -> {

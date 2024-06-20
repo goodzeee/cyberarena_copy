@@ -23,6 +23,6 @@ public class MediaService {
     // 상세 조회
     public Media detail(long mediaNo) {
         // 게시물 정보 조회
-        return mediaMapper.findOne(mediaNo);
+        return mediaMapper.findMedia(mediaNo);
     }
 }

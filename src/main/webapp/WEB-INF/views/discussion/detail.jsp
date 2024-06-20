@@ -40,8 +40,12 @@
       </div>
 
     <div class="comment-form">
-      <textarea placeholder="댓글을 입력하세요..."></textarea>
-      <button class="submit-comment">댓글 등록</button>
+      <form action="/discussion/reply/register" method="POST">
+        <textarea placeholder="댓글을 입력하세요..." name="discussionReplyContent"></textarea>
+        <input type="hidden" value="${found.discussionNo}" name="discussionNo">
+        <input type="hidden" value="${login.email}" name="email">
+        <button class="submit-comment">댓글 등록</button>
+      </form>
     </div>
   </div>
 </div>

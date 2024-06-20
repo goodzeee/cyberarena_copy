@@ -9,13 +9,13 @@ function debounce(callback, wait) {
 // 회원가입 입력 검증 처리
 
 // 계정 입력 검증
-const $nicknameInput = document.querySelector("#nickname input");
+const $nicknameInput = document.querySelector("#nickname");
 let nicknameFlag = false;
 let emailFlag = false;
-const $pwInput = document.querySelector("#password input");
-const $pwCheckInput = document.querySelector("#password_check input");
+const $pwInput = document.querySelector("#password");
+const $pwCheckInput = document.querySelector("#password_check");
 let pwFlag = false;
-const $emailInput = document.querySelector("#email input");
+const $emailInput = document.querySelector("#email");
 let nicknamePass = false;
 let pwPass = false;
 let pwChkPass = false;
@@ -77,12 +77,12 @@ $nicknameInput.addEventListener(
             if (nicknameFlag) {
                 $nicknameInput.style.borderColor = "red";
                 $nicknameChk.innerHTML =
-                    '<b class="warning"><i class="far fa-times-circle"></i>[아이디가 중복되었습니다. 다른 아이디를 사용하세요!]</b>';
+                    '<b class="warning"><i class="far fa-times-circle"></i>[이미 사용된 닉네임입니다. 다른 아이디를 사용하세요!]</b>';
                 nicknamePass = false;
             } else {
                 $nicknameInput.style.borderColor = "skyblue";
                 $nicknameChk.innerHTML =
-                    '<b class="success"><i class="far fa-check-circle"></i>[사용가능한 아이디입니다.]</b>';
+                    '<b class="success"><i class="far fa-check-circle"></i>[사용가능한 닉네임입니다.]</b>';
                 nicknamePass = true;
             }
         }

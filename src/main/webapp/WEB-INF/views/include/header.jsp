@@ -17,7 +17,6 @@
         <span class="menu-txt">MENU</span>
         <span class="lnr lnr-menu"></span>
     </a>
-    </div>
 
     <nav class="gnb">
         <a href="#" class="close">
@@ -26,9 +25,9 @@
         <ul>
             <li><a href="#">회원 가입</a></li>
             <li><a href="/user/sign-in">로그인</a></li>
-            <li><a href="#">영화</a></li>
-            <li><a href="#">시리즈</a></li>
-            <li><a href="#">도서</a></li>
+            <li><a href="/media/movie">영화</a></li>
+            <li><a href="/media/series">시리즈</a></li>
+            <li><a href="/media/book">도서</a></li>
             <li><a href="discussion/list">토론 게시판</a></li>
             <!--
             <li><a href="#">마이페이지</a></li>

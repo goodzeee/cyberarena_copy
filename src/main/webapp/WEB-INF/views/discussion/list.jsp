@@ -13,9 +13,15 @@
 <div id="backdrop" class="none"></div>
 <%@ include file="../include/header.jsp"%>
 
+<script type="text/javascript">
+  const isLoggedIn = ${login != null};
+</script>
+
 <div class="list-wrap">
   <h1>토론 리스트</h1>
+
   <button class="make-discussion">토론 생성하기</button>
+
   <c:forEach var="d" items="${dList}">
     <div class="card" data-dno="${d.discussionNo}">
       <p class="discussion-title">${d.discussionTitle}</p>
@@ -37,7 +43,7 @@
       <form action="/discussion/register" method="POST">
         <input type="hidden" name="email" value="${login.email}">
         <label>
-          # 닉네임 : <input type="text" id="nickname" value="${login.nickName}" readonly>
+          # 닉네임 : <input type="text" id="nickname" value="${login.nickname}" readonly>
         </label>
         <label>
           # 미디어 : <input type="text" id="media" name="mediaName" readonly placeholder="하단의 검색창을 이용해주세요.">
@@ -73,7 +79,7 @@
 
 
 <script type="module" src="/assets/js/kibeom/getMedia.js"></script>
-<script type="module" src="/assets/js/kibeom/list.js"></script>
+<script type="text/javascript" src="/assets/js/kibeom/list.js"></script>
 
 </body>
 </html>

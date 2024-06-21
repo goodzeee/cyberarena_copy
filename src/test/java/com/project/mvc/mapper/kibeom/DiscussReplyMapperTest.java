@@ -6,12 +6,16 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Rollback;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
+@Transactional
+@Rollback
 class DiscussReplyMapperTest {
 
     @Autowired
@@ -25,7 +29,8 @@ class DiscussReplyMapperTest {
         DiscussionCommentRequestDto dto = DiscussionCommentRequestDto.builder()
                 .discussionNo(5)
                 .email("hgb926@naver.com")
-                .discussionReplyContent("내일 뭐하지?")
+                .nickname("기범")
+                .discussionReplyContent("내..")
                 .build();
         //when
         boolean flag = discussReplyMapper.insert(dto);

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace에는 연결할 인터페이스의 풀네임 -->
+<!-- 설정파일에 매퍼 등록 -->
+<mapper namespace="com.project.mvc.mapper.seongjin.FollowLogMapper">
+
+    <select id="getList" resultType="String">
+        SELECT
+        <if test="type">
+            target_email
+            FROM follow_log
+            WHERE user_email = #{userEmail}
+        </if>
+        <if test="!type">
+            user_email
+            FROM follow_log
+            WHERE target_email = #{userEmail}
+        </if>
+    </select>
+
+    <insert id="follow">
+        INSERT INTO follow_log
+            (user_email, target_email)
+        VALUE
+            (#{userEmail}, #{targetEmail})
+    </insert>
+    <delete id="unfollow">
+        DELETE FROM follow_log
+            WHERE user_email = #{userEmail}
+            AND target_email = #{targetEmail}
+    </delete>
+
+
+</mapper>

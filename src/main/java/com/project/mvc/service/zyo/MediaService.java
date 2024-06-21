@@ -25,4 +25,9 @@ public class MediaService {
         // 게시물 정보 조회
         return mediaMapper.findOne(mediaNo);
     }
+
+    // 이미지 URL 조회
+    public List<String> findImageUrlByCategory(int categoryNo) {
+        return mediaMapper.findImageUrlByCategory(categoryNo);
+    }
 }

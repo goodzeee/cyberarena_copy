@@ -14,10 +14,15 @@
     </insert>
 
     <select id="findAll" resultType="discussReply">
-        SELECT
-        *
-        FROM discuss_reply
-        WHERE discussion_no = #{discussionNo}
+        select
+        D.discussion_no,
+        D.discussion_reply_content,
+        D.discussion_reply_no,
+        D.discussion_reply_created_at,
+        U.nickname as email
+        from discuss_reply D inner join user U
+        on D.email = U.email
+        where D.discussion_no = #{email}
     </select>
 
 

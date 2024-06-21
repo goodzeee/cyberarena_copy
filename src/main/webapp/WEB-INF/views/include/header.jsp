@@ -3,7 +3,7 @@
 
 
 <header>
-    <a href="#">
+    <a href="/index">
         <div class="logo">LOGO</div>
     </a>
     <div class="search-bar">

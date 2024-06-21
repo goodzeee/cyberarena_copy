@@ -26,10 +26,7 @@ public class DiscussReplyApiController {
     @GetMapping("/{dno}")
     public ResponseEntity<?> getReplies(@PathVariable("dno") long dno) {
         List<DiscussReply> all = discussReplyMapper.findAll(dno);
-//        for (DiscussReply discussReply : all) {
-//            String s = discussionReplyService.dateFormatting(discussReply.getDiscussionReplyCreatedAt());
-//            discussReply.setDiscussionReplyCreatedAt(LocalDateTime.parse(s));
-//        }
+
         if (all == null) {
             String message = "댓글 없다.";
             log.warn(message);

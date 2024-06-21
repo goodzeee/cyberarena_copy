@@ -59,6 +59,7 @@ document.addEventListener('DOMContentLoaded', function() {
         commentElement.innerHTML = `
             <div class="comment-header" data-replyNo="${comment.discussionReplyNo}">
                 <span class="comment-nickname">${comment.email}</span>
+                                                    <!-- email을 받지만 nickname으로 렌더링되게 바꿈 (이름만 email) -->
                 <span class="comment-date">${new Date(comment.discussionReplyCreatedAt).toLocaleString()}</span>
             </div>
             

@@ -26,9 +26,9 @@
         <ul>
             <li><a href="#">회원 가입</a></li>
             <li><a href="/user/sign-in">로그인</a></li>
-            <li><a href="#">영화</a></li>
-            <li><a href="#">시리즈</a></li>
-            <li><a href="#">도서</a></li>
+            <li><a href="/review/list/{mno}">영화</a></li>
+            <li><a href="/review/list">시리즈</a></li>
+            <li><a href="/review/list">도서</a></li>
             <li><a href="discussion/list">토론 게시판</a></li>
             <!--
             <li><a href="#">마이페이지</a></li>

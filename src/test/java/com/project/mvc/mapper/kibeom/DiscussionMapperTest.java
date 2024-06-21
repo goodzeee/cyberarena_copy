@@ -38,7 +38,6 @@ class DiscussionMapperTest {
         MakeDiscussionDto dto = MakeDiscussionDto.builder()
                 .email("hgb@naver.com")
                 .mediaNo(10)
-                .reviewNo(57)
                 .discussionTitle("봉준호씨는 남자입니다.")
                 .discussionOffer("남자 맞죠?")
                 .build();

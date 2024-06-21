@@ -30,6 +30,7 @@ public class MediaService {
     // 상세 조회 요청 중간처리
     public MediaDetailDto detail(long mediaNo) {
         // 게시물 정보 조회
+
         Media media = mediaMapper.findOne(mediaNo);
 
         // 특정 미디어에 달린 리뷰 목록 조회
@@ -58,5 +59,6 @@ public class MediaService {
         dto.setReviews(reviews);
 
         return dto;
+
     }
 }

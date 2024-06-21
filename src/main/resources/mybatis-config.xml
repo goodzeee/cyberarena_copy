@@ -13,6 +13,7 @@
         <typeAlias type="com.project.mvc.entity.Review" alias="review"/>
         <typeAlias type="com.project.mvc.entity.User" alias="user"/>
         <typeAlias type="com.project.mvc.entity.Discussion" alias="discussion"/>
+        <typeAlias type="com.project.mvc.entity.DiscussReply" alias="discussReply"/>
 
     </typeAliases>
 
@@ -21,6 +22,11 @@
         <mapper resource="mappers/jihye/ReviewMapper.xml" />
         <mapper resource="mappers/kibeom/DiscussionMapper.xml" />
         <mapper resource="mappers/UserMapper.xml"/>
+        <mapper resource="mappers/FollowLogMapper.xml"/>
+
+        <mapper resource="mappers/kibeom/DiscussReplyMapper.xml"/>
+
+
 
     </mappers>
 

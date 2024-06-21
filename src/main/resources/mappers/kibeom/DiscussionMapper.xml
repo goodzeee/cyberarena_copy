@@ -9,9 +9,9 @@
     <insert id="insert">
         INSERT INTO
         discussion
-        (email, media_no, review_no, discussion_title, discussion_offer)
+        (email, media_no, discussion_title, discussion_offer)
         VALUES
-        (#{email}, #{mediaNo}, #{reviewNo}, #{discussionTitle}, #{discussionOffer})
+        (#{email}, #{mediaNo}, #{discussionTitle}, #{discussionOffer})
     </insert>
 
     <select id="findAll" resultType="com.project.mvc.dto.response.kibeom.DiscussFindAllDto">

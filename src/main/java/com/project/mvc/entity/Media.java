@@ -18,6 +18,7 @@ public class Media {
 
     private long mediaNo;
     private int categoryNo;
+    @Setter
     private String mediaTitle;
     private String creator;
     private double rating;

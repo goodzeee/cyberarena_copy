@@ -36,6 +36,10 @@ public class UserService {
         return userMapper.save(dto.toEntity());
     }
 
+    public boolean checkIdentifier(String type, String keyword) {
+        return userMapper.isExist(type, keyword);
+    }
+
     // 로그인 검증
     public LoginResult validateLogin(LoginDto dto, HttpSession session, HttpServletResponse response) {
 

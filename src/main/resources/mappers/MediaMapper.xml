@@ -52,4 +52,12 @@
         FROM media
         WHERE media_no = #{mediaNo}
     </select>
+  
+    <select id="findImageUrlByCategory" parameterType="int" resultType="string">
+        SELECT image_url
+        FROM media
+        WHERE 1=1
+        <include refid="category" />
+    </select>
+
 </mapper>

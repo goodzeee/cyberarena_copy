@@ -19,11 +19,13 @@ public class DiscussionReplyService {
     private final DiscussReplyMapper discussReplyMapper;
 
 
-    public void insert(DiscussionCommentRequestDto dto) {
+    public boolean insert(DiscussionCommentRequestDto dto) {
         boolean flag = discussReplyMapper.insert(dto);
         if (flag) {
             log.info("등록 성공 : {}", dto);
+            return true;
         }
+        return false;
     }
 
     // 날짜 포매팅

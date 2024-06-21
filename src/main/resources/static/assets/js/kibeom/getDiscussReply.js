@@ -37,6 +37,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 addCommentToDOM(newComment);
                 commentForm.reset();
+
             } else {
                 console.error('Error submitting comment:', response.statusText);
             }
@@ -54,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function addCommentToDOM(comment) {
         const commentElement = document.createElement('div');
-        console.log(comment)
+        console.log('comment : ', comment)
         commentElement.classList.add('comment-card');
         commentElement.innerHTML = `
             <div class="comment-header" data-replyNo="${comment.discussionReplyNo}">

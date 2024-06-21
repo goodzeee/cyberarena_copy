@@ -39,10 +39,8 @@ public class DiscussReplyApiController {
     public ResponseEntity<?> createReply(@RequestBody DiscussionCommentRequestDto dto, BindingResult result) {
         log.info("/api/v1/discuss/reply : POST");
         log.debug("parameter: {}", dto);
-
-        boolean flag = discussReplyMapper.insert(dto);
+        boolean flag = discussionReplyService.insert(dto);
         if (!flag) return ResponseEntity.internalServerError().body("댓글 등록 실패");
-
         return ResponseEntity.ok().body(dto);
     }
 }

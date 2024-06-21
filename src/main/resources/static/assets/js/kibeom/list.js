@@ -1,4 +1,3 @@
-
 const $finishBtn = document.getElementById('finish');
 const $title = document.getElementById('title');
 const $offer = document.getElementById('detail');
@@ -23,19 +22,8 @@ for (let i = 0; i < validate.length; i++) {
     });
 }
 
-
-
-// ======================================== //
-
-
-
-
 const $makeBtn = document.querySelector('.make-discussion')
 const $backdrop = document.getElementById('backdrop')
-$makeBtn.addEventListener('click', e => {
-    $modal.classList.remove('none')
-    $backdrop.classList.remove('none')
-})
 
 const $detail = document.querySelector('.list-wrap')
 document.addEventListener('click', e => {
@@ -43,7 +31,6 @@ document.addEventListener('click', e => {
     const dno = e.target.closest('.card').dataset.dno;
     window.location.href = '/discussion/detail?dno=' + dno;
 })
-
 
 const menuBtn = document.querySelector("header .menu-open");
 const closeBtn = document.querySelector(".gnb .close");
@@ -55,4 +42,18 @@ menuBtn.addEventListener("click", () => {
 
 closeBtn.addEventListener("click", () => {
     gnb.classList.remove("on");
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    const makeDiscussionButton = document.querySelector('.make-discussion');
+
+    makeDiscussionButton.addEventListener('click', function(event) {
+        if (!isLoggedIn) {
+            alert('로그인이 필요한 서비스입니다.');
+            event.preventDefault();
+        } else {
+            $modal.classList.remove('none');
+            $backdrop.classList.remove('none');
+        }
+    });
 });

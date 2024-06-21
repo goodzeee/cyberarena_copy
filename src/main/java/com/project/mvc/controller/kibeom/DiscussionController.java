@@ -1,5 +1,6 @@
 package com.project.mvc.controller.kibeom;
 
+import com.project.mvc.dto.request.kibeom.DiscussionCommentRequestDto;
 import com.project.mvc.dto.request.kibeom.MakeDiscussionDto;
 import com.project.mvc.dto.response.kibeom.DiscussFindAllDto;
 import com.project.mvc.dto.response.kibeom.DiscussResponseDto;
@@ -48,7 +49,6 @@ public class DiscussionController {
 
     @PostMapping("/register")
     public String makeDiscussion(MakeDiscussionDto dto) {
-        log.debug("makeDiscussion: {}", dto);
         MakeDiscussionDto insertDto = discussionService.getMediaNo(dto);
         boolean flag = discussionMapper.insert(insertDto);
         if (flag) {
@@ -58,11 +58,16 @@ public class DiscussionController {
         }
     }
 
+
     @GetMapping("/detail")
     public String discussionDetail(Model model, long dno) {
         DiscussionDetailResponseDto foundDsc = discussionService.findOne(dno);
         model.addAttribute("found", foundDsc);
         return "discussion/detail";
     }
+
+
+
+
 
 }

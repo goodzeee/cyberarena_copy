@@ -16,5 +16,8 @@ public class DiscussReply {
     private long discussionNo;
     private String email;
     private String discussionReplyContent;
+    @Setter
     private LocalDateTime discussionReplyCreatedAt;
+
+
 }

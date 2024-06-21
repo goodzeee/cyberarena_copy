@@ -14,7 +14,7 @@
   <div class="discussion-card">
     <div class="discussion-header">
       <h1 class="discussion-title">${found.discussionTitle}</h1>
-        <div class="discussion-nickname">작성자: ${found.nickname}</div>
+      <div class="discussion-nickname">작성자: ${found.nickname}</div>
       <div class="discussion-info"></div>
     </div>
     <div class="discussion-body">
@@ -24,28 +24,26 @@
       <h4>내용</h4>
     </div>
     <br>
-      <div class="discussion-offer">${found.discussionOffer}</div>
+    <div class="discussion-offer">${found.discussionOffer}</div>
   </div>
   <div class="comment-section">
     <h2>댓글</h2>
-
-      <div class="comment-card">
-        <div class="comment-header">
-          <span class="comment-nickname">댓글 글쓴이</span>
-          <span class="comment-date">댓글 작성시간</span>
-        </div>
-        <div class="comment-body">
-          <p>댓글 내용</p>
-        </div>
-      </div>
-
+    <div id="comments">
+      <!-- 댓글 목록 -->
+    </div>
     <div class="comment-form">
-      <textarea placeholder="댓글을 입력하세요..."></textarea>
-      <button class="submit-comment">댓글 등록</button>
+      <form id="commentForm">
+        <textarea placeholder="댓글을 입력하세요..." name="discussionReplyContent"></textarea>
+        <input type="hidden" value="${found.discussionNo}" name="discussionNo">
+        <input type="hidden" value="${login.email}" name="email">
+        <button type="button" id="submitComment" class="submit-comment">댓글 등록</button>
+      </form>
     </div>
   </div>
 </div>
 
 <%@ include file="../include/footer.jsp"%>
+
+<script type="module" src="/assets/js/kibeom/getDiscussReply.js"></script>
 </body>
 </html>

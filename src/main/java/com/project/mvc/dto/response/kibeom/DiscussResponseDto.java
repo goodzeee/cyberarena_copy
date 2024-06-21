@@ -29,8 +29,8 @@ public class DiscussResponseDto {
     }
 
     private String dateFormatting(LocalDateTime regDateTime) {
-        DateTimeFormatter pattern = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        return pattern.format(regDateTime);
+        DateTimeFormatter pattern = DateTimeFormatter.ofPattern("yyyy. MM. dd a HH:mm");
+        return regDateTime.format(pattern);
     }
 
     private String makeShortContent(String content) {

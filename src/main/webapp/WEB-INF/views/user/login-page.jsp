@@ -10,6 +10,7 @@ pageEncoding="UTF-8"%>
     </head>
     <body>
         <div class="login-wrap">
+            <a class="home-btn" href="/"><i class="fas fa-long-arrow-alt-left"></i></a>
             <div class="login-html" data-sign-type="${enterType}">
                 <input
                     id="tab-1"
@@ -160,6 +161,15 @@ pageEncoding="UTF-8"%>
             if(document.querySelector(".login-html").dataset.signType === "signUp") {
                 document.querySelector("#tab-2").checked = true;
             }
+            const result = "${result}";
+            console.log("result:" + result);
+
+            if (result === "NO_EMAIL") {
+                alert("존재하지 않는 이메일입니다.");
+            } else if (result === "NO_PW") {
+                alert("비밀번호가 틀렸습니다.");
+            }
+
         </script>
     </body>
 </html>

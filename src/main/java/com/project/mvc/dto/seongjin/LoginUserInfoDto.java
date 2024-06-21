@@ -11,12 +11,12 @@ import lombok.*;
 public class LoginUserInfoDto {
 
     private String email;
-    private String nickName;
+    private String nickname;
     private String auth;
 
     public LoginUserInfoDto(User user) {
         this.email = user.getEmail();
-        this.nickName = user.getNickname();
+        this.nickname = user.getNickname();
         this.auth = user.getAuth();
     }
 }

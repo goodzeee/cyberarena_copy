@@ -39,7 +39,7 @@
                     <li><a href="/media/movie">영화</a></li>
                     <li><a href="/media/series">시리즈</a></li>
                     <li><a href="/media/book">도서</a></li>
-                    <li><a href="discussion/list">토론 게시판</a></li>
+                    <li><a href="discussion/list">토론 게시판</a></li>    
           </ul>
     </nav>
 </header>

@@ -19,9 +19,7 @@
 
     <mappers>
         <mapper resource="mappers/MediaMapper.xml" />
-
         <mapper resource="mappers/jihye/ReviewMapper.xml" />
-
         <mapper resource="mappers/kibeom/DiscussionMapper.xml" />
         <mapper resource="mappers/UserMapper.xml"/>
         <mapper resource="mappers/FollowLogMapper.xml"/>

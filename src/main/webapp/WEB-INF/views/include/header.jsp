@@ -30,20 +30,16 @@
                 <c:when test="${login == null}">
                     <li><a href="/user/sign-up">회원 가입</a></li>
                     <li><a href="/user/sign-in">로그인</a></li>
-                    <li><a href="/media/movie">영화</a></li>
-                    <li><a href="/media/series">시리즈</a></li>
-                    <li><a href="/media/book">도서</a></li>
-                    <li><a href="discussion/list">토론 게시판</a></li>
                 </c:when>
                 <c:otherwise>
                     <li><a href="/user/mypage">마이페이지</a></li>
+                    <li><a href="/user/sign-out">로그아웃</a></li>
+                </c:otherwise>
+            </c:choose>
                     <li><a href="/media/movie">영화</a></li>
                     <li><a href="/media/series">시리즈</a></li>
                     <li><a href="/media/book">도서</a></li>
                     <li><a href="discussion/list">토론 게시판</a></li>
-                    <li><a href="/user/sign-out">로그아웃</a></li>
-                </c:otherwise>
-            </c:choose>
           </ul>
     </nav>
 </header>

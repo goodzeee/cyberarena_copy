@@ -1,5 +1,6 @@
 package com.project.mvc.service.kibeom;
 
+import com.project.mvc.common.zyo.Search;
 import com.project.mvc.dto.request.kibeom.MakeDiscussionDto;
 import com.project.mvc.dto.response.kibeom.DiscussFindAllDto;
 import com.project.mvc.dto.response.kibeom.DiscussResponseDto;
@@ -47,7 +48,10 @@ public class DiscussionService {
     }
 
     public MakeDiscussionDto getMediaNo(MakeDiscussionDto dto) {
-        List<Media> byTitle = mediaMapper.findByTitle(dto.getMediaName());
+        List<Media> byTitle = mediaMapper.findAll(Search.builder()
+                        .keyword(dto.getMediaName())
+                        .searchType("title")
+                .build());
         log.debug(byTitle.toString());
         // 지금은 미디어 이름만 가지고 있는데,
         // 미디어매퍼에서 이름으로 찾는 함수 만들어서

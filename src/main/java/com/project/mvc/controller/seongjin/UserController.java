@@ -40,6 +40,7 @@ public class UserController {
 
         LoginResult result = userService.validateLogin(dto, session, response);
 
+        ra.addFlashAttribute("result", result);
         if (result == LoginResult.SUCCESS) {
 
             return "redirect:/index";

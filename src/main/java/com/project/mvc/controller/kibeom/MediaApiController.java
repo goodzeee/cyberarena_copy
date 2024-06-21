@@ -1,6 +1,7 @@
 package com.project.mvc.controller.kibeom;
 
 
+import com.project.mvc.common.zyo.Search;
 import com.project.mvc.dto.request.kibeom.DiscussionCommentRequestDto;
 import com.project.mvc.entity.Media;
 import com.project.mvc.mapper.kibeom.DiscussReplyMapper;
@@ -27,7 +28,11 @@ public class MediaApiController {
     @GetMapping("/mediaList/{title}")
     public ResponseEntity<?> mediaList(@PathVariable String title) {
 
-        List<Media> all =  mediaMapper.findByTitle(title);
+        List<Media> all =  mediaMapper.findAll(Search.builder()
+                        .searchType("title")
+                        .keyword(title)
+                        .build());
+
 
         if (all == null) {
             String message = "찾는 미디어가 없습니다.";

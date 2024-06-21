@@ -12,9 +12,9 @@ public interface MediaMapper {
     // 미디어 목록 조회
     List<Media> findAll(Search media);
 
-    // 미디어 상세 조회
-    Media findOne(long mediaNo);
 
     // 이미지 URL 조회
     List<String> findImageUrlByCategory(int categoryNo);
+
+    Media findMedia(long mediaNo);
 }

@@ -15,6 +15,7 @@
 
 <div class="list-wrap">
   <h1>토론 리스트</h1>
+  <button class="make-discussion">토론 생성하기</button>
   <c:forEach var="d" items="${dList}">
     <div class="card" data-dno="${d.discussionNo}">
       <p class="discussion-title">${d.discussionTitle}</p>
@@ -23,7 +24,7 @@
       <p class="discussion-created-at">${d.formattedDiscussionCreatedAt}</p>
     </div>
   </c:forEach>
-  <button class="make-discussion">토론 생성하기</button>
+
 </div>
 
 <%@ include file="../include/footer.jsp"%>
@@ -36,19 +37,19 @@
       <form action="/discussion/register" method="POST">
         <input type="hidden" name="email" value="${login.email}">
         <label>
-          # 닉네임 : <input type="text" value="${login.nickName}" readonly>
+          # 닉네임 : <input type="text" id="nickname" value="${login.nickName}" readonly>
         </label>
         <label>
-          # 미디어 : <input type="text" name="mediaName" readonly>
+          # 미디어 : <input type="text" id="media" name="mediaName" readonly placeholder="하단의 검색창을 이용해주세요.">
         </label>
         <label>
-          # 주제 : <input type="text" name="discussionTitle">
+          # 주제 : <input type="text" id="title" name="discussionTitle">
         </label>
         <label>
-          # 세부 내용 : <input type="text" name="discussionOffer">
+          # 세부 내용 : <input type="text" id="detail" name="discussionOffer">
         </label>
         <label>
-          <button type="submit">작성 완료</button>
+          <input type="button" id="finish" value="작성 완료">
           <button type="button" id="cancelButton">작성 취소</button>
         </label>
       </form>
@@ -72,28 +73,7 @@
 
 
 <script type="module" src="/assets/js/kibeom/getMedia.js"></script>
-<script>
+<script type="module" src="/assets/js/kibeom/list.js"></script>
 
-  // backdrop 해야함
-
-  const $makeBtn = document.querySelector('.make-discussion')
-  const $modal = document.getElementById('modal');
-  const $backdrop = document.getElementById('backdrop')
-  $makeBtn.addEventListener('click', e => {
-    $modal.classList.remove('none')
-    $backdrop.classList.remove('none')
-  })
-
-  const $detail = document.querySelector('.list-wrap')
-  document.addEventListener('click', e => {
-    if (!e.target.closest('.card')) return;
-    const dno = e.target.closest('.card').dataset.dno;
-    window.location.href = '/discussion/detail?dno=' + dno;
-  })
-
-
-
-
-</script>
 </body>
 </html>

@@ -14,10 +14,10 @@ import java.time.format.DateTimeFormatter;
 @Builder
 public class DiscussionDetailResponseDto {
 
-//    private long discussionNo;
 //    private String email;
-    private long mediaNo;
 //    private long reviewNo;
+    private long discussionNo;
+    private long mediaNo;
     private String discussionTitle;
     private String discussionOffer;
     private LocalDateTime discussionCreatedAt;
@@ -27,6 +27,7 @@ public class DiscussionDetailResponseDto {
 
 
     public DiscussionDetailResponseDto(Discussion d) {
+        this.discussionNo = d.getDiscussionNo();
         this.mediaNo = d.getMediaNo();
         this.discussionTitle = d.getDiscussionTitle();
         this.discussionOffer = d.getDiscussionOffer();
@@ -36,7 +37,7 @@ public class DiscussionDetailResponseDto {
     }
 
     private String dateFormatting(LocalDateTime regDateTime) {
-        DateTimeFormatter pattern = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        DateTimeFormatter pattern = DateTimeFormatter.ofPattern("yyyy. MM. dd a HH:mm");
         return pattern.format(regDateTime);
     }
 

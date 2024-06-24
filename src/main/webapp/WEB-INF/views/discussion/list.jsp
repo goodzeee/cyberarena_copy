@@ -28,6 +28,10 @@
       <p class="nickname">${d.nickname}</p>
       <p class="discussion-offer">${d.discussionOffer}</p>
       <p class="discussion-created-at">${d.formattedDiscussionCreatedAt}</p>
+      <c:if test="${login.nickname == d.nickname}">
+        <a>수정</a>
+        <a>삭제</a>
+      </c:if>
     </div>
   </c:forEach>
 

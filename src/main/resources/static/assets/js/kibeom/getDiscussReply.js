@@ -46,6 +46,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    // 회원 정보 가져오기
+
     function renderComments(comments) {
         commentsContainer.innerHTML = '';
         comments.forEach(comment => {

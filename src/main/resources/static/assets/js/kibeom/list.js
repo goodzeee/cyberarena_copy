@@ -1,7 +1,7 @@
 const $finishBtn = document.getElementById('finish');
 const $title = document.getElementById('title');
 const $offer = document.getElementById('detail');
-const $modal = document.getElementById('modal');
+const $modalWrap = document.querySelector('.modal-wrap');
 
 const validate = [$title, $offer];
 let isValidate = [false, false];
@@ -44,16 +44,19 @@ closeBtn.addEventListener("click", () => {
     gnb.classList.remove("on");
 });
 
-document.addEventListener('DOMContentLoaded', function() {
+// document.addEventListener('DOMContentLoaded', function() {
     const makeDiscussionButton = document.querySelector('.make-discussion');
 
-    makeDiscussionButton.addEventListener('click', function(event) {
+    makeDiscussionButton.addEventListener('click', e =>  {
         if (!isLoggedIn) {
             alert('로그인이 필요한 서비스입니다.');
-            event.preventDefault();
+            e.preventDefault();
         } else {
-            $modal.classList.remove('none');
+            console.log("modal ", $modalWrap)
+            // $modalWrap.classList.remove('none');
+            $modalWrap.style.display = 'block'
+            console.log('removed modal, ', $modalWrap)
             $backdrop.classList.remove('none');
         }
     });
-});
+// });

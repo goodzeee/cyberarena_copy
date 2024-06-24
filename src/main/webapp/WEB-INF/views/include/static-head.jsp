@@ -34,5 +34,5 @@
         defer
 ></script>
 <script
-        src="assets/js/kibeom/home.js" defer type="module"
+        src="/assets/js/kibeom/home.js" defer type="module"
 ></script>

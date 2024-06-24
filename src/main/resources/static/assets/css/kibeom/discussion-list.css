@@ -108,7 +108,7 @@ main {
     /*width: 80%;*/
     /*height: 80%;*/
     position: fixed;
-    z-index: 1000;
+    z-index: 50000000;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
@@ -215,6 +215,10 @@ footer {
 }
 
 .none {
+    display: none;
+}
+
+.hide {
     display: none;
 }
 

@@ -10,7 +10,7 @@
 </head>
 
 <body>
-<div id="backdrop" class="none"></div>
+<div id="backdrop" class="hide"></div>
 <%@ include file="../include/header.jsp"%>
 
 <script type="text/javascript">

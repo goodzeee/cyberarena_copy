@@ -14,6 +14,5 @@ public interface DiscussReplyMapper {
 
     List<DiscussReply> findAll(long discussionNo);
 
-
-
+    String findNicknameByEmail(String email);
 }

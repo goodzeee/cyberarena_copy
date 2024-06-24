@@ -92,3 +92,5 @@ document.getElementById('searchMediaInput').addEventListener('input', debouncedH
 
 // 글로벌 함수로 selectMedia를 정의하여 onclick 속성에서 사용할 수 있도록 함
 window.selectMedia = selectMedia;
+
+

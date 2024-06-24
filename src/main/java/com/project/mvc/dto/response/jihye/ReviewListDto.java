@@ -16,15 +16,15 @@ import java.util.List;
 public class ReviewListDto {
 
     // 리뷰 목록 조회를 위해 필요한 데이터만 DTO
-    private long reviewNo;
-    private String email;
-    private String reviewText;
-    private double userRating;
-    private DiscussionStatus discussionStatus;
-    private LocalDateTime reviewCreatedAt;
+//    private long reviewNo;
+////    private String email;
+////    private String reviewText;
+////    private double userRating;
+////    private DiscussionStatus discussionStatus;
+////    private LocalDateTime reviewCreatedAt;
 
     private Media media;
-    private List<Review> reviews;
+    private List<ReviewDetailDto> reviews;
 
     private PageMaker pageInfo;
 
@@ -32,13 +32,13 @@ public class ReviewListDto {
 //    @Setter
 //    private LoginUserInfoDto loginUser;
 
-    public ReviewListDto(Review r) {
-        this.reviewNo = r.getReviewNo();
-        this.email = r.getEmail();
-        this.reviewText = r.getReviewText();
-        this.userRating = r.getUserRating();
-        this.discussionStatus = r.getDiscussionStatus();
-        this.reviewCreatedAt = r.getReviewCreatedAt();
-    }
+//    public ReviewListDto(Review r) {
+//        this.reviewNo = r.getReviewNo();
+//        this.email = r.getEmail();
+//        this.reviewText = r.getReviewText();
+//        this.userRating = r.getUserRating();
+//        this.discussionStatus = r.getDiscussionStatus();
+//        this.reviewCreatedAt = r.getReviewCreatedAt();
+//    }
 
 }

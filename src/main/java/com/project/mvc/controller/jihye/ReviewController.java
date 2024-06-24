@@ -1,14 +1,11 @@
 package com.project.mvc.controller.jihye;
 
-import com.project.mvc.common.jihye.Page;
-import com.project.mvc.common.zyo.Search;
 import com.project.mvc.dto.request.jihye.MediaDetailDto;
 import com.project.mvc.dto.request.jihye.ReviewPostDto;
 import com.project.mvc.dto.response.jihye.ReviewDetailDto;
+import com.project.mvc.dto.request.jihye.ReviewModifyDto;
 import com.project.mvc.dto.response.jihye.ReviewListDto;
-import com.project.mvc.entity.Media;
 import com.project.mvc.entity.Review;
-import com.project.mvc.service.jihye.ReviewModifyDto;
 import com.project.mvc.service.jihye.ReviewService;
 import com.project.mvc.service.zyo.MediaService;
 import lombok.RequiredArgsConstructor;
@@ -21,11 +18,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -41,7 +34,7 @@ public class ReviewController {
 
     // 1. 리뷰 목록 조회 요청 : GET
     @GetMapping("/list/{mno}")
-    public String list(@PathVariable("mno") long mno, Model model) {
+    public ResponseEntity<?> list(@PathVariable("mno") long mno, Model model) {
         log.info("/review/{} : GET", mno);
 
         // 특정 미디어 정보 조회
@@ -57,12 +50,15 @@ public class ReviewController {
 //        movie.setCreatedAt(20230234);
 
         // 리뷰 목록 조회
-        List<ReviewDetailDto> rList = reviewService.findList(mno); // 모든 미디어와 리뷰 목록 가져오기
+        ReviewListDto rList = reviewService.findList(mno); // 모든 미디어와 리뷰 목록 가져오기
 
         model.addAttribute("media", media);
         model.addAttribute("reviews", rList);
 
-        return "reviewjsp/detail";
+//        return "reviewjsp/detail";
+        return ResponseEntity
+                .ok()
+                .body(rList);
     }
 
     // 2. 리뷰 등록 요청
@@ -83,7 +79,7 @@ public class ReviewController {
 
         boolean success = reviewService.register(dto);
         if (success) {
-            List<ReviewDetailDto> updatedReviews = reviewService.findList(dto.getMediaNo());
+            ReviewListDto updatedReviews = reviewService.findList(dto.getMediaNo());
             return ResponseEntity.ok(updatedReviews);
         } else {
             return ResponseEntity.internalServerError().body("리뷰 등록에 실패했습니다.");
@@ -103,34 +99,41 @@ public class ReviewController {
     }
 
     // 3. 리뷰 수정 요청
+//    @RequestMapping(method = {RequestMethod.PUT, RequestMethod.PATCH})
     @PostMapping("/modify")
-    public ResponseEntity<?> modifyReview(@Valid @RequestBody ReviewModifyDto dto, BindingResult result) {
+    public ResponseEntity<?> modify(@Valid @RequestBody ReviewModifyDto dto, BindingResult result) {
         log.info("/review/modify : POST");
         log.debug("parameter - {}", dto);
 
+//        if (result.hasErrors()) {
+//            // 유효성 검사 에러 처리
+//            return ResponseEntity.badRequest().body("입력값이 올바르지 않습니다.");
+//        }
         if (result.hasErrors()) {
             // 유효성 검사 에러 처리
-            return ResponseEntity.badRequest().body("입력값이 올바르지 않습니다.");
+            Map<String, String> errors = makeValidationMessageMap(result);
+
+            return ResponseEntity
+                    .badRequest()
+                    .body(errors);
         }
 
-        boolean success = reviewService.modify(dto);
-        if (success) {
-            return ResponseEntity.ok("리뷰가 성공적으로 수정되었습니다.");
-        } else {
-            return ResponseEntity.internalServerError().body("리뷰 수정에 실패했습니다.");
-        }
+        ReviewListDto reviewListDto = reviewService.modify(dto);
+
+        return ResponseEntity.ok().body(reviewListDto);
     }
+
 
     // 4. 리뷰 삭제 처리 요청
     @DeleteMapping("/{rno}")
     public ResponseEntity<?> delete(@PathVariable long rno) {
-        log.info("/review/{} : DELETE", rno);
+//        log.info("/review/{} : DELETE", rno);
 
-        List<ReviewDetailDto> updatedReviews = reviewService.remove(rno);
+        ReviewListDto dtoList = reviewService.remove(rno);
 
         return ResponseEntity
                 .ok()
-                .body(updatedReviews);
+                .body(dtoList);
 //        if (updatedReviews != null) {
 //            return ResponseEntity.ok(updatedReviews);
 //        } else {

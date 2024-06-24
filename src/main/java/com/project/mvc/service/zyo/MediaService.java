@@ -31,7 +31,7 @@ public class MediaService {
     public MediaDetailDto detail(long mediaNo) {
         // 게시물 정보 조회
 
-        Media media = mediaMapper.findOne(mediaNo);
+        Media media = mediaMapper.findMedia(mediaNo);
 
         // 특정 미디어에 달린 리뷰 목록 조회
 //        List<ReviewDetailDto> reviewList = reviewMapper.findAll(mediaNo)
@@ -60,5 +60,9 @@ public class MediaService {
 
         return dto;
 
+    }
+
+    public List<String> findImageUrlByCategory(int categoryNo) {
+        return null;
     }
 }

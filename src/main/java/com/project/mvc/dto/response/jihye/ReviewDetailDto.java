@@ -5,7 +5,6 @@ import com.project.mvc.entity.DiscussionStatus;
 import com.project.mvc.entity.Review;
 import lombok.*;
 
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 @Getter @Setter
@@ -14,7 +13,7 @@ import java.time.format.DateTimeFormatter;
 @AllArgsConstructor
 @EqualsAndHashCode
 @Builder
-// 리뷰 목록 상세 조회하기 위한 객체
+// 리뷰 목록 상세 조회 화면을 보여줄 객체
 public class ReviewDetailDto {
 
     @JsonProperty("review_no")

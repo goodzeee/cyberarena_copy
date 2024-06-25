@@ -1,5 +1,7 @@
 package com.project.mvc.controller.kibeom;
 
+import com.project.mvc.common.jihye.Page;
+import com.project.mvc.common.jihye.PageMaker;
 import com.project.mvc.dto.request.kibeom.DiscussionCommentRequestDto;
 import com.project.mvc.dto.request.kibeom.MakeDiscussionDto;
 import com.project.mvc.dto.response.kibeom.DiscussFindAllDto;
@@ -34,18 +36,13 @@ public class DiscussionController {
     private final DiscussionMapper discussionMapper;
 
     @GetMapping("/list")
-    public String discussionList(Model model) {
-        List<DiscussResponseDto> dtoList = discussionService.findAll();
-        List<Media> temp = mediaMapper.findAll(null);
-        List<Media> mList = new ArrayList<>();
-        // 댓글 수
+    public String discussionList(Page page, Model model) {
+        List<DiscussResponseDto> dtoList = discussionService.findAll(page);
+        List<Media> mList = mediaMapper.findAll(null);
 
+        PageMaker maker = new PageMaker(page, discussionService.getCount());
 
-        for (Media media : temp) {
-            mList.add(media);
-            if (mList.size() > 4) break;
-        }
-        log.debug("mList size: {}", mList.size());
+        model.addAttribute("maker", maker);
         model.addAttribute("dList", dtoList);
         model.addAttribute("mList", mList);
         return "discussion/list";

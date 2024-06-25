@@ -34,6 +34,8 @@
             D.review_no,
             D.discussion_no,
             D.view_count
+        ORDER BY D.discussion_no DESC
+        LIMIT #{pageStart}, #{amount}
     </select>
 
     <delete id="delete">
@@ -53,6 +55,11 @@
         SET view_count = view_count + 1
         WHERE discussion_no = #{discussionNo}
     </update>
+
+    <select id="count" resultType="int">
+        SELECT COUNT(*)
+        FROM discussion
+    </select>
 
 
 </mapper>

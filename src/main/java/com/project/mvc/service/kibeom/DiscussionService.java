@@ -1,5 +1,6 @@
 package com.project.mvc.service.kibeom;
 
+import com.project.mvc.common.jihye.Page;
 import com.project.mvc.common.zyo.Search;
 import com.project.mvc.dto.request.kibeom.MakeDiscussionDto;
 import com.project.mvc.dto.response.kibeom.DiscussFindAllDto;
@@ -31,8 +32,8 @@ public class DiscussionService {
     private final MediaMapper mediaMapper;
     private final UserMapper userMapper;
 
-    public List<DiscussResponseDto> findAll() {
-        List<DiscussFindAllDto> list = discussionMapper.findAll();
+    public List<DiscussResponseDto> findAll(Page page) {
+        List<DiscussFindAllDto> list = discussionMapper.findAll(page);
         List<DiscussResponseDto> dtoList = list.stream()
                 .map(d -> new DiscussResponseDto(d))
                 .collect(Collectors.toList());
@@ -77,5 +78,10 @@ public class DiscussionService {
 
     public void updateViewCount(long dno) {
         discussionMapper.updateViewCount(dno);
+    }
+
+    // 페이지 생성 파라미터를 받아옴
+    public int getCount() {
+        return discussionMapper.count();
     }
 }

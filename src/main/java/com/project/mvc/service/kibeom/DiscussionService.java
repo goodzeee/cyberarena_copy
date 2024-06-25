@@ -84,4 +84,8 @@ public class DiscussionService {
     public int getCount() {
         return discussionMapper.count();
     }
+
+    public boolean remove(long dno) {
+        return discussionMapper.remove(dno);
+    }
 }

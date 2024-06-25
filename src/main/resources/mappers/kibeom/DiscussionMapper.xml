@@ -61,5 +61,10 @@
         FROM discussion
     </select>
 
+    <delete id="remove">
+        DELETE FROM
+        discussion
+        WHERE discussion_no = #{discussionNo}
+    </delete>
 
 </mapper>

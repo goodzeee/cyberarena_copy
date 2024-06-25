@@ -29,6 +29,9 @@ public interface DiscussionMapper {
     // 총 게시물 수 조회
     int count();
 
+    // 토론 삭제
+    boolean remove(long dno);
+
     // 수정 구현해야 함
 
 

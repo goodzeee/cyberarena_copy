@@ -21,6 +21,12 @@
       <span class="discussion-date">작성 시간 : ${found.formattedDiscussionCreatedAt}</span>
       <span class="discussion-date">댓글 : [${count}]</span>
     </div>
+    <c:if test="${login.nickname == found.nickname}">
+      <button href="/discussion/modify">수정</button>
+
+      <button class="del-btn" data-href="/discussion/remove?dno=${found.discussionNo}">삭제</button>
+
+    </c:if>
     <div class="discussion-actions">
       <h4>내용</h4>
     </div>
@@ -45,6 +51,19 @@
 
 <%@ include file="../include/footer.jsp"%>
 
+
+<%-- 삭제 모달 --%>
+
+<%-- 삭제 모달 끝 --%>
+
+
 <script type="module" src="/assets/js/kibeom/getDiscussReply.js"></script>
+<script>
+  const $delBtn = document.querySelector('.del-btn');
+  $delBtn.addEventListener('click', e => {
+    window.location.href = "/discussion/remove?dno=${found.discussionNo}"
+  })
+
+</script>
 </body>
 </html>

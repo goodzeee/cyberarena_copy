@@ -8,8 +8,9 @@
 </head>
 <body>
 
-<%@ include file="../include/header.jsp"%>
+<div id="backdrop" class="hide"></div>
 
+<%@ include file="../include/header.jsp"%>
 <div class="content-wrap">
   <div class="discussion-card">
     <div class="discussion-header">
@@ -22,7 +23,7 @@
       <span class="discussion-date">댓글 : [${count}]</span>
     </div>
     <c:if test="${login.nickname == found.nickname}">
-      <button href="/discussion/modify">수정</button>
+      <button id="modify">수정</button>
 
       <button class="del-btn" data-href="/discussion/remove?dno=${found.discussionNo}">삭제</button>
 
@@ -52,12 +53,52 @@
 <%@ include file="../include/footer.jsp"%>
 
 
-<%-- 삭제 모달 --%>
+<%-- 수정 모달 --%>
+<div class="modal-wrap" id="modal">
+  <div class="modal-content">
+    <div class="modal-left">
+      <h1>토론 수정</h1>
+      <form action="/discussion/modify" method="POST">
+        <input type="hidden" name="email" value="${login.email}">
+        <label>
+          # 닉네임 : <input type="text" id="nickname" value="${login.nickname}" readonly>
+        </label>
+        <label>
+          # 미디어 : <input type="text" id="media" name="mediaName" value="${found.mediaTitle}" readonly >
+        </label>
+        <label>
+          # 주제 : <input type="text" id="title" name="discussionTitle" value="${found.discussionTitle}">
+        </label>
+        <label>
+          # 세부 내용 : <input type="text" id="detail" name="discussionOffer" value="${found.discussionOffer}">
+        </label>
+        <label>
+          <input type="button" id="finish" value="작성 완료">
+          <button type="button" id="cancelButton">작성 취소</button>
+        </label>
+      </form>
+    </div>
+    <div class="modal-right">
+      <form class="modal-search">
 
-<%-- 삭제 모달 끝 --%>
+<%--        <label>--%>
+<%--          <p>미디어 검색</p>--%>
+<%--          <input class="modal-input" type="text" name="searchMedia" id="searchMediaInput"--%>
+<%--                 placeholder="검색어를 입력해주세요.">--%>
+<%--        </label>--%>
+      </form>
+      <div class="fetch-wrap">
+
+      </div>
+    </div>
+  </div>
+  <div class="modal-close" id="closeModalButton">닫기</div>
+</div>
+<%-- 수정 모달 끝 --%>
 
 
 <script type="module" src="/assets/js/kibeom/getDiscussReply.js"></script>
+<script type="module" src="/assets/js/kibeom/detail.js"></script>
 <script>
   const $delBtn = document.querySelector('.del-btn');
   $delBtn.addEventListener('click', e => {

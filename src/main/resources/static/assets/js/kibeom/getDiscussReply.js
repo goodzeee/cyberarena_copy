@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function addCommentToDOM(comment) {
         const commentElement = document.createElement('div');
-        console.log('comment : ', comment);
+        // console.log('comment : ', comment);
         commentElement.classList.add('comment-card');
         commentElement.innerHTML = `
         <div class="comment-header" data-replyNo="${comment.discussionReplyNo}">

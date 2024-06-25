@@ -69,6 +69,11 @@ public class DiscussionService {
     public DiscussionDetailResponseDto findOne(long discussionNo) {
         Discussion d = discussionMapper.findOne(discussionNo);
         DiscussionDetailResponseDto dto = new DiscussionDetailResponseDto(d);
+
+        Media media = mediaMapper.findMedia(d.getMediaNo());
+        String mediaTitle = media.getMediaTitle();
+        dto.setMediaTitle(mediaTitle);
+
         User foundEmail = userMapper.findOne(d.getEmail());
         dto.setNickname(foundEmail.getNickname());
 

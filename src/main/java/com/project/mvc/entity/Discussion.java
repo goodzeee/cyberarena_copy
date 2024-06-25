@@ -18,4 +18,5 @@ public class Discussion {
     private String discussionTitle;
     private String discussionOffer;
     private LocalDateTime discussionCreatedAt;
+    private long viewCount;
 }

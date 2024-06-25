@@ -9,6 +9,7 @@ import com.project.mvc.entity.Discussion;
 import com.project.mvc.entity.Media;
 import com.project.mvc.mapper.kibeom.DiscussionMapper;
 import com.project.mvc.mapper.zyo.MediaMapper;
+import com.project.mvc.service.kibeom.DiscussionReplyService;
 import com.project.mvc.service.kibeom.DiscussionService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -28,6 +29,7 @@ import java.util.List;
 public class DiscussionController {
 
     private final DiscussionService discussionService;
+    private final DiscussionReplyService discussionReplyService;
     private final MediaMapper mediaMapper;
     private final DiscussionMapper discussionMapper;
 
@@ -36,6 +38,8 @@ public class DiscussionController {
         List<DiscussResponseDto> dtoList = discussionService.findAll();
         List<Media> temp = mediaMapper.findAll(null);
         List<Media> mList = new ArrayList<>();
+        // 댓글 수
+
 
         for (Media media : temp) {
             mList.add(media);
@@ -62,6 +66,14 @@ public class DiscussionController {
     @GetMapping("/detail")
     public String discussionDetail(Model model, long dno) {
         DiscussionDetailResponseDto foundDsc = discussionService.findOne(dno);
+
+        // 댓글 수
+        long count = discussionReplyService.getCount(dno);
+
+        // 조회수 상승
+        discussionService.updateViewCount(dno);
+
+        model.addAttribute("count", count);
         model.addAttribute("found", foundDsc);
         return "discussion/detail";
     }

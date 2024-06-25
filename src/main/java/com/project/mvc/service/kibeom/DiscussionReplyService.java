@@ -34,5 +34,14 @@ public class DiscussionReplyService {
         return regDateTime.format(pattern);
     }
 
+    public int getCount(long dno) {
+        int replyCount = discussReplyMapper.getReplyCountByDiscussionNo(dno);
+        if (replyCount == 0) {
+            return 0;
+        } else {
+            return replyCount;
+        }
+    }
+
 
 }

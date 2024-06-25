@@ -49,6 +49,7 @@
         ,   nickname
         ,   auth
         ,   limit_time
+        FROM user
         WHERE session_id = #{sessionId}
     </select>
 

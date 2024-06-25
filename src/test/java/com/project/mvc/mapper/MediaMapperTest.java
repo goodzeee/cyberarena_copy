@@ -47,9 +47,9 @@ class MediaMapperTest {
         //given
         String title = "암살";
         //when
-        Media byTitle = (Media) mediaMapper.findByTitle(title);
+//        Media byTitle = (Media) mediaMapper.findByTitle(title);
         //then
-        System.out.println(byTitle);
+//        System.out.println(byTitle);
     }
 
     

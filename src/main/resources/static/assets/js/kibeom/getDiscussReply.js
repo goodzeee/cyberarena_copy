@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (!response.ok) throw new Error('댓글을 불러오는데 실패했습니다.');
             const comments = await response.json();
             renderComments(comments);
-        } catch (error) {
+        } catch (error) {ㅓ
             console.error('Error fetching comments:', error);
         }
     }
@@ -46,6 +46,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    // 회원 정보 가져오기
+
     function renderComments(comments) {
         commentsContainer.innerHTML = '';
         comments.forEach(comment => {
@@ -55,22 +57,19 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function addCommentToDOM(comment) {
         const commentElement = document.createElement('div');
-        console.log('comment : ', comment)
+        console.log('comment : ', comment);
         commentElement.classList.add('comment-card');
         commentElement.innerHTML = `
-            <div class="comment-header" data-replyNo="${comment.discussionReplyNo}">
-                <span class="comment-nickname">${comment.email}</span>
-                                                    <!-- email을 받지만 nickname으로 렌더링되게 바꿈 (이름만 email) -->
-                <span class="comment-date">${new Date(comment.discussionReplyCreatedAt).toLocaleString()}</span>
-            </div>
-            
-                <span class="modify-and-delete"><button>삭제</button></span>
-                <span class="modify-and-delete"><button>수정</button></span>
-            
-            <div class="comment-body">
-                <p>${comment.discussionReplyContent}</p>
-            </div>
-        `;
+        <div class="comment-header" data-replyNo="${comment.discussionReplyNo}">
+            <span class="comment-nickname">${comment.nickname || comment.email}</span> <!-- 닉네임이 없으면 이메일 출력 -->
+            <span class="comment-date">${new Date(comment.discussionReplyCreatedAt).toLocaleString('ko-KR', { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' })}</span>
+        </div>
+        <span class="modify-and-delete"><button>삭제</button></span>
+        <span class="modify-and-delete"><button>수정</button></span>
+        <div class="comment-body">
+            <p>${comment.discussionReplyContent}</p>
+        </div>
+    `;
         commentsContainer.appendChild(commentElement);
     }
 

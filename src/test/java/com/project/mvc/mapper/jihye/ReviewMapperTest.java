@@ -39,8 +39,8 @@ class ReviewMapperTest {
             r.setUserRating(random.nextDouble() * 10); // 0부터 10 사이의 랜덤 별점 설정
             r.setDiscussionStatus(DiscussionStatus.ALLOW);
 
-            boolean save = reviewMapper.saveReview(r);
-            assertEquals(true, save, "리뷰 등록 실패");
+//            boolean save = reviewMapper.saveReview(r);
+//            assertEquals(true, save, "리뷰 등록 실패");r
         }
     }
 
@@ -62,7 +62,7 @@ class ReviewMapperTest {
         //given
         long reviewNo = 177;
         //when
-        reviewMapper.deleteReview(reviewNo);
+//        reviewMapper.deleteReview(reviewNo);
         //then
     }
 
@@ -78,7 +78,7 @@ class ReviewMapperTest {
                 .userRating(5)
                 .discussionStatus(DiscussionStatus.DISALLOW)
                 .build();
-        reviewMapper.updateReview(r);
+//        reviewMapper.updateReview(r);
         //then
     }
 

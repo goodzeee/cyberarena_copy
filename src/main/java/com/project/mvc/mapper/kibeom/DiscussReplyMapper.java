@@ -14,6 +14,12 @@ public interface DiscussReplyMapper {
 
     List<DiscussReply> findAll(long discussionNo);
 
+    String findNicknameByEmail(String email);
+
+    int getReplyCountByDiscussionNo(long discussionNo);
+
+    // 댓글 순으로 찾아오는 쿼리
+    List<Integer> getReplyCounts();
 
 
 }

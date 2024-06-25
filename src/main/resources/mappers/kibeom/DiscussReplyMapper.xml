@@ -9,23 +9,42 @@
 
     <insert id="insert">
         INSERT INTO discuss_reply
-        (discussion_no, email, discussion_reply_content)
-        values (#{discussionNo}, #{email}, #{discussionReplyContent})
+        (discussion_no, email, discussion_reply_content, discussion_reply_created_at)
+        values (#{discussionNo}, #{email}, #{discussionReplyContent}, #{discussionReplyCreatedAt})
     </insert>
 
-    <select id="findAll" resultType="discussReply">
-        select
+    <select id="findAll" resultType="com.project.mvc.entity.DiscussReply">
+        SELECT
         D.discussion_no,
         D.discussion_reply_content,
         D.discussion_reply_no,
         D.discussion_reply_created_at,
-        U.nickname as email
-        from discuss_reply D inner join user U
-        on D.email = U.email
-        where D.discussion_no = #{email}
+        U.nickname AS nickname,
+        D.email
+        FROM discuss_reply D
+        INNER JOIN user U ON D.email = U.email
+        WHERE D.discussion_no = #{discussionNo}
     </select>
 
+    <select id="findNicknameByEmail" resultType="java.lang.String">
+        SELECT
+        nickname
+        FROM user
+        WHERE email = #{email}
+    </select>
 
+    <select id="getReplyCountByDiscussionNo" resultType="int">
+        SELECT COUNT (*)
+        FROM discuss_reply
+        WHERE discussion_no = #{discussionNo}
+    </select>
+
+    <select id="getReplyCounts" resultType="int">
+        SELECT count (*) as 'count'
+        FROM discuss_reply
+        GROUP BY discussion_no
+        ORDER BY count DESC
+    </select>
 
 </mapper>
 

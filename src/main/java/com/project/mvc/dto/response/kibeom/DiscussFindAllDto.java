@@ -26,6 +26,8 @@ public class DiscussFindAllDto {
     private long discussionNo;
 
     private long mediaNo;
+    private long viewCount;
+    private int replyCount;
 
 
 }

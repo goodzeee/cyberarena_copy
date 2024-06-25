@@ -75,4 +75,7 @@ public class DiscussionService {
     }
 
 
+    public void updateViewCount(long dno) {
+        discussionMapper.updateViewCount(dno);
+    }
 }

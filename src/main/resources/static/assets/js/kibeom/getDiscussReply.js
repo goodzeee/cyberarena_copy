@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (!response.ok) throw new Error('댓글을 불러오는데 실패했습니다.');
             const comments = await response.json();
             renderComments(comments);
-        } catch (error) {
+        } catch (error) {ㅓ
             console.error('Error fetching comments:', error);
         }
     }

@@ -22,6 +22,10 @@ public interface DiscussionMapper {
     // 토론 삭제
     boolean delete(long discussionNo);
 
+    // 조회수 상승
+    void updateViewCount(long discussionNo);
+
     // 수정 구현해야 함
+
 
 }

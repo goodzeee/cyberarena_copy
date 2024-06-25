@@ -53,6 +53,19 @@ class DiscussReplyMapperTest {
     }
 
 
+    @Test
+    @DisplayName("댓글 순으로 조회")
+    void getAllReplyCount() {
+        //given
+        List<Integer> replyCounts = discussReplyMapper.getReplyCounts();
+        //when
+        replyCounts.forEach(System.out::println);
+
+        //then
+    }
+
+
+
 
 
 

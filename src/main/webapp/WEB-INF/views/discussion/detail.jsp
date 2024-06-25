@@ -19,6 +19,7 @@
     </div>
     <div class="discussion-body">
       <span class="discussion-date">작성 시간 : ${found.formattedDiscussionCreatedAt}</span>
+      <span class="discussion-date">댓글 : [${count}]</span>
     </div>
     <div class="discussion-actions">
       <h4>내용</h4>

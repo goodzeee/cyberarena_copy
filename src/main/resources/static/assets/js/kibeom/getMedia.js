@@ -51,6 +51,12 @@ const renderReplies = (mediaResponse) => {
 
     const $fetchWrap = document.querySelector('.fetch-wrap');
     $fetchWrap.innerHTML = tag;
+
+    $fetchWrap.addEventListener("click", e => {
+        const $mediaInput = document.getElementById('media')
+        $fetchWrap.innerHTML = "";
+        $mediaInput.style.backgroundColor = "#E7F0FE"
+    })
 };
 
 // 미디어 선택 함수 정의
@@ -92,5 +98,4 @@ document.getElementById('searchMediaInput').addEventListener('input', debouncedH
 
 // 글로벌 함수로 selectMedia를 정의하여 onclick 속성에서 사용할 수 있도록 함
 window.selectMedia = selectMedia;
-
 

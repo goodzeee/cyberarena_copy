@@ -17,6 +17,9 @@ public class DiscussResponseDto {
     private String formattedDiscussionCreatedAt; // 포맷된 문자열을 저장할 필드 추가
     private long reviewNo;
     private long discussionNo;
+    private long viewCount;
+    private int replyCount;
+
 
     public DiscussResponseDto(DiscussFindAllDto dto) {
         this.nickname = dto.getNickname();
@@ -26,6 +29,8 @@ public class DiscussResponseDto {
         this.formattedDiscussionCreatedAt = dateFormatting(dto.getDiscussionCreatedAt()); // 포맷된 문자열 할당
         this.reviewNo = dto.getReviewNo();
         this.discussionNo = dto.getDiscussionNo();
+        this.viewCount = dto.getViewCount();
+        this.replyCount = dto.getReplyCount();
     }
 
     private String dateFormatting(LocalDateTime regDateTime) {

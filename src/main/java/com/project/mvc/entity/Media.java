@@ -1,6 +1,8 @@
 package com.project.mvc.entity;
 
 import com.project.mvc.dto.response.jihye.ReviewDetailDto;
+import com.project.mvc.dto.response.kibeom.DiscussFindAllDto;
+import com.project.mvc.dto.response.kibeom.DiscussResponseDto;
 import lombok.*;
 
 import java.sql.ResultSet;
@@ -27,4 +29,6 @@ public class Media {
     private String imageUrl;
 
     private List<ReviewDetailDto> reviews;
+
+    private List<DiscussFindAllDto> discussions;
 }

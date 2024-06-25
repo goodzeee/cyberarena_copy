@@ -60,4 +60,15 @@
         <include refid="category" />
     </select>
 
+    <select id="findReviewByCategory" resultType="review">
+        select * from review
+        WHERE media_no in (select media_no from media
+        WHERE category_no = #{category_no})
+    </select>
+
+    <select id="findDiscussionByCategory" resultType="discussion">
+        select * from discussion
+        WHERE media_no in (select media_no from media
+        WHERE category_no = #{category_no})
+    </select>
 </mapper>

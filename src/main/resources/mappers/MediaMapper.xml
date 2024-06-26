@@ -71,4 +71,26 @@
         WHERE media_no in (select media_no from media
         WHERE category_no = #{category_no})
     </select>
+
+    <select id="findReviewRenderInfo" resultType="com.project.mvc.dto.zyo.ReviewRenderingDto">
+        SELECT
+        U.nickname,
+        R.email,
+        R.review_no,
+        R.user_rating,
+        R.review_text,
+        R.review_created_at,
+        R.media_no,
+        M.media_title,
+        M.image_url
+        FROM review AS R
+        INNER JOIN user AS U
+        USING (email)
+        INNER JOIN media AS M
+        USING (media_no)
+        WHERE M.category_no = #{category_no}
+    </select>
+
+
+
 </mapper>

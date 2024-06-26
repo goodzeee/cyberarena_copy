@@ -21,5 +21,5 @@ public interface DiscussReplyMapper {
     // 댓글 순으로 찾아오는 쿼리
     List<Integer> getReplyCounts();
 
-
+    boolean remove(long rno);
 }

@@ -5,6 +5,7 @@ import com.project.mvc.service.kibeom.DiscussionReplyService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -23,9 +24,15 @@ public class DiscussionReplyController {
         discussionReplyService.insert(dto);
 
             return "redirect:/discussion/detail?dno=" + discussionNo;
+    }
 
-
-
+    @GetMapping("/reply/remove")
+    public String removeDiscussion(long rno) {
+        boolean flag = discussionReplyService.remove(rno);
+        if (flag) {
+            return  "redirect:/discussion/list";
+        }
+        return "redirect:/index";
     }
 
 

@@ -2,6 +2,7 @@ package com.project.mvc.mapper.zyo;
 
 import com.project.mvc.common.zyo.Search;
 import com.project.mvc.dto.response.kibeom.DiscussFindAllDto;
+import com.project.mvc.dto.zyo.ReviewRenderingDto;
 import com.project.mvc.entity.Discussion;
 import com.project.mvc.entity.Media;
 import com.project.mvc.entity.Review;
@@ -28,4 +29,6 @@ public interface MediaMapper {
 
     // 특정 카테고리에 포함된 미디어에 포함된 모든 리뷰의 정보를 가져온다.
     List<Discussion> findDiscussionByCategory(int categoryNo);
+
+    List<ReviewRenderingDto> findReviewRenderInfo(int categoryNo);
 }

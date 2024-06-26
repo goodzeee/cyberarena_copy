@@ -2,6 +2,7 @@ package com.project.mvc.controller.zyo;
 
 import com.project.mvc.dto.response.jihye.ReviewFindAllDto;
 import com.project.mvc.dto.response.kibeom.DiscussFindAllDto;
+import com.project.mvc.dto.zyo.ReviewRenderingDto;
 import com.project.mvc.entity.Discussion;
 import com.project.mvc.entity.Review;
 import com.project.mvc.service.zyo.MediaService;
@@ -25,8 +26,9 @@ public class MediaController {
     public String movie(Model model) {
         int categoryNo = 1; // 해당 카테고리 번호
         List<String> imageUrls = mediaService.findImageUrlByCategory(categoryNo);
-        List<Review> reviews = mediaService.findAllReviews(categoryNo);
+        List<ReviewRenderingDto> reviews = mediaService.findAllReviews(categoryNo);
         List<Discussion> discussions = mediaService.findAllDiscussions(categoryNo);
+        System.out.println("reviews = " + reviews);
         model.addAttribute("reviews", reviews);
         model.addAttribute("discussions", discussions);
         model.addAttribute("imageUrls", imageUrls);
@@ -37,7 +39,7 @@ public class MediaController {
     public String series(Model model) {
         int categoryNo = 2; // 해당 카테고리 번호
         List<String> imageUrls = mediaService.findImageUrlByCategory(categoryNo);
-        List<Review> reviews = mediaService.findAllReviews(categoryNo);
+        List<ReviewRenderingDto> reviews = mediaService.findAllReviews(categoryNo);
         List<Discussion> discussions = mediaService.findAllDiscussions(categoryNo);
         model.addAttribute("reviews", reviews);
         model.addAttribute("discussions", discussions);
@@ -49,7 +51,7 @@ public class MediaController {
     public String book(Model model) {
         int categoryNo = 3; // 해당 카테고리 번호
         List<String> imageUrls = mediaService.findImageUrlByCategory(categoryNo);
-        List<Review> reviews = mediaService.findAllReviews(categoryNo);
+        List<ReviewRenderingDto> reviews = mediaService.findAllReviews(categoryNo);
         List<Discussion> discussions = mediaService.findAllDiscussions(categoryNo);
         model.addAttribute("reviews", reviews);
         model.addAttribute("discussions", discussions);

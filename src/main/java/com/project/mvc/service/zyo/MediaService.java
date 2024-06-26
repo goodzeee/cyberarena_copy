@@ -5,6 +5,7 @@ import com.project.mvc.dto.request.jihye.MediaDetailDto;
 import com.project.mvc.dto.response.jihye.ReviewDetailDto;
 import com.project.mvc.dto.response.jihye.ReviewFindAllDto;
 import com.project.mvc.dto.response.kibeom.DiscussFindAllDto;
+import com.project.mvc.dto.zyo.ReviewRenderingDto;
 import com.project.mvc.entity.Category;
 import com.project.mvc.entity.Discussion;
 import com.project.mvc.entity.Media;
@@ -67,12 +68,18 @@ public class MediaService {
     }
 
      // 리뷰 목록 조회
-    public List<Review> findAllReviews(int categoryNo) {
-        List<Review> allreviews = mediaMapper.findReviewByCategory(categoryNo)
+    public List<ReviewRenderingDto> findAllReviews(int categoryNo) {
+//        List<Review> allreviews = mediaMapper.findReviewByCategory(categoryNo)
+//                .stream()
+//                .sorted(Comparator.comparing(Review::getReviewCreatedAt).reversed())
+//                .collect(Collectors.toList());
+//        return allreviews;
+        List<ReviewRenderingDto> reviewRenderList = mediaMapper.findReviewRenderInfo(categoryNo)
                 .stream()
-                .sorted(Comparator.comparing(Review::getReviewCreatedAt))
+                .sorted(Comparator.comparing(ReviewRenderingDto::getReviewCreatedAt).reversed())
                 .collect(Collectors.toList());
-        return allreviews;
+        return reviewRenderList;
+
     }
 
 

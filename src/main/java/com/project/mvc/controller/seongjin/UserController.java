@@ -1,18 +1,16 @@
 package com.project.mvc.controller.seongjin;
 
 
-import com.project.mvc.dto.seongjin.LoginDto;
-import com.project.mvc.dto.seongjin.SignUpDto;
+import com.project.mvc.dto.seongjin.*;
+import com.project.mvc.service.seongjin.FollowLogService;
 import com.project.mvc.service.seongjin.LoginResult;
 import com.project.mvc.service.seongjin.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.WebUtils;
 
@@ -20,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.PushBuilder;
+import java.util.List;
 
 @Controller
 @RequestMapping("/user")
@@ -27,6 +26,7 @@ import javax.servlet.http.PushBuilder;
 public class UserController {
 
     private final UserService userService;
+    private final FollowLogService followLogService;
 
     @GetMapping("/sign-in")
     public String signInGet() {
@@ -87,4 +87,64 @@ public class UserController {
                 .body(flag);
 
     }
+
+    @GetMapping("/mypage")
+    public String myPageGet(Model model, HttpServletRequest request) {
+        int followerSize = followLogService.getFollowList(request.getSession(), false).size();
+        int followingSize = followLogService.getFollowList(request.getSession(), true).size();
+
+
+        model.addAttribute("follower", followerSize);
+        model.addAttribute("following", followingSize);
+        return "user/mypage";
+    }
+
+    @GetMapping("/mypage/follower")
+    @ResponseBody
+    public ResponseEntity<?> followerList(HttpServletRequest request) {
+
+        List<FollowExistsDto> followList = followLogService.getFollowList(request.getSession(), false);
+
+        return ResponseEntity
+                .ok()
+                .body(followList);
+    }
+
+    @GetMapping("/mypage/following")
+    @ResponseBody
+    public ResponseEntity<?> followingList(HttpServletRequest request) {
+
+        List<FollowExistsDto> followList = followLogService.getFollowList(request.getSession(), true);
+
+        return ResponseEntity
+                .ok()
+                .body(followList);
+    }
+
+
+    @GetMapping("/follow")
+    @ResponseBody
+    public ResponseEntity<?> following(@RequestParam String userEmail, @RequestParam String targetEmail) {
+        boolean flag = followLogService.follow(FollowLogRequestDto.builder()
+                .userEmail(userEmail)
+                .targetEmail(targetEmail)
+                .build());
+        return ResponseEntity
+                .ok()
+                .body(flag);
+    }
+
+    @GetMapping("/unfollow")
+    @ResponseBody
+    public ResponseEntity<?> unfollowing(@RequestParam String userEmail, @RequestParam String targetEmail) {
+        boolean flag = followLogService.unfollow(FollowLogRequestDto.builder()
+                        .userEmail(userEmail)
+                        .targetEmail(targetEmail)
+                .build());
+
+        return ResponseEntity
+                .ok()
+                .body(flag);
+    }
+
 }

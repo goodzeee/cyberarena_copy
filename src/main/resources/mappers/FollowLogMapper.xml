@@ -6,17 +6,30 @@
 <!-- 설정파일에 매퍼 등록 -->
 <mapper namespace="com.project.mvc.mapper.seongjin.FollowLogMapper">
 
-    <select id="getList" resultType="String">
+    <select id="getList" resultType="com.project.mvc.dto.seongjin.FollowExistsDto">
         SELECT
         <if test="type">
-            target_email
+            target_email AS email,
+            (1=1) AS "exist"
             FROM follow_log
             WHERE user_email = #{userEmail}
+            ORDER BY follow_no
         </if>
         <if test="!type">
-            user_email
-            FROM follow_log
-            WHERE target_email = #{userEmail}
+            f1.user_email AS email,
+            CASE
+            WHEN f2.user_email IS NOT NULL THEN true
+            ELSE false
+            END AS "exist"
+            FROM
+            follow_log f1
+            LEFT JOIN
+            follow_log f2
+            ON
+            f1.target_email = f2.user_email AND f1.user_email = f2.target_email
+            WHERE
+            f1.target_email = #{userEmail}
+            ORDER BY f1.follow_no
         </if>
     </select>
 
@@ -31,6 +44,13 @@
             WHERE user_email = #{userEmail}
             AND target_email = #{targetEmail}
     </delete>
+    <select id="followed" resultType="boolean">
+
+    SELECT COUNT(*) FROM
+    follow_log
+            WHERE user_email = #{userEmail}
+            AND target_email = #{targetEmail}
+    </select>
 
 
 </mapper>

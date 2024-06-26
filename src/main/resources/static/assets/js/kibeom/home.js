@@ -14,11 +14,9 @@ closeBtn.addEventListener("click", () => {
 // 모달 띄우기
 
 const [...$media] = document.querySelectorAll('.media-card')
-console.log($media);
 const $modal = document.querySelector('.modal-wrap')
 const $closeBtn = document.querySelector('.modal-close')
 const $backdrop = document.getElementById('backdrop')
-console.log($closeBtn)
 
 $media.forEach($card => {
     $card.addEventListener('click', e => {

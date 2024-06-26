@@ -17,6 +17,6 @@ public class DiscussReply {
     private String email;
     private String nickname;
     private String discussionReplyContent;
-    @Setter
+
     private LocalDateTime discussionReplyCreatedAt;
 }

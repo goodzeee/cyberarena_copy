@@ -46,5 +46,10 @@
         ORDER BY count DESC
     </select>
 
+    <delete id="remove">
+        DELETE FROM discuss_reply
+        WHERE discussion_reply_no = #{discussionReplyNo}
+    </delete>
+
 </mapper>
 

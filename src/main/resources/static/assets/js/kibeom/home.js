@@ -33,12 +33,12 @@ $closeBtn.addEventListener('click', e => {
 })
 
 
-document.addEventListener('click', e => {
-
-    if (!e.target.closest('.modal-wrap') && !e.target.closest('.media-card')) {
-        $modal.classList.add('none');
-        $backdrop.classList.add('none')
-    }
-});
+// document.addEventListener('click', e => {
+//
+//     if (!e.target.closest('.modal-wrap') && !e.target.closest('.media-card')) {
+//         $modal.classList.add('none');
+//         $backdrop.classList.add('none')
+//     }
+// });
 
 

@@ -1,10 +1,14 @@
 package com.project.mvc.service.kibeom;
 
+import com.project.mvc.common.jihye.Page;
 import com.project.mvc.common.zyo.Search;
+import com.project.mvc.dto.request.kibeom.DiscussionModifyDto;
 import com.project.mvc.dto.request.kibeom.MakeDiscussionDto;
 import com.project.mvc.dto.response.kibeom.DiscussFindAllDto;
+import com.project.mvc.dto.response.kibeom.DiscussReplyResponseDto;
 import com.project.mvc.dto.response.kibeom.DiscussResponseDto;
 import com.project.mvc.dto.response.kibeom.DiscussionDetailResponseDto;
+import com.project.mvc.entity.DiscussReply;
 import com.project.mvc.entity.Discussion;
 import com.project.mvc.entity.Media;
 import com.project.mvc.entity.User;
@@ -31,8 +35,8 @@ public class DiscussionService {
     private final MediaMapper mediaMapper;
     private final UserMapper userMapper;
 
-    public List<DiscussResponseDto> findAll() {
-        List<DiscussFindAllDto> list = discussionMapper.findAll();
+    public List<DiscussResponseDto> findAll(Page page) {
+        List<DiscussFindAllDto> list = discussionMapper.findAll(page);
         List<DiscussResponseDto> dtoList = list.stream()
                 .map(d -> new DiscussResponseDto(d))
                 .collect(Collectors.toList());
@@ -68,6 +72,11 @@ public class DiscussionService {
     public DiscussionDetailResponseDto findOne(long discussionNo) {
         Discussion d = discussionMapper.findOne(discussionNo);
         DiscussionDetailResponseDto dto = new DiscussionDetailResponseDto(d);
+
+        Media media = mediaMapper.findMedia(d.getMediaNo());
+        String mediaTitle = media.getMediaTitle();
+        dto.setMediaTitle(mediaTitle);
+
         User foundEmail = userMapper.findOne(d.getEmail());
         dto.setNickname(foundEmail.getNickname());
 
@@ -77,5 +86,26 @@ public class DiscussionService {
 
     public void updateViewCount(long dno) {
         discussionMapper.updateViewCount(dno);
+    }
+
+    // 페이지 생성 파라미터를 받아옴
+    public int getCount() {
+        return discussionMapper.count();
+    }
+
+    public boolean remove(long dno) {
+        return discussionMapper.remove(dno);
+    }
+
+    public boolean modify(DiscussionModifyDto dto) {
+        return discussionMapper.modify(dto);
+    }
+
+    public List<DiscussReplyResponseDto> convertToDto(List<DiscussReply> all) {
+        List<DiscussReplyResponseDto> list = all.stream()
+                .map(d -> new DiscussReplyResponseDto(d))
+                .collect(Collectors.toList());
+
+        return list;
     }
 }

@@ -44,4 +44,7 @@ public class DiscussionReplyService {
     }
 
 
+    public boolean remove(long rno) {
+        return  discussReplyMapper.remove(rno);
+    }
 }

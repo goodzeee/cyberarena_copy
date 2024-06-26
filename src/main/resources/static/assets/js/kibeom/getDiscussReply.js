@@ -13,8 +13,6 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log(dtoList)
             console.log(loginUserDto)
             renderComments(dtoList, loginUserDto);
-
-
         } catch (error) {
             console.error('Error fetching comments:', error);
         }
@@ -39,10 +37,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
             if (response.ok) {
                 const newComment = await response.json();
-
-                addCommentToDOM(newComment);
+                fetchComments(); // 전체 댓글 다시 불러오기
                 commentForm.reset();
-
             } else {
                 console.error('Error submitting comment:', response.statusText);
             }
@@ -50,8 +46,6 @@ document.addEventListener('DOMContentLoaded', function() {
             console.error('Error submitting comment:', error);
         }
     }
-
-
 
     function renderComments(comments, loginUserDto) {
         commentsContainer.innerHTML = '';
@@ -68,27 +62,24 @@ document.addEventListener('DOMContentLoaded', function() {
             <span class="comment-nickname">${comment.nickname || comment.email}</span> 
             <span class="comment-date">${new Date(comment.discussionReplyCreatedAt).toLocaleString('ko-KR', { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' })}</span>
         </div>`;
-   
+
         if (loginUserDto.nickname === comment.nickname) {
             commentElement.innerHTML +=
-            `<span class="modify-and-delete" 
+                `<span class="modify-and-delete" 
             onclick="window.location.href='/discussion/reply/remove?rno='+ ${comment.discussionReplyNo} + '&&dno=' + ${comment.discussionNo}">
                 <button>삭제</button>
             </span>
             <span class="modify-and-delete"  
             onclick="window.location.href='/discussion/reply/modify?rno=' + ${comment.discussionReplyNo}">
                 <button>수정</button>
-            </span>`
+            </span>`;
         }
         commentElement.innerHTML += `<div class="comment-body">
             <p>${comment.discussionReplyContent}</p>
-        </div>
-    `;
+        </div>`;
         commentsContainer.appendChild(commentElement);
     }
 
     fetchComments();
     submitCommentButton.addEventListener('click', submitComment);
 });
-
-

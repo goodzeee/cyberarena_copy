@@ -27,10 +27,10 @@ public class DiscussionReplyController {
     }
 
     @GetMapping("/reply/remove")
-    public String removeDiscussion(long rno) {
+    public String removeDiscussion(long rno, long dno) {
         boolean flag = discussionReplyService.remove(rno);
         if (flag) {
-            return  "redirect:/discussion/list";
+            return  "redirect:/discussion/detail?dno=" + dno;
         }
         return "redirect:/index";
     }

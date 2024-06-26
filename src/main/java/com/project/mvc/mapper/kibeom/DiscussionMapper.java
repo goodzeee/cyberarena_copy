@@ -37,5 +37,8 @@ public interface DiscussionMapper {
     boolean modify(DiscussionModifyDto dto);
 
 
+    List<Discussion> findByEmail(String email);
+
+
 
 }

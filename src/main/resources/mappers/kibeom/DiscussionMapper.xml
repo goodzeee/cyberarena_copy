@@ -76,4 +76,23 @@
         WHERE discussion_no = #{discussionNo}
     </update>
 
+    <select id="findByEmail" resultType="discussion">
+        SELECT *
+        FROM discussion
+        WHERE discussion_no IN
+        (
+        SELECT
+            discussion_no
+        FROM discussion
+        WHERE email = #{email}
+        UNION
+        SELECT
+            discussion_no
+        FROM
+            discuss_reply
+        WHERE email = #{email}
+        )
+    </select>
+
+
 </mapper>

@@ -71,8 +71,14 @@ document.addEventListener('DOMContentLoaded', function() {
    
         if (loginUserDto.nickname === comment.nickname) {
             commentElement.innerHTML +=
-            `<span class="modify-and-delete" data-rno="${comment.discussionReplyNo}" onclick="window.location.href='/discussion/reply/remove?rno='+ ${comment.discussionReplyNo}"><button>삭제</button></span>
-            <span class="modify-and-delete" data-rno="${comment.discussionReplyNo}" onclick="window.location.href='/discussion/reply/modify?rno=' + ${comment.discussionReplyNo}"><button>수정</button></span>`
+            `<span class="modify-and-delete" 
+            onclick="window.location.href='/discussion/reply/remove?rno='+ ${comment.discussionReplyNo} + '&&dno=' + ${comment.discussionNo}">
+                <button>삭제</button>
+            </span>
+            <span class="modify-and-delete"  
+            onclick="window.location.href='/discussion/reply/modify?rno=' + ${comment.discussionReplyNo}">
+                <button>수정</button>
+            </span>`
         }
         commentElement.innerHTML += `<div class="comment-body">
             <p>${comment.discussionReplyContent}</p>

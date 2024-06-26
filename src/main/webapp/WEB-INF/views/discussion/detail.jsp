@@ -59,12 +59,13 @@
     <div class="modal-left">
       <h1>토론 수정</h1>
       <form action="/discussion/modify" method="POST">
-        <input type="hidden" name="email" value="${login.email}">
+<%--        <input type="hidden" name="email" value="${login.email}">--%>
+        <input type="hidden" name="discussionNo" value="${found.discussionNo}">
         <label>
-          # 닉네임 : <input type="text" id="nickname" value="${login.nickname}" readonly>
+          # 닉네임 : <input type="text" value="${login.nickname}" readonly>
         </label>
         <label>
-          # 미디어 : <input type="text" id="media" name="mediaName" value="${found.mediaTitle}" readonly >
+          # 미디어 : <input type="text"  name="mediaName" value="${found.mediaTitle}" readonly >
         </label>
         <label>
           # 주제 : <input type="text" id="title" name="discussionTitle" value="${found.discussionTitle}">
@@ -72,10 +73,10 @@
         <label>
           # 세부 내용 : <input type="text" id="detail" name="discussionOffer" value="${found.discussionOffer}">
         </label>
-        <label>
-          <input type="button" id="finish" value="작성 완료">
-          <button type="button" id="cancelButton">작성 취소</button>
-        </label>
+
+          <button type="submit" id="finish">수정 완료</button>
+          <button type="button" id="cancelButton">수정 취소</button>
+
       </form>
     </div>
     <div class="modal-right">
@@ -103,6 +104,11 @@
   const $delBtn = document.querySelector('.del-btn');
   $delBtn.addEventListener('click', e => {
     window.location.href = "/discussion/remove?dno=${found.discussionNo}"
+  })
+
+  const $finishBtn = document.getElementById('finish');
+  $finishBtn.addEventListener('click', e => {
+    window.location.href = "/discussion/modify"
   })
 
 </script>

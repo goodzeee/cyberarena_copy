@@ -67,4 +67,13 @@
         WHERE discussion_no = #{discussionNo}
     </delete>
 
+
+    <update id="modify">
+        UPDATE discussion
+        SET
+        discussion_title = #{discussionTitle},
+        discussion_offer = #{discussionOffer}
+        WHERE discussion_no = #{discussionNo}
+    </update>
+
 </mapper>

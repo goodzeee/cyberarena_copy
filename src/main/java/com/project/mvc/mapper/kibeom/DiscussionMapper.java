@@ -1,6 +1,7 @@
 package com.project.mvc.mapper.kibeom;
 
 import com.project.mvc.common.jihye.Page;
+import com.project.mvc.dto.request.kibeom.DiscussionModifyDto;
 import com.project.mvc.dto.request.kibeom.MakeDiscussionDto;
 import com.project.mvc.dto.response.kibeom.DiscussFindAllDto;
 import com.project.mvc.entity.Discussion;
@@ -32,7 +33,9 @@ public interface DiscussionMapper {
     // 토론 삭제
     boolean remove(long dno);
 
-    // 수정 구현해야 함
+    // 수정
+    boolean modify(DiscussionModifyDto dto);
+
 
 
 }

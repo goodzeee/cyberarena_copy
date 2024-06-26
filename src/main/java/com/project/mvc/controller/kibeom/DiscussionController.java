@@ -3,6 +3,7 @@ package com.project.mvc.controller.kibeom;
 import com.project.mvc.common.jihye.Page;
 import com.project.mvc.common.jihye.PageMaker;
 import com.project.mvc.dto.request.kibeom.DiscussionCommentRequestDto;
+import com.project.mvc.dto.request.kibeom.DiscussionModifyDto;
 import com.project.mvc.dto.request.kibeom.MakeDiscussionDto;
 import com.project.mvc.dto.response.kibeom.DiscussFindAllDto;
 import com.project.mvc.dto.response.kibeom.DiscussResponseDto;
@@ -79,7 +80,6 @@ public class DiscussionController {
 
     @GetMapping("/remove")
     public String discussionRemove(long dno) {
-        log.debug("dno : {}", dno);
 
         boolean flag = discussionService.remove(dno);
 
@@ -87,6 +87,21 @@ public class DiscussionController {
             return "redirect:/discussion/list";
         } else {
             return "redirect:/index";
+        }
+    }
+
+
+    @PostMapping("/modify")
+    public String discussModify(DiscussionModifyDto dto) {
+
+        log.debug("dto: {}", dto);
+
+        boolean flag = discussionService.modify(dto);
+
+        if (flag) {
+            return "redirect:/discussion/detail?dno=" + dto.getDiscussionNo();
+        } else {
+            return "redirect:/discussion/list"; // 일단 리스트로 돌려보냄
         }
     }
 

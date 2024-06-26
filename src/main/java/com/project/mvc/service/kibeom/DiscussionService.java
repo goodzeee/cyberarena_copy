@@ -2,6 +2,7 @@ package com.project.mvc.service.kibeom;
 
 import com.project.mvc.common.jihye.Page;
 import com.project.mvc.common.zyo.Search;
+import com.project.mvc.dto.request.kibeom.DiscussionModifyDto;
 import com.project.mvc.dto.request.kibeom.MakeDiscussionDto;
 import com.project.mvc.dto.response.kibeom.DiscussFindAllDto;
 import com.project.mvc.dto.response.kibeom.DiscussResponseDto;
@@ -92,5 +93,9 @@ public class DiscussionService {
 
     public boolean remove(long dno) {
         return discussionMapper.remove(dno);
+    }
+
+    public boolean modify(DiscussionModifyDto dto) {
+        return discussionMapper.modify(dto);
     }
 }

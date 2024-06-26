@@ -8,9 +8,14 @@ document.addEventListener('DOMContentLoaded', function() {
         try {
             const response = await fetch(`/api/v1/discuss/reply/${discussionNo}`);
             if (!response.ok) throw new Error('댓글을 불러오는데 실패했습니다.');
-            const comments = await response.json();
-            renderComments(comments);
-        } catch (error) {ㅓ
+            const {dtoList, loginUserDto} = await response.json();
+            // 0626 comments안에 로그인 유저정보 객체도 담음
+            console.log(dtoList)
+            console.log(loginUserDto)
+            renderComments(dtoList, loginUserDto);
+
+
+        } catch (error) {
             console.error('Error fetching comments:', error);
         }
     }
@@ -46,27 +51,30 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // 회원 정보 가져오기
 
-    function renderComments(comments) {
+
+    function renderComments(comments, loginUserDto) {
         commentsContainer.innerHTML = '';
         comments.forEach(comment => {
-            addCommentToDOM(comment);
+            addCommentToDOM(comment, loginUserDto);
         });
     }
 
-    function addCommentToDOM(comment) {
+    function addCommentToDOM(comment, loginUserDto) {
         const commentElement = document.createElement('div');
-        // console.log('comment : ', comment);
         commentElement.classList.add('comment-card');
         commentElement.innerHTML = `
         <div class="comment-header" data-replyNo="${comment.discussionReplyNo}">
-            <span class="comment-nickname">${comment.nickname || comment.email}</span> <!-- 닉네임이 없으면 이메일 출력 -->
+            <span class="comment-nickname">${comment.nickname || comment.email}</span> 
             <span class="comment-date">${new Date(comment.discussionReplyCreatedAt).toLocaleString('ko-KR', { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' })}</span>
-        </div>
-        <span class="modify-and-delete"><button>삭제</button></span>
-        <span class="modify-and-delete"><button>수정</button></span>
-        <div class="comment-body">
+        </div>`;
+   
+        if (loginUserDto.nickname === comment.nickname) {
+            commentElement.innerHTML +=
+            `<span class="modify-and-delete"><button>삭제</button></span>
+            <span class="modify-and-delete"><button>수정</button></span>`
+        }
+        commentElement.innerHTML += `<div class="comment-body">
             <p>${comment.discussionReplyContent}</p>
         </div>
     `;

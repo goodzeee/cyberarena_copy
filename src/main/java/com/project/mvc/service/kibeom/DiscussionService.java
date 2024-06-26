@@ -5,8 +5,10 @@ import com.project.mvc.common.zyo.Search;
 import com.project.mvc.dto.request.kibeom.DiscussionModifyDto;
 import com.project.mvc.dto.request.kibeom.MakeDiscussionDto;
 import com.project.mvc.dto.response.kibeom.DiscussFindAllDto;
+import com.project.mvc.dto.response.kibeom.DiscussReplyResponseDto;
 import com.project.mvc.dto.response.kibeom.DiscussResponseDto;
 import com.project.mvc.dto.response.kibeom.DiscussionDetailResponseDto;
+import com.project.mvc.entity.DiscussReply;
 import com.project.mvc.entity.Discussion;
 import com.project.mvc.entity.Media;
 import com.project.mvc.entity.User;
@@ -97,5 +99,13 @@ public class DiscussionService {
 
     public boolean modify(DiscussionModifyDto dto) {
         return discussionMapper.modify(dto);
+    }
+
+    public List<DiscussReplyResponseDto> convertToDto(List<DiscussReply> all) {
+        List<DiscussReplyResponseDto> list = all.stream()
+                .map(d -> new DiscussReplyResponseDto(d))
+                .collect(Collectors.toList());
+
+        return list;
     }
 }

@@ -69,12 +69,14 @@ $offer.addEventListener('keyup', e => {
     }
 });
 
-$modalInput.addEventListener('keydown', e => {
-    if ($modalInput.value !== '') {
-        $modalInput.style.backgroundColor = "#E7F0FE";
-    } else {
-        $modalInput.style.backgroundColor = "white";
-    }
-})
+
+// 0626 에러나서 일단 주석처리
+// $modalInput.addEventListener('keydown', e => {
+//     if ($modalInput.value !== '') {
+//         $modalInput.style.backgroundColor = "#E7F0FE";
+//     } else {
+//         $modalInput.style.backgroundColor = "white";
+//     }
+// })
 
 

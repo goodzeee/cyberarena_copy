@@ -10,8 +10,6 @@ document.addEventListener('DOMContentLoaded', function() {
             if (!response.ok) throw new Error('댓글을 불러오는데 실패했습니다.');
             const {dtoList, loginUserDto} = await response.json();
             // 0626 comments안에 로그인 유저정보 객체도 담음
-            console.log(dtoList)
-            console.log(loginUserDto)
             renderComments(dtoList, loginUserDto);
         } catch (error) {
             console.error('Error fetching comments:', error);
@@ -65,17 +63,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if (loginUserDto.nickname === comment.nickname) {
             commentElement.innerHTML +=
-                `<span class="modify-and-delete" 
+                `<span class="modify-and-delete"
             onclick="window.location.href='/discussion/reply/remove?rno='+ ${comment.discussionReplyNo} + '&&dno=' + ${comment.discussionNo}">
-                <button>삭제</button>
+                <button class="deleteBtn">삭제</button>
             </span>
-            <span class="modify-and-delete"  
-            onclick="window.location.href='/discussion/reply/modify?rno=' + ${comment.discussionReplyNo}">
-                <button>수정</button>
+            <span class="modify-and-delete modify" >
+                <button class="modifyBtn" data-rno="${comment.discussionReplyNo}">수정</button>
             </span>`;
         }
         commentElement.innerHTML += `<div class="comment-body">
-            <p>${comment.discussionReplyContent}</p>
+            <p class="reply-comment">${comment.discussionReplyContent}</p>
+            <input class="hide modify-input">
         </div>`;
         commentsContainer.appendChild(commentElement);
     }
@@ -83,3 +81,48 @@ document.addEventListener('DOMContentLoaded', function() {
     fetchComments();
     submitCommentButton.addEventListener('click', submitComment);
 });
+
+
+const $replyWrap = document.querySelector('.comment-section');
+
+$replyWrap.addEventListener("click", e => {
+    if (!e.target.matches('.modifyBtn')) return
+
+    // =========== 변수 정의 영역 ==============
+    const $parentWrap = e.target.closest('.comment-card') // 부모
+    const $parentDiv = $parentWrap.lastChild // 부모
+    const $oldNode = $parentWrap.lastChild.lastElementChild // 교체할 원래 P태그
+    const $modifyBtn = $parentWrap.querySelector('.modifyBtn')
+    const $deleteBtn = $parentWrap.querySelector('.deleteBtn')
+    const $oldText = $parentWrap.querySelector('.reply-comment')
+    const $newText = $parentWrap.querySelector('.modify-input')
+
+
+
+    $deleteBtn.textContent = "완료"
+    $modifyBtn.textContent = "취소"
+    // =========== 변수 정의 영역 끝 ==============
+
+    $oldText.classList.add('hide');
+    $newText.classList.remove('hide');
+
+
+
+
+
+    // 수정 취소 이벤트
+
+    // 스코프 옮기면 될듯
+
+    $deleteBtn.addEventListener('click', e => {
+        $oldText.classList.remove('hide');
+        $newText.classList.add('hide');
+
+    })
+    // 수정 다시 보자. 태그 교체 안됨
+})
+// const 버튼 선언
+// if (!$deleteBtn) {}
+
+
+

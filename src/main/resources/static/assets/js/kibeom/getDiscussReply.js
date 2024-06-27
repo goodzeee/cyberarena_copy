@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const discussionNo = document.querySelector('input[name="discussionNo"]').value;
     const commentsContainer = document.getElementById('comments');
     const submitCommentButton = document.getElementById('submitComment');
@@ -58,7 +58,13 @@ document.addEventListener('DOMContentLoaded', function() {
         commentElement.innerHTML = `
         <div class="comment-header" data-replyNo="${comment.discussionReplyNo}">
             <span class="comment-nickname">${comment.nickname || comment.email}</span> 
-            <span class="comment-date">${new Date(comment.discussionReplyCreatedAt).toLocaleString('ko-KR', { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' })}</span>
+            <span class="comment-date">${new Date(comment.discussionReplyCreatedAt).toLocaleString('ko-KR', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit'
+        })}</span>
         </div>`;
 
         if (loginUserDto.nickname === comment.nickname) {
@@ -73,7 +79,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         commentElement.innerHTML += `<div class="comment-body">
             <p class="reply-comment">${comment.discussionReplyContent}</p>
-            <input class="hide modify-input">
+<!--            <input class="hide modify-input">-->
         </div>`;
         commentsContainer.appendChild(commentElement);
     }
@@ -87,42 +93,33 @@ const $replyWrap = document.querySelector('.comment-section');
 
 $replyWrap.addEventListener("click", e => {
     if (!e.target.matches('.modifyBtn')) return
-
-    // =========== 변수 정의 영역 ==============
-    const $parentWrap = e.target.closest('.comment-card') // 부모
-    const $parentDiv = $parentWrap.lastChild // 부모
-    const $oldNode = $parentWrap.lastChild.lastElementChild // 교체할 원래 P태그
-    const $modifyBtn = $parentWrap.querySelector('.modifyBtn')
-    const $deleteBtn = $parentWrap.querySelector('.deleteBtn')
-    const $oldText = $parentWrap.querySelector('.reply-comment')
-    const $newText = $parentWrap.querySelector('.modify-input')
+    const $parentNode = e.target.closest('.comment-card');
+    const $delBtn = $parentNode.querySelector('.deleteBtn');
+    const $modifyBtn = $parentNode.querySelector('.modifyBtn');
+    const $commentBody = $parentNode.querySelector('.comment-body');
+    const $newInput = document.createElement('input')
+    const $oldP = $parentNode.querySelector('.reply-comment')
+    const backupText = $oldP.textContent;
 
 
-
-    $deleteBtn.textContent = "완료"
     $modifyBtn.textContent = "취소"
-    // =========== 변수 정의 영역 끝 ==============
+    $delBtn.textContent = "완료"
 
-    $oldText.classList.add('hide');
-    $newText.classList.remove('hide');
-
-
-
+    $parentNode.removeChild($commentBody);
+    $parentNode.appendChild($newInput);
+    $newInput.setAttribute("value", backupText)
 
 
-    // 수정 취소 이벤트
-
-    // 스코프 옮기면 될듯
-
-    $deleteBtn.addEventListener('click', e => {
-        $oldText.classList.remove('hide');
-        $newText.classList.add('hide');
-
+    $modifyBtn.addEventListener("click", e => {
+    const $newP = document.createElement('p')
+        $parentNode.appendChild($newP);
+        $parentNode.removeChild($newInput);
+        $newP.textContent = backupText;
+        $modifyBtn.textContent = "수정"
+        $delBtn.textContent = "삭제"
     })
-    // 수정 다시 보자. 태그 교체 안됨
+
+    console.log("버튼 클릭~")
+
 })
-// const 버튼 선언
-// if (!$deleteBtn) {}
-
-
 

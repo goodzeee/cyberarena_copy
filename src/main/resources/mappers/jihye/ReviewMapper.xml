@@ -7,9 +7,8 @@
     <!--선택한 미디어에 리뷰 등록 : email, 해당 미디어번호, 리뷰 내용, 별점,토론신청 여부-->
     <!--PK 리뷰 번호, 등록 날짜는 자동으로 들어옴-->
     <insert id="save">
-        INSERT INTO review
-            (email, media_no, review_text, user_rating, discussion_status)
-        VALUES (#{email}, #{mediaNo}, #{reviewText}, #{userRating}, #{discussionStatus})
+        INSERT INTO review (email, media_no, review_text, user_rating, discussion_status, nickname)
+        VALUES (#{email}, #{mediaNo}, #{reviewText}, #{userRating}, #{discussionStatus}, #{nickname})
     </insert>
 
     <!--리뷰 수정 : 리뷰 내용, 평점, 토론신청 여부만 수정할 수 있도록-->
@@ -27,10 +26,15 @@
 
     <!--선택한 미디어에 달린 리뷰 전체조회 : 별점, 내용, 토론신청 여부-->
     <!--특정 미디어에 달린 리뷰 목록 조회-->
-    <select id="findAll" resultType="review">
-        SELECT * FROM review
-        WHERE media_no = #{mediaNo}
-        ORDER BY review_no
+    <select id="findAll" resultType="com.project.mvc.dto.response.jihye.ReviewFindAllDto">
+        SELECT
+        u.nickname AS nickname,
+        r.*
+        FROM review r
+        INNER JOIN user u
+        ON r.email = u.email
+        WHERE r.media_no = #{mediaNo}
+        ORDER BY r.review_no desc
     </select>
 
     <!--특정 미디어에 리뷰 총 수-->
@@ -44,6 +48,12 @@
         SELECT media_no
         FROM review
         WHERE review_no = #{rno}
+    </select>
+
+    <select id="findAllByEmail" resultType="review">
+        select *
+        from review
+        WHERE email = #{email}
     </select>
 
 </mapper>

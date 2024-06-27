@@ -1,6 +1,7 @@
 package com.project.mvc.dto.request.jihye;
 
 import com.project.mvc.dto.response.jihye.ReviewDetailDto;
+import com.project.mvc.dto.response.jihye.ReviewFindAllDto;
 import com.project.mvc.entity.Media;
 import com.project.mvc.entity.Review;
 import lombok.*;
@@ -25,10 +26,10 @@ public class MediaDetailDto {
     private String imageUrl;
 
     @Setter
-    private List<Review> reviews;
+    private List<ReviewFindAllDto> reviews;
 //    private List<ReviewDetailDto> reviews;
 
-    public MediaDetailDto(Media media, List<Review> reviews) {
+    public MediaDetailDto(Media media, List<ReviewFindAllDto> reviews) {
         this.mediaNo = media.getMediaNo();
         this.mediaTitle = media.getMediaTitle();
         this.creator = media.getCreator();

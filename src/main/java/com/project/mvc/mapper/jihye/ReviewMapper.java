@@ -1,7 +1,6 @@
 package com.project.mvc.mapper.jihye;
 
 import com.project.mvc.common.jihye.Page;
-import com.project.mvc.dto.response.jihye.ReviewDetailDto;
 import com.project.mvc.dto.response.jihye.ReviewFindAllDto;
 import com.project.mvc.entity.Review;
 import org.apache.ibatis.annotations.Mapper;
@@ -23,12 +22,15 @@ public interface ReviewMapper {
 
     // 특정 미디어에 달린 리뷰 목록 전체조회
     // ReviewFindAllDto
-    List<Review> findAll(long mediaNo);
+    List<ReviewFindAllDto> findAll(long mediaNo);
 
     // 특정 미디어에 달린 총 댓글 수 조회
     int count(long mediaNo);
 
     // 리뷰 번호로 원본 미디어글 찾기
     long findMno(long rno);
+
+    //
+    Review findAllByEmail(String email);
 }
 

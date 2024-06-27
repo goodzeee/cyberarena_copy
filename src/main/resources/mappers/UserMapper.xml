@@ -45,10 +45,12 @@
 
     <select id="findBySessionId" resultType="user">
         SELECT
-            email
-        ,   nickname
-        ,   auth
-        ,   limit_time
+        email,
+        nickname,
+        auth,
+        reg_date,
+        limit_time
+        FROM user
         WHERE session_id = #{sessionId}
     </select>
 

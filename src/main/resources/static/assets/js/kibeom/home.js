@@ -14,11 +14,11 @@ closeBtn.addEventListener("click", () => {
 // 모달 띄우기
 
 const [...$media] = document.querySelectorAll('.media-card')
-console.log($media);
+// console.log($media);
 const $modal = document.querySelector('.modal-wrap')
 const $closeBtn = document.querySelector('.modal-close')
 const $backdrop = document.getElementById('backdrop')
-console.log($closeBtn)
+// console.log($closeBtn)
 
 $media.forEach($card => {
     $card.addEventListener('click', e => {
@@ -33,12 +33,12 @@ $closeBtn.addEventListener('click', e => {
 })
 
 
-document.addEventListener('click', e => {
-
-    if (!e.target.closest('.modal-wrap') && !e.target.closest('.media-card')) {
-        $modal.classList.add('none');
-        $backdrop.classList.add('none')
-    }
-});
+// document.addEventListener('click', e => {
+//
+//     if (!e.target.closest('.modal-wrap') && !e.target.closest('.media-card')) {
+//         $modal.classList.add('none');
+//         $backdrop.classList.add('none')
+//     }
+// });
 
 

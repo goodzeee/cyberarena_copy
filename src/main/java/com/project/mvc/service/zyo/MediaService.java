@@ -2,13 +2,20 @@ package com.project.mvc.service.zyo;
 
 import com.project.mvc.common.zyo.Search;
 import com.project.mvc.dto.request.jihye.MediaDetailDto;
+import com.project.mvc.dto.response.jihye.ReviewDetailDto;
 import com.project.mvc.dto.response.jihye.ReviewFindAllDto;
+import com.project.mvc.dto.response.kibeom.DiscussFindAllDto;
+import com.project.mvc.dto.zyo.ReviewRenderingDto;
+import com.project.mvc.entity.Category;
+import com.project.mvc.entity.Discussion;
 import com.project.mvc.entity.Media;
 import com.project.mvc.mapper.jihye.ReviewMapper;
+import com.project.mvc.mapper.kibeom.DiscussionMapper;
 import com.project.mvc.mapper.zyo.MediaMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -17,10 +24,10 @@ public class MediaService {
 
     private final MediaMapper mediaMapper;
     private final ReviewMapper reviewMapper;
+    private final DiscussionMapper discussionMapper;
 
     // 미디어 조회
     public List<Media> findList(Search media) {
-
         return mediaMapper.findAll(media);
     }
 
@@ -56,10 +63,36 @@ public class MediaService {
         dto.setReviews(reviews);
 
         return dto;
+    }
+
+     // 리뷰 목록 조회
+    public List<ReviewRenderingDto> findAllReviews(int categoryNo) {
+//        List<Review> allreviews = mediaMapper.findReviewByCategory(categoryNo)
+//                .stream()
+//                .sorted(Comparator.comparing(Review::getReviewCreatedAt).reversed())
+//                .collect(Collectors.toList());
+//        return allreviews;
+        List<ReviewRenderingDto> reviewRenderList = mediaMapper.findReviewRenderInfo(categoryNo)
+                .stream()
+                .sorted(Comparator.comparing(ReviewRenderingDto::getReviewCreatedAt).reversed())
+                .collect(Collectors.toList());
+        return reviewRenderList;
 
     }
 
+
+    // 토론 목록 조회
+    public List<Discussion> findAllDiscussions(int categoryNo) {
+        List<Discussion> allDiscussions = mediaMapper.findDiscussionByCategory(categoryNo)
+                .stream()
+                .sorted(Comparator.comparing(Discussion::getViewCount))
+                .collect(Collectors.toList());
+        return allDiscussions;
+    }
+
+    // 이미지 URL 조회
     public List<String> findImageUrlByCategory(int categoryNo) {
-        return null;
+        return mediaMapper.findImageUrlByCategory(categoryNo);
     }
+
 }

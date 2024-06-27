@@ -24,6 +24,8 @@ public class DiscussionDetailResponseDto {
     private String formattedDiscussionCreatedAt; // 포맷된 문자열을 저장할 필드 추가
     @Setter
     private String nickname;
+    @Setter
+    private String mediaTitle;
 
 
     public DiscussionDetailResponseDto(Discussion d) {
@@ -33,13 +35,15 @@ public class DiscussionDetailResponseDto {
         this.discussionOffer = d.getDiscussionOffer();
         this.discussionCreatedAt = d.getDiscussionCreatedAt();
         this.formattedDiscussionCreatedAt = dateFormatting(d.getDiscussionCreatedAt());
-
+        this.mediaTitle = null;
     }
 
     private String dateFormatting(LocalDateTime regDateTime) {
         DateTimeFormatter pattern = DateTimeFormatter.ofPattern("yyyy. MM. dd a HH:mm");
         return pattern.format(regDateTime);
     }
+
+
 
 }
 

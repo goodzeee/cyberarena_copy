@@ -15,9 +15,8 @@ public class DiscussReply {
     private long discussionReplyNo;
     private long discussionNo;
     private String email;
+    private String nickname;
     private String discussionReplyContent;
-    @Setter
+
     private LocalDateTime discussionReplyCreatedAt;
-
-
 }

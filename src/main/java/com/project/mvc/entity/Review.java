@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 public class Review {
 
     private long reviewNo;
-    private String email;
+    private String email;   // 로그인한 이메일
     private long mediaNo;
     @Setter
     private String reviewText;
@@ -19,7 +19,5 @@ public class Review {
     private DiscussionStatus discussionStatus;
     private LocalDateTime reviewCreatedAt;
 
-//    private User user;
-//
-//    private Media media;
+    private String nickname; // 추가된 필드: 리뷰 작성자의 닉네임
 }

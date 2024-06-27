@@ -9,7 +9,6 @@ import com.project.mvc.dto.zyo.ReviewRenderingDto;
 import com.project.mvc.entity.Category;
 import com.project.mvc.entity.Discussion;
 import com.project.mvc.entity.Media;
-import com.project.mvc.entity.Review;
 import com.project.mvc.mapper.jihye.ReviewMapper;
 import com.project.mvc.mapper.kibeom.DiscussionMapper;
 import com.project.mvc.mapper.zyo.MediaMapper;
@@ -18,7 +17,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -59,7 +57,7 @@ public class MediaService {
 //                .build();
 
         // 특정 미디어 상세조회 시 리뷰 목록 조회도 같이 처리 !
-        List<Review> reviews = reviewMapper.findAll(mediaNo);
+        List<ReviewFindAllDto> reviews = reviewMapper.findAll(mediaNo);
 
         MediaDetailDto dto = new MediaDetailDto(media);
         dto.setReviews(reviews);
@@ -96,6 +94,5 @@ public class MediaService {
     public List<String> findImageUrlByCategory(int categoryNo) {
         return mediaMapper.findImageUrlByCategory(categoryNo);
     }
-
 
 }

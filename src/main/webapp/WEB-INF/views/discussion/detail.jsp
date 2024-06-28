@@ -16,6 +16,7 @@
     <div class="discussion-header">
       <h1 class="discussion-title">${found.discussionTitle}</h1>
       <div class="discussion-nickname">작성자: ${found.nickname}</div>
+      <div class="discussion-nickname">미디어: ${found.mediaTitle}</div>
       <div class="discussion-info"></div>
     </div>
     <div class="discussion-body">

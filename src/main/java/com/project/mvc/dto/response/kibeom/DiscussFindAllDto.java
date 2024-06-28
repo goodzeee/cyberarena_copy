@@ -29,5 +29,6 @@ public class DiscussFindAllDto {
     private long viewCount;
     private int replyCount;
 
-
+    // 0628 추가 ↓
+    private String mediaTitle;
 }

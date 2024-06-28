@@ -19,6 +19,7 @@ public class DiscussResponseDto {
     private long discussionNo;
     private long viewCount;
     private int replyCount;
+    private String mediaTitle;
 
 
     public DiscussResponseDto(DiscussFindAllDto dto) {
@@ -31,6 +32,7 @@ public class DiscussResponseDto {
         this.discussionNo = dto.getDiscussionNo();
         this.viewCount = dto.getViewCount();
         this.replyCount = dto.getReplyCount();
+        this.mediaTitle = dto.getMediaTitle();
     }
 
     private String dateFormatting(LocalDateTime regDateTime) {

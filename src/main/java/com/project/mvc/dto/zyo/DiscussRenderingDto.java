@@ -20,6 +20,7 @@ public class DiscussRenderingDto {
     private String discussionTitle;
     private LocalDateTime discussionCreatedAt;
     private long viewCount;
+    private int replyCount;
     //media
     private long mediaNo;
     private String mediaTitle;

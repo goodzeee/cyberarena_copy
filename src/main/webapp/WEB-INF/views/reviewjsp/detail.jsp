@@ -37,7 +37,7 @@
 
             <!-- 리뷰 등록 폼 -->
             <c:if test="${empty login}">
-                   <a href="/user/sign-in?redirect=/review/list/${reviews.mediaNo}">리뷰 등록은 로그인 후 사용하실 수 있습니다 😏</a>
+                   <a href="/user/sign-in?redirect/review/list/${reviews.mediaNo}">리뷰 등록은 로그인 후 사용하실 수 있습니다 😏</a>
             </c:if>
 
             <c:if test = "${not empty login}">

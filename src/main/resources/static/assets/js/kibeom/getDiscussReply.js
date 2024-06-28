@@ -9,7 +9,6 @@ document.addEventListener('DOMContentLoaded', function () {
             const response = await fetch(`/api/v1/discuss/reply/${discussionNo}`);
             if (!response.ok) throw new Error('댓글을 불러오는데 실패했습니다.');
             const {dtoList, loginUserDto} = await response.json();
-            console.log(dtoList)
             renderComments(dtoList, loginUserDto);
         } catch (error) {
             console.error(error);
@@ -58,8 +57,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const oldDate = new Date(comment.discussionReplyCreatedAt);
         const newDate = new Date(comment.discussionReplyUpdatedAt);
-        console.log(oldDate.getTime())
-        console.log(newDate.getTime())
+
 
 
         const commentElement = document.createElement('div');
@@ -109,23 +107,7 @@ document.addEventListener('DOMContentLoaded', function () {
         commentsContainer.appendChild(commentElement);
     }
 
-    // // 삭제 핸들러
-    // window.handleDelete = async function (btn) {
-    //     const replyNo = btn.getAttribute('data-rno');
-    //     try {
-    //         const response = await fetch(`/api/v1/discuss/reply/remove?rno=${replyNo}`, {
-    //             method: 'DELETE'
-    //         });
-    //
-    //         if (response.ok) {
-    //             await fetchComments(); // 전체 댓글 다시 불러오기
-    //         } else {
-    //             console.error('Error deleting comment:', response.statusText);
-    //         }
-    //     } catch (error) {
-    //         console.error('Error deleting comment:', error);
-    //     }
-    // };
+
 
     fetchComments();
     submitCommentButton.addEventListener('click', submitComment);

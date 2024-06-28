@@ -11,6 +11,8 @@ import com.project.mvc.service.jihye.ReviewService;
 import com.project.mvc.service.zyo.MediaService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpRequest;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +21,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.HashMap;
@@ -34,51 +37,24 @@ public class ReviewController {
     private final ReviewService reviewService;
     private final MediaService mediaService;
     private final MediaMapper mediaMapper;
-//    private final UserService userService;
 
     // 1. 리뷰 목록 조회 요청 : GET
     @GetMapping("/list/{mno}")
-    public String list (@PathVariable("mno") long mno, Model model, HttpSession session) {
-//        if (mno == 0) {
-//            String message = "글 번호는 0번이 될 수 없습니다.";
-//            log.warn(message);
-////            return ResponseEntity
-////                    .badRequest()
-////                    .body(message);
-//        }
-
-        log.info("/review/list {} : GET", mno);
+    public String list(@PathVariable("mno") long mno, Model model) {
+        log.info("/review/list/{} : GET", mno);
 
         // 특정 미디어 정보 조회
         MediaDetailDto media = mediaService.detail(mno);
 
         // 리뷰 목록 조회
-        ReviewListDto rList = reviewService.findList(mno); // 모든 미디어와 리뷰 목록 가져오기
-        //        reviews.setLoginUser(LoginUtil.getLoggedInUser(session));
+        ReviewListDto reviewList = reviewService.findList(mno);
 
         model.addAttribute("media", media);
-        model.addAttribute("reviews", rList);
-//        return ResponseEntity
-//                .ok()
-//                .body(reviews);
+        model.addAttribute("reviews", reviewList);
+
+        // 리뷰 페이지로 이동
         return "reviewjsp/detail";
     }
-
-//    @GetMapping("/list/{mno}")
-//    public String list(@PathVariable("mno") long mno, Model model) {
-//        log.info("/review/{} : GET", mno);
-//
-//        // 특정 미디어 정보 조회
-//        MediaDetailDto media = mediaService.detail(mno);
-//
-//        // 리뷰 목록 조회
-//        ReviewListDto rList = reviewService.findList(mno); // 모든 미디어와 리뷰 목록 가져오기
-//
-//        model.addAttribute("media", media);
-//        model.addAttribute("reviews", rList);
-//
-//        return "reviewjsp/detail";
-//    }
 
     // 2. 리뷰 등록 요청
     // @RequestBody : 클라이언트가 전송한 데이터를 json으로 받아서 파싱
@@ -88,14 +64,12 @@ public class ReviewController {
         log.info("/review : POST");
         log.debug("parameter - {}", dto);
 
-//        dto.setNickname(dto.getNickname());
-
         if (result.hasErrors()) {
             log.warn("Validation errors: {}", result.getAllErrors());
             return ResponseEntity.badRequest().body("Invalid input data");
         }
 
-        boolean flag = reviewService.register(dto);
+        boolean flag = reviewService.register(dto, session);
         if (flag) {
             log.info("Review successfully registered");
             ReviewListDto reviewListDto = reviewService.findList(dto.getMediaNo());
@@ -105,9 +79,6 @@ public class ReviewController {
             return ResponseEntity.internalServerError().body("Failed to register review");
         }
 
-//        return ResponseEntity
-//                .ok()
-//                .body(reviewService.findList(dto.getMediaNo()));
     }
 
     private Map<String, String> makeValidationMessageMap(BindingResult result) {
@@ -130,7 +101,6 @@ public class ReviewController {
         if (result.hasErrors()) {
             // 유효성 검사 에러 처리
             Map<String, String> errors = makeValidationMessageMap(result);
-
             return ResponseEntity
                     .badRequest()
                     .body(errors);
@@ -141,9 +111,8 @@ public class ReviewController {
         return ResponseEntity.ok().body(reviewListDto);
     }
 
-
     // 4. 리뷰 삭제 처리 요청
-    @DeleteMapping("/delete/{reviewNo}")
+    @DeleteMapping ("/delete/{reviewNo}")
     public ResponseEntity<?> delete(@PathVariable long reviewNo) {
         log.info("/review/{} : DELETE", reviewNo);
 
@@ -152,6 +121,26 @@ public class ReviewController {
         return ResponseEntity
                 .ok()
                 .body(dtoList);
-
     }
+
+    // 4. 게시글 삭제 요청
+//    @GetMapping("/delete")
+//    public String delete(long reviewNo) {
+//        System.out.println("/board/delete : GET");
+//
+//        reviewService.remove(reviewNo);
+//        return "redirect:/reviewjsp/detail";
+//    }
+
+//    @DeleteMapping("/delete/{reviewNo}")
+//    public ResponseEntity<?> delete(@PathVariable long reviewNo) {
+//        log.info("/review/{} : DELETE", reviewNo);
+//
+//        ReviewListDto dtoList = reviewService.remove(reviewNo);
+//
+//        return ResponseEntity
+//                .ok()
+//                .body(dtoList);
+//
+//    }
 }

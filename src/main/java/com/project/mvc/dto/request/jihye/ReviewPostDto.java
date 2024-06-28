@@ -2,6 +2,7 @@ package com.project.mvc.dto.request.jihye;
 
 
 import com.project.mvc.entity.DiscussionStatus;
+import com.project.mvc.entity.Review;
 import lombok.*;
 
 import javax.validation.constraints.NotBlank;
@@ -30,5 +31,17 @@ public class ReviewPostDto {
     private String nickname;  // 리뷰 작성자
 
     private String email; // 리뷰 이메일 계정
+
+    // 엔터티로 변환하는 메서드
+    public Review toEntity() {
+        return Review.builder()
+//                .reviewNo(this.reviewNo)
+                .reviewText(this.reviewText)
+                .userRating(this.userRating)
+                .discussionStatus(this.discussionStatus)
+                .email(this.email)
+                .mediaNo(this.mediaNo)
+                .build();
+    }
 
 }

@@ -21,6 +21,8 @@ public class ReviewModifyDto {
     private double userRating;
     private DiscussionStatus discussionStatus;
 //    private LocalDateTime reviewCreatedAt;
+
+    private String email;   // 세션 로그인한 유저 가져오기 위해
     @NotNull
     private long mno;  //수정 완료 후 미디어에 달린 새로운 리뷰 목록을 조회하기 위해
 
@@ -31,6 +33,7 @@ public class ReviewModifyDto {
                 .reviewText(this.reviewText)
                 .userRating(this.userRating)
                 .discussionStatus(this.discussionStatus)
+                .email(this.email)
                 .mediaNo(this.mno)
                 .build();
     }

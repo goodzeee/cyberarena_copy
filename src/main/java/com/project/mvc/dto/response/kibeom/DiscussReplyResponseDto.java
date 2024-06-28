@@ -23,8 +23,9 @@ public class DiscussReplyResponseDto {
     private String nickname;
     private LocalDateTime discussionReplyCreatedAt;
     private String formattedDiscussionCreatedAt;
-    // 로그인 유저
 
+    // 0628 추가 ↓
+    private LocalDateTime discussionReplyUpdatedAt;
 
 
     public DiscussReplyResponseDto(DiscussReply d) {
@@ -35,7 +36,7 @@ public class DiscussReplyResponseDto {
         this.nickname = d.getNickname();
         this.discussionReplyCreatedAt = d.getDiscussionReplyCreatedAt();
         this.formattedDiscussionCreatedAt = dateFormatting(d.getDiscussionReplyCreatedAt());
-
+        this.discussionReplyUpdatedAt = d.getDiscussionReplyUpdatedAt();
 
     }
 

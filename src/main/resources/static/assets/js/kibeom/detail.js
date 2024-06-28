@@ -36,7 +36,7 @@ let isValidate = [false, false];
 
 for(let i = 0; i < 1; i++) {
     $replyTextArea.addEventListener('keyup', e => {
-        if ($replyTextArea.value.trim() > 0) {
+        if ($replyTextArea.value.trim().length > 0) {
             isExist = true;
         } else {
             isExist = false;

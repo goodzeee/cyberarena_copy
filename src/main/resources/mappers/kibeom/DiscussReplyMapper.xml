@@ -19,6 +19,7 @@
         D.discussion_reply_content,
         D.discussion_reply_no,
         D.discussion_reply_created_at,
+        D.discussion_reply_updated_at,
         U.nickname AS nickname,
         D.email
         FROM discuss_reply D

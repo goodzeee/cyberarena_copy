@@ -72,7 +72,8 @@ document.addEventListener('DOMContentLoaded', function () {
         if (loginUserDto && loginUserDto.nickname === comment.nickname) {
             commentElement.innerHTML += `
                 <span class="modify-and-delete delete">
-                    <button class="deleteBtn" data-rno="${comment.discussionReplyNo}" onclick="handleDelete(this)">삭제</button>
+                    <button class="deleteBtn" data-rno="${comment.discussionReplyNo}" 
+                      onclick="window.location.href='/discussion/reply/remove?rno='+ ${comment.discussionReplyNo} + '&&dno=' + ${comment.discussionNo}">삭제</button>
                 </span>
                 <span class="modify-and-delete modify">
                     <button class="modifyBtn" data-rno="${comment.discussionReplyNo}" data-email="${comment.email}">수정</button>
@@ -82,23 +83,23 @@ document.addEventListener('DOMContentLoaded', function () {
         commentsContainer.appendChild(commentElement);
     }
 
-    // 삭제 핸들러
-    window.handleDelete = async function (btn) {
-        const replyNo = btn.getAttribute('data-rno');
-        try {
-            const response = await fetch(`/api/v1/discuss/reply/remove?rno=${replyNo}`, {
-                method: 'DELETE'
-            });
-
-            if (response.ok) {
-                await fetchComments(); // 전체 댓글 다시 불러오기
-            } else {
-                console.error('Error deleting comment:', response.statusText);
-            }
-        } catch (error) {
-            console.error('Error deleting comment:', error);
-        }
-    };
+    // // 삭제 핸들러
+    // window.handleDelete = async function (btn) {
+    //     const replyNo = btn.getAttribute('data-rno');
+    //     try {
+    //         const response = await fetch(`/api/v1/discuss/reply/remove?rno=${replyNo}`, {
+    //             method: 'DELETE'
+    //         });
+    //
+    //         if (response.ok) {
+    //             await fetchComments(); // 전체 댓글 다시 불러오기
+    //         } else {
+    //             console.error('Error deleting comment:', response.statusText);
+    //         }
+    //     } catch (error) {
+    //         console.error('Error deleting comment:', error);
+    //     }
+    // };
 
     fetchComments();
     submitCommentButton.addEventListener('click', submitComment);

@@ -16,66 +16,37 @@ body {
   color: #111;
 }
 
-.banner_contents {
-  margin-left: 30px;
-  padding-top: 240px;
-}
-
-.banner_content {
+.rank {
   position: absolute;
-  top: -45px;
-  left: 0;
-  z-index: -1;
-  width: 100%;
+  height: 200px;
+  letter-spacing: 270px;
 }
 
-.banner_title {
-  width: 60%;
-  padding-bottom: 0.3rem;
-}
-
-.banner_btn {
-  display: flex;
-  width: 50%;
-  padding: 0.5rem 0.5rem;
-  gap: 10px;
-}
-
-.banner_btn button {
-  display: flex;
-  align-items: center;
-  padding: 3px 16px;
-  border-radius: 5px;
-  border: 1px solid transparent;
-  font-size: 1rem;
-}
-
-.banner_content :first-child {
-  background-color: white;
-}
-
-.banner_btn button:nth-child(2) {
-  background-color: rgba(128, 127, 127, 0.33);
-  color: white;
-}
-
-.banner_btn button:hover {
-  background-color: rgb(171, 163, 163);
+.poster_wrap {
+  position: relative;
+  width: 250px;
+  margin-left: 180px;
+  height: 200px;
   cursor: pointer;
+  /* transition: 0.5s; */
+  /* border: 1px solid #e0e0e0;
+  border-radius: 10px; */
+  overflow: hidden;
 }
 
-.banner_btn button img {
-  width: 30px;
+.poster_wrap:nth-last-child(2) {
+  margin-left: 240px
 }
 
-.banner_description {
-  width: 40%;
-  padding: 0.5rem 0.5rem;
-  font-size: 1rem;
-  line-height: 1.5;
-  white-space: pre-line;
+.poster_wrap:last-child {
+  margin-left: 250px;
 }
 
+.poster_wrap section {
+  margin-top: 50px;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+}
 
 /* row */
 .row {
@@ -109,16 +80,7 @@ body {
   transform: scale(1.3);
 }
 
-.poster_wrap {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-right: 10%;
-}
 
-.rank {
-  height: 200px;
-}
 
 .row_poster {
   overflow: visible;
@@ -131,7 +93,7 @@ body {
   transform-origin: left center;
 }
 
-.row_poster .img_list.mouse-over {
+.row_poster.mouse-over img {
   transform: scale(1.3);
 }
 
@@ -179,19 +141,13 @@ body {
   align-items: center;
 }
 
-.reviews {
-  display: flex;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-}
-
 .card-wrapper {
   flex: 0 0 auto;
   scroll-snap-align: start;
   position: relative;
-  width: 300px;
-  margin-right: 20px;
-  height: 400px;
+  width: 350px;
+  margin-right: 25px;
+  height: 185px;
   cursor: pointer;
   transition: 0.5s;
   border: 1px solid #e0e0e0;
@@ -234,15 +190,20 @@ body {
 }
 
 .rating {
-  display: flex;
+  display: inline-block;
 }
 
-.rating .fa-star {
-  color: #ffd700;
+.rating .fa-star,
+.rating .fa-star-half-alt {
+  color: #fff; /* 기본 흰색 */
+  -webkit-text-stroke: 1px #ffd700; /* 테두리만 금색 */
+  font-size: 20px; /* 별점 아이콘 크기 */
 }
 
-.rating .fa-star.filled {
-  color: #ffd700;
+.rating .fa-star.filled,
+.rating .fa-star-half-alt.filled {
+  color: #ffd700; /* 채워진 별 색상 */
+  -webkit-text-stroke: 0;
 }
 
 .card-content {
@@ -254,9 +215,9 @@ body {
 }
 
 /* 카드 이미지 */
-.review-image {
-  width: 100%;
-  height: 150px;
+.card-content img {
+  width: 20%;
+  height: 100%;
   object-fit: cover;
   border-bottom: 1px solid #e0e0e0;
 }

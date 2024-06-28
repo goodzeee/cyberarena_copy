@@ -91,6 +91,24 @@
         WHERE M.category_no = #{category_no}
     </select>
 
+    <select id="findDiscussRenderInfo" resultType="com.project.mvc.dto.zyo.DiscussRenderingDto">
+        SELECT
+        U.nickname,
+        D.email,
+        D.discussion_no,
+        D.discussion_title,
+        D.discussion_created_at,
+        D.view_count,
+        D.media_no,
+        M.media_title,
+        M.image_url
+        FROM discussion AS D
+        INNER JOIN user AS U
+        USING (email)
+        INNER JOIN media AS M
+        USING (media_no)
+        WHERE M.category_no = #{category_no}
+    </select>
 
 
 </mapper>

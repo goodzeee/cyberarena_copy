@@ -11,7 +11,7 @@ body {
 
 /*banner*/
 .banner {
-  margin-bottom: 150px;
+  margin-bottom: 50px;
   background-color: #f0f0f0;
   color: #111;
 }
@@ -28,10 +28,8 @@ body {
   margin-left: 180px;
   height: 200px;
   cursor: pointer;
-  /* transition: 0.5s; */
-  /* border: 1px solid #e0e0e0;
-  border-radius: 10px; */
   overflow: hidden;
+  border-radius: 10px;
 }
 
 .poster_wrap:nth-last-child(2) {
@@ -43,10 +41,30 @@ body {
 }
 
 .poster_wrap section {
-  margin-top: 50px;
+  padding: 20px;
+  margin-top: 20px;
   border: 1px solid #e0e0e0;
+  box-shadow: 0 5px 0 #999;
   border-radius: 10px;
 }
+
+.poster_wrap h2 {
+  font-size: x-large;
+  font-weight: bold;
+}
+
+.poster_info span {
+  font-weight: bold;
+}
+.poster_info p {
+  color: #333333;
+}
+
+.poster_count {
+  border-top: 1px solid #e0e0e0;
+}
+
+
 
 /* row */
 .row {

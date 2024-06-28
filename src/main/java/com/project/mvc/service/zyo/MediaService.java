@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -86,7 +87,7 @@ public class MediaService {
     public List<DiscussRenderingDto> findAllDiscussions(int categoryNo) {
         List<DiscussRenderingDto> allDiscussions = mediaMapper.findDiscussRenderInfo(categoryNo)
                 .stream()
-                .sorted(Comparator.comparing(DiscussRenderingDto::getViewCount).reversed())
+                .sorted(Comparator.comparing(DiscussRenderingDto::getReplyCount).reversed())
                 .limit(3)
                 .collect(Collectors.toList());
         for (DiscussRenderingDto disc : allDiscussions) {

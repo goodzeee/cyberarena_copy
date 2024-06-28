@@ -101,13 +101,23 @@
         D.view_count,
         D.media_no,
         M.media_title,
-        M.image_url
+        M.image_url,
+        COUNT(R.discussion_reply_no) AS reply_count
         FROM discussion AS D
-        INNER JOIN user AS U
-        USING (email)
-        INNER JOIN media AS M
-        USING (media_no)
+        INNER JOIN user AS U USING (email)
+        INNER JOIN media AS M USING (media_no)
+        LEFT JOIN discuss_reply R ON R.discussion_no = D.discussion_no
         WHERE M.category_no = #{category_no}
+        GROUP BY
+        U.nickname,
+        D.email,
+        D.discussion_no,
+        D.discussion_title,
+        D.discussion_created_at,
+        D.view_count,
+        D.media_no,
+        M.media_title,
+        M.image_url
     </select>
 
 

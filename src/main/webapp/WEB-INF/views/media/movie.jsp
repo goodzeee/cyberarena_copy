@@ -10,6 +10,7 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
       type="text/css"
       href="https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@2.0/nanumsquare.css"
     />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link
       rel="stylesheet"
       href="https://unpkg.com/swiper@8/swiper-bundle.min.css"
@@ -81,11 +82,12 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
             <div class="poster_wrap">
               <section data-view-count="${discussions.viewCount}">
                 <h2>${discussions.discussionTitle}</h2>
-                <div class="">
+                <div class="poster_info">
                   <span>${discussions.mediaTitle}</span>
-                  <span>${discussions.format}</span>
+                  <p>${discussions.format}</p>
                 </div>
-                <div class="">
+                <div class="poster_count">
+                  <span><i class="fa-solid fa-user"></i>${discussions.replyCount}명 참여</span>
                   <span>조회수:${discussions.viewCount}</span>
                 </div>
               </section>

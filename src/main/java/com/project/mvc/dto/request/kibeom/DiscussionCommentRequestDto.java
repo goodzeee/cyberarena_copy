@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 @Setter
 public class DiscussionCommentRequestDto {
     private long discussionNo;
+    private long discussionReplyNo;
     private String email;
     private String nickname;
     private String discussionReplyContent;

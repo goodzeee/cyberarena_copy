@@ -16,6 +16,7 @@
     <div class="discussion-header">
       <h1 class="discussion-title">${found.discussionTitle}</h1>
       <div class="discussion-nickname">작성자: ${found.nickname}</div>
+      <div class="discussion-nickname">미디어: ${found.mediaTitle}</div>
       <div class="discussion-info"></div>
     </div>
     <div class="discussion-body">
@@ -41,7 +42,7 @@
     </div>
     <div class="comment-form">
       <form id="commentForm">
-        <textarea placeholder="댓글을 입력하세요..." name="discussionReplyContent"></textarea>
+        <textarea id="reply-textarea" placeholder="댓글을 입력하세요..." name="discussionReplyContent"></textarea>
         <input type="hidden" value="${found.discussionNo}" name="discussionNo">
         <input type="hidden" value="${login.email}" name="email">
         <button type="button" id="submitComment" class="submit-comment">댓글 등록</button>

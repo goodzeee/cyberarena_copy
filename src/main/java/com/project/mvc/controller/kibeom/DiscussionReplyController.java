@@ -19,21 +19,29 @@ public class DiscussionReplyController {
 
     @PostMapping("/reply/register")
     public String replyToDiscussion(DiscussionCommentRequestDto dto) {
-
         long discussionNo = dto.getDiscussionNo();
         discussionReplyService.insert(dto);
-
-            return "redirect:/discussion/detail?dno=" + discussionNo;
+        return "redirect:/discussion/detail?dno=" + discussionNo;
     }
 
     @GetMapping("/reply/remove")
     public String removeDiscussion(long rno, long dno) {
         boolean flag = discussionReplyService.remove(rno);
         if (flag) {
-            return  "redirect:/discussion/detail?dno=" + dno;
+            return "redirect:/discussion/detail?dno=" + dno;
         }
         return "redirect:/index";
     }
 
+    @PostMapping("/reply/modify")
+    public String modifyDiscussion(DiscussionCommentRequestDto dto) {
+        log.info("/discussion/reply/modify : POST");
+        log.debug("parameter: {}", dto);
+        discussionReplyService.update(dto);
+//        boolean flag = discussionReplyService.update(dto);
+//        if (flag) {
+            return "redirect:/discussion/detail?dno=" + dto.getDiscussionNo();
+//        }
 
+    }
 }

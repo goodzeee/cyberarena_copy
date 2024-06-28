@@ -131,7 +131,7 @@ header {
 }
 
 .submit-comment {
-    background-color: #28a745;
+    background-color: lightgray;
     color: #fff;
     border: none;
     padding: 10px 20px;
@@ -261,3 +261,4 @@ header {
 .hide {
     display: none;
 }
+

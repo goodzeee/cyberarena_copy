@@ -3,6 +3,10 @@ const $title = document.getElementById('title');
 const $offer = document.getElementById('detail');
 const $media = document.getElementById('media');
 const $modalWrap = document.querySelector('.modal-wrap');
+const $replySubmitBtn = document.getElementById('submitComment');
+const $replyTextArea = document.getElementById('reply-textarea');
+
+let isExist = false; // 댓글 등록창에 값이 있냐 없냐
 
 const validate = [$title, $offer];
 let isValidate = [false, false];
@@ -28,6 +32,27 @@ let isValidate = [false, false];
 //         }
 //     });
 // }
+
+
+for(let i = 0; i < 1; i++) {
+    $replyTextArea.addEventListener('keyup', e => {
+        if ($replyTextArea.value.trim() > 0) {
+            isExist = true;
+        } else {
+            isExist = false;
+        }
+
+        if (isExist) {
+            $replySubmitBtn.style.backgroundColor = "#28a745"
+        } else {
+            $replySubmitBtn.style.pointerEvents = 'none'
+            $replySubmitBtn.style.backgroundColor = "lightgray";
+        }
+
+    })
+}
+
+
 
 
 
@@ -69,12 +94,15 @@ $offer.addEventListener('keyup', e => {
     }
 });
 
-$modalInput.addEventListener('keydown', e => {
-    if ($modalInput.value !== '') {
-        $modalInput.style.backgroundColor = "#E7F0FE";
-    } else {
-        $modalInput.style.backgroundColor = "white";
-    }
-})
+
+// 0626 에러나서 일단 주석처리
+// $modalInput.addEventListener('keydown', e => {
+//     if ($modalInput.value !== '') {
+//         $modalInput.style.backgroundColor = "#E7F0FE";
+//     } else {
+//         $modalInput.style.backgroundColor = "white";
+//     }
+// })
+
 
 

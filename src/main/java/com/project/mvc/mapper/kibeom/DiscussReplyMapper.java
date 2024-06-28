@@ -22,4 +22,6 @@ public interface DiscussReplyMapper {
     List<Integer> getReplyCounts();
 
     boolean remove(long rno);
+
+    void update(DiscussionCommentRequestDto dto);
 }

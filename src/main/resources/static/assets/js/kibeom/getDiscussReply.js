@@ -50,27 +50,49 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
+
+
     function addCommentToDOM(comment, loginUserDto) {
+
+
+        const oldDate = new Date(comment.discussionReplyCreatedAt);
+        const newDate = new Date(comment.discussionReplyUpdatedAt);
+
+
+
         const commentElement = document.createElement('div');
         commentElement.classList.add('comment-card');
-        commentElement.innerHTML = `
+        let tag = `
             <div class="comment-header" data-replyNo="${comment.discussionReplyNo}">
-                <span class="comment-nickname">${comment.nickname || comment.email}</span> 
-                <span class="comment-date">${new Date(comment.discussionReplyCreatedAt).toLocaleString('ko-KR', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric',
-            hour: '2-digit',
-            minute: '2-digit'
-        })}</span>
-            </div>
+                <span class="comment-nickname">${comment.nickname || comment.email}</span> `
+
+
+        if (oldDate.getTime()+1000 < newDate.getTime()) {
+            tag += `<span class="comment-date">*수정됨.  ${new Date(comment.discussionReplyUpdatedAt).toLocaleString('ko-KR', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            })}</span>`
+        } else {
+            tag += `<span class="comment-date">${new Date(comment.discussionReplyCreatedAt).toLocaleString('ko-KR', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            })}</span>`
+        }
+                
+            tag += `</div>
             <div class="comment-body">
                 <p class="reply-comment">${comment.discussionReplyContent}</p>
             </div>
         `;
 
         if (loginUserDto && loginUserDto.nickname === comment.nickname) {
-            commentElement.innerHTML += `
+            tag += `
                 <span class="modify-and-delete delete">
                     <button class="deleteBtn" data-rno="${comment.discussionReplyNo}" 
                       onclick="window.location.href='/discussion/reply/remove?rno='+ ${comment.discussionReplyNo} + '&&dno=' + ${comment.discussionNo}">삭제</button>
@@ -80,26 +102,12 @@ document.addEventListener('DOMContentLoaded', function () {
                 </span>
             `;
         }
+        commentElement.innerHTML = tag;
+
         commentsContainer.appendChild(commentElement);
     }
 
-    // // 삭제 핸들러
-    // window.handleDelete = async function (btn) {
-    //     const replyNo = btn.getAttribute('data-rno');
-    //     try {
-    //         const response = await fetch(`/api/v1/discuss/reply/remove?rno=${replyNo}`, {
-    //             method: 'DELETE'
-    //         });
-    //
-    //         if (response.ok) {
-    //             await fetchComments(); // 전체 댓글 다시 불러오기
-    //         } else {
-    //             console.error('Error deleting comment:', response.statusText);
-    //         }
-    //     } catch (error) {
-    //         console.error('Error deleting comment:', error);
-    //     }
-    // };
+
 
     fetchComments();
     submitCommentButton.addEventListener('click', submitComment);

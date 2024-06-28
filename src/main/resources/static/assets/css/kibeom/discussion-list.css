@@ -279,3 +279,14 @@ footer {
 .bottom-section nav {
     margin-top: 50px;
 }
+
+#top-parents {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+}
+
+#top-parents div {
+    position: relative;
+    right: 20%;
+}

@@ -17,26 +17,39 @@
 <!--  media title 가져와야한다..~  -->
     <select id="findAll" resultType="com.project.mvc.dto.response.kibeom.DiscussFindAllDto">
         SELECT
-        U.nickname AS nickname,
-        D.discussion_title,
-        D.discussion_offer,
-        D.discussion_created_at,
-        D.review_no,
-        D.discussion_no,
-        D.view_count,
-        M.media_title,
-        COUNT(R.discussion_reply_no) AS reply_count
+            U.nickname AS nickname,
+            D.discussion_title,
+            D.discussion_offer,
+            D.discussion_created_at,
+            D.review_no,
+            D.discussion_no,
+            D.view_count,
+            M.media_title,
+            COUNT(R.discussion_reply_no) AS reply_count
         FROM discussion D INNER JOIN user U ON U.email = D.email
         LEFT JOIN discuss_reply R ON R.discussion_no = D.discussion_no
         INNER JOIN media M on D.media_no = M.media_no
+        <if test="type == 'title'">
+            WHERE D.discussion_title LIKE CONCAT('%', #{keyword}, '%')
+        </if>
+        <if test="type == 'content'">
+            WHERE D.discussion_offer LIKE CONCAT('%', #{keyword}, '%')
+        </if>
+        <if test="type == 'writer'">
+            WHERE U.nickname LIKE CONCAT('%', #{keyword}, '%')
+        </if>
+        <if test="type == 'tc'">
+            WHERE D.discussion_title LIKE CONCAT('%', #{keyword}, '%')
+                OR D.discussion_offer LIKE CONCAT('%', #{keyword}, '%')
+        </if>
         GROUP BY
-        U.nickname,
-        D.discussion_title,
-        D.discussion_offer,
-        D.discussion_created_at,
-        D.review_no,
-        D.discussion_no,
-        D.view_count
+            U.nickname,
+            D.discussion_title,
+            D.discussion_offer,
+            D.discussion_created_at,
+            D.review_no,
+            D.discussion_no,
+            D.view_count
         ORDER BY D.discussion_no DESC
         LIMIT #{pageStart}, #{amount}
     </select>
@@ -61,7 +74,20 @@
 
     <select id="count" resultType="int">
         SELECT COUNT(*)
-        FROM discussion
+        FROM discussion D INNER JOIN user U ON D.email = U.email
+        <if test="type == 'title'">
+            WHERE D.discussion_title LIKE CONCAT('%', #{keyword}, '%')
+        </if>
+        <if test="type == 'content'">
+            WHERE D.discussion_offer LIKE CONCAT('%', #{keyword}, '%')
+        </if>
+        <if test="type == 'writer'">
+            WHERE U.nickname LIKE CONCAT('%', #{keyword}, '%')
+        </if>
+        <if test="type == 'tc'">
+            WHERE D.discussion_title LIKE CONCAT('%', #{keyword}, '%')
+            OR D.discussion_offer LIKE CONCAT('%', #{keyword}, '%')
+        </if>
     </select>
 
     <delete id="remove">

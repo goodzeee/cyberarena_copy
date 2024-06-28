@@ -27,13 +27,13 @@
             <form action="/discussion/list" method="get">
 
                 <select class="form-select" name="type">
-                    <option value="title">제목</option>
+                    <option value="title" selected>제목</option>
                     <option value="content">내용</option>
                     <option value="writer">작성자</option>
                     <option value="tc">제목+내용</option>
                 </select>
 
-                <input type="text" name="keyword">
+                <input type="text" name="keyword" value="${s.keyword}">
 
                 <button class="btn btn-primary" type="submit">
                     <i class="fas fa-search"></i>

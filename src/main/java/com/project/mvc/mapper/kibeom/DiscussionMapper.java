@@ -1,6 +1,7 @@
 package com.project.mvc.mapper.kibeom;
 
 import com.project.mvc.common.jihye.Page;
+import com.project.mvc.common.zyo.Search;
 import com.project.mvc.dto.request.kibeom.DiscussionModifyDto;
 import com.project.mvc.dto.request.kibeom.MakeDiscussionDto;
 import com.project.mvc.dto.response.kibeom.DiscussFindAllDto;
@@ -16,7 +17,7 @@ public interface DiscussionMapper {
     boolean insert(MakeDiscussionDto dto);
 
     // 토론 목록 조회
-    List<DiscussFindAllDto> findAll(Page page);
+    List<DiscussFindAllDto> findAll(Search page);
 
     // 토론 개별 조회
     Discussion findOne(long discussionNo);
@@ -28,7 +29,7 @@ public interface DiscussionMapper {
     void updateViewCount(long discussionNo);
 
     // 총 게시물 수 조회
-    int count();
+    int count(Search search);
 
     // 토론 삭제
     boolean remove(long dno);

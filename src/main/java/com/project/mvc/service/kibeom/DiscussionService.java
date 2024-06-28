@@ -35,7 +35,7 @@ public class DiscussionService {
     private final MediaMapper mediaMapper;
     private final UserMapper userMapper;
 
-    public List<DiscussResponseDto> findAll(Page page) {
+    public List<DiscussResponseDto> findAll(Search page) {
         List<DiscussFindAllDto> list = discussionMapper.findAll(page);
         List<DiscussResponseDto> dtoList = list.stream()
                 .map(d -> new DiscussResponseDto(d))
@@ -89,8 +89,8 @@ public class DiscussionService {
     }
 
     // 페이지 생성 파라미터를 받아옴
-    public int getCount() {
-        return discussionMapper.count();
+    public int getCount(Search search) {
+        return discussionMapper.count(search);
     }
 
     public boolean remove(long dno) {

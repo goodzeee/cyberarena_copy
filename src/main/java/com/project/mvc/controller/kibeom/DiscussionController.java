@@ -2,6 +2,7 @@ package com.project.mvc.controller.kibeom;
 
 import com.project.mvc.common.jihye.Page;
 import com.project.mvc.common.jihye.PageMaker;
+import com.project.mvc.common.zyo.Search;
 import com.project.mvc.dto.request.kibeom.DiscussionCommentRequestDto;
 import com.project.mvc.dto.request.kibeom.DiscussionModifyDto;
 import com.project.mvc.dto.request.kibeom.MakeDiscussionDto;
@@ -19,10 +20,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,11 +37,11 @@ public class DiscussionController {
     private final DiscussionMapper discussionMapper;
 
     @GetMapping("/list")
-    public String discussionList(Page page, Model model) {
+    public String discussionList(@ModelAttribute("s") Search page, Model model) {
         List<DiscussResponseDto> dtoList = discussionService.findAll(page);
         List<Media> mList = mediaMapper.findAll(null);
 
-        PageMaker maker = new PageMaker(page, discussionService.getCount());
+        PageMaker maker = new PageMaker(page, discussionService.getCount(page));
 
         model.addAttribute("maker", maker);
         model.addAttribute("dList", dtoList);

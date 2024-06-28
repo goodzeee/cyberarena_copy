@@ -8,6 +8,8 @@ import com.project.mvc.dto.request.jihye.ReviewPostDto;
 import com.project.mvc.dto.response.jihye.ReviewDetailDto;
 import com.project.mvc.dto.response.jihye.ReviewFindAllDto;
 import com.project.mvc.dto.response.jihye.ReviewListDto;
+import com.project.mvc.dto.seongjin.LoginDto;
+import com.project.mvc.dto.seongjin.LoginUserInfoDto;
 import com.project.mvc.entity.Review;
 import com.project.mvc.entity.User;
 import com.project.mvc.mapper.jihye.ReviewMapper;
@@ -21,7 +23,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.net.http.HttpRequest;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -45,101 +49,39 @@ public class ReviewService {
 
         return ReviewListDto.builder()
                 .reviews(dtoList)
-//                .pageInfo(new PageMaker(page, reviewMapper.count(mediaNo)))
-//                .loginUser(LoginUtil.getLoggedInUser(session))
                 .build();
-
-//        List<Review> reviews = reviewMapper.findAll(mediaNo);
-
-//        List<ReviewDetailDto> dtoList = reviews.stream()
-//                .map(r -> new ReviewDetailDto(r))
-//                .collect(Collectors.toList());
-//
-//        return ReviewListDto.builder()
-//                .reviews(dtoList)
-//                .build();
-
-//        List<ReviewDetailDto> reviewDetailDtoList = reviews.stream()
-//                .map(review -> new ReviewDetailDto(review))
-//                .collect(Collectors.toList());
-//        return reviewDetailDtoList;
-//        return reviews.stream()
-//                .map(r -> new ReviewDetailDto(r))
-//                .collect(Collectors.toList());
     }
 
     // 2. 리뷰 등록
-    public boolean register(ReviewPostDto dto) {
+    public boolean register(ReviewPostDto dto, HttpSession session) {
 
-        try {
-            Review review = Review.builder()
-                    .reviewText(dto.getReviewText())
-                    .email(dto.getEmail())
-                    .nickname(dto.getNickname())
-                    .userRating(dto.getUserRating())
-                    .discussionStatus(dto.getDiscussionStatus())
-                    .mediaNo(dto.getMediaNo())
-                    .build();
+        Review r = dto.toEntity();
+        //계정명을 엔터티에 추가 - 세션에서 계정명 가져오기
+//        r.setEmail(LoginDto.getLoggedInUserAccount(session));
 
-            boolean registrationSuccess = reviewMapper.save(review);
+        LoginUserInfoDto loginUser = (LoginUserInfoDto) session.getAttribute("login");
+        loginUser.getEmail();
 
-            if (registrationSuccess) {
-                log.info("Review successfully saved: {}", dto);
-            } else {
-                log.warn("Failed to save review: {}", dto);
-            }
-
-            return registrationSuccess;
-        } catch (Exception e) {
-            log.error("Error occurred while registering review: {}", e.getMessage());
-            return false;
-        }
+            return reviewMapper.save(r);
     }
-//        Review review = Review.builder()
-//                .reviewText(dto.getReviewText())
-//                .email(dto.getEmail())
-////                .email(LoginUtil.getLoggedInUserAccount(session))
-//                .nickname(dto.getNickname())
-//                .userRating(dto.getUserRating())
-//                .discussionStatus(dto.getDiscussionStatus())
-//                .mediaNo(dto.getMediaNo())
-//                .build();
-//
-//        boolean flag = reviewMapper.save(review);
-//        if (flag) log.info("댓글 등록 성공 ! - {}", dto);
-//        else log.warn("댓글 등록 실패");
-//        return flag;
-//        return reviewMapper.save(review);
 
     // 3. 리뷰 수정
     public ReviewListDto modify(ReviewModifyDto dto) {
-//        Review review = Review.builder()
-//                .reviewNo(dto.getReviewNo())
-//                .reviewText(dto.getReviewText())
-//                .userRating(dto.getUserRating())
-//                .discussionStatus(dto.getDiscussionStatus())
-//                .build();
+
         reviewMapper.modify(dto.toEntity());
         return findList(dto.getReviewNo());
-//        return reviewMapper.modify(review);
     }
 
     // 4. 리뷰 삭제
-    public ReviewListDto remove (long reviewNo) {
-        // 댓글 번호로 원본 글번호 찾기
+    public ReviewListDto remove(long reviewNo) {
+        log.info("Removing review with reviewNo: {}", reviewNo);
+
+        // 댓글 번호로 원본 미디어 번호 찾기
         long mediaNo = reviewMapper.findMno(reviewNo);
 
         boolean deleted = reviewMapper.delete(reviewNo);
 
         return deleted ? findList(mediaNo) : null;
-//        if (deleted) {
-//            List<ReviewDetailDto> reviewList = findList(mediaNo);
-//            return ReviewListDto.builder()
-//                    .reviews(reviewList)
-//                    .build();
-//        } else {
-//            throw new RuntimeException("리뷰 삭제에 실패했습니다.");
-//        }
     }
 
 }

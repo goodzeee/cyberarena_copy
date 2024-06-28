@@ -1,10 +1,8 @@
 package com.project.mvc.mapper.jihye;
 
-import com.project.mvc.common.jihye.Page;
 import com.project.mvc.dto.response.jihye.ReviewFindAllDto;
 import com.project.mvc.entity.Review;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 

@@ -33,13 +33,13 @@ public class ReviewListDto {
     @Setter
     private LoginUserInfoDto loginUser;
 
-//    public ReviewListDto(Review r) {
-//        this.reviewNo = r.getReviewNo();
-//        this.email = r.getEmail();
-//        this.reviewText = r.getReviewText();
-//        this.userRating = r.getUserRating();
-//        this.discussionStatus = r.getDiscussionStatus();
-//        this.reviewCreatedAt = r.getReviewCreatedAt();
-//    }
+    public ReviewListDto(ReviewFindAllDto r) {
+        this.reviewNo = r.getReviewNo();
+        this.email = r.getEmail();
+        this.reviewText = r.getReviewText();
+        this.userRating = r.getUserRating();
+        this.discussionStatus = r.getDiscussionStatus();
+        this.reviewCreatedAt = r.getReviewCreatedAt();
+    }
 
 }

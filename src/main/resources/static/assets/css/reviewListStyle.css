@@ -112,3 +112,26 @@ footer {
         margin-top: 10px;
     }
 }
+
+.review-item p {
+    margin: 5px 0;
+}
+
+.review-item a {
+    color: blue;
+    text-decoration: underline;
+}
+
+.review-item .disabled {
+    color: gray;
+    cursor: not-allowed;
+    text-decoration: none;
+}
+
+.review-average {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #4CAF50;
+    margin-top: 20px;
+}
+

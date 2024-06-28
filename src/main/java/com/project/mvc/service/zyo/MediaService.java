@@ -5,6 +5,7 @@ import com.project.mvc.dto.request.jihye.MediaDetailDto;
 import com.project.mvc.dto.response.jihye.ReviewDetailDto;
 import com.project.mvc.dto.response.jihye.ReviewFindAllDto;
 import com.project.mvc.dto.response.kibeom.DiscussFindAllDto;
+import com.project.mvc.dto.zyo.DiscussRenderingDto;
 import com.project.mvc.dto.zyo.ReviewRenderingDto;
 import com.project.mvc.entity.Category;
 import com.project.mvc.entity.Discussion;
@@ -84,11 +85,15 @@ public class MediaService {
 
 
     // 토론 목록 조회
-    public List<Discussion> findAllDiscussions(int categoryNo) {
-        List<Discussion> allDiscussions = mediaMapper.findDiscussionByCategory(categoryNo)
+    public List<DiscussRenderingDto> findAllDiscussions(int categoryNo) {
+        List<DiscussRenderingDto> allDiscussions = mediaMapper.findDiscussRenderInfo(categoryNo)
                 .stream()
-                .sorted(Comparator.comparing(Discussion::getViewCount))
+                .sorted(Comparator.comparing(DiscussRenderingDto::getViewCount).reversed())
+                .limit(3)
                 .collect(Collectors.toList());
+        for (DiscussRenderingDto disc : allDiscussions) {
+            disc.dateFormatting();
+        }
         return allDiscussions;
     }
 

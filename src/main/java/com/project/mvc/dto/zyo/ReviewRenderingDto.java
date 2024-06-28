@@ -19,7 +19,7 @@ public class ReviewRenderingDto {
     private String reviewText;
     private LocalDateTime reviewCreatedAt;
     //media
-    private String mediaNo;
+    private long mediaNo;
     private String mediaTitle;
     private String imageUrl;
 }

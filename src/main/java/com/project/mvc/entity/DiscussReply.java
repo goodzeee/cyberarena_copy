@@ -19,4 +19,5 @@ public class DiscussReply {
     private String discussionReplyContent;
 
     private LocalDateTime discussionReplyCreatedAt;
+    private LocalDateTime discussionReplyUpdatedAt;
 }

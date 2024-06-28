@@ -47,4 +47,8 @@ public class DiscussionReplyService {
     public boolean remove(long rno) {
         return  discussReplyMapper.remove(rno);
     }
+
+    public void update(DiscussionCommentRequestDto dto) {
+        discussReplyMapper.update(dto);
+    }
 }

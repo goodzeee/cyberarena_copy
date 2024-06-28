@@ -37,11 +37,11 @@ public class DiscussionReplyController {
     public String modifyDiscussion(DiscussionCommentRequestDto dto) {
         log.info("/discussion/reply/modify : POST");
         log.debug("parameter: {}", dto);
-
+        discussionReplyService.update(dto);
 //        boolean flag = discussionReplyService.update(dto);
 //        if (flag) {
-//            return "redirect:/discussion/detail?dno=" + dto.getDiscussionNo();
+            return "redirect:/discussion/detail?dno=" + dto.getDiscussionNo();
 //        }
-        return null;
+
     }
 }

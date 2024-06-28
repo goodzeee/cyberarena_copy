@@ -51,5 +51,13 @@
         WHERE discussion_reply_no = #{discussionReplyNo}
     </delete>
 
+    <update id="update">
+        UPDATE discuss_reply
+        SET
+        discussion_reply_content = #{discussionReplyContent},
+        discussion_reply_updated_at = current_timestamp
+        WHERE discussion_reply_no = #{discussionReplyNo}
+    </update>
+
 </mapper>
 

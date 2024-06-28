@@ -16,6 +16,7 @@ import java.util.List;
 @AllArgsConstructor @Builder
 public class ReviewListDto {
 
+    private long mediaNo;
     // 리뷰 목록 조회를 위해 필요한 데이터만 DTO
     private long reviewNo;
     private String email;

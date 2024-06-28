@@ -7,8 +7,8 @@
     <!--선택한 미디어에 리뷰 등록 : email, 해당 미디어번호, 리뷰 내용, 별점,토론신청 여부-->
     <!--PK 리뷰 번호, 등록 날짜는 자동으로 들어옴-->
     <insert id="save">
-        INSERT INTO review (email, media_no, review_text, user_rating, discussion_status, nickname)
-        VALUES (#{email}, #{mediaNo}, #{reviewText}, #{userRating}, #{discussionStatus}, #{nickname})
+        INSERT INTO review (email, media_no, review_text, user_rating, discussion_status)
+        VALUES (#{email}, #{mediaNo}, #{reviewText}, #{userRating}, #{discussionStatus})
     </insert>
 
     <!--리뷰 수정 : 리뷰 내용, 평점, 토론신청 여부만 수정할 수 있도록-->

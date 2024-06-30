@@ -29,7 +29,7 @@ for (let i = 0; i < validate.length; i++) {
     });
 }
 
-const $makeBtn = document.querySelector('.make-discussion')
+
 const $backdrop = document.getElementById('backdrop')
 
 const $detail = document.querySelector('.list-wrap')
@@ -59,11 +59,8 @@ closeBtn.addEventListener("click", () => {
             alert('로그인이 필요한 서비스입니다.');
             e.preventDefault();
         } else {
-            console.log("modal ", $modalWrap)
-            // $modalWrap.classList.remove('none');
-            $modalWrap.style.display = 'block'
-            console.log('removed modal, ', $modalWrap)
-            $backdrop.classList.remove('none');
+            window.location.href = '/discussion/register'
+
         }
     });
 // });

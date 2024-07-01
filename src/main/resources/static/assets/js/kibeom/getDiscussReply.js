@@ -45,47 +45,50 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function renderComments(comments, loginUserDto) {
         commentsContainer.innerHTML = '';
-        comments.forEach(comment => {
-            addCommentToDOM(comment, loginUserDto);
-        });
+        if (comments.length === 0) {
+            const commentElement = document.createElement('div');
+            commentElement.classList.add('comment-card');
+            let tag = `<div>댓글이 없습니다.</div>`
+            commentElement.innerHTML = tag;
+            commentsContainer.appendChild(commentElement);
+        } else {
+            comments.forEach(comment => {
+                addCommentToDOM(comment, loginUserDto);
+            });
+        }
     }
 
-
-
     function addCommentToDOM(comment, loginUserDto) {
-
-
         const oldDate = new Date(comment.discussionReplyCreatedAt);
         const newDate = new Date(comment.discussionReplyUpdatedAt);
 
-
-
         const commentElement = document.createElement('div');
         commentElement.classList.add('comment-card');
+
+
         let tag = `
             <div class="comment-header" data-replyNo="${comment.discussionReplyNo}">
-                <span class="comment-nickname">${comment.nickname || comment.email}</span> `
+                <span class="comment-nickname">${comment.nickname || comment.email}</span> `;
 
-
-        if (oldDate.getTime()+1000 < newDate.getTime()) {
-            tag += `<span class="comment-date">*수정됨.  ${new Date(comment.discussionReplyUpdatedAt).toLocaleString('ko-KR', {
+        if (oldDate.getTime() + 1000 < newDate.getTime()) {
+            tag += `<span class="comment-date">*수정됨.  ${newDate.toLocaleString('ko-KR', {
                 year: 'numeric',
                 month: 'long',
                 day: 'numeric',
                 hour: '2-digit',
                 minute: '2-digit'
-            })}</span>`
+            })}</span>`;
         } else {
-            tag += `<span class="comment-date">${new Date(comment.discussionReplyCreatedAt).toLocaleString('ko-KR', {
+            tag += `<span class="comment-date">${oldDate.toLocaleString('ko-KR', {
                 year: 'numeric',
                 month: 'long',
                 day: 'numeric',
                 hour: '2-digit',
                 minute: '2-digit'
-            })}</span>`
+            })}</span>`;
         }
-                
-            tag += `</div>
+
+        tag += `</div>
             <div class="comment-body">
                 <p class="reply-comment">${comment.discussionReplyContent}</p>
             </div>
@@ -95,7 +98,7 @@ document.addEventListener('DOMContentLoaded', function () {
             tag += `
                 <span class="modify-and-delete delete">
                     <button class="deleteBtn" data-rno="${comment.discussionReplyNo}" 
-                      onclick="window.location.href='/discussion/reply/remove?rno='+ ${comment.discussionReplyNo} + '&&dno=' + ${comment.discussionNo}">삭제</button>
+                      onclick="window.location.href='/discussion/reply/remove?rno=' + ${comment.discussionReplyNo} + '&&dno=' + ${comment.discussionNo}">삭제</button>
                 </span>
                 <span class="modify-and-delete modify">
                     <button class="modifyBtn" data-rno="${comment.discussionReplyNo}" data-email="${comment.email}">수정</button>
@@ -106,8 +109,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
         commentsContainer.appendChild(commentElement);
     }
-
-
 
     fetchComments();
     submitCommentButton.addEventListener('click', submitComment);

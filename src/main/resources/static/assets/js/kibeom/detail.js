@@ -58,7 +58,6 @@ for(let i = 0; i < 1; i++) {
 
 const $modify = document.getElementById('modify');
 
-console.log($modify)
 const $backdrop = document.getElementById('backdrop')
 
 

@@ -270,7 +270,7 @@ footer {
     color: #444 !important;
 }
 
-.pagination li.active { /* .active 클래스가 li 요소에 직접 할당되므로 선택자 수정 */
+.pagination li.active {
     background: #333 !important;
     color: #fff !important;
 }

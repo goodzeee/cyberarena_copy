@@ -19,7 +19,10 @@ body {
 .rank {
   position: absolute;
   height: 200px;
-  letter-spacing: 270px;
+}
+
+.rank svg {
+  margin-right: 280px;
 }
 
 .poster_wrap {
@@ -98,7 +101,9 @@ body {
   transform: scale(1.3);
 }
 
-
+.media_list {
+  margin-right: 4px;
+}
 
 .row_poster {
   overflow: visible;

@@ -140,12 +140,15 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
         </div>
         <div class="row_posters slider">
           <c:forEach items="${imageUrls}" var="imageUrl">
-            <img
+            <div class="media_list">
+              <img
               class="img_list"
-              src="${pageContext.request.contextPath}${imageUrl}"
-              alt="Media Image"
-            />
+              src="${imageUrl.imageUrl}"
+              alt="Media Image">
+              ${imageUrl.mediaTitle}
+            </div>
           </c:forEach>
+          
         </div>
         <div class="next"><i class="fa-solid fa-angle-right"></i></div>
       </div>
@@ -204,10 +207,10 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
     for (let i = 0; i <= 1; i++) {
       next[i].addEventListener("click", (e) => {
-        slider[i].scrollBy(slider[i].offsetWidth, 0);
+        slider[i].scrollBy(1490, 0);
       });
       prev[i].addEventListener("click", (e) => {
-        slider[i].scrollBy(-slider[i].offsetWidth, 0);
+        slider[i].scrollBy(-1490, 0);
       });
     }
 

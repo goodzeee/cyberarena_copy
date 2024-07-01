@@ -97,7 +97,7 @@ public class MediaService {
     }
 
     // 이미지 URL 조회
-    public List<String> findImageUrlByCategory(int categoryNo) {
+    public List<Media> findImageUrlByCategory(int categoryNo) {
         return mediaMapper.findImageUrlByCategory(categoryNo);
     }
 

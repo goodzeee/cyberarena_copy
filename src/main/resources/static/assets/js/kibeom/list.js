@@ -2,10 +2,22 @@ const $finishBtn = document.getElementById('finish');
 const $title = document.getElementById('title');
 const $offer = document.getElementById('detail');
 const $media = document.getElementById('media');
-const $modalWrap = document.querySelector('.modal-wrap');
+const $listWrap = document.getElementById('whole-wrap');
+// const $modalWrap = document.querySelector('.modal-wrap');
 
 const validate = [$title, $offer];
 let isValidate = [false, false];
+
+console.log($listWrap)
+$listWrap.addEventListener('click', e => {
+    // if (!e.target.matches('.card')) return
+    console.log("click")
+    const dno = e.target.closest('.card').dataset.dno;
+    window.location.href = "/discussion/detail?dno=" + dno;
+})
+
+
+
 
 for (let i = 0; i < validate.length; i++) {
     validate[i].addEventListener('keyup', e => {
@@ -29,7 +41,7 @@ for (let i = 0; i < validate.length; i++) {
     });
 }
 
-const $makeBtn = document.querySelector('.make-discussion')
+
 const $backdrop = document.getElementById('backdrop')
 
 const $detail = document.querySelector('.list-wrap')
@@ -59,11 +71,8 @@ closeBtn.addEventListener("click", () => {
             alert('로그인이 필요한 서비스입니다.');
             e.preventDefault();
         } else {
-            console.log("modal ", $modalWrap)
-            // $modalWrap.classList.remove('none');
-            $modalWrap.style.display = 'block'
-            console.log('removed modal, ', $modalWrap)
-            $backdrop.classList.remove('none');
+            window.location.href = '/discussion/register'
+
         }
     });
 // });
@@ -96,3 +105,4 @@ $modalInput.addEventListener('keydown', e => {
         $modalInput.style.backgroundColor = "white";
     }
 })
+

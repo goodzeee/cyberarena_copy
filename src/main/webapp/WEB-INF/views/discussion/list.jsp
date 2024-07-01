@@ -43,7 +43,9 @@
         </div>
     </div>
 
-    <c:forEach var="d" items="${dList}">
+
+    <div id="whole-wrap">
+        <c:forEach var="d" items="${dList}">
         <div class="card" data-dno="${d.discussionNo}">
             <p class="media-title">미디어: ${d.mediaTitle}</p>
             <p class="discussion-title">토론 주제: ${d.discussionTitle}</p>
@@ -52,12 +54,12 @@
             <p class="discuss-view-count">조회수: ${d.viewCount}</p>
             <p class="reply-count">댓글[${d.replyCount}]</p>
             <p class="discussion-created-at">${d.formattedDiscussionCreatedAt}</p>
-<%--            <c:if test="${login.nickname == d.nickname}">--%>
-<%--                <a href="/discussion/modify">수정</a>--%>
-<%--                <a href="/discussion/remove">삭제</a>--%>
-<%--            </c:if>--%>
+                <%--            <c:if test="${login.nickname == d.nickname}">--%>
+                <%--                <a href="/discussion/modify">수정</a>--%>
+                <%--                <a href="/discussion/remove">삭제</a>--%>
+                <%--            </c:if>--%>
         </div>
-    </c:forEach>
+    </c:forEach></div>
 
 </div>
 
@@ -95,46 +97,46 @@
 <%@ include file="../include/footer.jsp" %>
 
 <%-- Modal --%>
-<div class="modal-wrap none" id="modal">
-    <div class="modal-content">
-        <div class="modal-left">
-            <h1>토론 등록</h1>
-            <form action="/discussion/register" method="POST">
-                <input type="hidden" name="email" value="${login.email}">
-                <label>
-                    # 닉네임 : <input type="text" id="nickname" value="${login.nickname}" readonly>
-                </label>
-                <label>
-                    # 미디어 : <input type="text" id="media" name="mediaName" readonly placeholder="하단의 검색창을 이용해주세요.">
-                </label>
-                <label>
-                    # 주제 : <input type="text" id="title" name="discussionTitle">
-                </label>
-                <label>
-                    # 세부 내용 : <input type="text" id="detail" name="discussionOffer">
-                </label>
-                <label>
-                    <input type="button" id="finish" value="작성 완료">
-                    <button type="button" id="cancelButton">작성 취소</button>
-                </label>
-            </form>
-        </div>
-        <div class="modal-right">
-            <form class="modal-search">
+<%--<div class="modal-wrap none" id="modal">--%>
+<%--    <div class="modal-content">--%>
+<%--        <div class="modal-left">--%>
+<%--            <h1>토론 등록</h1>--%>
+<%--            <form action="/discussion/register" method="POST">--%>
+<%--                <input type="hidden" name="email" value="${login.email}">--%>
+<%--                <label>--%>
+<%--                    # 닉네임 : <input type="text" id="nickname" value="${login.nickname}" readonly>--%>
+<%--                </label>--%>
+<%--                <label>--%>
+<%--                    # 미디어 : <input type="text" id="media" name="mediaName" readonly placeholder="하단의 검색창을 이용해주세요.">--%>
+<%--                </label>--%>
+<%--                <label>--%>
+<%--                    # 주제 : <input type="text" id="title" name="discussionTitle">--%>
+<%--                </label>--%>
+<%--                <label>--%>
+<%--                    # 세부 내용 : <input type="text" id="detail" name="discussionOffer">--%>
+<%--                </label>--%>
+<%--                <label>--%>
+<%--                    <input type="button" id="finish" value="작성 완료">--%>
+<%--                    <button type="button" id="cancelButton">작성 취소</button>--%>
+<%--                </label>--%>
+<%--            </form>--%>
+<%--        </div>--%>
+<%--        <div class="modal-right">--%>
+<%--            <form class="modal-search">--%>
 
-                <label>
-                    <p>미디어 검색</p>
-                    <input class="modal-input" type="text" name="searchMedia" id="searchMediaInput"
-                           placeholder="검색어를 입력해주세요.">
-                </label>
-            </form>
-            <div class="fetch-wrap">
+<%--                <label>--%>
+<%--                    <p>미디어 검색</p>--%>
+<%--                    <input class="modal-input" type="text" name="searchMedia" id="searchMediaInput"--%>
+<%--                           placeholder="검색어를 입력해주세요.">--%>
+<%--                </label>--%>
+<%--            </form>--%>
+<%--            <div class="fetch-wrap">--%>
 
-            </div>
-        </div>
-    </div>
-    <div class="modal-close" id="closeModalButton">닫기</div>
-</div>
+<%--            </div>--%>
+<%--        </div>--%>
+<%--    </div>--%>
+<%--    <div class="modal-close" id="closeModalButton">닫기</div>--%>
+<%--</div>--%>
 
 
 <script type="module" src="/assets/js/kibeom/getMedia.js"></script>

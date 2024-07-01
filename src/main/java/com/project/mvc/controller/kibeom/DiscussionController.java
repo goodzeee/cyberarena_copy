@@ -49,6 +49,12 @@ public class DiscussionController {
         return "discussion/list";
     }
 
+    @GetMapping("/register")
+    public String register() {
+        return "discussion/register";
+    }
+
+
     @PostMapping("/register")
     public String makeDiscussion(MakeDiscussionDto dto) {
         MakeDiscussionDto insertDto = discussionService.getMediaNo(dto);

@@ -26,8 +26,8 @@
         <div>
             <form action="/discussion/list" method="get">
 
-                <select class="form-select" name="type">
-                    <option value="title" selected>제목</option>
+                <select class="form-select" name="type" id="search-type">
+                    <option value="title">제목</option>
                     <option value="content">내용</option>
                     <option value="writer">작성자</option>
                     <option value="tc">제목+내용</option>
@@ -87,7 +87,7 @@
             </c:if>
             <c:forEach var="i" begin="${maker.begin}" end="${maker.end}">
                 <li class="page-item items" data-page-num="${i}">
-                    <a class="page-link" href="/discussion/list?pageNo=${i}">${i}</a>
+                    <a class="page-link" href="/discussion/list?pageNo=${i}&type=${s.type}&keyword=${s.keyword}">${i}</a>
                 </li>
             </c:forEach>
             <c:if test="${maker.pageInfo.pageNo != maker.finalPage}">
@@ -120,7 +120,16 @@
         }
     }
 
+    function fixSearchOption () {
+        const type =`${s.type}`
+        const $option = document.querySelector(`#search-type option[value='\${type}']`);
+        $option?.setAttribute('selected', 'selected');
+
+    }
+
+
     appendActivePage();
+    fixSearchOption();
 </script>
 
 </body>

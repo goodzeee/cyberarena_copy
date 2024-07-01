@@ -8,34 +8,16 @@ const $replyTextArea = document.getElementById('reply-textarea');
 
 let isExist = false; // 댓글 등록창에 값이 있냐 없냐
 
-const validate = [$title, $offer];
-let isValidate = [false, false];
-//
-// for (let i = 0; i < validate.length; i++) {
-//     validate[i].addEventListener('keyup', e => {
-//         if (validate[i].value !== '' ) {
-//             isValidate[i] = true;
-//         } else {
-//             isValidate[i] = false;
-//         }
-//         // 미디어값 비어도 완료 들어감, 예외처리 해야함
-//
-//         if (isValidate[0] === true && isValidate[1] === true) {
-//             $finishBtn.style.cursor = 'pointer';
-//             $finishBtn.style.backgroundColor = "#333";
-//             $finishBtn.setAttribute('type', 'submit');
-//         } else {
-//             $finishBtn.style.cursor = 'default';
-//             $finishBtn.style.width = '100px'
-//             $finishBtn.style.backgroundColor = "#ccc";
-//             $finishBtn.removeAttribute('type');
-//         }
-//     });
-// }
+// const validate = [$title, $offer];
+// let isValidate = [false, false];
+
+$replySubmitBtn.style.pointerEvents = "none";
+$replySubmitBtn.style.backgroundColor = "lightgray";
 
 
 for(let i = 0; i < 1; i++) {
     $replyTextArea.addEventListener('keyup', e => {
+
         if ($replyTextArea.value.trim().length > 0) {
             isExist = true;
         } else {
@@ -43,12 +25,16 @@ for(let i = 0; i < 1; i++) {
         }
 
         if (isExist) {
+
             $replySubmitBtn.style.backgroundColor = "#28a745"
+            $replySubmitBtn.style.pointerEvents = "auto"
+
         } else {
+
             $replySubmitBtn.style.pointerEvents = 'none'
             $replySubmitBtn.style.backgroundColor = "lightgray";
+            $replyTextArea.preventDefault();
         }
-
     })
 }
 

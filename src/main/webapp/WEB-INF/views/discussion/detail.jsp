@@ -101,11 +101,7 @@
         <div class="modal-right">
             <form class="modal-search">
 
-                <%--        <label>--%>
-                <%--          <p>미디어 검색</p>--%>
-                <%--          <input class="modal-input" type="text" name="searchMedia" id="searchMediaInput"--%>
-                <%--                 placeholder="검색어를 입력해주세요.">--%>
-                <%--        </label>--%>
+
             </form>
             <div class="fetch-wrap">
 

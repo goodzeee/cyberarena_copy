@@ -13,44 +13,40 @@
         <div class="modal-content">
             <div class="modal-left">
                 <h1>토론 등록</h1>
-                <form action="/discussion/register" method="POST">
+                <form action="/discussion/register" method="POST" id="discussionForm">
                     <input type="hidden" name="email" value="${login.email}">
                     <label>
                         # 닉네임 : <input type="text" id="nickname" value="${login.nickname}" readonly>
                     </label>
                     <label>
-                        # 미디어 : <input type="text" id="media" name="mediaName" readonly placeholder="하단의 검색창을 이용해주세요.">
+                        # 미디어 :
+                        <input class="mediaName" type="text" name="mediaName" id="searchMediaInput" placeholder="검색어를 입력해주세요.">
                     </label>
                     <label>
-                        # 주제 : <input type="text" id="title" name="discussionTitle">
+                        # 주제 :<br> <input type="text" id="title" name="discussionTitle">
                     </label>
+                    <br>
                     <label>
-                        # 세부 내용 : <input type="text" id="detail" name="discussionOffer">
+                        # 세부 내용 : <br><input type="text" id="detail" name="discussionOffer">
                     </label>
+                    <br>
                     <label>
-                        <input type="button" id="finish" value="작성 완료">
+                        <input type="submit" id="finish" value="작성 완료">
                         <button type="button" id="cancelButton" onclick="window.location.href='/discussion/list'">작성 취소</button>
                     </label>
                 </form>
             </div>
             <div class="modal-right">
-                <form class="modal-search">
-                    <label>
-                        <p>미디어 검색</p>
-                        <input class="modal-input" type="text" name="searchMedia" id="searchMediaInput"
-                               placeholder="검색어를 입력해주세요.">
-                    </label>
-                </form>
-                <div class="fetch-wrap">
-                    <!-- 검색 결과를 보여주는 영역 -->
-                </div>
+                <!-- 추가적인 콘텐츠가 들어갈 수 있는 영역 -->
             </div>
         </div>
+    </div>
+    <div class="fetch-wrap">
+        <!-- 검색 결과를 보여주는 영역 -->
     </div>
 </main>
 <%@ include file="../include/footer.jsp" %>
 <script type="module" src="/assets/js/kibeom/getMedia.js"></script>
-<script type="text/javascript" src="/assets/js/kibeom/list.js"></script>
-
+<script type="text/javascript" src="/assets/js/kibeom/register.js"></script>
 </body>
 </html>

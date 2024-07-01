@@ -41,7 +41,7 @@
 
             </form>
         </div>
-        <button class="make-discussion">토론 생성하기</button>
+        <button class="make-discussion" id="makeDiscussion">토론 생성하기</button>
     </div>
 
 
@@ -109,8 +109,8 @@
 
 <%@ include file="../include/footer.jsp" %>
 
-<script type="module" src="/assets/js/kibeom/getMedia.js"></script>
-<script type="text/javascript" src="/assets/js/kibeom/list.js"></script>
+<%--<script type="module" src="/assets/js/kibeom/getMedia.js"></script>--%>
+<script type="module" src="/assets/js/kibeom/list.js"></script>
 <script>
 
     function appendActivePage() {
@@ -133,6 +133,23 @@
 
     appendActivePage();
     fixSearchOption();
+
+    const makeDiscussionButton = document.getElementById('makeDiscussion');
+
+    makeDiscussionButton.addEventListener('click', e =>  {
+
+        if (!isLoggedIn) {
+            e.preventDefault();
+            const flag = confirm('\n로그인이 필요한 서비스입니다.\n로그인을 하시겠습니까?');
+
+            if (flag) {
+                window.location.href= "/user/sign-in";
+            }
+
+        } else {
+            window.location.href = '/discussion/register'
+        }
+    });
 </script>
 
 </body>

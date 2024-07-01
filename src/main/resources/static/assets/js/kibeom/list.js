@@ -8,20 +8,34 @@ const $listWrap = document.getElementById('whole-wrap');
 const validate = [$title, $offer];
 let isValidate = [false, false];
 
+const $detail = document.getElementById('whole-wrap')
 
-const makeDiscussionButton = document.querySelector('.make-discussion');
-makeDiscussionButton.addEventListener('click', e =>  {
-    if (!isLoggedIn) {
-        e.preventDefault();
-        const flag = confirm('\n로그인이 필요한 서비스입니다.\n로그인을 하시겠습니까?');
-        if (flag) {
-            window.location.href= "/user/sign-in";
-        }
+$detail.addEventListener('click', e => {
 
+    if (!e.target.closest('.card')) return;
+
+    const dno = e.target.closest('.card').dataset.dno;
+    window.location.href = '/discussion/detail?dno=' + dno;
+})
+
+
+$title.addEventListener('keyup', e => {
+    if ($title.value !== '') {
+        $title.style.backgroundColor = "#E7F0FE";
     } else {
-        window.location.href = '/discussion/register'
+        $title.style.backgroundColor = "white";
     }
 });
+
+$offer.addEventListener('keyup', e => {
+
+    if ($offer.value !== '') {
+        $offer.style.backgroundColor = "#E7F0FE";
+    } else {
+        $offer.style.backgroundColor = "white";
+    }
+});
+
 
 
 $listWrap.addEventListener('click', e => {
@@ -34,37 +48,11 @@ $listWrap.addEventListener('click', e => {
 
 
 
-for (let i = 0; i < validate.length; i++) {
-    validate[i].addEventListener('keyup', e => {
-        if (validate[i].value !== '' ) {
-            isValidate[i] = true;
-        } else {
-            isValidate[i] = false;
-        }
-        // 미디어값 비어도 완료 들어감, 예외처리 해야함
-
-        if (isValidate[0] === true && isValidate[1] === true) {
-            $finishBtn.style.cursor = 'pointer';
-            $finishBtn.style.backgroundColor = "#333";
-            $finishBtn.setAttribute('type', 'submit');
-        } else {
-            $finishBtn.style.cursor = 'default';
-            $finishBtn.style.width = '100px'
-            $finishBtn.style.backgroundColor = "#ccc";
-            $finishBtn.removeAttribute('type');
-        }
-    });
-}
 
 
 const $backdrop = document.getElementById('backdrop')
 
-const $detail = document.querySelector('.list-wrap')
-document.addEventListener('click', e => {
-    if (!e.target.closest('.card')) return;
-    const dno = e.target.closest('.card').dataset.dno;
-    window.location.href = '/discussion/detail?dno=' + dno;
-})
+
 
 const menuBtn = document.querySelector("header .menu-open");
 const closeBtn = document.querySelector(".gnb .close");
@@ -85,29 +73,5 @@ closeBtn.addEventListener("click", () => {
 
 // 입력값 상호작용
 
-const $modalInput = document.querySelector('.modal-input');
 
-$title.addEventListener('keyup', e => {
-    if ($title.value !== '') {
-        $title.style.backgroundColor = "#E7F0FE";
-    } else {
-        $title.style.backgroundColor = "white";
-    }
-});
-
-$offer.addEventListener('keyup', e => {
-    if ($offer.value !== '') {
-        $offer.style.backgroundColor = "#E7F0FE";
-    } else {
-        $offer.style.backgroundColor = "white";
-    }
-});
-
-$modalInput.addEventListener('keydown', e => {
-    if ($modalInput.value !== '') {
-        $modalInput.style.backgroundColor = "#E7F0FE";
-    } else {
-        $modalInput.style.backgroundColor = "white";
-    }
-})
 

@@ -52,15 +52,18 @@ const renderReplies = (mediaResponse) => {
     const $fetchWrap = document.querySelector('.fetch-wrap');
     $fetchWrap.innerHTML = tag;
 
+
     $fetchWrap.addEventListener("click", e => {
         const $mediaInput = document.getElementById('media')
         $fetchWrap.innerHTML = "";
-        $mediaInput.style.backgroundColor = "#E7F0FE"
+
+        // $mediaInput.style.backgroundColor = "#E7F0FE"
     })
 };
 
 // 미디어 선택 함수 정의
 const selectMedia = (mediaTitle) => {
+    console.log(mediaTitle)
     document.querySelector('input[name="mediaName"]').value = mediaTitle;
 };
 

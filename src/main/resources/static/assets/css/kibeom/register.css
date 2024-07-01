@@ -55,13 +55,15 @@ main {
     margin-bottom: 10px;
 }
 
-.modal-left form input[type="text"], .modal-right form input[type="text"] {
+.modal-left input[type="text"], .modal-right input[type="text"] {
     width: 100%;
     padding: 10px;
     margin-top: 5px;
     border: 1px solid #ddd;
     border-radius: 5px;
 }
+
+
 
 .modal-left form button {
     padding: 10px 20px;
@@ -136,4 +138,8 @@ footer {
 
 #nickname {
     background: #E7F0FE;
+}
+
+#searchMediaInput {
+    width: 100%;
 }

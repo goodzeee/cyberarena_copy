@@ -2,10 +2,22 @@ const $finishBtn = document.getElementById('finish');
 const $title = document.getElementById('title');
 const $offer = document.getElementById('detail');
 const $media = document.getElementById('media');
-const $modalWrap = document.querySelector('.modal-wrap');
+const $listWrap = document.getElementById('whole-wrap');
+// const $modalWrap = document.querySelector('.modal-wrap');
 
 const validate = [$title, $offer];
 let isValidate = [false, false];
+
+console.log($listWrap)
+$listWrap.addEventListener('click', e => {
+    // if (!e.target.matches('.card')) return
+    console.log("click")
+    const dno = e.target.closest('.card').dataset.dno;
+    window.location.href = "/discussion/detail?dno=" + dno;
+})
+
+
+
 
 for (let i = 0; i < validate.length; i++) {
     validate[i].addEventListener('keyup', e => {
@@ -93,3 +105,4 @@ $modalInput.addEventListener('keydown', e => {
         $modalInput.style.backgroundColor = "white";
     }
 })
+

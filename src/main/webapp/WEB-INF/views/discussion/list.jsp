@@ -43,7 +43,9 @@
         </div>
     </div>
 
-    <c:forEach var="d" items="${dList}">
+
+    <div id="whole-wrap">
+        <c:forEach var="d" items="${dList}">
         <div class="card" data-dno="${d.discussionNo}">
             <p class="media-title">미디어: ${d.mediaTitle}</p>
             <p class="discussion-title">토론 주제: ${d.discussionTitle}</p>
@@ -52,12 +54,12 @@
             <p class="discuss-view-count">조회수: ${d.viewCount}</p>
             <p class="reply-count">댓글[${d.replyCount}]</p>
             <p class="discussion-created-at">${d.formattedDiscussionCreatedAt}</p>
-<%--            <c:if test="${login.nickname == d.nickname}">--%>
-<%--                <a href="/discussion/modify">수정</a>--%>
-<%--                <a href="/discussion/remove">삭제</a>--%>
-<%--            </c:if>--%>
+                <%--            <c:if test="${login.nickname == d.nickname}">--%>
+                <%--                <a href="/discussion/modify">수정</a>--%>
+                <%--                <a href="/discussion/remove">삭제</a>--%>
+                <%--            </c:if>--%>
         </div>
-    </c:forEach>
+    </c:forEach></div>
 
 </div>
 

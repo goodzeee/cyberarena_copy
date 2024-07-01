@@ -270,12 +270,10 @@ footer {
     color: #444 !important;
 }
 
-.pagination-custom li.active a,
-.pagination-custom li:hover a {
+.pagination li.active { /* .active 클래스가 li 요소에 직접 할당되므로 선택자 수정 */
     background: #333 !important;
     color: #fff !important;
 }
-
 .bottom-section nav {
     margin-top: 50px;
 }
@@ -290,3 +288,9 @@ footer {
     position: relative;
     right: 20%;
 }
+
+/*.pagination-custom li.active a,*/
+/*.pagination-custom li:hover a {*/
+/*    background: #333 !important;*/
+/*    color: #fff !important;*/
+/*}*/

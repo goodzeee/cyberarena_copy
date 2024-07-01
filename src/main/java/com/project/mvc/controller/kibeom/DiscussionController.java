@@ -22,6 +22,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -68,7 +69,7 @@ public class DiscussionController {
 
 
     @GetMapping("/detail")
-    public String discussionDetail(Model model, long dno) {
+    public String discussionDetail(Model model, long dno, HttpServletRequest request) {
         DiscussionDetailResponseDto foundDsc = discussionService.findOne(dno);
 
         // 댓글 수
@@ -79,6 +80,8 @@ public class DiscussionController {
 
         model.addAttribute("count", count);
         model.addAttribute("found", foundDsc);
+        String ref = request.getHeader("Referer");
+        model.addAttribute("ref", ref);
         return "discussion/detail";
     }
 

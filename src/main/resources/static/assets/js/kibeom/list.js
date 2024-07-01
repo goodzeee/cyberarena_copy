@@ -8,11 +8,16 @@ const $listWrap = document.getElementById('whole-wrap');
 const validate = [$title, $offer];
 let isValidate = [false, false];
 
+
 const makeDiscussionButton = document.querySelector('.make-discussion');
 makeDiscussionButton.addEventListener('click', e =>  {
     if (!isLoggedIn) {
-        alert('로그인이 필요한 서비스입니다.');
         e.preventDefault();
+        const flag = confirm('\n로그인이 필요한 서비스입니다.\n로그인을 하시겠습니까?');
+        if (flag) {
+            window.location.href= "/user/sign-in";
+        }
+
     } else {
         window.location.href = '/discussion/register'
     }

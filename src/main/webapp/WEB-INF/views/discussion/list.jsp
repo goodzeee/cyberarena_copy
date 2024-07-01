@@ -76,7 +76,7 @@
                 </li>
             </c:if>
             <c:forEach var="i" begin="${maker.begin}" end="${maker.end}">
-                <li class="page-item" data-page-num="${i}">
+                <li class="page-item items" data-page-num="${i}">
                     <a class="page-link" href="/discussion/list?pageNo=${i}">${i}</a>
                 </li>
             </c:forEach>
@@ -96,51 +96,23 @@
 
 <%@ include file="../include/footer.jsp" %>
 
-<%-- Modal --%>
-<%--<div class="modal-wrap none" id="modal">--%>
-<%--    <div class="modal-content">--%>
-<%--        <div class="modal-left">--%>
-<%--            <h1>토론 등록</h1>--%>
-<%--            <form action="/discussion/register" method="POST">--%>
-<%--                <input type="hidden" name="email" value="${login.email}">--%>
-<%--                <label>--%>
-<%--                    # 닉네임 : <input type="text" id="nickname" value="${login.nickname}" readonly>--%>
-<%--                </label>--%>
-<%--                <label>--%>
-<%--                    # 미디어 : <input type="text" id="media" name="mediaName" readonly placeholder="하단의 검색창을 이용해주세요.">--%>
-<%--                </label>--%>
-<%--                <label>--%>
-<%--                    # 주제 : <input type="text" id="title" name="discussionTitle">--%>
-<%--                </label>--%>
-<%--                <label>--%>
-<%--                    # 세부 내용 : <input type="text" id="detail" name="discussionOffer">--%>
-<%--                </label>--%>
-<%--                <label>--%>
-<%--                    <input type="button" id="finish" value="작성 완료">--%>
-<%--                    <button type="button" id="cancelButton">작성 취소</button>--%>
-<%--                </label>--%>
-<%--            </form>--%>
-<%--        </div>--%>
-<%--        <div class="modal-right">--%>
-<%--            <form class="modal-search">--%>
-
-<%--                <label>--%>
-<%--                    <p>미디어 검색</p>--%>
-<%--                    <input class="modal-input" type="text" name="searchMedia" id="searchMediaInput"--%>
-<%--                           placeholder="검색어를 입력해주세요.">--%>
-<%--                </label>--%>
-<%--            </form>--%>
-<%--            <div class="fetch-wrap">--%>
-
-<%--            </div>--%>
-<%--        </div>--%>
-<%--    </div>--%>
-<%--    <div class="modal-close" id="closeModalButton">닫기</div>--%>
-<%--</div>--%>
-
-
 <script type="module" src="/assets/js/kibeom/getMedia.js"></script>
 <script type="text/javascript" src="/assets/js/kibeom/list.js"></script>
+<script>
+
+    function appendActivePage() {
+        const currentPage = `${maker.pageInfo.pageNo}`; // 템플릿 리터럴 올바르게 사용
+        console.log('현재페이지: ' + currentPage);
+
+        const $li = document.querySelector(`.page-item[data-page-num="\${currentPage}"]`);
+
+        if ($li) {
+            $li.classList.add('active');
+        }
+    }
+
+    appendActivePage();
+</script>
 
 </body>
 </html>

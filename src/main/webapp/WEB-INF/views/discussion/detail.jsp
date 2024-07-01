@@ -12,7 +12,15 @@
 
 <%@ include file="../include/header.jsp"%>
 <div class="content-wrap">
+    <button
+            class="list-btn"
+            type="button"
+            onclick="window.location.href='${ref}'"
+    >
+        목록
+    </button>
   <div class="discussion-card">
+
     <div class="discussion-header">
       <h1 class="discussion-title">${found.discussionTitle}</h1>
       <div class="discussion-nickname">작성자: ${found.nickname}</div>

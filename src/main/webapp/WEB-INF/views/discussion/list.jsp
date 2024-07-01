@@ -20,9 +20,9 @@
 
 <div class="list-wrap">
     <h1>토론 리스트</h1>
+    <hr>
 
     <div id="top-parents">
-        <button class="make-discussion">토론 생성하기</button>
         <div>
             <form action="/discussion/list" method="get">
 
@@ -33,7 +33,7 @@
                     <option value="tc">제목+내용</option>
                 </select>
 
-                <input type="text" name="keyword" value="${s.keyword}">
+                <input type="text" name="keyword" value="${s.keyword}" placeholder="검색...">
 
                 <button class="btn btn-primary" type="submit">
                     <i class="fas fa-search"></i>
@@ -41,6 +41,7 @@
 
             </form>
         </div>
+        <button class="make-discussion">토론 생성하기</button>
     </div>
 
 
@@ -56,12 +57,15 @@
             <c:if test="${dList.size() > 0}">
             <c:forEach var="d" items="${dList}">
                 <div class="card" data-dno="${d.discussionNo}">
-                    <p class="media-title">미디어: ${d.mediaTitle}</p>
-                    <p class="discussion-title">토론 주제: ${d.discussionTitle}</p>
-                    <p class="nickname">글쓴이: ${d.nickname}</p>
+                    <h2 class="discussion-title">${d.discussionTitle}</h2>
+                    <hr>
+                    <div>
+                        <span class="media-title"><h3>${d.mediaTitle}</h3></span>
+                        <span class="nickname">작성자: ${d.nickname}</span>
+                    </div>
 <%--                    <p class="discussion-offer">세부내용: ${d.discussionOffer}</p>--%>
-                    <p class="discuss-view-count">조회수: ${d.viewCount}</p>
-                    <p class="reply-count">참여[${d.replyCount}]</p>
+                    <p class="discuss-view-count"><i class="fas fa-eye"></i> ${d.viewCount}</p>
+                    <p class="reply-count">참여 [${d.replyCount}]</p>
                     <p class="discussion-created-at">${d.formattedDiscussionCreatedAt}</p>
                 </div>
             </c:forEach>

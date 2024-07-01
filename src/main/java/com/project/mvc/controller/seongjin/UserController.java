@@ -2,6 +2,9 @@ package com.project.mvc.controller.seongjin;
 
 
 import com.project.mvc.dto.seongjin.*;
+import com.project.mvc.dto.zyo.ReviewRenderingDto;
+import com.project.mvc.entity.Discussion;
+import com.project.mvc.entity.Review;
 import com.project.mvc.service.seongjin.FollowLogService;
 import com.project.mvc.service.seongjin.LoginResult;
 import com.project.mvc.service.seongjin.UserService;
@@ -19,6 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.PushBuilder;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/user")
@@ -29,8 +33,8 @@ public class UserController {
     private final FollowLogService followLogService;
 
     @GetMapping("/sign-in")
-    public String signInGet() {
-
+    public String signInGet(HttpSession session, @RequestParam(required = false) String redirect) {
+        session.setAttribute("redirect", redirect);
 
         return "user/login-page";
     }
@@ -39,10 +43,15 @@ public class UserController {
     public String signInPost(LoginDto dto, HttpSession session, HttpServletResponse response, RedirectAttributes ra) {
 
         LoginResult result = userService.validateLogin(dto, session, response);
+        String redirect = (String) session.getAttribute("redirect");
 
         ra.addFlashAttribute("result", result);
         if (result == LoginResult.SUCCESS) {
-
+            System.out.println("redirect = " + redirect);
+            if (redirect != null) {
+                session.removeAttribute("redirect");
+                return "redirect:" + redirect;
+            }
             return "redirect:/index";
         } else {
             return "redirect:/user/sign-in";
@@ -93,7 +102,10 @@ public class UserController {
         int followerSize = followLogService.getFollowList(request.getSession(), false).size();
         int followingSize = followLogService.getFollowList(request.getSession(), true).size();
 
-
+        List<Discussion> discussList = userService.getDiscussList(request.getSession());
+        model.addAttribute("discussions", discussList);
+        List<ReviewLinkDto> reviewList = userService.getReviewList(request.getSession());
+        model.addAttribute("reviews", reviewList);
         model.addAttribute("follower", followerSize);
         model.addAttribute("following", followingSize);
         return "user/mypage";
@@ -138,13 +150,78 @@ public class UserController {
     @ResponseBody
     public ResponseEntity<?> unfollowing(@RequestParam String userEmail, @RequestParam String targetEmail) {
         boolean flag = followLogService.unfollow(FollowLogRequestDto.builder()
-                        .userEmail(userEmail)
-                        .targetEmail(targetEmail)
+                .userEmail(userEmail)
+                .targetEmail(targetEmail)
                 .build());
 
         return ResponseEntity
                 .ok()
                 .body(flag);
     }
+    @GetMapping("/verify")
+    @ResponseBody
+    public ResponseEntity<?> verify(HttpSession session) {
+        LoginUserInfoDto loginUser = (LoginUserInfoDto) session.getAttribute("login");
 
+        if(loginUser.isVerified()) {
+
+            return ResponseEntity
+                    .ok()
+                    .body("이미 식별코드를 발급받았습니다.");
+        }
+
+        String code = userService.makeAndSaveCode(loginUser, session);
+
+        return ResponseEntity
+                .ok()
+                .body(code);
+    }
+    @PostMapping("/find-id")
+    @ResponseBody
+    public ResponseEntity<?> findId(@RequestBody Map<String, Object> requestMap) {
+        String code = (String) requestMap.get("code");
+
+        String email = userService.findEmail(code);
+        if(email == null) {
+            return ResponseEntity
+                    .status(403)
+                    .body("올바르지 않은 식별코드 입니다.");
+        }
+
+        return ResponseEntity
+                .ok()
+                .body(email);
+    }
+
+    @PostMapping("/find-pw")
+    @ResponseBody
+    public ResponseEntity<?> findPw(@RequestBody Map<String, Object> requestMap) {
+        String code = (String) requestMap.get("code");
+        String email = (String) requestMap.get("email");
+        String emailByCode = userService.findEmail(code);
+
+        if(!email.equals(emailByCode)) {
+            return ResponseEntity
+                    .status(403)
+                    .body("올바르지 않은 식별코드 입니다.");
+        }
+
+        return ResponseEntity
+                .ok()
+                .body(email);
+    }
+
+    @PostMapping("/change-password")
+    @ResponseBody
+    public ResponseEntity<?> changePassword(@RequestBody ChangePasswordDto dto) {
+        boolean flag = userService.changePassword(dto);
+        if(flag) {
+            return ResponseEntity
+                    .ok()
+                    .body(flag);
+        }
+        return ResponseEntity
+                .status(403)
+                .body(flag);
+    }
 }

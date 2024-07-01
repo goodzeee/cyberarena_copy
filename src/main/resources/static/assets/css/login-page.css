@@ -167,3 +167,19 @@ a { color: inherit; text-decoration: none; }
     color: #fff;
     z-index: 33;
 }
+#find-dialog {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 35%;
+    height: 40%;
+    padding: 0;
+    transform: translate(-50%, -50%);
+}
+#find-dialog::backdrop {
+    background-color: rgba(0,0,0,0.5);
+}
+.dialog-wrap {
+    position: relative;
+    height: 100%;
+}

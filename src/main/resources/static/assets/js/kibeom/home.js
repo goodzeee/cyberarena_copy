@@ -3,11 +3,13 @@ const menuBtn = document.querySelector("header .menu-open");
 const closeBtn = document.querySelector(".gnb .close");
 const gnb = document.querySelector(".gnb");
 
-menuBtn.addEventListener("click", () => {
+menuBtn.addEventListener("click", e => {
+    e.preventDefault();
     gnb.classList.add("on");
 });
 
-closeBtn.addEventListener("click", () => {
+closeBtn.addEventListener("click", e => {
+    e.preventDefault();
     gnb.classList.remove("on");
 });
 
@@ -27,7 +29,7 @@ $media.forEach($card => {
     });
 });
 
-$closeBtn.addEventListener('click', e => {
+$closeBtn?.addEventListener('click', e => {
     $modal.classList.add('none')
     $backdrop.classList.add('none')
 })

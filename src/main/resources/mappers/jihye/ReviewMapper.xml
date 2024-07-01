@@ -50,10 +50,21 @@
         WHERE review_no = #{rno}
     </select>
 
-    <select id="findAllByEmail" resultType="review">
-        select *
-        from review
-        WHERE email = #{email}
+    <select id="findAllByEmail" resultType="com.project.mvc.dto.seongjin.ReviewLinkDto">
+        SELECT
+        R.review_no,
+        R.user_rating,
+        R.review_text,
+        R.review_created_at,
+        R.media_no,
+        M.category_no,
+        M.media_title,
+        M.image_url
+        FROM review AS R
+        INNER JOIN media AS M
+        USING (media_no)
+        WHERE R.email = #{email}
+        ORDER BY R.review_created_at
     </select>
 
 </mapper>

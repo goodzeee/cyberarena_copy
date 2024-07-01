@@ -20,6 +20,8 @@
         ,   password
         ,   auth
         ,   reg_date
+        ,   verified
+        ,   verify_code
         FROM user
         WHERE email = #{email}
     </select>
@@ -49,10 +51,30 @@
         nickname,
         auth,
         reg_date,
-        limit_time
+        limit_time,
+        verified,
+        verify_code
         FROM user
         WHERE session_id = #{sessionId}
     </select>
 
+    <update id="saveVerifyCode">
+        UPDATE user
+        SET verify_code = #{code}
+        , verified = true
+        WHERE email = #{email}
+    </update>
+
+    <select id="findEmail" resultType="String">
+        SELECT email
+        FROM user
+        WHERE verify_code = #{code}
+    </select>
+
+    <update id="changePassword">
+        UPDATE user
+        SET password = #{password}
+        WHERE email = #{email}
+    </update>
 
 </mapper>

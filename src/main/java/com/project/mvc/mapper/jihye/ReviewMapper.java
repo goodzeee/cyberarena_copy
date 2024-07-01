@@ -2,6 +2,8 @@ package com.project.mvc.mapper.jihye;
 
 import com.project.mvc.common.jihye.Page;
 import com.project.mvc.dto.response.jihye.ReviewFindAllDto;
+import com.project.mvc.dto.seongjin.ReviewLinkDto;
+import com.project.mvc.dto.zyo.ReviewRenderingDto;
 import com.project.mvc.entity.Review;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -30,7 +32,7 @@ public interface ReviewMapper {
     // 리뷰 번호로 원본 미디어글 찾기
     long findMno(long rno);
 
-    //
-    Review findAllByEmail(String email);
+    // 리턴값 수정했음 -seongjin
+    List<ReviewLinkDto> findAllByEmail(String email);
 }
 

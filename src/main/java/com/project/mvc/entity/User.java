@@ -19,4 +19,6 @@ public class User {
     private LocalDateTime regDate;
     private String sessionId;
     private LocalDateTime limitTime;
+    private boolean verified;
+    private String verifyCode;
 }

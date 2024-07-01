@@ -66,7 +66,9 @@ main {
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    margin-right: 20px;
+
+    width: 80%;
+    margin: 0 auto;
 }
 
 .list-wrap h1 {
@@ -294,3 +296,16 @@ footer {
 /*    background: #333 !important;*/
 /*    color: #fff !important;*/
 /*}*/
+
+#discuss-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+#discuss-wrap .card {
+    margin-bottom: 50px;
+    width: 30%;
+    padding: 50px 0;
+    padding-left: 15px;
+}

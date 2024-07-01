@@ -39,6 +39,7 @@ public class DiscussionController {
 
     @GetMapping("/list")
     public String discussionList(@ModelAttribute("s") Search page, Model model) {
+        page.setAmount(9);
         List<DiscussResponseDto> dtoList = discussionService.findAll(page);
         List<Media> mList = mediaMapper.findAll(null);
 

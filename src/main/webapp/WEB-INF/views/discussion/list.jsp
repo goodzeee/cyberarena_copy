@@ -52,23 +52,22 @@
         </c:if>
 
 
-        <c:if test="${dList.size() > 0}">
-                <c:forEach var="d" items="${dList}">
+        <div id="discuss-wrap">
+            <c:if test="${dList.size() > 0}">
+            <c:forEach var="d" items="${dList}">
                 <div class="card" data-dno="${d.discussionNo}">
                     <p class="media-title">미디어: ${d.mediaTitle}</p>
                     <p class="discussion-title">토론 주제: ${d.discussionTitle}</p>
                     <p class="nickname">글쓴이: ${d.nickname}</p>
-                    <p class="discussion-offer">세부내용: ${d.discussionOffer}</p>
+<%--                    <p class="discussion-offer">세부내용: ${d.discussionOffer}</p>--%>
                     <p class="discuss-view-count">조회수: ${d.viewCount}</p>
-                    <p class="reply-count">댓글[${d.replyCount}]</p>
+                    <p class="reply-count">참여[${d.replyCount}]</p>
                     <p class="discussion-created-at">${d.formattedDiscussionCreatedAt}</p>
-                        <%--            <c:if test="${login.nickname == d.nickname}">--%>
-                        <%--                <a href="/discussion/modify">수정</a>--%>
-                        <%--                <a href="/discussion/remove">삭제</a>--%>
-                        <%--            </c:if>--%>
                 </div>
             </c:forEach>
-        </c:if>
+            </c:if>
+        </div>
+
     </div>
 
 </div>

@@ -14,7 +14,7 @@
         (#{email}, #{mediaNo}, #{discussionTitle}, #{discussionOffer})
     </insert>
 
-<!--  media title 가져와야한다..~  -->
+
     <select id="findAll" resultType="com.project.mvc.dto.response.kibeom.DiscussFindAllDto">
         SELECT
             U.nickname AS nickname,
@@ -25,7 +25,11 @@
             D.discussion_no,
             D.view_count,
             M.media_title,
-            COUNT(R.discussion_reply_no) AS reply_count
+            (
+            SELECT COUNT(DISTINCT R.email)
+            FROM discuss_reply R
+            WHERE R.discussion_no = D.discussion_no
+            ) AS reply_count
         FROM discussion D INNER JOIN user U ON U.email = D.email
         LEFT JOIN discuss_reply R ON R.discussion_no = D.discussion_no
         INNER JOIN media M on D.media_no = M.media_no

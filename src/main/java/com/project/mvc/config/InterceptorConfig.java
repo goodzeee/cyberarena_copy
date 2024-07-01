@@ -25,7 +25,7 @@ public class InterceptorConfig implements WebMvcConfigurer {
                 .addPathPatterns("/user/mypage")//해당 체인에 url 추가시 로그인 이전에 할 수 없는 요청을 로그인창으로 대체해줌
                 ;
         registry.addInterceptor(afterLoginInterceptor)
-                .addPathPatterns("/user/sign-in", "user/sign-up")
+                .addPathPatterns("/user/sign-in", "/user/sign-up")
                 ;
     }
 }

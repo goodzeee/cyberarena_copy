@@ -6,6 +6,7 @@ import com.project.mvc.dto.response.kibeom.DiscussFindAllDto;
 import com.project.mvc.dto.zyo.DiscussRenderingDto;
 import com.project.mvc.dto.zyo.ReviewRenderingDto;
 import com.project.mvc.entity.Discussion;
+import com.project.mvc.entity.Media;
 import com.project.mvc.entity.Review;
 import com.project.mvc.service.zyo.MediaService;
 import lombok.RequiredArgsConstructor;
@@ -27,7 +28,7 @@ public class MediaController {
     @GetMapping("/movie")
     public String movie(Model model) {
         int categoryNo = 1; // 해당 카테고리 번호
-        List<String> imageUrls = mediaService.findImageUrlByCategory(categoryNo);
+        List<Media> imageUrls = mediaService.findImageUrlByCategory(categoryNo);
         List<ReviewRenderingDto> reviews = mediaService.findAllReviews(categoryNo);
         List<DiscussRenderingDto> discussions = mediaService.findAllDiscussions(categoryNo);
         model.addAttribute("reviews", reviews);
@@ -39,7 +40,7 @@ public class MediaController {
     @GetMapping("/series")
     public String series(Model model) {
         int categoryNo = 2; // 해당 카테고리 번호
-        List<String> imageUrls = mediaService.findImageUrlByCategory(categoryNo);
+        List<Media> imageUrls = mediaService.findImageUrlByCategory(categoryNo);
         List<ReviewRenderingDto> reviews = mediaService.findAllReviews(categoryNo);
         List<DiscussRenderingDto> discussions = mediaService.findAllDiscussions(categoryNo);
         model.addAttribute("reviews", reviews);
@@ -51,7 +52,7 @@ public class MediaController {
     @GetMapping("/book")
     public String book(Model model) {
         int categoryNo = 3; // 해당 카테고리 번호
-        List<String> imageUrls = mediaService.findImageUrlByCategory(categoryNo);
+        List<Media> imageUrls = mediaService.findImageUrlByCategory(categoryNo);
         List<ReviewRenderingDto> reviews = mediaService.findAllReviews(categoryNo);
         List<DiscussRenderingDto> discussions = mediaService.findAllDiscussions(categoryNo);
         model.addAttribute("reviews", reviews);

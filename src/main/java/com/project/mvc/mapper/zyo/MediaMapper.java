@@ -1,14 +1,11 @@
 package com.project.mvc.mapper.zyo;
 
 import com.project.mvc.common.zyo.Search;
-import com.project.mvc.dto.response.kibeom.DiscussFindAllDto;
 import com.project.mvc.dto.zyo.DiscussRenderingDto;
 import com.project.mvc.dto.zyo.ReviewRenderingDto;
-import com.project.mvc.entity.Discussion;
 import com.project.mvc.entity.Media;
 import com.project.mvc.entity.Review;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -20,7 +17,7 @@ public interface MediaMapper {
 
 
     // 이미지 URL 조회
-    List<String> findImageUrlByCategory(int categoryNo);
+    List<Media> findImageUrlByCategory(int categoryNo);
 
     Media findMedia(long mediaNo);
 

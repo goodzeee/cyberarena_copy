@@ -8,7 +8,17 @@ const $listWrap = document.getElementById('whole-wrap');
 const validate = [$title, $offer];
 let isValidate = [false, false];
 
-console.log($listWrap)
+const makeDiscussionButton = document.querySelector('.make-discussion');
+makeDiscussionButton.addEventListener('click', e =>  {
+    if (!isLoggedIn) {
+        alert('로그인이 필요한 서비스입니다.');
+        e.preventDefault();
+    } else {
+        window.location.href = '/discussion/register'
+    }
+});
+
+
 $listWrap.addEventListener('click', e => {
     // if (!e.target.matches('.card')) return
     console.log("click")
@@ -64,17 +74,7 @@ closeBtn.addEventListener("click", () => {
 });
 
 // document.addEventListener('DOMContentLoaded', function() {
-    const makeDiscussionButton = document.querySelector('.make-discussion');
 
-    makeDiscussionButton.addEventListener('click', e =>  {
-        if (!isLoggedIn) {
-            alert('로그인이 필요한 서비스입니다.');
-            e.preventDefault();
-        } else {
-            window.location.href = '/discussion/register'
-
-        }
-    });
 // });
 
 

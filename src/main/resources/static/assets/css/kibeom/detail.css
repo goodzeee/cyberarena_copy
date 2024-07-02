@@ -103,23 +103,32 @@ header {
 }
 
 .comment-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    /*display: flex;*/
+    /*justify-content: space-between;*/
+    /*align-items: center;*/
     margin-bottom: 10px;
     font-size: 14px;
     color: #777;
+    position: relative;
 }
 
 .comment-body {
     font-size: 16px;
     line-height: 1.6;
+    position: relative;
+}
+
+#modify-delete-btn {
+    text-align: right;
 }
 
 .comment-form {
     display: flex;
     flex-direction: column;
     margin-top: 20px;
+}
+.reply-comment {
+    margin-top: 15px;
 }
 
 .comment-form textarea {
@@ -139,23 +148,35 @@ header {
     cursor: pointer;
     align-self: flex-end;
 }
-.modify-and-delete {
+div.modify-and-delete {
     /*left: 82%;*/
     /*position: relative;*/
     margin-left: 20px;
     cursor: pointer;
-    text-decoration-line: none ;
-    color: #444444 ;
-}
-div.modify-and-delete .deleteBtn {
-    text-decoration-line: none ;
-    color: #444444 ;
+    /*text-decoration-line: none !important;*/
+    /*color: #444444 !important;*/
 }
 
-div.modify-and-delete .modifyBtn {
-    text-decoration-line: none ;
-    color: #444444 ;
+#modify {
+    text-decoration-line: none !important;
+    color: #444444 !important;
+    cursor: pointer;
 }
+#delete {
+    text-decoration-line: none !important;
+    color: #444444 !important;
+    cursor: pointer;
+}
+
+/*div.modify-and-delete a {*/
+/*    text-decoration-line: none !important ;*/
+/*    color: #444444 !important;*/
+/*}*/
+
+/*div.modify-and-delete a {*/
+/*    text-decoration-line: none ;*/
+/*    color: #444444 ;*/
+/*}*/
 
 
 
@@ -277,6 +298,45 @@ div.modify-and-delete .modifyBtn {
     text-align: right;
 }
 #my-nickname {
-    text-align: right;
+    position: absolute;
+    right: 0;
 }
+
+#my-date {
+    position: absolute;
+    right: 0;
+}
+
+.modify-input {
+    margin-top: 10px;
+    width: 100%;
+    resize: none;
+    border-color: #DDDDDD;
+    border-radius: 5px;
+    text-indent: 10px;
+}
+
+.comment-card {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+.comment-header, .comment-body {
+    padding: 10px;
+    /*border: 1px solid #ddd;*/
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+
+.comment-card.self {
+    align-items: flex-end;
+}
+
+.comment-card.self .comment-header,
+.comment-card.self .comment-body {
+    text-align: right;
+    /*background-color: #f0f8ff;*/
+}
+
 

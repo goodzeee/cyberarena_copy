@@ -34,7 +34,7 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
       <div class="banner">
         <!-- 큰 이미지 추천 -->
         <div class="row">
-          <div class="row_title">화제의 토론(조회수, 댓글수)</div>
+          <div class="row_title">화제의 토론</div>
           <div class="row_posters">
             <div class="rank">
 
@@ -87,7 +87,7 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
                   <p>${discussions.format}</p>
                 </div>
                 <div class="poster_count">
-                  <span><i class="fa-solid fa-user"></i>${discussions.replyCount}명 참여</span>
+                  <span class="count01"><i class="fa-solid fa-user"></i>${discussions.replyCount}명 참여</span>
                   <span>조회수:${discussions.viewCount}</span>
                 </div>
               </section>
@@ -101,7 +101,7 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
       <!-- 작은이미지 추천 -->
       <div class="row">
-        <div class="row_title">지금 뜨는 리뷰 (실시간 리뷰)</div>
+        <div class="row_title">지금 뜨는 리뷰</div>
         <div class="prev">
             <i class="fa-solid fa-angle-right prev-arrow"></i>
           </div>
@@ -207,10 +207,17 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
     for (let i = 0; i <= 1; i++) {
       next[i].addEventListener("click", (e) => {
-        slider[i].scrollBy(1490, 0);
+        slider[i].scrollTo({
+          left: slider[i].scrollLeft + 1493,
+          behavior: 'smooth'
+        });
       });
+      
       prev[i].addEventListener("click", (e) => {
-        slider[i].scrollBy(-1490, 0);
+        slider[i].scrollTo({
+          left: slider[i].scrollLeft - 1493,
+          behavior: 'smooth'
+        });
       });
     }
 

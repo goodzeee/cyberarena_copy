@@ -17,6 +17,7 @@ body {
 }
 
 .rank {
+  display: flex;
   position: absolute;
   height: 200px;
 }
@@ -67,7 +68,17 @@ body {
   border-top: 1px solid #e0e0e0;
 }
 
+.poster_count:first-child span {
+  margin-right: 15px;
+}
 
+.count01 {
+  margin-right: 35px;
+}
+
+.fa-user:before {
+  margin-right: 5px;
+}
 
 /* row */
 .row {
@@ -155,7 +166,9 @@ body {
   position: absolute;
   left: 95%;
 }
-
+.slider {
+  scroll-behavior: smooth;
+}
 
 
 /* 리뷰 */

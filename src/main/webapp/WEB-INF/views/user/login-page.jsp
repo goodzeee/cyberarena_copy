@@ -278,17 +278,17 @@ pageEncoding="UTF-8"%>
                         if (pwValue.trim().length != pwValue.length) {
                             $newPw.style.borderColor = "red";
                             $newPwVal.innerHTML =
-                                '<b class="warning">[비밀번호에 공백을 포함할 수 없습니다.]</b>';
+                                '<p class="warning">[비밀번호에 공백을 포함할 수 없습니다.]</p>';
                             newPwFlag = false;
                         } else if (!passwordPattern.test(pwValue)) {
                             $newPw.style.borderColor = "red";
                             $newPwVal.innerHTML =
-                                '<b class="warning">>[비밀번호는 영문과 특수문자를 포함해야 합니다.]</b>';
+                                '<p class="warning">>[비밀번호는 영문과 특수문자를 포함해야 합니다.]</p>';
                             newPwFlag = false;
                         } else {
                             $newPw.style.borderColor = "green";
                             $newPwVal.innerHTML =
-                                '<b class="success">[사용할 수 있는 비밀번호입니다.]</b>';
+                                '<p class="success">[사용할 수 있는 비밀번호입니다.]</p>';
                             newPwFlag = true;
                         }
                     } else {
@@ -310,12 +310,12 @@ pageEncoding="UTF-8"%>
                         if (pwValue2 !== pwValue) {
                             $newPwChk.style.borderColor = "red";
                             $newPwChkVal.innerHTML =
-                                '<b class="warning">[비밀번호가 일치하지 않습니다.]</b>';
+                                '<p class="warning">[비밀번호가 일치하지 않습니다.]</p>';
                             newPwChkFlag = false;
                         } else {
                             $newPwChk.style.borderColor = "green";
                             $newPwChkVal.innerHTML =
-                                '<b class="success">[비밀번호가 일치합니다.]</b>';
+                                '<p class="success">[비밀번호가 일치합니다.]</p>';
                             newPwChkFlag = true;
                         }
                     }

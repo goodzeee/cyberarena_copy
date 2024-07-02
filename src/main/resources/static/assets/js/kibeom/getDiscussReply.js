@@ -64,47 +64,88 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const commentElement = document.createElement('div');
         commentElement.classList.add('comment-card');
+        let tag;
 
-
-        let tag = `
+        if (loginUserDto.nickname === comment.nickname) {
+            tag = `
+            <div class="comment-header " data-replyNo="${comment.discussionReplyNo}">
+                <span class="comment-nickname " id="my-nickname">${comment.nickname || comment.email}</span> `;
+        } else {
+            tag = `
             <div class="comment-header" data-replyNo="${comment.discussionReplyNo}">
                 <span class="comment-nickname">${comment.nickname || comment.email}</span> `;
-
-        if (oldDate.getTime() + 1000 < newDate.getTime()) {
-            tag += `<span class="comment-date">*수정됨.  ${newDate.toLocaleString('ko-KR', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
-                hour: '2-digit',
-                minute: '2-digit'
-            })}</span>`;
-        } else {
-            tag += `<span class="comment-date">${oldDate.toLocaleString('ko-KR', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
-                hour: '2-digit',
-                minute: '2-digit'
-            })}</span>`;
         }
+
+
+        if (oldDate.getTime() + 1000 < newDate.getTime() && loginUserDto.nickname === comment.nickname ) {
+            tag += `<div>
+                        <span class="modify-and-delete delete">
+                            <a class="deleteBtn" data-rno="${comment.discussionReplyNo}" 
+                            onclick="window.location.href='/discussion/reply/remove?rno=' + ${comment.discussionReplyNo} + '&&dno=' + ${comment.discussionNo}">삭제</a>
+                        </span>
+                        <span class="modify-and-delete modify">
+                            <a class="modifyBtn" data-rno="${comment.discussionReplyNo}" data-email="${comment.email}">수정</a>
+                        </span>
+                        <span class="comment-date">*수정됨.   ${oldDate.toLocaleString('ko-KR', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            })}</span>
+                   </div>`;
+        } else if (oldDate.getTime() + 1000 < newDate.getTime() ) {
+            tag += `<span className="comment-date">*수정됨.   ${oldDate.toLocaleString('ko-KR', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            })}</span>`
+        } else if (loginUserDto.nickname === comment.nickname) {
+            tag += ` <div>
+                        <span class="modify-and-delete delete">
+                            <a class="deleteBtn" data-rno="${comment.discussionReplyNo}" 
+                            onclick="window.location.href='/discussion/reply/remove?rno=' + ${comment.discussionReplyNo} + '&&dno=' + ${comment.discussionNo}">삭제</a>
+                        </span>
+                        <span class="modify-and-delete modify">
+                            <a class="modifyBtn" data-rno="${comment.discussionReplyNo}" data-email="${comment.email}">수정</a>
+                        </span>
+                        <span class="comment-date">   ${oldDate.toLocaleString('ko-KR', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            })}</span>
+                   </div>`
+
+        } else if (!oldDate.getTime() + 1000 < newDate.getTime() || !loginUserDto.nickname === comment.nickname) {
+            tag += `<span class="comment-date">  ${oldDate.toLocaleString('ko-KR', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            })}</span>`
+        }
+
+        if (loginUserDto.nickname === comment.nickname) {
+            tag += `</div>
+            <div class="comment-body" id="my-content">
+                <p class="reply-comment">${comment.discussionReplyContent}</p>
+            </div>
+            
+        `;
+        } else {
 
         tag += `</div>
             <div class="comment-body">
                 <p class="reply-comment">${comment.discussionReplyContent}</p>
             </div>
         `;
-
-        if (loginUserDto && loginUserDto.nickname === comment.nickname) {
-            tag += `
-                <span class="modify-and-delete delete">
-                    <button class="deleteBtn" data-rno="${comment.discussionReplyNo}" 
-                      onclick="window.location.href='/discussion/reply/remove?rno=' + ${comment.discussionReplyNo} + '&&dno=' + ${comment.discussionNo}">삭제</button>
-                </span>
-                <span class="modify-and-delete modify">
-                    <button class="modifyBtn" data-rno="${comment.discussionReplyNo}" data-email="${comment.email}">수정</button>
-                </span>
-            `;
         }
+
         commentElement.innerHTML = tag;
 
         commentsContainer.appendChild(commentElement);
@@ -112,6 +153,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
     fetchComments();
     submitCommentButton.addEventListener('click', submitComment);
+
+
+
 
     // 댓글 수정 기능 추가
     commentsContainer.addEventListener('click', e => {

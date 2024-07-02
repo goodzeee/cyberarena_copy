@@ -140,11 +140,22 @@ header {
     align-self: flex-end;
 }
 .modify-and-delete {
-    left: 82%;
-    position: relative;
+    /*left: 82%;*/
+    /*position: relative;*/
     margin-left: 20px;
+    cursor: pointer;
+    text-decoration-line: none ;
+    color: #444444 ;
+}
+div.modify-and-delete .deleteBtn {
+    text-decoration-line: none ;
+    color: #444444 ;
 }
 
+div.modify-and-delete .modifyBtn {
+    text-decoration-line: none ;
+    color: #444444 ;
+}
 
 
 
@@ -260,5 +271,12 @@ header {
 
 .hide {
     display: none;
+}
+
+#my-content {
+    text-align: right;
+}
+#my-nickname {
+    text-align: right;
 }
 

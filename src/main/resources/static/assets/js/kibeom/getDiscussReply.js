@@ -101,13 +101,12 @@ document.addEventListener('DOMContentLoaded', function () {
                 <p class="reply-comment">${comment.discussionReplyContent}</p>
             </div>
             <div id="modify-delete-btn">
-                <span class="delete">
+
                     <a class="deleteBtn" data-rno="${comment.discussionReplyNo}" 
                     onclick="window.location.href='/discussion/reply/remove?rno=' + ${comment.discussionReplyNo} + '&&dno=' + ${comment.discussionNo}">삭제</a>
-                </span>
-                <span class="modify">
+
                     <a class="modifyBtn" data-rno="${comment.discussionReplyNo}" data-email="${comment.email}">수정</a>
-                </span>
+
             </div>`;
         } else {
             // 남이 쓴 댓글
@@ -175,6 +174,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             $modifyBtn.textContent = '완료';
             $delBtn.textContent = '취소';
+            $delBtn.setAttribute("onclick", '')
 
             $modifyBtn.classList.add('saveBtn');
             $delBtn.classList.add('cancelBtn');

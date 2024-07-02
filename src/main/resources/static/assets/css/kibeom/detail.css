@@ -339,4 +339,11 @@ div.modify-and-delete {
     /*background-color: #f0f8ff;*/
 }
 
+.modifyBtn {
+    cursor: pointer;
+}
+.deleteBtn {
+    cursor: pointer;
+}
+
 

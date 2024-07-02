@@ -27,18 +27,22 @@
                     </label>
                     <br>
                     <label>
-                        # 세부 내용 : <br><input type="text" id="detail" name="discussionOffer">
+                        # 세부 내용 : <br><textarea type="text" id="detail" name="discussionOffer"></textarea>
                     </label>
                     <br>
                     <label>
-                        <input type="submit" id="finish" value="작성 완료">
-                        <button type="button" id="cancelButton" onclick="window.location.href='/discussion/list'">작성 취소</button>
+                        <div class="bottom-wrap">
+                            <input type="submit" id="finish" value="작성 완료">
+                            <button type="button" id="cancelButton" onclick="window.location.href='/discussion/list'">작성
+                                취소
+                            </button>
+                        </div>
                     </label>
                 </form>
             </div>
-            <div class="modal-right">
-                <!-- 추가적인 콘텐츠가 들어갈 수 있는 영역 -->
-            </div>
+<%--            <div class="modal-right">--%>
+<%--                <!-- 추가적인 콘텐츠가 들어갈 수 있는 영역 -->--%>
+<%--            </div>--%>
         </div>
     </div>
     <div class="fetch-wrap">

@@ -232,7 +232,7 @@ pageEncoding="UTF-8"%>
                 `;
                 document
                     .querySelector(".after-email")
-                    .addEventListener("click", findPwHandler);
+                    .addEventListener("click", findPwHandler.bind(null, email));
             }
 
             async function pwSubmitHandler(e) {
@@ -355,11 +355,11 @@ pageEncoding="UTF-8"%>
 
                 $btn.addEventListener("click", submitHandler);
             };
-            const findPwHandler = (e) => {
+            const findPwHandler = (email, e) => {
                 $dialog.showModal();
                 $modalWrap.innerHTML = `
                 <input class="code-input" type="text" placeholder="식별코드">
-                <input class="find-email-input" type="email" placeholder="이메일">
+                <input class="find-email-input" type="email" placeholder="이메일" value="\${email}">
                 <button class="change-submit">비밀번호 찾기</button>
                 `;
                 const $btn = $dialog.querySelector(".change-submit");

@@ -2,14 +2,17 @@ const $finishBtn = document.getElementById('finish');
 const $title = document.getElementById('title');
 const $offer = document.getElementById('detail');
 const $media = document.getElementById('searchMediaInput')
+const $fetchWrap = document.querySelector('.fetch-wrap');
 // const $media = document.getElementById('media');
 
 // const $modalWrap = document.querySelector('.modal-wrap');
 console.log($finishBtn)
 console.log($title)
 console.log($offer)
-
-
+console.log($media)
+$media.addEventListener('keydown', e => {
+    $fetchWrap.style.display = 'block';
+})
 
 
 const validate = [$title, $offer, $media];

@@ -45,6 +45,7 @@ const renderReplies = (mediaResponse) => {
                         <div class="modal-media-rating">${media.rating || '평점 없음'}</div>
                     </div>
                 </div>
+                <hr class="line">
             `;
         });
     }
@@ -55,6 +56,7 @@ const renderReplies = (mediaResponse) => {
 
     $fetchWrap.addEventListener("click", e => {
         const $mediaInput = document.getElementById('media')
+        $fetchWrap.style.display = 'none';
         $fetchWrap.innerHTML = "";
 
         // $mediaInput.style.backgroundColor = "#E7F0FE"

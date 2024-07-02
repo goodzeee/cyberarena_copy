@@ -66,8 +66,14 @@ header {
 }
 
 .discussion-offer {
-    font-size: 16px;
+    margin-top: 10px;
+    font-size: 17px;
     line-height: 1.6;
+    border: 1px solid #c5c3c3;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0.2);
+
 }
 
 .discussion-actions {
@@ -110,6 +116,7 @@ header {
     font-size: 14px;
     color: #777;
     position: relative;
+    margin-left: 10px;
 }
 
 .comment-body {
@@ -120,15 +127,17 @@ header {
 
 #modify-delete-btn {
     text-align: right;
+    width: 95%;
+
 }
 
-.comment-form {
-    display: flex;
-    flex-direction: column;
-    margin-top: 20px;
-}
+
 .reply-comment {
-    margin-top: 15px;
+    margin-top: 6px;
+    border: 1px solid #c5c3c3;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
 .comment-form textarea {
@@ -341,9 +350,36 @@ div.modify-and-delete {
 
 .modifyBtn {
     cursor: pointer;
+    margin-left: 5px;
 }
 .deleteBtn {
     cursor: pointer;
+
 }
 
+div.comment-header-self {
+    margin-right: 20px;
+    margin-bottom: 25px;
+}
 
+.comment-form {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    width: 100%;
+    position: relative;
+}
+
+#reply-textarea {
+    width: 85%;
+    border-radius: 15px;
+    text-indent: 10px;
+}
+
+#submitComment {
+    width: 12%;
+    cursor: pointer;
+    position: relative;
+    bottom: 52px;
+    border-radius: 15px;
+}

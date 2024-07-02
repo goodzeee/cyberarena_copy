@@ -69,13 +69,13 @@ document.addEventListener('DOMContentLoaded', function () {
         if (loginUserDto.nickname === comment.nickname) {
             // 내가 쓴 댓글
             tag = `
-            <div class="comment-header self" data-replyNo="${comment.discussionReplyNo}">
+            <div class="comment-header self comment-header-self"  data-replyNo="${comment.discussionReplyNo}">
                 <span class="comment-nickname" id="my-nickname">${comment.nickname || comment.email}</span> `;
 
             if (oldDate.getTime() + 1000 < newDate.getTime()) { // 내가 쓴 글이 수정됐을 때
                 tag += `
                         <br>
-                        <span class="comment-date" id="my-date">*수정됨*&nbsp;&nbsp; ${oldDate.toLocaleString('ko-KR', {
+                        <span class="comment-date" id="my-date">*수정됨*&nbsp;&nbsp;&nbsp; ${oldDate.toLocaleString('ko-KR', {
                     year: 'numeric',
                     month: 'long',
                     day: 'numeric',
@@ -123,7 +123,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     day: 'numeric',
                     hour: '2-digit',
                     minute: '2-digit'
-                })}&nbsp;&nbsp;*수정됨*</span>
+                })}&nbsp;&nbsp;&nbsp;*수정됨*</span>
                     </div>`;
             } else { // 남이 쓴 글이 수정되지 않았을 때
                 tag += `

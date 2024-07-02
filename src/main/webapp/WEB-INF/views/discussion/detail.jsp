@@ -29,7 +29,7 @@
         </div>
         <div class="discussion-body">
             <span class="discussion-date">작성 시간 : ${found.formattedDiscussionCreatedAt}</span>
-            <span class="discussion-date">댓글 : [${count}]</span>
+
         </div>
         <c:if test="${login.nickname == found.nickname}">
             <button id="modify">수정</button>
@@ -37,17 +37,12 @@
             <button class="del-btn" data-href="/discussion/remove?dno=${found.discussionNo}">삭제</button>
 
         </c:if>
-        <div class="discussion-actions">
-            <h4>내용</h4>
-        </div>
+
         <br>
         <div class="discussion-offer">${found.discussionOffer}</div>
     </div>
     <div class="comment-section">
-        <h2>댓글</h2>
-        <div id="comments">
-            <!-- 댓글 목록 -->
-        </div>
+        <h2>댓글 [${count}]</h2>
         <c:if test="${login != null}">
             <div class="comment-form">
                 <form id="commentForm">
@@ -66,6 +61,9 @@
                 </div>
             </div>
         </c:if>
+        <div id="comments">
+            <!-- 댓글 목록 -->
+        </div>
     </div>
 </div>
 

@@ -101,4 +101,10 @@ public class MediaService {
         return mediaMapper.findImageUrlByCategory(categoryNo);
     }
 
+
+    public Media findMedia(long mediaNo) {
+        return mediaMapper.findByMediaNo(mediaNo);
+    }
+
+
 }

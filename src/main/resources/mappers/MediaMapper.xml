@@ -120,5 +120,11 @@
         M.image_url
     </select>
 
+    <select id="findByMediaNo" resultType="media">
+        SELECT * FROM MEDIA
+        WHERE media_no = #{mediaNo}
+    </select>
+
+
 
 </mapper>

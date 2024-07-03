@@ -91,6 +91,8 @@ main {
     margin-top: 10px;
     margin-bottom: 10px;
     color: black;
+    width: 100%;
+    /*margin: 10px auto;*/
 }
 
 .card {
@@ -239,14 +241,33 @@ footer {
 #discuss-wrap {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
-
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 93%;
+    margin: 0 auto;
 }
 
 #discuss-wrap .card {
+
     margin-bottom: 50px;
     width: 30%;
     padding: 50px 0;
     padding-left: 15px;
     border-radius: 20px;
+}
+#discuss-wrap .card:nth-child(3n + 1) {
+    margin-right: 60px;
+}
+#discuss-wrap .card:nth-child(3n + 2) {
+    margin-right: 60px;
+}
+
+.discussion-title {
+    border-bottom: 1px solid black;
+    padding-bottom: 25px;
+
+}
+
+.main-content {
+    padding-top: 15px;
 }

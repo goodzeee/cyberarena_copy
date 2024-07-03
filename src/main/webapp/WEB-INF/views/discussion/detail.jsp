@@ -114,10 +114,10 @@
 <script type="module" src="/assets/js/kibeom/getDiscussReply.js"></script>
 <script type="module" src="/assets/js/kibeom/detail.js"></script>
 <script>
-    const $delBtn = document.querySelector('.del-btn');
-    $delBtn.addEventListener('click', e => {
-        window.location.href = "/discussion/remove?dno=${found.discussionNo}"
-    })
+    <%--const $delBtn = document.querySelector('.del-btn');--%>
+    <%--$delBtn.addEventListener('click', e => {--%>
+    <%--    window.location.href = "/discussion/remove?dno=${found.discussionNo}"--%>
+    <%--})--%>
 
     const $finishBtn = document.getElementById('finish');
     $finishBtn.addEventListener('click', e => {

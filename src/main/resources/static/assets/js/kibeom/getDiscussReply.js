@@ -1,3 +1,28 @@
+// callApi 함수 정의
+const callApi = async (url, method = 'GET', payload = null) => {
+    const requestInfo = {
+        method,
+    };
+
+    if (payload) {
+        requestInfo.headers = { 'content-type': 'application/json' };
+        requestInfo.body = JSON.stringify(payload);
+    }
+
+    const res = await fetch(url, requestInfo);
+
+    if (res.status === 403) {
+        alert('접근 권한이 없습니다.');
+        return null;
+    }
+
+    if (method === 'DELETE' && res.status === 204) {
+        return true; // 삭제 성공 시 true 반환
+    }
+
+    return await res.json();
+};
+
 document.addEventListener('DOMContentLoaded', function () {
     const discussionNo = document.querySelector('input[name="discussionNo"]').value;
     const commentsContainer = document.getElementById('comments');
@@ -8,10 +33,20 @@ document.addEventListener('DOMContentLoaded', function () {
         try {
             const response = await fetch(`/api/v1/discuss/reply/${discussionNo}`);
             if (!response.ok) throw new Error('댓글을 불러오는데 실패했습니다.');
-            const {dtoList, loginUserDto} = await response.json();
+            const { dtoList, loginUserDto } = await response.json();
             renderComments(dtoList, loginUserDto);
         } catch (error) {
             console.error(error);
+        }
+    }
+
+    async function removeComment(rno) {
+        const result = await callApi(`http://localhost:8989/api/v1/discuss/reply/` + rno, 'DELETE');
+        if (result) {
+            const commentElement = document.querySelector(`[data-replyNo="${rno}"]`).closest('.comment-card');
+            if (commentElement) {
+                commentElement.remove();
+            }
         }
     }
 
@@ -48,7 +83,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (comments.length === 0) {
             const commentElement = document.createElement('div');
             commentElement.classList.add('comment-card');
-            let tag = `<div>댓글이 없습니다.</div>`
+            let tag = `<div>댓글이 없습니다.</div>`;
             commentElement.innerHTML = tag;
             commentsContainer.appendChild(commentElement);
         } else {
@@ -69,7 +104,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (loginUserDto.nickname === comment.nickname) {
             // 내가 쓴 댓글
             tag = `
-            <div class="comment-header self comment-header-self"  data-replyNo="${comment.discussionReplyNo}">
+            <div class="comment-header self comment-header-self" data-replyNo="${comment.discussionReplyNo}">
                 <span class="comment-nickname" id="my-nickname">${comment.nickname || comment.email}</span> `;
 
             if (oldDate.getTime() + 1000 < newDate.getTime()) { // 내가 쓴 글이 수정됐을 때
@@ -102,8 +137,7 @@ document.addEventListener('DOMContentLoaded', function () {
             </div>
             <div id="modify-delete-btn">
 
-                    <a class="deleteBtn" data-rno="${comment.discussionReplyNo}" 
-                    onclick="window.location.href='/discussion/reply/remove?rno=' + ${comment.discussionReplyNo} + '&&dno=' + ${comment.discussionNo}">삭제</a>
+                    <a class="deleteBtn" data-rno="${comment.discussionReplyNo}">삭제</a>
 
                     <a class="modifyBtn" data-rno="${comment.discussionReplyNo}" data-email="${comment.email}">수정</a>
 
@@ -152,8 +186,12 @@ document.addEventListener('DOMContentLoaded', function () {
     fetchComments();
     submitCommentButton.addEventListener('click', submitComment);
 
-
-
+    commentsContainer.addEventListener('click', async (e) => {
+        if (e.target.matches('.deleteBtn')) {
+            const rno = e.target.getAttribute('data-rno');
+            await removeComment(rno);
+        }
+    });
 
     // 댓글 수정 기능 추가
     commentsContainer.addEventListener('click', e => {

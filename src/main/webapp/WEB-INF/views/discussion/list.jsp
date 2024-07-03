@@ -58,8 +58,8 @@
             <c:forEach var="d" items="${dList}">
                 <div class="card" data-dno="${d.discussionNo}">
                     <h2 class="discussion-title">${d.discussionTitle}</h2>
-                    <hr>
-                    <div>
+<%--                    <hr>--%>
+                    <div class="main-content">
                         <span class="media-title"><h3>${d.mediaTitle}</h3></span>
                         <span class="nickname">작성자: ${d.nickname}</span>
                     </div>

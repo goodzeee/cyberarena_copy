@@ -24,4 +24,7 @@ public interface DiscussReplyMapper {
     boolean remove(long rno);
 
     void update(DiscussionCommentRequestDto dto);
+
+    // 댓글번호로 원본 글번호 가져오기
+    long getDiscussNoByRno(long rno);
 }

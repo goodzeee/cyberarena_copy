@@ -22,6 +22,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,6 +39,7 @@ public class DiscussionController {
 
     @GetMapping("/list")
     public String discussionList(@ModelAttribute("s") Search page, Model model) {
+        page.setAmount(9);
         List<DiscussResponseDto> dtoList = discussionService.findAll(page);
         List<Media> mList = mediaMapper.findAll(null);
 
@@ -58,6 +60,7 @@ public class DiscussionController {
     @PostMapping("/register")
     public String makeDiscussion(MakeDiscussionDto dto) {
         MakeDiscussionDto insertDto = discussionService.getMediaNo(dto);
+        log.debug("insert dto: {}", insertDto);
         boolean flag = discussionMapper.insert(insertDto);
         if (flag) {
             return "redirect:/discussion/list";
@@ -68,7 +71,7 @@ public class DiscussionController {
 
 
     @GetMapping("/detail")
-    public String discussionDetail(Model model, long dno) {
+    public String discussionDetail(Model model, long dno, HttpServletRequest request) {
         DiscussionDetailResponseDto foundDsc = discussionService.findOne(dno);
 
         // 댓글 수
@@ -79,6 +82,8 @@ public class DiscussionController {
 
         model.addAttribute("count", count);
         model.addAttribute("found", foundDsc);
+        String ref = request.getHeader("Referer");
+        model.addAttribute("ref", ref);
         return "discussion/detail";
     }
 

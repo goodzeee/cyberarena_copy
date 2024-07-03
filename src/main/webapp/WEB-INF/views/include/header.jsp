@@ -1,6 +1,10 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<style>
+    nav ul {
+        list-style: none;
+    }
+</style>
 <header>
     <a href="/index">
         <div class="logo">LOGO</div>
@@ -39,7 +43,7 @@
                     <li><a href="/media/movie">영화</a></li>
                     <li><a href="/media/series">시리즈</a></li>
                     <li><a href="/media/book">도서</a></li>
-                    <li><a href="discussion/list">토론 게시판</a></li>    
+                    <li><a href="/discussion/list">토론 게시판</a></li>
           </ul>
     </nav>
 </header>

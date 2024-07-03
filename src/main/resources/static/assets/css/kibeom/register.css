@@ -11,6 +11,15 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    /*overflow: hidden;*/
+}
+
+div.click {
+    font-size: 20px;
+    font-weight: 700;
+    text-align: center;
+    padding: 10px 20px 20px;
+    border-bottom: 1px solid black;
 }
 
 main {
@@ -18,16 +27,33 @@ main {
     display: flex;
     justify-content: center;
     padding: 20px;
+    margin-top: 50px;
 }
 
 .content-wrap {
     background-color: #fff;
     padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 25px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     max-width: 800px;
     width: 100%;
+    height: 70vh;
 }
+
+div.fetch-wrap {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 25px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    overflow-y: auto;
+    height: 70vh;
+    /*margin-left: 20px;*/
+    width: 20%;
+    position: absolute;
+    right: 5%;
+    display: none;
+}
+
 
 .modal-content {
     display: flex;
@@ -45,9 +71,9 @@ main {
 
 .modal-left h1, .modal-right h1 {
     margin-bottom: 15px;
-    font-size: 24px;
+    font-size: 27px;
     border-bottom: 2px solid #333;
-    padding-bottom: 5px;
+    padding-bottom: 20px;
 }
 
 .modal-left form label, .modal-right form label {
@@ -55,13 +81,15 @@ main {
     margin-bottom: 10px;
 }
 
-.modal-left form input[type="text"], .modal-right form input[type="text"] {
+.modal-left input[type="text"], .modal-right input[type="text"] {
     width: 100%;
     padding: 10px;
     margin-top: 5px;
     border: 1px solid #ddd;
     border-radius: 5px;
 }
+
+
 
 .modal-left form button {
     padding: 10px 20px;
@@ -71,13 +99,7 @@ main {
     cursor: pointer;
 }
 
-#finish {
-    padding: 10px 20px;
-    background-color: #989898;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-}
+
 
 .modal-search {
     display: flex;
@@ -92,17 +114,27 @@ main {
     margin-right: 10px;
 }
 
-.fetch-wrap {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    max-height: 20rem;
-    overflow-y: auto;
-}
 
 #nickname {
     background: #E7F0FE;
+    margin-bottom: 10px;
+}
+#searchMediaInput {
+    margin-bottom: 10px;
+}
+#detail {
+    margin-top: 10px;
+    width: 100%;
+    resize: none;
+    height: 150px;
+    border-color: #DDDDDD;
+    border-radius: 5px;
+
+
+}
+
+#detail::placeholder {
+    color: #8D8D8D;
 }
 
 footer {
@@ -113,7 +145,9 @@ footer {
 }
 
 .modal-right-wrap {
+    margin: 30px 0;
     display: flex;
+    cursor: pointer;
 }
 .modal-right-wrap .modal-media-left {
     width: 50%;
@@ -123,17 +157,71 @@ footer {
     width: 50%;
 }
 
+hr.line {
+    font-size: 1px;
+    color: black;
+}
+
 .modal-right-wrap .modal-media-left .modal-media-wrap {
-    width: 100px;
-    height: 170px;
+    width: 90%;
+    height: 15vh;
     overflow: hidden;
     cursor: pointer;
 }
 .modal-right-wrap .modal-media-left .modal-media-wrap img {
-    width: 100px;
-    height: 170px;
+    width: 90%;
+    height: 15vh;
 }
 
 #nickname {
     background: #E7F0FE;
 }
+
+#searchMediaInput {
+    width: 100%;
+}
+
+.modal-media-title h2 {
+    text-align: center;
+    font-size: 22px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid black;
+    border-top: 1px solid black;
+}
+
+.bottom-wrap {
+    width: 35%;
+    margin: 0 auto;
+}
+#cancelButton {
+    border-radius: 15px;
+
+
+
+}
+#cancelButton:hover {
+
+}
+
+#finish {
+    border-radius: 15px;
+    padding: 10px 20px;
+    background-color: #CCCCCC;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    margin-right: 20px;
+
+
+}
+#finish:hover {
+
+}
+
+.empty-list {
+    text-align: center;
+    font-size: 22px;
+    font-weight: 800;
+}
+

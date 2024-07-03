@@ -60,5 +60,12 @@
         WHERE discussion_reply_no = #{discussionReplyNo}
     </update>
 
+    <select id="getDiscussNoByRno" resultType="long">
+        SELECT
+            discussion_no
+        FROM discuss_reply
+        WHERE discussion_reply_no = #{discussionReplyNo}
+    </select>
+
 </mapper>
 

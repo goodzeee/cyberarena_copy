@@ -201,6 +201,8 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
+
+
     // 댓글 수정 기능 추가
     commentsContainer.addEventListener('click', e => {
         if (e.target.matches('.modifyBtn')) {
@@ -229,8 +231,10 @@ document.addEventListener('DOMContentLoaded', function () {
             $delBtn.classList.remove('deleteBtn');
 
             // 완료 버튼 클릭 이벤트
-            const saveHandler = () => {
+            const saveHandler = (e) => {
+
                 const updatedContent = $newInput.value;
+
                 const replyNo = $modifyBtn.getAttribute('data-rno');
                 const email = $modifyBtn.getAttribute('data-email');
 
@@ -265,8 +269,13 @@ document.addEventListener('DOMContentLoaded', function () {
                 form.appendChild(inputContent);
                 form.appendChild(inputDiscussionNo);
 
-                document.body.appendChild(form);
-                form.submit();
+                if (originalText === updatedContent) {
+                    e.preventDefault();
+                    $modifyBtn.setAttribute('disabled', 'disabled');
+                } else {
+                    document.body.appendChild(form);
+                    form.submit();
+                }
             };
 
             // 취소 버튼 클릭 이벤트
@@ -289,8 +298,8 @@ document.addEventListener('DOMContentLoaded', function () {
             // 기존 이벤트 리스너를 제거하고 새로 추가
             $modifyBtn.removeEventListener('click', saveHandler);
             $delBtn.removeEventListener('click', cancelHandler);
-            $modifyBtn.addEventListener('click', saveHandler);
             $delBtn.addEventListener('click', cancelHandler);
+            $modifyBtn.addEventListener('click', saveHandler);
         }
     });
 });

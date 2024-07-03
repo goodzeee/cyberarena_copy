@@ -24,21 +24,26 @@ for(let i = 0; i < 1; i++) {
             isExist = false;
         }
 
-        if (isExist) {
+        if (isExist && $replyTextArea.value.length > 3) {
 
-            $replySubmitBtn.style.backgroundColor = "#28a745"
+            $replySubmitBtn.style.animation = "vivid-btn 0.7s"
+            $replySubmitBtn.style.animationFillMode = "forwards"
             $replySubmitBtn.style.pointerEvents = "auto"
 
         } else {
 
             $replySubmitBtn.style.pointerEvents = 'none'
             $replySubmitBtn.style.backgroundColor = "lightgray";
+            $replySubmitBtn.style.animation = '';
             $replyTextArea.preventDefault();
         }
     })
 }
 
-
+$replySubmitBtn.addEventListener('click', e => {
+    $replySubmitBtn.style.backgroundColor = "#D3D3D3"
+    $replySubmitBtn.style.animation = '';
+})
 
 
 

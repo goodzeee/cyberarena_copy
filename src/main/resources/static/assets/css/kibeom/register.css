@@ -129,6 +129,12 @@ div.fetch-wrap {
     height: 150px;
     border-color: #DDDDDD;
     border-radius: 5px;
+
+
+}
+
+#detail::placeholder {
+    color: #8D8D8D;
 }
 
 footer {

@@ -117,7 +117,14 @@ document.addEventListener('DOMContentLoaded', function () {
                     hour: '2-digit',
                     minute: '2-digit'
                 })}</span>
-                    </div>`;
+                    </div>
+<div id="modify-delete-btn">
+
+                    <button class="deleteBtn" data-rno="${comment.discussionReplyNo}">삭제</button>
+
+                    <button class="modifyBtn" data-rno="${comment.discussionReplyNo}" data-email="${comment.email}">수정</button>
+
+            </div>`;
             } else { // 내가 쓴 글이 수정되지 않았을 때
                 tag += `
                         <br>
@@ -128,20 +135,21 @@ document.addEventListener('DOMContentLoaded', function () {
                     hour: '2-digit',
                     minute: '2-digit'
                 })}</span>
-                    </div>`;
+                    </div>
+<div id="modify-delete-btn">
+
+                    <button class="deleteBtn" data-rno="${comment.discussionReplyNo}">삭제</button>
+
+                    <button class="modifyBtn" data-rno="${comment.discussionReplyNo}" data-email="${comment.email}">수정</button>
+
+            </div>`;
             }
 
             tag += `
             <div class="comment-body self" id="my-content">
                 <p class="reply-comment">${comment.discussionReplyContent}</p>
             </div>
-            <div id="modify-delete-btn">
-
-                    <a class="deleteBtn" data-rno="${comment.discussionReplyNo}">삭제</a>
-
-                    <a class="modifyBtn" data-rno="${comment.discussionReplyNo}" data-email="${comment.email}">수정</a>
-
-            </div>`;
+            `;
         } else {
             // 남이 쓴 댓글
             tag = `
@@ -212,7 +220,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
             $modifyBtn.textContent = '완료';
             $delBtn.textContent = '취소';
-            $delBtn.setAttribute("onclick", '')
+
+
 
             $modifyBtn.classList.add('saveBtn');
             $delBtn.classList.add('cancelBtn');
@@ -262,6 +271,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             // 취소 버튼 클릭 이벤트
             const cancelHandler = () => {
+                $delBtn.setAttribute("onclick", '')
                 $commentBody.innerHTML = `<p class="reply-comment">${originalText}</p>`;
                 $modifyBtn.textContent = '수정';
                 $delBtn.textContent = '삭제';

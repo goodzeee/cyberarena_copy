@@ -109,12 +109,6 @@ public class UserService {
         );
     }
 
-    public List<Discussion> getDiscussList(HttpSession session) {
-        String email = ((LoginUserInfoDto) session.getAttribute("login")).getEmail();
-
-        return discussionMapper.findByEmail(email);
-    }
-
     public List<ReviewLinkDto> getReviewList(HttpSession session) {
         String email = ((LoginUserInfoDto) session.getAttribute("login")).getEmail();
 

@@ -64,12 +64,17 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                                 <h2>참여중인 토론이 없습니다.</h2>
                             </c:when>
                             <c:otherwise>
-                                <c:forEach var="discussion" items="${discussions}">
-                                    <div class="discuss-card">
-                                        <a class="discuss-link"
-                                            href="/discussion/detail?dno=${discussion.discussionNo}"
-                                            >${discussion.discussionTitle}</a
-                                        >
+                                <c:forEach var="d" items="${discussions}">
+                                    <div class="discuss-card" data-dno="${d.discussionNo}">
+                                        <h2 class="discussion-title" onclick="window.location.href='/discussion/detail?dno=${d.discussionNo}'">${d.shortTitle}</h2>
+                                        <hr>
+                                        <div>
+                                            <span class="media-title" onclick="window.location.href='/media/${d.mediaNo}'">
+                                                <h3>${d.mediaTitle}</h3>
+                                            <img src="${d.imageUrl}" alt="${d.mediaTitle}"/>
+                                            </span>
+                                            <span class="nickname">작성자: ${d.nickname}</span>
+                                        </div>
                                     </div>
                                 </c:forEach>
                             </c:otherwise>
@@ -83,13 +88,11 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                             <c:otherwise>
                                 <c:forEach var="review" items="${reviews}">
                                     <div class="review-card">
-                                        <a
-                                            href="/media/${review.mediaNo}"
-                                            class="media-title"
-                                            >${review.mediaTitle}</a
-                                        >
+                                        <h2 class="media-title"
+                                            onclick="window.location.href='/media/${review.mediaNo}'"
+                                            >작품: ${review.mediaTitle}</h2>
                                         <div class="review-text">
-                                            ${review.reviewText}　
+                                            내용: ${review.reviewText}
                                         </div>
                                     </div>
                                 </c:forEach>

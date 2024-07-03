@@ -8,6 +8,8 @@ import com.project.mvc.dto.response.kibeom.DiscussFindAllDto;
 import com.project.mvc.dto.response.kibeom.DiscussReplyResponseDto;
 import com.project.mvc.dto.response.kibeom.DiscussResponseDto;
 import com.project.mvc.dto.response.kibeom.DiscussionDetailResponseDto;
+import com.project.mvc.dto.seongjin.DiscussMyPageDto;
+import com.project.mvc.dto.seongjin.LoginUserInfoDto;
 import com.project.mvc.entity.DiscussReply;
 import com.project.mvc.entity.Discussion;
 import com.project.mvc.entity.Media;
@@ -19,6 +21,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.time.LocalDateTime;
@@ -107,5 +110,17 @@ public class DiscussionService {
                 .collect(Collectors.toList());
 
         return list;
+    }
+
+    public List<DiscussMyPageDto> findMyDiscuss(HttpServletRequest request) {
+        LoginUserInfoDto login = (LoginUserInfoDto) request.getSession().getAttribute("login");
+        return discussionMapper.findByEmail(login.getEmail()).stream().map(dto -> {
+            if (dto.getDiscussionTitle().length() > 9) {
+                dto.setShortTitle(dto.getDiscussionTitle().substring(0, 8) + "...");
+            } else {
+                dto.setShortTitle(dto.getDiscussionTitle());
+            }
+            return dto;
+        }).collect(Collectors.toList());
     }
 }

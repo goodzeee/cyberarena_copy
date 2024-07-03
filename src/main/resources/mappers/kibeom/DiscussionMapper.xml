@@ -109,10 +109,21 @@
         WHERE discussion_no = #{discussionNo}
     </update>
 
-    <select id="findByEmail" resultType="discussion">
-        SELECT *
-        FROM discussion
-        WHERE discussion_no IN
+    <select id="findByEmail" resultType="com.project.mvc.dto.seongjin.DiscussMyPageDto">
+        SELECT
+            U.nickname,
+            D.discussion_no,
+            D.discussion_title,
+            D.email,
+            D.media_no,
+            M.media_title,
+            M.image_url
+        FROM discussion D
+        INNER JOIN user U
+        USING(email)
+        INNER JOIN media M
+        USING(media_no)
+        WHERE D.discussion_no IN
         (
         SELECT
             discussion_no

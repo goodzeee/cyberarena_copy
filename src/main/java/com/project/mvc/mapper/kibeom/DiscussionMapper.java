@@ -5,6 +5,8 @@ import com.project.mvc.common.zyo.Search;
 import com.project.mvc.dto.request.kibeom.DiscussionModifyDto;
 import com.project.mvc.dto.request.kibeom.MakeDiscussionDto;
 import com.project.mvc.dto.response.kibeom.DiscussFindAllDto;
+import com.project.mvc.dto.response.kibeom.DiscussResponseDto;
+import com.project.mvc.dto.seongjin.DiscussMyPageDto;
 import com.project.mvc.entity.Discussion;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -38,7 +40,7 @@ public interface DiscussionMapper {
     boolean modify(DiscussionModifyDto dto);
 
 
-    List<Discussion> findByEmail(String email);
+    List<DiscussMyPageDto> findByEmail(String email);
 
 
 

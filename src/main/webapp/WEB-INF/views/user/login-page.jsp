@@ -10,8 +10,7 @@ pageEncoding="UTF-8"%>
     </head>
     <body>
         <dialog id="find-dialog">
-            <div class="dialog-wrap">
-            </div>
+            <div class="dialog-wrap"></div>
         </dialog>
         <div class="login-wrap">
             <a class="home-btn" href="/"
@@ -207,9 +206,19 @@ pageEncoding="UTF-8"%>
                     $submit.disabled = false;
                 }
             }
+            const enterHandler = (sup, e) => {
+                if(e.key === "Enter") return;
+                sup.click();
+            }
 
             async function submitHandler(e) {
                 const $codeInput = $dialog.querySelector(".code-input");
+                if ($codeInput.value.trim() == "") {
+                    alert("식별코드를 입력해주세요.");
+                    return;
+                }
+                console.log(this);
+                $codeInput.addEventListener("keyup", enterHandler.bind(null, this));
                 const requestInfo = {
                     method: "POST",
                     headers: {
@@ -220,9 +229,9 @@ pageEncoding="UTF-8"%>
                     }),
                 };
                 const res = await fetch("/user/find-id", requestInfo);
-                if (res.status === 403) {
-                    const msg = await res.text();
-                    alert(msg);
+                if (res.status === 500 || res.status === 403) {
+                    alert("식별코드가 올바르지 않습니다.");
+                    $dialog.close();
                     return;
                 }
                 const email = await res.text();
@@ -237,6 +246,11 @@ pageEncoding="UTF-8"%>
 
             async function pwSubmitHandler(e) {
                 const $codeInput = $dialog.querySelector(".code-input");
+                if ($codeInput.value.trim() == "") {
+                    alert("식별코드를 입력해주세요.");
+                    return;
+                }
+                $codeInput.addEventListener("keyup", enterHandler.bind(null, this));
                 const $findEmailInput =
                     $dialog.querySelector(".find-email-input");
                 const requestInfo = {
@@ -250,9 +264,9 @@ pageEncoding="UTF-8"%>
                     }),
                 };
                 const res = await fetch("/user/find-pw", requestInfo);
-                if (res.status === 403) {
-                    const msg = await res.text();
-                    alert(msg);
+                if (res.status === 500 || res.status === 403) {
+                    alert("이메일 혹은 식별코드가 올바르지 않습니다.");
+                    $dialog.close();
                     return;
                 }
                 const email = await res.text();
@@ -335,8 +349,11 @@ pageEncoding="UTF-8"%>
                                 password: $newPw.value,
                             }),
                         };
-                        const res = await fetch("/user/change-password", requestInfo);
-                        if(res.status == 403) {
+                        const res = await fetch(
+                            "/user/change-password",
+                            requestInfo
+                        );
+                        if (res.status == 403) {
                             alert("오류발생");
                             return;
                         }

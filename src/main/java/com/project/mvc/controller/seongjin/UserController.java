@@ -1,10 +1,13 @@
 package com.project.mvc.controller.seongjin;
 
 
+import com.project.mvc.common.zyo.Search;
+import com.project.mvc.dto.response.kibeom.DiscussResponseDto;
 import com.project.mvc.dto.seongjin.*;
 import com.project.mvc.dto.zyo.ReviewRenderingDto;
 import com.project.mvc.entity.Discussion;
 import com.project.mvc.entity.Review;
+import com.project.mvc.service.kibeom.DiscussionService;
 import com.project.mvc.service.seongjin.FollowLogService;
 import com.project.mvc.service.seongjin.LoginResult;
 import com.project.mvc.service.seongjin.UserService;
@@ -31,6 +34,7 @@ public class UserController {
 
     private final UserService userService;
     private final FollowLogService followLogService;
+    private final DiscussionService discussionService;
 
     @GetMapping("/sign-in")
     public String signInGet(HttpSession session, @RequestParam(required = false) String redirect) {
@@ -102,7 +106,7 @@ public class UserController {
         int followerSize = followLogService.getFollowList(request.getSession(), false).size();
         int followingSize = followLogService.getFollowList(request.getSession(), true).size();
 
-        List<Discussion> discussList = userService.getDiscussList(request.getSession());
+        List<DiscussMyPageDto> discussList = discussionService.findMyDiscuss(request);
         model.addAttribute("discussions", discussList);
         List<ReviewLinkDto> reviewList = userService.getReviewList(request.getSession());
         model.addAttribute("reviews", reviewList);

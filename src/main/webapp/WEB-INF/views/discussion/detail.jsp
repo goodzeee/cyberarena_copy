@@ -60,7 +60,7 @@
             <div class="discussion-offer">${found.discussionOffer}</div>
         </div>
         <div class="comment-section">
-            <h2>댓글 [${count}]</h2>
+<%--            <h2>댓글 [${count}]</h2>--%>
             <c:if test="${login != null}">
                 <div class="comment-form">
                     <form id="commentForm">

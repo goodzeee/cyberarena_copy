@@ -48,6 +48,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 commentElement.remove();
             }
         }
+        await fetchComments();
     }
 
     async function submitComment() {
@@ -87,6 +88,10 @@ document.addEventListener('DOMContentLoaded', function () {
             commentElement.innerHTML = tag;
             commentsContainer.appendChild(commentElement);
         } else {
+            const replyCount = document.createElement('h2');
+            replyCount.textContent = `댓글 [${comments.length}]`
+            document.getElementById('comments').appendChild(replyCount)
+
             comments.forEach(comment => {
                 addCommentToDOM(comment, loginUserDto);
             });

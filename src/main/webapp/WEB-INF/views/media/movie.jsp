@@ -80,7 +80,7 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
             </div>
             <c:forEach var="discussions" items="${discussions}">
             <div class="poster_wrap">
-              <section data-view-count="${discussions.viewCount}">
+              <section class="link" data-reply-count="${discussions.replyCount}" onclick="location.href='/discussion/detail?dno=${discussions.discussionNo}'">
                 <h2>${discussions.discussionTitle}</h2>
                 <div class="poster_info">
                   <span>${discussions.mediaTitle}</span>
@@ -119,7 +119,7 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
                       ></div>
                     </div>
                     <div class="card-content"><img src="${review.imageUrl}" alt="Media Image">  
-                      ${review.reviewText}
+                      <span>${review.reviewText}</span>
                   </div>
                 </section>
               </div>
@@ -160,21 +160,24 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
        <img src="" alt="">
       </div>
       <div class="media-info">
-        <h2>더 글로리</h2>
+        <h2></h2>
         <div class="detail-info">
-          <span class="rating">평점: 3.3</span>
-          <span class="created-at">2023</span>
-          <span class="creator">제작자: 몰루</span>
+          <span class="rating"></span>
+          <span class="creator"></span>
+          <span class="created-at"></span>
         </div>
-        <div class="description">
-          더 글로리 - 위키백과, 우리 모두의 백과사전 《더 글로리》 (영어: The
-          Glory)는 넷플릭스에서 2022년 12월 30일부터 방영된 대한민국의 드라마로
-          학교폭력에 대한 복수를 다룬 복수극, 범죄극, 스릴러물이다. 송혜교,
-          이도현, 임지연, 염혜란, 박성훈, 정성일이 앙상블 캐스팅을 마무리한다.
-        </div>
+        <div class="description"></div>
       </div>
       <div class="modal-close">닫기</div>
-      <div class="reviews">리뷰</div>
+      <div class="reviews">
+        <div class="review-title">
+          <h2></h2>
+          <span></span>
+          <div class="review-list">
+            <span class="review-content"></span>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- 모달 끝 -->
@@ -248,10 +251,31 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
         const json = await res.json();
         $modal.querySelector(".img-wrap img").setAttribute("src", json.imageUrl);
         $modal.querySelector(".media-info h2").textContent = json.mediaTitle;
-        $modal.querySelector(".rating").textContent = "제목" +json.rating;
+        $modal.querySelector(".rating").textContent = "평균 별점: " +json.rating;
+        $modal.querySelector(".creator").textContent = "제작진: " +json.creator;
         $modal.querySelector(".created-at").textContent = json.createdAt;
-        $modal.querySelector(".creator").textContent = json.creator;
         $modal.querySelector(".description").textContent = json.mediaDesc;
+        const res2 = await fetch(`/media/review-info?mediaNo=\${mediaNo}`);
+        const json2 = await res2.json();
+        const reviewList = json2.reviews;
+        const $reviews = $modal.querySelector('.reviews');
+        $reviews.innerHTML = `<h2>리뷰</h2>
+                               <a href="/review/list/\${mediaNo}">더보기<i class="fa-solid fa-angle-right"></i></a>`;
+        const latestReviews = reviewList.slice(0, 8);
+        latestReviews.forEach(({ nickname, text, userRating }) => {
+
+          $reviews.innerHTML += `
+          <div class="review-title">
+            <h2>\${nickname}</h2>
+            <span><i class="fa-solid fa-star filled"></i>\${userRating}</span>
+            <div class="review-list">
+              <span class="review-content">\${text}</span>
+            </div>
+          </div>
+          `;
+        });
+        
+      
       });
     });
 
@@ -270,6 +294,7 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
       }
     });
 
+    // 별점 효과
     document.addEventListener("DOMContentLoaded", function () {
       var ratings = document.querySelectorAll(".rating");
 
@@ -300,5 +325,6 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
         ratingContainer.innerHTML = starsHtml;
       });
     });
+
   </script>
 </html>

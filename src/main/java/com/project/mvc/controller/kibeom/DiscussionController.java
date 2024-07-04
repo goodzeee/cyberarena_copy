@@ -1,30 +1,26 @@
 package com.project.mvc.controller.kibeom;
 
-import com.project.mvc.common.jihye.Page;
 import com.project.mvc.common.jihye.PageMaker;
 import com.project.mvc.common.zyo.Search;
-import com.project.mvc.dto.request.kibeom.DiscussionCommentRequestDto;
 import com.project.mvc.dto.request.kibeom.DiscussionModifyDto;
 import com.project.mvc.dto.request.kibeom.MakeDiscussionDto;
 import com.project.mvc.dto.response.kibeom.DiscussAsideListDto;
 import com.project.mvc.dto.response.kibeom.DiscussFindAllDto;
 import com.project.mvc.dto.response.kibeom.DiscussResponseDto;
 import com.project.mvc.dto.response.kibeom.DiscussionDetailResponseDto;
-import com.project.mvc.entity.Discussion;
 import com.project.mvc.entity.Media;
 import com.project.mvc.mapper.kibeom.DiscussionMapper;
 import com.project.mvc.mapper.zyo.MediaMapper;
 import com.project.mvc.service.kibeom.DiscussionReplyService;
 import com.project.mvc.service.kibeom.DiscussionService;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -114,11 +110,17 @@ public class DiscussionController {
         if (flag) {
             return "redirect:/discussion/detail?dno=" + dto.getDiscussionNo();
         } else {
-            return "redirect:/discussion/list"; // 일단 리스트로 돌려보냄
+            return "redirect:/discussion/list";
         }
     }
 
-
+    @GetMapping("/list/{sort}")
+    @ResponseBody
+    public ResponseEntity<?> sortDiscussions(@PathVariable("sort") String sort) {
+        log.debug("sort: {}", sort);
+        List<DiscussResponseDto> sortedDiscussions = discussionService.getSortedDiscussions(sort);
+        return ResponseEntity.ok(sortedDiscussions);
+    }
 
 
 

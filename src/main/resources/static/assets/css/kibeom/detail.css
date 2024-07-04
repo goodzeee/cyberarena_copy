@@ -1,3 +1,5 @@
+
+
 * {
     margin: 0;
     padding: 0;
@@ -25,6 +27,8 @@ header {
 
 #whole {
     display: flex;
+    width: 92%;
+    margin: 0 auto;
 }
 
 .content-wrap {
@@ -38,21 +42,30 @@ header {
 }
 
 aside {
-    /*width: 25%;*/
     width: 20%;
-    /*margin-top: 67px;*/
-    border-radius: 15px;
     margin: 67px auto 0 auto;
+    position: sticky;
+    top: 20px;
+    height: calc(100vh - 67px - 20px);
+    overflow-y: auto;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
-/*#left-aside {*/
-/*    margin-left: 100px;*/
-/*}*/
+
+#left-aside {
+    left: 0;
+}
+
+#right-aside {
+    right: 0;
+}
 
 .aside-wrap {
     border: 1px solid #ccc;
     border-radius: 15px;
     margin: 0;
-    padding: 0;
+    padding: 0 0 60px 0;
+    /*box-shadow: rgba(100, 100, 111, 0.1) 0px 7px 29px 0px !important;*/
 }
 
 .aside-header {
@@ -79,6 +92,7 @@ aside ul {
     width: 70%;
     margin: 0 auto;
     list-style: none;
+    padding: 0;
 }
 
 aside ul li {
@@ -425,13 +439,13 @@ div.comment-header-self {
     text-decoration: underline;
 }
 
- .live-icon {
-     display: inline-flex;
-     align-items: center;
-     justify-content: center;
-     background-color: red;
-     color: white;
-     border-radius: 5px;
-     padding: 5px 10px;
-     font-size: 10px;
- }
+.live-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: red;
+    color: white;
+    border-radius: 5px;
+    padding: 5px 10px;
+    font-size: 10px;
+}

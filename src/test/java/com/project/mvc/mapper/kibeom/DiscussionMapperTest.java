@@ -2,6 +2,7 @@ package com.project.mvc.mapper.kibeom;
 
 import com.project.mvc.dto.request.kibeom.MakeDiscussionDto;
 import com.project.mvc.dto.response.kibeom.DiscussFindAllDto;
+import com.project.mvc.dto.response.kibeom.DiscussResponseDto;
 import com.project.mvc.entity.Discussion;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -21,15 +22,15 @@ class DiscussionMapperTest {
     private DiscussionMapper discussionMapper;
 
 
-    @Test
-    @DisplayName("전체 조회 성공.")
-    void findAll() {
-        //given
-        List<DiscussFindAllDto> all = discussionMapper.findAll();
-        //when
-        System.out.println(all);
-        //then
-    }
+//    @Test
+//    @DisplayName("전체 조회 성공.")
+//    void findAll() {
+//        //given
+//        List<DiscussFindAllDto> all = discussionMapper.findAll();
+//        //when
+//        System.out.println(all);
+//        //then
+//    }
 
     @Test
     @DisplayName("저장 성공")
@@ -72,6 +73,18 @@ class DiscussionMapperTest {
         System.out.println("foundData = " + foundData);
         assertNotNull(foundData);
     }
+
+    @Test
+    @DisplayName("정렬")
+    void sortTest() {
+        //given
+        String sort = "view";
+        //when
+        List<DiscussFindAllDto> sortedDiscussion = discussionMapper.getSortedDiscussion(sort);
+        //then
+        sortedDiscussion.forEach(System.out::println);
+    }
+
     
 
 

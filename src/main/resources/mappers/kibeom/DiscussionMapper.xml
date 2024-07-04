@@ -138,5 +138,15 @@
         )
     </select>
 
+    <select id="findAsideList" resultType="com.project.mvc.dto.response.kibeom.DiscussAsideListDto">
+        SELECT
+            discussion_no,
+            discussion_title,
+            view_count
+        FROM discussion
+        ORDER BY view_count DESC
+        LIMIT 0, 7
+    </select>
+
 
 </mapper>

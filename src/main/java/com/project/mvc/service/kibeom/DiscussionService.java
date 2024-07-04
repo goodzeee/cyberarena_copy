@@ -4,10 +4,7 @@ import com.project.mvc.common.jihye.Page;
 import com.project.mvc.common.zyo.Search;
 import com.project.mvc.dto.request.kibeom.DiscussionModifyDto;
 import com.project.mvc.dto.request.kibeom.MakeDiscussionDto;
-import com.project.mvc.dto.response.kibeom.DiscussFindAllDto;
-import com.project.mvc.dto.response.kibeom.DiscussReplyResponseDto;
-import com.project.mvc.dto.response.kibeom.DiscussResponseDto;
-import com.project.mvc.dto.response.kibeom.DiscussionDetailResponseDto;
+import com.project.mvc.dto.response.kibeom.*;
 import com.project.mvc.dto.seongjin.DiscussMyPageDto;
 import com.project.mvc.dto.seongjin.LoginUserInfoDto;
 import com.project.mvc.entity.DiscussReply;
@@ -19,6 +16,7 @@ import com.project.mvc.mapper.seongjin.UserMapper;
 import com.project.mvc.mapper.zyo.MediaMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.taglibs.standard.lang.jstl.GreaterThanOperator;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
@@ -122,5 +120,10 @@ public class DiscussionService {
             }
             return dto;
         }).collect(Collectors.toList());
+    }
+
+
+    public List<DiscussAsideListDto> findAsideList() {
+        return discussionMapper.findAsideList();
     }
 }

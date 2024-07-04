@@ -14,15 +14,18 @@
 <div id="whole">
     <aside id="left-aside">
         <div class="aside-wrap">
-            <h2 class="aside-header"> 🔥 최근 인기 토론 🔥</h2>
-            <ul>
-                    <li>#1 기생충에 대해..</li>
-                    <li>#2 독전에 대해..</li>
-                    <li>#3 타짜에 대해..</li>
-                    <li>#4 인사이드아웃2에 대해..</li>
-                    <li>#5 명량에 대해..</li>
-                    <li>#6 정처기에 대해..</li>
-                    <li>#7 실기에 대해..</li>
+            <h2 class="aside-header">지금 뜨는 토론 <i class="live-icon">LIVE</i></h2>
+            <ul class="aside-ul">
+            <p class="aside-p" onclick="window.location.href=`/discussion/list`">더보기</p>
+                <c:forEach var="a" items="${aList}" >
+                    <li data-dno="${a.discussionNo}" class="aside-li">
+                        <p onclick="window.location.href=`/discussion/detail?dno=${a.discussionNo}`">
+<%--                            <${status.index + 1}> <span class="aside-title">${a.discussionTitle}</span><br>--%>
+                            <span class="aside-title">${a.discussionTitle}</span><br>
+                            <i class="fas fa-eye"></i> ${a.viewCount}
+                        </p>
+                    </li>
+                </c:forEach>
             </ul>
 
         </div>

@@ -6,6 +6,7 @@ import com.project.mvc.common.zyo.Search;
 import com.project.mvc.dto.request.kibeom.DiscussionCommentRequestDto;
 import com.project.mvc.dto.request.kibeom.DiscussionModifyDto;
 import com.project.mvc.dto.request.kibeom.MakeDiscussionDto;
+import com.project.mvc.dto.response.kibeom.DiscussAsideListDto;
 import com.project.mvc.dto.response.kibeom.DiscussFindAllDto;
 import com.project.mvc.dto.response.kibeom.DiscussResponseDto;
 import com.project.mvc.dto.response.kibeom.DiscussionDetailResponseDto;
@@ -71,9 +72,10 @@ public class DiscussionController {
 
 
     @GetMapping("/detail")
-    public String discussionDetail(Model model, long dno, HttpServletRequest request) {
+    public String discussionDetail(Model model, long dno, HttpServletRequest request, Search page) {
         DiscussionDetailResponseDto foundDsc = discussionService.findOne(dno);
-
+        page.setAmount(10);
+        List<DiscussAsideListDto> asideList = discussionService.findAsideList();
         // 댓글 수
         long count = discussionReplyService.getCount(dno);
 
@@ -82,6 +84,8 @@ public class DiscussionController {
 
         model.addAttribute("count", count);
         model.addAttribute("found", foundDsc);
+        model.addAttribute("aList", asideList);
+
         String ref = request.getHeader("Referer");
         model.addAttribute("ref", ref);
         return "discussion/detail";

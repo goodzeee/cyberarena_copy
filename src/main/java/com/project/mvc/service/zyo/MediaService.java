@@ -77,6 +77,7 @@ public class MediaService {
         List<ReviewRenderingDto> reviewRenderList = mediaMapper.findReviewRenderInfo(categoryNo)
                 .stream()
                 .sorted(Comparator.comparing(ReviewRenderingDto::getReviewCreatedAt).reversed())
+                .limit(12)
                 .collect(Collectors.toList());
         return reviewRenderList;
 

@@ -2,12 +2,14 @@ package com.project.mvc.controller.zyo;
 
 import com.project.mvc.dto.request.jihye.MediaDetailDto;
 import com.project.mvc.dto.response.jihye.ReviewFindAllDto;
+import com.project.mvc.dto.response.jihye.ReviewListDto;
 import com.project.mvc.dto.response.kibeom.DiscussFindAllDto;
 import com.project.mvc.dto.zyo.DiscussRenderingDto;
 import com.project.mvc.dto.zyo.ReviewRenderingDto;
 import com.project.mvc.entity.Discussion;
 import com.project.mvc.entity.Media;
 import com.project.mvc.entity.Review;
+import com.project.mvc.service.jihye.ReviewService;
 import com.project.mvc.service.zyo.MediaService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +25,7 @@ import java.util.List;
 public class MediaController {
 
     private final MediaService mediaService;
+    private final ReviewService reviewService;
 
     @GetMapping("/movie")
     public String movie(Model model) {
@@ -88,6 +91,13 @@ public class MediaController {
     }
 
 
+    @GetMapping("/review-info")
+    @ResponseBody
+    public ResponseEntity<?> findReviewInfo(@RequestParam long mediaNo) {
+        ReviewListDto list = reviewService.findList(mediaNo);
+        return ResponseEntity.ok()
+                .body(list);
+    }
 
 
 }

@@ -31,4 +31,5 @@ public interface MediaMapper {
     List<ReviewRenderingDto> findReviewRenderInfo(int categoryNo);
 
     Media findByMediaNo(long mediaNo);
+
 }

@@ -3,56 +3,16 @@
     padding: 0;
     box-sizing: border-box;
     font-family: Arial, sans-serif;
+    color: #b6b6b6;
 }
 
 body {
-    background-color: #f0f0f0;
-    color: #333;
+    background-color: black !important;
+
     display: flex;
     flex-direction: column;
     min-height: 100vh;
 }
-
-/*header {*/
-/*    background-color: #333;*/
-/*    color: #fff;*/
-/*    padding: 10px;*/
-/*    display: flex;*/
-/*    justify-content: space-between;*/
-/*    align-items: center;*/
-/*}*/
-
-/*.logo {*/
-/*    font-size: 24px;*/
-/*}*/
-
-/*.search-bar {*/
-/*    display: flex;*/
-/*}*/
-
-/*.search-bar input {*/
-/*    padding: 5px;*/
-/*    font-size: 16px;*/
-/*}*/
-
-/*.search-bar button {*/
-/*    padding: 5px 10px;*/
-/*    background-color: #555;*/
-/*    color: #fff;*/
-/*    border: none;*/
-/*    cursor: pointer;*/
-/*}*/
-
-/*nav ul {*/
-/*    list-style: none;*/
-/*    display: flex;*/
-/*    gap: 15px;*/
-/*}*/
-
-/*nav ul li a {*/
-/*    color: #fff;*/
-/*    text-decoration: none;*/
-/*}*/
 
 main {
     flex: 1;
@@ -63,10 +23,10 @@ main {
 .list-wrap {
 
     flex: 1;
-    background-color: #fff;
+    background-color: #222323;
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgb(214, 212, 212);
 
     width: 80%;
     margin: 100px auto ;
@@ -78,7 +38,7 @@ main {
     padding-bottom: 5px;
 }
 .list-wrap hr {
-    color: black;
+    color: #E5E5E5;
     margin-bottom: 20px;
     margin-top: 20px;
 }
@@ -98,16 +58,16 @@ main {
 .card {
     padding: 15px 15px 0 15px;
     /*margin-bottom: 10px;*/
-    border: 1px solid #ddd;
+    border: 1px solid #222323;
     border-radius: 10px;
-    background-color: #F8F8F8;
+    background-color: #393838;
     cursor: pointer;
-    box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 30px 60px -20px rgb(69, 69, 69);
     transition: box-shadow 0.2s;
     height: 330px;
 }
 .card:hover {
-    box-shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.9);
+    box-shadow: 0 30px 60px -30px rgb(214, 212, 212);
 }
 
 .card div {
@@ -127,49 +87,73 @@ main {
 }
 .make-discussion {
     display: block;
-    background: white;
+    background: #D0CECE;
     color: black;
     cursor: pointer;
     text-align: center;
     padding: 10px 20px;
-    box-shadow: 0 10px 10px -10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 10px 10px -10px rgb(198, 194, 194);
     border-radius: 30px;
 
 }
+
+
 
 .make-discussion:hover {
     background-color: #c8ccd3;
     transition: 0.5s;
 }
+#top-parents form {
+    margin-top: 10px;
+}
+
 #top-parents input {
     height: 36px;
     margin-right: 5px;
+    background-color: #d1cece;
+    border: none;
+    color: white;
 }
-#top-parents select {
-    margin-bottom: 10px;
+#top-parents #search-type {
+    margin-bottom: 25px;
+    background-color: #9f9e9e;
+    border: none;
+
+    color: white;
+}
+
+#top-parents #sortSelect {
+    margin-top: 10px;
+    background-color: #9f9e9e;
+    border: none;
+    width: 95%;
+    padding: 10px;
+    color: white;
 }
 
 .btn-primary {
-    background: lightgray;
+    background: #8e8d8d;
     border: none;
+    color: black;
+
 }
 
 
-.fetch-wrap {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    max-height: 20rem;
-    overflow: scroll;
-}
+/*.fetch-wrap {*/
+/*    background-color: #fff;*/
+/*    padding: 20px;*/
+/*    border-radius: 10px;*/
+/*    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);*/
+/*    max-height: 20rem;*/
+/*    overflow: scroll;*/
+/*}*/
 
-footer {
-    background-color: #333;
-    color: #fff;
-    text-align: center;
-    padding: 10px;
-}
+/*footer {*/
+/*    background-color: #333;*/
+/*    color: #fff;*/
+/*    text-align: center;*/
+/*    padding: 10px;*/
+/*}*/
 
 .none {
     display: none;
@@ -259,11 +243,16 @@ footer {
 }
 
 .discussion-title {
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid #E5E5E5;
     padding-bottom: 25px;
 
 }
 
 .main-content {
     padding-top: 15px;
+}
+
+.nickname:hover, .media-title h3:hover {
+    font-weight: 700;
+    cursor: pointer;
 }

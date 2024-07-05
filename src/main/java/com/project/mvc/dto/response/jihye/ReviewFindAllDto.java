@@ -21,9 +21,10 @@ public class ReviewFindAllDto {
     private DiscussionStatus discussionStatus;
     private LocalDateTime reviewCreatedAt;
     private long mediaNo;
+
+    private int likeCount;  // 좋아요 수 추가
     private String nickname;
 }
-
 
 //    // Review 엔티티에서 ReviewFindAllDto로 매핑하는 생성자
 //    public ReviewFindAllDto(Review r) {

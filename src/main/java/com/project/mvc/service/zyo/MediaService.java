@@ -1,5 +1,6 @@
 package com.project.mvc.service.zyo;
 
+import com.project.mvc.common.jihye.Page;
 import com.project.mvc.common.zyo.Search;
 import com.project.mvc.dto.request.jihye.MediaDetailDto;
 import com.project.mvc.dto.response.jihye.ReviewDetailDto;

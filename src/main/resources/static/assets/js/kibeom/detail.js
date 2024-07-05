@@ -12,7 +12,7 @@ let isExist = false; // 댓글 등록창에 값이 있냐 없냐
 // let isValidate = [false, false];
 
 $replySubmitBtn.style.pointerEvents = "none";
-$replySubmitBtn.style.backgroundColor = "lightgray";
+$replySubmitBtn.style.backgroundColor = "#acaaaa";
 
 
 for(let i = 0; i < 1; i++) {
@@ -24,7 +24,7 @@ for(let i = 0; i < 1; i++) {
             isExist = false;
         }
 
-        if (isExist && $replyTextArea.value.length > 3) {
+        if (isExist && $replyTextArea.value.length > 2) {
 
             $replySubmitBtn.style.animation = "vivid-btn 0.7s"
             $replySubmitBtn.style.animationFillMode = "forwards"
@@ -33,15 +33,14 @@ for(let i = 0; i < 1; i++) {
         } else {
 
             $replySubmitBtn.style.pointerEvents = 'none'
-            $replySubmitBtn.style.backgroundColor = "lightgray";
             $replySubmitBtn.style.animation = '';
-            $replyTextArea.preventDefault();
+            if (e.target.matches('submitComment')) alert('2글자 이상!')
         }
     })
 }
 
 $replySubmitBtn.addEventListener('click', e => {
-    $replySubmitBtn.style.backgroundColor = "#D3D3D3"
+    $replySubmitBtn.style.backgroundColor = "#acaaaa"
     $replySubmitBtn.style.animation = '';
 })
 
@@ -53,15 +52,17 @@ const $modify = document.getElementById('modify');
 const $backdrop = document.getElementById('backdrop')
 
 
-$modify?.addEventListener('click', e =>  {
 
-        console.log("modal ", $modalWrap)
+// $modify.addEventListener('click', e =>  {
+//
+//         console.log("modal ", $modalWrap)
+//
+//         $modalWrap.style.display = 'flex'
+//         console.log('removed modal, ', $modalWrap)
+//         $backdrop.classList.remove('none');
+//
+// });
 
-        $modalWrap.style.display = 'flex'
-        console.log('removed modal, ', $modalWrap)
-        $backdrop.classList.remove('none');
-
-});
 // });
 
 

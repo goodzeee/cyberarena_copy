@@ -260,7 +260,7 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
         const reviewList = json2.reviews;
         const $reviews = $modal.querySelector('.reviews');
         $reviews.innerHTML = `<h2>리뷰</h2>
-                               <a href="/review/list/\${mediaNo}">더보기</a>`;
+                               <a href="/review/list/\${mediaNo}">더보기<i class="fa-solid fa-angle-right"></i></a>`;
         const latestReviews = reviewList.slice(0, 8);
         latestReviews.forEach(({ nickname, text, userRating, email }) => {
 

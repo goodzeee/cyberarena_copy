@@ -1,5 +1,6 @@
 package com.project.mvc.controller.zyo;
 
+import com.project.mvc.common.jihye.Page;
 import com.project.mvc.dto.request.jihye.MediaDetailDto;
 import com.project.mvc.dto.response.jihye.ReviewFindAllDto;
 import com.project.mvc.dto.response.jihye.ReviewListDto;

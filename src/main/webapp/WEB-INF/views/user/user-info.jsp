@@ -19,41 +19,30 @@ uri="http://java.sun.com/jsp/jstl/core" %>
         <div class="outer-content-wrap">
             <div class="inner-content-wrap">
                 <div id="user-info">
-                    <div class="name">
-                        <h1>${login.nickname}</h1>
-                        <p>${login.email}</p>
-                        <p>가입일: ${login.regDate}</p>
+                    <div class="name" data-target-email="${userInfo.email}" >
+                        <h1>${userInfo.nickname}
+                            <c:choose>
+                                <c:when test="${wasFollow}">
+                                    <span class="follow-btn green">팔로잉</span>
+                                </c:when>
+                                <c:otherwise>
+                                    <span class="follow-btn gray">팔로우</span>
+                                </c:otherwise>
+                            </c:choose>
+                        </h1>
+                        <p>${userInfo.email}</p>
+                        <p>가입일: ${userInfo.regDate}</p>
                     </div>
                     <div class="user-relation">
                         <a href="#" id="follower">팔로워(${follower})명</a>
                         <div class="wall"></div>
                         <a href="#" id="following">팔로잉(${following})명</a>
                     </div>
-
-                    <div class="sign-out-wrap">
-                        <a href="/user/sign-out">로그아웃</a>
-                    </div>
-
-                    <div class="verify-code-wrap">
-                        <c:choose>
-                            <c:when test="${!login.verified}">
-                                <button id="verify">
-                                    식별코드 발급받기
-                                    <br />(최초1회)
-                                </button>
-                                <input type="text" id="verify-code" readonly />
-                                <button class="copy">COPY</button>
-                            </c:when>
-                            <c:otherwise>
-                                <div>-식별코드 발급 완료-</div>
-                            </c:otherwise>
-                        </c:choose>
-                    </div>
                 </div>
                 <div class="title-btn-wrap">
                     <div class="discuss-btn title-btn">　참여중인 토론(${discussions.size()})</div>
                     <div class="wall"></div>
-                    <div class="review-btn title-btn">　 내 리뷰(${reviews.size()}) 　　</div>
+                    <div class="review-btn title-btn">　 작성한 리뷰(${reviews.size()})　</div>
                 </div>
                 <div class="content-wrap"></div>
 
@@ -111,14 +100,14 @@ uri="http://java.sun.com/jsp/jstl/core" %>
             const $users = document.querySelector(".users-info");
             const $follower = document.querySelector("#follower");
             const $following = document.querySelector("#following");
-            const $verify = document.querySelector("#verify");
-            const $copy = document.querySelector(".copy");
             const $content = document.querySelector(".content-wrap");
             const $discussBtn = document.querySelector(".discuss-btn");
             const $reviewBtn = document.querySelector(".review-btn");
             const $disc = document.querySelector(".discuss-content");
             const $review = document.querySelector(".review-content");
             const $hidden = document.querySelector("#hidden-content");
+            const $followBtn = document.querySelector(".follow-btn");
+            const infoUserEmail = document.querySelector(".name").dataset.targetEmail;
 
             const discussRenderingHandler = (e) => {
                 $discussBtn.classList.add("active");
@@ -134,52 +123,26 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                 $content.appendChild($review);
                 
             };
+            function followHandler() {
+                if ($followBtn.classList.contains("gray")) {
+                    fetch(`/user/follow?userEmail=${login.email}&targetEmail=\${infoUserEmail}`);
+                    $followBtn.classList.remove("gray");
+                    $followBtn.classList.add("green");
+                    $followBtn.textContent = "취소";
+                } else if($followBtn.classList.contains("green")) {
+                    fetch(`/user/unfollow?userEmail=${login.email}&targetEmail=\${infoUserEmail}`);
+                    $followBtn.classList.remove("green");
+                    $followBtn.classList.add("gray");
+                    $followBtn.textContent = "팔로우";
+                }
+            }
 
             const render = (dto, flag) => {
                 console.log(dto.exist);
                 const $li = document.createElement("li");
                 $li.dataset.email = dto.email;
                 $li.classList.add("user-list");
-                $li.innerHTML = `<span class="email">\${dto.nickname}/\${dto.email}</span>
-                        <span>Follow
-                        <i title="팔로우하기" class="fas fa-user-check"></i>
-                        UnFollow
-                        <i title="팔로우 취소하기" class="fas fa-user-times"></i>
-                        </span>
-                        `;
-                const $cancel = $li.querySelector(".fa-user-times");
-                const $add = $li.querySelector(".fa-user-check");
-                if (!dto.exist) {
-                    $cancel.classList.add("cancel");
-                    $cancel.classList.remove("done");
-                    $add.classList.remove("add");
-                    $add.classList.add("done");
-                    $add.addEventListener("click", (e) => {
-                        fetch(
-                            `/user/follow?userEmail=${login.email}&targetEmail=\${dto.email}`
-                        );
-                        if (flag) {
-                            setTimeout(followerHandler, 300);
-                        } else {
-                            setTimeout(followingHandler, 300);
-                        }
-                    });
-                } else {
-                    $cancel.classList.remove("cancel");
-                    $cancel.classList.add("done");
-                    $add.classList.add("add");
-                    $add.classList.remove("done");
-                    $cancel.addEventListener("click", (e) => {
-                        fetch(
-                            `/user/unfollow?userEmail=${login.email}&targetEmail=\${dto.email}`
-                        );
-                        if (flag) {
-                            setTimeout(followerHandler, 300);
-                        } else {
-                            setTimeout(followingHandler, 300);
-                        }
-                    });
-                }
+                $li.innerHTML = `<span class="email">\${dto.nickname}/\${dto.email}</span>`;
                 $users.appendChild($li);
             };
             async function followerHandler(e) {
@@ -188,7 +151,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                 $followDialog.showModal();
                 console.log("follower click!");
                 $users.innerHTML = "";
-                const res = await fetch(`/user/mypage/follower`);
+                const res = await fetch(`/user/user-info/follower/\${infoUserEmail}`);
                 const json = await res.json();
                 console.log(json.length);
                 $follower.textContent = `팔로워(\${json.length})명`;
@@ -204,39 +167,40 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                 $followDialog.showModal();
                 console.log("following click!");
                 $users.innerHTML = "";
-                const res = await fetch(`/user/mypage/following`);
+                const res = await fetch(`/user/user-info/following/\${infoUserEmail}`);
                 const json = await res.json();
                 console.log(json.length);
                 $following.textContent = `팔로잉(\${json.length})명`;
                 json.forEach((dto) => render(dto, false));
             }
-
-            async function verifyHandler(e) {
-                e.preventDefault();
-                const $code = document.querySelector("#verify-code");
-                const agree = confirm(
-                    "식별코드는 최초 1회만 발급받을 수 있습니다.\n(복사 혹은 스크린샷을 통해 저장해주세요)\n 지금 발급 받으시겠습니까?"
-                );
-                console.log(e.target);
-                if (!agree) return;
-                const res = await fetch("/user/verify");
-                $code.value = await res.text();
+            const btnTextChangeHandler = e => {
+                if ($followBtn.classList.contains("gray")) {
+                    $followBtn.textContent = "팔로우";
+                } else if($followBtn.classList.contains("green")) {   
+                    $followBtn.textContent = "취소";
+                }
             }
-            const copyCodeHandler = (e) => {
-                const $code = document.querySelector("#verify-code");
-                navigator.clipboard.writeText($code.value);
-                alert("복사되었습니다.");
-            };
+            const btnTextResetHandler = e => {
+                if ($followBtn.classList.contains("gray")) {
+                    $followBtn.textContent = "팔로우";
+                } else if($followBtn.classList.contains("green")) {   
+                    $followBtn.textContent = "팔로잉";
+                }
 
+            }
+
+            
+            
             $followDialog.addEventListener("click", (e) => {
                 if (e.target.matches("#follow-dialog")) $followDialog.close();
             });
             $follower.addEventListener("click", followerHandler);
             $following.addEventListener("click", followingHandler);
-            $verify?.addEventListener("click", verifyHandler);
-            $copy?.addEventListener("click", copyCodeHandler);
             $discussBtn.addEventListener("click", discussRenderingHandler);
             $reviewBtn.addEventListener("click", reviewRenderingHandler);
+            $followBtn.addEventListener("click", followHandler);
+            $followBtn.addEventListener("mouseover", btnTextChangeHandler);
+            $followBtn.addEventListener("mouseout", btnTextResetHandler);
         </script>
     </body>
 </html>

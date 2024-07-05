@@ -13,10 +13,14 @@ h2 {
     position: absolute;
     left: 50%;
     top: 50%;
-    width: 35%;
-    height: 40%;
+    width: 600px;
+    min-height: 300px;
     padding: 0;
     transform: translate(-50%, -50%);
+    border-radius: 15px;
+}
+#follow-dialog .user-type {
+    text-align: center;
 }
 i.cancel,
 i.fa-user-times:hover {
@@ -33,6 +37,10 @@ i.done {
     display: flex;
     justify-content: space-between;
     padding-right: 8px;
+    border-bottom: #616161 solid 1px;
+}
+#follow-dialog .users-info .user-list:nth-child(2n - 1) {
+    background-color: #ededed;
 }
 #follow-dialog::backdrop {
     background-color: rgba(0, 0, 0, 0.5);
@@ -205,7 +213,6 @@ i.done {
     padding: 25px 0;
     padding-left: 15px;
     border-radius: 20px;
-    
 }
 .discuss-card:hover {
     box-shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.9);
@@ -237,4 +244,38 @@ i.done {
 }
 .review-card .media-title {
     cursor: pointer;
+}
+
+h2.no-content {
+    text-align: center;
+    font-weight: normal;
+    width: 100%;
+}
+.follow-btn {
+    display: inline-block;
+    margin-left: 15px;
+    border-radius: 5px;
+    font-size: 16px;
+    padding: 4px;
+    width: 56.5px;
+    text-align: center;
+}
+
+.follow-btn.green {
+    background-color: #00ee00;
+    border: 1px solid #00ff00;
+    transition: 400ms;
+}
+.follow-btn.green:hover {
+    background-color: #ee0000;
+    transition: 400ms;
+}
+.follow-btn.gray {
+    background-color: #aaa;
+    border: 1px solid #444;
+    transition: 400ms;
+}
+.follow-btn.gray:hover {
+    background-color: #00ee00;
+    transition: 400ms;
 }

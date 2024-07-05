@@ -9,14 +9,18 @@
     <select id="getList" resultType="com.project.mvc.dto.seongjin.FollowExistsDto">
         SELECT
         <if test="type">
-            target_email AS email,
+            FL.target_email AS email,
+            U.nickname,
             (1=1) AS "exist"
-            FROM follow_log
+            FROM follow_log FL
+            INNER JOIN user U
+            ON (FL.target_email = U.email)
             WHERE user_email = #{userEmail}
             ORDER BY follow_no
         </if>
         <if test="!type">
             f1.user_email AS email,
+            U.nickname,
             CASE
             WHEN f2.user_email IS NOT NULL THEN true
             ELSE false
@@ -27,6 +31,8 @@
             follow_log f2
             ON
             f1.target_email = f2.user_email AND f1.user_email = f2.target_email
+            INNER JOIN user U
+            ON (f1.user_email = U.email)
             WHERE
             f1.target_email = #{userEmail}
             ORDER BY f1.follow_no

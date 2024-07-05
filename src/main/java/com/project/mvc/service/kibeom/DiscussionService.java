@@ -106,9 +106,9 @@ public class DiscussionService {
         return list;
     }
 
-    public List<DiscussMyPageDto> findMyDiscuss(HttpServletRequest request) {
-        LoginUserInfoDto login = (LoginUserInfoDto) request.getSession().getAttribute("login");
-        return discussionMapper.findByEmail(login.getEmail()).stream().map(dto -> {
+    public List<DiscussMyPageDto> findMyDiscuss(String email) {
+
+        return discussionMapper.findByEmail(email).stream().map(dto -> {
             if (dto.getDiscussionTitle().length() > 9) {
                 dto.setShortTitle(dto.getDiscussionTitle().substring(0, 8) + "...");
             } else {

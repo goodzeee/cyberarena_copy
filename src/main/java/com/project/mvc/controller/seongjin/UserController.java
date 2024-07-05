@@ -103,12 +103,14 @@ public class UserController {
 
     @GetMapping("/mypage")
     public String myPageGet(Model model, HttpServletRequest request) {
-        int followerSize = followLogService.getFollowList(request.getSession(), false).size();
-        int followingSize = followLogService.getFollowList(request.getSession(), true).size();
+        LoginUserInfoDto login = (LoginUserInfoDto) request.getSession().getAttribute("login");
 
-        List<DiscussMyPageDto> discussList = discussionService.findMyDiscuss(request);
+        int followerSize = followLogService.getFollowList(login.getEmail(), false).size();
+        int followingSize = followLogService.getFollowList(login.getEmail(), true).size();
+
+        List<DiscussMyPageDto> discussList = discussionService.findMyDiscuss(login.getEmail());
         model.addAttribute("discussions", discussList);
-        List<ReviewLinkDto> reviewList = userService.getReviewList(request.getSession());
+        List<ReviewLinkDto> reviewList = userService.getReviewList(login.getEmail());
         model.addAttribute("reviews", reviewList);
         model.addAttribute("follower", followerSize);
         model.addAttribute("following", followingSize);
@@ -118,8 +120,8 @@ public class UserController {
     @GetMapping("/mypage/follower")
     @ResponseBody
     public ResponseEntity<?> followerList(HttpServletRequest request) {
-
-        List<FollowExistsDto> followList = followLogService.getFollowList(request.getSession(), false);
+        LoginUserInfoDto login = (LoginUserInfoDto) request.getSession().getAttribute("login");
+        List<FollowExistsDto> followList = followLogService.getFollowList(login.getEmail(), false);
 
         return ResponseEntity
                 .ok()
@@ -129,8 +131,8 @@ public class UserController {
     @GetMapping("/mypage/following")
     @ResponseBody
     public ResponseEntity<?> followingList(HttpServletRequest request) {
-
-        List<FollowExistsDto> followList = followLogService.getFollowList(request.getSession(), true);
+        LoginUserInfoDto login = (LoginUserInfoDto) request.getSession().getAttribute("login");
+        List<FollowExistsDto> followList = followLogService.getFollowList(login.getEmail(), true);
 
         return ResponseEntity
                 .ok()
@@ -227,5 +229,47 @@ public class UserController {
         return ResponseEntity
                 .status(403)
                 .body(flag);
+    }
+    @GetMapping("/user-info/{targetEmail}")
+    public String userInfoGet(@PathVariable String targetEmail ,Model model, HttpServletRequest request) {
+        LoginUserInfoDto login = (LoginUserInfoDto) request.getSession().getAttribute("login");
+        if(login != null) {
+            if(login.getEmail().equals(targetEmail)) {
+                return "redirect:/user/mypage";
+            }
+        }
+        boolean wasFollow = followLogService.wasFollow(login.getEmail(), targetEmail);
+        int followerSize = followLogService.getFollowList(targetEmail, false).size();
+        int followingSize = followLogService.getFollowList(targetEmail, true).size();
+        LoginUserInfoDto userInfo = userService.findUserInfo(targetEmail);
+        List<DiscussMyPageDto> discussList = discussionService.findMyDiscuss(targetEmail);
+        List<ReviewLinkDto> reviewList = userService.getReviewList(targetEmail);
+        model.addAttribute("wasFollow", wasFollow);
+        model.addAttribute("follower", followerSize);
+        model.addAttribute("following", followingSize);
+        model.addAttribute("userInfo", userInfo);
+        model.addAttribute("discussions", discussList);
+        model.addAttribute("reviews", reviewList);
+        return "user/user-info";
+    }
+    @GetMapping("/user-info/follower/{targetEmail}")
+    @ResponseBody
+    public ResponseEntity<?> userInfoFollowerListGet(@PathVariable String targetEmail , HttpServletRequest request) {
+
+        List<FollowExistsDto> followList = followLogService.getFollowList(targetEmail, false);
+
+        return ResponseEntity
+                .ok()
+                .body(followList);
+    }
+    @GetMapping("/user-info/following/{targetEmail}")
+    @ResponseBody
+    public ResponseEntity<?> userInfoFollowingListGet(@PathVariable String targetEmail , HttpServletRequest request) {
+
+        List<FollowExistsDto> followList = followLogService.getFollowList(targetEmail, true);
+
+        return ResponseEntity
+                .ok()
+                .body(followList);
     }
 }

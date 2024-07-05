@@ -1,6 +1,7 @@
 package com.project.mvc.mapper.seongjin;
 
 import com.project.mvc.dto.seongjin.AutoLoginDto;
+import com.project.mvc.dto.seongjin.ChangePasswordDto;
 import com.project.mvc.entity.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -23,4 +24,9 @@ public interface UserMapper {
     // 세션 아이디를 통해 유저 조회
     User findBySessionId(String sessionId);
 
+    boolean saveVerifyCode(@Param("email")String email,@Param("code") String verifyCode);
+
+    String findEmail(String code);
+
+    boolean changePassword(ChangePasswordDto dto);
 }

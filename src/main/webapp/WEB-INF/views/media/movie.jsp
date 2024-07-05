@@ -34,7 +34,7 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
       <div class="banner">
         <!-- 큰 이미지 추천 -->
         <div class="row">
-          <div class="row_title">화제의 토론(조회수, 댓글수)</div>
+          <div class="row_title">화제의 토론</div>
           <div class="row_posters">
             <div class="rank">
 
@@ -80,14 +80,14 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
             </div>
             <c:forEach var="discussions" items="${discussions}">
             <div class="poster_wrap">
-              <section data-view-count="${discussions.viewCount}">
+              <section class="link" data-reply-count="${discussions.replyCount}" onclick="location.href='/discussion/detail?dno=${discussions.discussionNo}'">
                 <h2>${discussions.discussionTitle}</h2>
                 <div class="poster_info">
                   <span>${discussions.mediaTitle}</span>
                   <p>${discussions.format}</p>
                 </div>
                 <div class="poster_count">
-                  <span><i class="fa-solid fa-user"></i>${discussions.replyCount}명 참여</span>
+                  <span class="count01"><i class="fa-solid fa-user"></i>${discussions.replyCount}명 참여</span>
                   <span>조회수:${discussions.viewCount}</span>
                 </div>
               </section>
@@ -101,7 +101,7 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
       <!-- 작은이미지 추천 -->
       <div class="row">
-        <div class="row_title">지금 뜨는 리뷰 (실시간 리뷰)</div>
+        <div class="row_title">지금 뜨는 리뷰</div>
         <div class="prev">
             <i class="fa-solid fa-angle-right prev-arrow"></i>
           </div>
@@ -119,7 +119,7 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
                       ></div>
                     </div>
                     <div class="card-content"><img src="${review.imageUrl}" alt="Media Image">  
-                      ${review.reviewText}
+                      <span>${review.reviewText}</span>
                   </div>
                 </section>
               </div>
@@ -139,13 +139,16 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
           <i class="fa-solid fa-angle-right prev-arrow"></i>
         </div>
         <div class="row_posters slider">
-          <c:forEach items="${imageUrls}" var="imageUrl">
-            <img
+          <c:forEach items="${media}" var="media">
+            <div class="media_list" data-media-no="${media.mediaNo}">
+              <img
               class="img_list"
-              src="${pageContext.request.contextPath}${imageUrl}"
-              alt="Media Image"
-            />
+              src="${media.imageUrl}"
+              alt="Media Image">
+              ${media.mediaTitle}
+            </div>
           </c:forEach>
+          
         </div>
         <div class="next"><i class="fa-solid fa-angle-right"></i></div>
       </div>
@@ -154,27 +157,27 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
     <!--모달 -->
     <div class="modal-wrap none">
       <div class="img-wrap">
-        <img
-          src="data:image/jpeg;base64,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"
-          alt="미디어 이미지"
-        />
+       <img src="" alt="">
       </div>
       <div class="media-info">
-        <h2>더 글로리</h2>
+        <h2></h2>
         <div class="detail-info">
-          <span class="rating">평점: 3.3</span>
-          <span>2023</span>
-          <span>장르 : 스릴러</span>
+          <span class="rating"></span>
+          <span class="creator"></span>
+          <span class="created-at"></span>
         </div>
-        <div class="description">
-          더 글로리 - 위키백과, 우리 모두의 백과사전 《더 글로리》 (영어: The
-          Glory)는 넷플릭스에서 2022년 12월 30일부터 방영된 대한민국의 드라마로
-          학교폭력에 대한 복수를 다룬 복수극, 범죄극, 스릴러물이다. 송혜교,
-          이도현, 임지연, 염혜란, 박성훈, 정성일이 앙상블 캐스팅을 마무리한다.
-        </div>
+        <div class="description"></div>
       </div>
       <div class="modal-close">닫기</div>
-      <div class="reviews">리뷰</div>
+      <div class="reviews">
+        <div class="review-title">
+          <h2></h2>
+          <span></span>
+          <div class="review-list">
+            <span class="review-content"></span>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- 모달 끝 -->
@@ -204,10 +207,17 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
     for (let i = 0; i <= 1; i++) {
       next[i].addEventListener("click", (e) => {
-        slider[i].scrollBy(slider[i].offsetWidth, 0);
+        slider[i].scrollTo({
+          left: slider[i].scrollLeft + 1493,
+          behavior: 'smooth'
+        });
       });
+      
       prev[i].addEventListener("click", (e) => {
-        slider[i].scrollBy(-slider[i].offsetWidth, 0);
+        slider[i].scrollTo({
+          left: slider[i].scrollLeft - 1493,
+          behavior: 'smooth'
+        });
       });
     }
 
@@ -227,17 +237,45 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
     }
 
     // 모달 띄우기
-    const [...$media] = document.querySelectorAll(".img_list");
-    console.log($media);
+    const [...$media] = document.querySelectorAll(".media_list");
     const $modal = document.querySelector(".modal-wrap");
     const $closeBtn = document.querySelector(".modal-close");
     const $backdrop = document.getElementById("backdrop");
-    console.log($closeBtn);
 
     $media.forEach(($card) => {
-      $card.addEventListener("click", (e) => {
+      $card.addEventListener("click", async (e) => {
         $modal.classList.remove("none");
         $backdrop.classList.remove("none");
+        const mediaNo = $card.dataset.mediaNo;
+        const res = await fetch(`/media/info?mediaNo=\${mediaNo}`);
+        const json = await res.json();
+        $modal.querySelector(".img-wrap img").setAttribute("src", json.imageUrl);
+        $modal.querySelector(".media-info h2").textContent = json.mediaTitle;
+        $modal.querySelector(".rating").textContent = "평균 별점: " +json.rating;
+        $modal.querySelector(".creator").textContent = "제작진: " +json.creator;
+        $modal.querySelector(".created-at").textContent = json.createdAt;
+        $modal.querySelector(".description").textContent = json.mediaDesc;
+        const res2 = await fetch(`/media/review-info?mediaNo=\${mediaNo}`);
+        const json2 = await res2.json();
+        const reviewList = json2.reviews;
+        const $reviews = $modal.querySelector('.reviews');
+        $reviews.innerHTML = `<h2>리뷰</h2>
+                               <a href="/review/list/\${mediaNo}">더보기<i class="fa-solid fa-angle-right"></i></a>`;
+        const latestReviews = reviewList.slice(0, 8);
+        latestReviews.forEach(({ nickname, text, userRating }) => {
+
+          $reviews.innerHTML += `
+          <div class="review-title">
+            <h2>\${nickname}</h2>
+            <span><i class="fa-solid fa-star filled"></i>\${userRating}</span>
+            <div class="review-list">
+              <span class="review-content">\${text}</span>
+            </div>
+          </div>
+          `;
+        });
+        
+      
       });
     });
 
@@ -256,6 +294,7 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
       }
     });
 
+    // 별점 효과
     document.addEventListener("DOMContentLoaded", function () {
       var ratings = document.querySelectorAll(".rating");
 
@@ -286,5 +325,6 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
         ratingContainer.innerHTML = starsHtml;
       });
     });
+
   </script>
 </html>

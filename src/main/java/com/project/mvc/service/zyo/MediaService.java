@@ -78,6 +78,7 @@ public class MediaService {
         List<ReviewRenderingDto> reviewRenderList = mediaMapper.findReviewRenderInfo(categoryNo)
                 .stream()
                 .sorted(Comparator.comparing(ReviewRenderingDto::getReviewCreatedAt).reversed())
+                .limit(12)
                 .collect(Collectors.toList());
         return reviewRenderList;
 
@@ -98,8 +99,14 @@ public class MediaService {
     }
 
     // 이미지 URL 조회
-    public List<String> findImageUrlByCategory(int categoryNo) {
+    public List<Media> findImageUrlByCategory(int categoryNo) {
         return mediaMapper.findImageUrlByCategory(categoryNo);
     }
+
+
+    public Media findMedia(long mediaNo) {
+        return mediaMapper.findByMediaNo(mediaNo);
+    }
+
 
 }

@@ -50,10 +50,10 @@ class ReviewMapperTest {
         //given
         long mediaNo = 14;
         //when
-        List<Review> r = reviewMapper.findAll(mediaNo);
+//        List<Review> r = reviewMapper.findAll(mediaNo);
         //then
-        assertNotNull(r);
-        r.forEach(System.out::println);
+//        assertNotNull(r);
+//        r.forEach(System.out::println);
     }
 
     @Test

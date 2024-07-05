@@ -53,8 +53,8 @@
         WHERE media_no = #{mediaNo}
     </select>
   
-    <select id="findImageUrlByCategory" parameterType="int" resultType="string">
-        SELECT image_url
+    <select id="findImageUrlByCategory" parameterType="int" resultType="media">
+        SELECT *
         FROM media
         WHERE 1=1
         <include refid="category" />
@@ -119,6 +119,12 @@
         M.media_title,
         M.image_url
     </select>
+
+    <select id="findByMediaNo" resultType="media">
+        SELECT * FROM MEDIA
+        WHERE media_no = #{mediaNo}
+    </select>
+
 
 
 </mapper>

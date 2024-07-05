@@ -20,20 +20,20 @@
 
 <div class="list-wrap">
     <h1>토론 리스트</h1>
+    <hr>
 
     <div id="top-parents">
-        <button class="make-discussion">토론 생성하기</button>
         <div>
             <form action="/discussion/list" method="get">
 
-                <select class="form-select" name="type">
-                    <option value="title" selected>제목</option>
+                <select class="form-select" name="type" id="search-type">
+                    <option value="title">제목</option>
                     <option value="content">내용</option>
                     <option value="writer">작성자</option>
                     <option value="tc">제목+내용</option>
                 </select>
 
-                <input type="text" name="keyword" value="${s.keyword}">
+                <input type="text" name="keyword" value="${s.keyword}" placeholder="검색...">
 
                 <button class="btn btn-primary" type="submit">
                     <i class="fas fa-search"></i>
@@ -41,23 +41,50 @@
 
             </form>
         </div>
+        <div class="button-wrap">
+            <button class="make-discussion" id="makeDiscussion">토론 생성하기</button>
+            <div id="sortDropdown" class="sort-dropdown">
+                <form id="sortForm">
+                    <select id="sortSelect" name="sort">
+                        <option value="new">최신순</option>
+                        <option value="view">조회순</option>
+                        <option value="hit">참여자순</option>
+                    </select>
+                </form>
+            </div>
+        </div>
+
     </div>
 
-    <c:forEach var="d" items="${dList}">
-        <div class="card" data-dno="${d.discussionNo}">
-            <p class="media-title">미디어: ${d.mediaTitle}</p>
-            <p class="discussion-title">토론 주제: ${d.discussionTitle}</p>
-            <p class="nickname">글쓴이: ${d.nickname}</p>
-            <p class="discussion-offer">세부내용: ${d.discussionOffer}</p>
-            <p class="discuss-view-count">조회수: ${d.viewCount}</p>
-            <p class="reply-count">댓글[${d.replyCount}]</p>
-            <p class="discussion-created-at">${d.formattedDiscussionCreatedAt}</p>
-<%--            <c:if test="${login.nickname == d.nickname}">--%>
-<%--                <a href="/discussion/modify">수정</a>--%>
-<%--                <a href="/discussion/remove">삭제</a>--%>
-<%--            </c:if>--%>
+
+    <div id="whole-wrap">
+        <c:if test="${dList.size() == 0}">
+            <div class="empty">
+                게시물이 존재하지 않습니다.
+            </div>
+        </c:if>
+
+
+        <div id="discuss-wrap">
+            <c:if test="${dList.size() > 0}">
+            <c:forEach var="d" items="${dList}">
+                <div class="card" data-dno="${d.discussionNo}">
+                    <h2 class="discussion-title">${d.discussionTitle}</h2>
+<%--                    <hr>--%>
+                    <div class="main-content">
+                        <span class="media-title"><h3>${d.mediaTitle}</h3></span>
+                        <span class="nickname">작성자: ${d.nickname}</span>
+                    </div>
+<%--                    <p class="discussion-offer">세부내용: ${d.discussionOffer}</p>--%>
+                    <p class="discuss-view-count"><i class="fas fa-eye"></i> ${d.viewCount}</p>
+                    <p class="reply-count">참여 [${d.replyCount}]</p>
+                    <p class="discussion-created-at">${d.formattedDiscussionCreatedAt}</p>
+                </div>
+            </c:forEach>
+            </c:if>
         </div>
-    </c:forEach>
+
+    </div>
 
 </div>
 
@@ -74,8 +101,8 @@
                 </li>
             </c:if>
             <c:forEach var="i" begin="${maker.begin}" end="${maker.end}">
-                <li class="page-item" data-page-num="${i}">
-                    <a class="page-link" href="/discussion/list?pageNo=${i}">${i}</a>
+                <li class="page-item items" data-page-num="${i}">
+                    <a class="page-link" href="/discussion/list?pageNo=${i}&type=${s.type}&keyword=${s.keyword}">${i}</a>
                 </li>
             </c:forEach>
             <c:if test="${maker.pageInfo.pageNo != maker.finalPage}">
@@ -94,51 +121,49 @@
 
 <%@ include file="../include/footer.jsp" %>
 
-<%-- Modal --%>
-<div class="modal-wrap none" id="modal">
-    <div class="modal-content">
-        <div class="modal-left">
-            <h1>토론 등록</h1>
-            <form action="/discussion/register" method="POST">
-                <input type="hidden" name="email" value="${login.email}">
-                <label>
-                    # 닉네임 : <input type="text" id="nickname" value="${login.nickname}" readonly>
-                </label>
-                <label>
-                    # 미디어 : <input type="text" id="media" name="mediaName" readonly placeholder="하단의 검색창을 이용해주세요.">
-                </label>
-                <label>
-                    # 주제 : <input type="text" id="title" name="discussionTitle">
-                </label>
-                <label>
-                    # 세부 내용 : <input type="text" id="detail" name="discussionOffer">
-                </label>
-                <label>
-                    <input type="button" id="finish" value="작성 완료">
-                    <button type="button" id="cancelButton">작성 취소</button>
-                </label>
-            </form>
-        </div>
-        <div class="modal-right">
-            <form class="modal-search">
+<%--<script type="module" src="/assets/js/kibeom/getMedia.js"></script>--%>
+<script type="module" src="/assets/js/kibeom/list.js"></script>
+<script type="module" src="/assets/js/kibeom/listSort.js"></script>
+<script>
 
-                <label>
-                    <p>미디어 검색</p>
-                    <input class="modal-input" type="text" name="searchMedia" id="searchMediaInput"
-                           placeholder="검색어를 입력해주세요.">
-                </label>
-            </form>
-            <div class="fetch-wrap">
+    function appendActivePage() {
+        const currentPage = `${maker.pageInfo.pageNo}`; // 템플릿 리터럴 올바르게 사용
 
-            </div>
-        </div>
-    </div>
-    <div class="modal-close" id="closeModalButton">닫기</div>
-</div>
+        const $li = document.querySelector(`.page-item[data-page-num="\${currentPage}"]`);
+
+        if ($li) {
+            $li.classList.add('active');
+        }
+    }
+
+    function fixSearchOption () {
+        const type =`${s.type}`
+        const $option = document.querySelector(`#search-type option[value='\${type}']`);
+        $option?.setAttribute('selected', 'selected');
+
+    }
 
 
-<script type="module" src="/assets/js/kibeom/getMedia.js"></script>
-<script type="text/javascript" src="/assets/js/kibeom/list.js"></script>
+    appendActivePage();
+    fixSearchOption();
+
+    const makeDiscussionButton = document.getElementById('makeDiscussion');
+
+    makeDiscussionButton.addEventListener('click', e =>  {
+
+        if (!isLoggedIn) {
+            e.preventDefault();
+            const flag = confirm('\n로그인이 필요한 서비스입니다.\n로그인을 하시겠습니까?');
+
+            if (flag) {
+                window.location.href= "/user/sign-in";
+            }
+
+        } else {
+            window.location.href = '/discussion/register'
+        }
+    });
+</script>
 
 </body>
 </html>

@@ -1,10 +1,12 @@
 package com.project.mvc.service.seongjin;
 
-import com.project.mvc.dto.seongjin.AutoLoginDto;
-import com.project.mvc.dto.seongjin.LoginDto;
-import com.project.mvc.dto.seongjin.LoginUserInfoDto;
-import com.project.mvc.dto.seongjin.SignUpDto;
+import com.project.mvc.dto.seongjin.*;
+import com.project.mvc.dto.zyo.ReviewRenderingDto;
+import com.project.mvc.entity.Discussion;
+import com.project.mvc.entity.Review;
 import com.project.mvc.entity.User;
+import com.project.mvc.mapper.jihye.ReviewMapper;
+import com.project.mvc.mapper.kibeom.DiscussionMapper;
 import com.project.mvc.mapper.seongjin.UserMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,6 +21,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.UUID;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -28,6 +33,8 @@ public class UserService {
     private static final Logger log = LoggerFactory.getLogger(UserService.class);
     private final UserMapper userMapper;
     private final PasswordEncoder passwordEncoder;
+    private final DiscussionMapper discussionMapper;
+    private final ReviewMapper reviewMapper;
 
 
     // 회원가입 및 비밀번호 인코딩
@@ -102,4 +109,46 @@ public class UserService {
         );
     }
 
+    public List<ReviewLinkDto> getReviewList(String email) {
+
+        List<ReviewLinkDto> reviews = reviewMapper.findAllByEmail(email);
+        reviews.forEach(dto -> {
+            if (dto.getCategoryNo() == 1) {
+                dto.setCategory("movie");
+            } else if (dto.getCategoryNo() == 2) {
+                dto.setCategory("series");
+            } else if (dto.getCategoryNo() == 3) {
+                dto.setCategory("book");
+            }
+        });
+        return reviews;
+    }
+
+    public String makeAndSaveCode(LoginUserInfoDto dto, HttpSession session) {
+
+        String verifyCode = UUID.randomUUID().toString();
+        boolean flag = userMapper.saveVerifyCode(dto.getEmail(), verifyCode);
+        if (flag) {
+            dto.setVerified(flag);
+            dto.setVerify_code(verifyCode);
+            session.removeAttribute("login");
+            session.setAttribute("login", dto);
+        }
+        return verifyCode;
+    }
+
+    public String findEmail(String code) {
+        return userMapper.findEmail(code);
+
+    }
+
+    public boolean changePassword(ChangePasswordDto dto) {
+        dto.setPassword(passwordEncoder.encode(dto.getPassword()));
+        return userMapper.changePassword(dto);
+    }
+
+    public LoginUserInfoDto findUserInfo(String targetEmail) {
+        User user = userMapper.findOne(targetEmail);
+        return new LoginUserInfoDto(user);
+    }
 }

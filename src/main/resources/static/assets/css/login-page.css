@@ -1,7 +1,7 @@
 body {
     margin: 0;
-    color: #6a6f8c;
-    background: rgba(40,57,101,.9);
+    color: #999;
+    background: rgba(45,45,45,.9);
     font: 600 16px/18px 'Open Sans', sans-serif;
     display: flex;
     justify-content: center;
@@ -15,7 +15,7 @@ a { color: inherit; text-decoration: none; }
 
 .login-wrap {
     width: 100%;
-    max-width: 525px;
+    max-width: 800px;
     height: 100vh;
     position: relative;
     background: url(https://raw.githubusercontent.com/khadkamhn/day-01-login-form/master/img/bg.jpg) no-repeat center;
@@ -61,7 +61,7 @@ a { color: inherit; text-decoration: none; }
 .login-html .sign-in:checked + .tab,
 .login-html .sign-up:checked + .tab {
     color: #fff;
-    border-color: #1161ee;
+    border-color: #999;
 }
 .login-form {
     min-height: 345px;
@@ -87,7 +87,6 @@ a { color: inherit; text-decoration: none; }
     background: rgba(255,255,255,.1);
 }
 .login-form .group input[data-type="password"] {
-    text-security: circle;
     -webkit-text-security: circle;
 }
 .login-form .group .label {
@@ -95,7 +94,7 @@ a { color: inherit; text-decoration: none; }
     font-size: 12px;
 }
 .login-form .group .button {
-    background: #1161ee;
+    background: #999;
 }
 .login-form .group label .icon {
     width: 15px;
@@ -129,7 +128,7 @@ a { color: inherit; text-decoration: none; }
     color: #fff;
 }
 .login-form .group .check:checked + label .icon {
-    background: #1161ee;
+    background: #999;
 }
 .login-form .group .check:checked + label .icon:before {
     transform: scale(1) rotate(45deg);
@@ -143,6 +142,13 @@ a { color: inherit; text-decoration: none; }
 .login-html .sign-up:checked + .tab + .login-form .sign-up-htm {
     transform: rotate(0);
 }
+.sign-in-htm button {
+    color: #fff;
+    background: #999;
+    padding: 15px 79px;
+    border-radius: 25px;
+}
+
 
 .hr {
     height: 2px;
@@ -166,4 +172,49 @@ a { color: inherit; text-decoration: none; }
     font-size: 25px;
     color: #fff;
     z-index: 33;
+}
+#find-dialog {
+    border-radius: 20px;
+    position: absolute;
+    left: 15%;
+    width: 300px;
+    height: 215px;
+    padding: 0;
+    transform: translate(-50%, -50%);
+}
+#find-dialog::backdrop {
+    background-color: rgba(0,0,0,0.5);
+}
+.dialog-wrap {
+    line-height: 20px;
+    position: relative;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+.dialog-wrap input {
+    height: 25px;
+    border: 1px solid #999;
+}
+.dialog-wrap button{
+    position: absolute;
+    border: 1px solid #999;
+    height: 30px;
+}
+.find-submit {
+    top: 185%;
+    left: 35%;
+}
+.change-submit {
+    top: 140%;
+    left: 33%;
+}
+.find-pw-submit {
+    top: 111%;
+    left: 30%;
+}
+.after-email {
+    top: 185%;
+    left: 35%;
 }

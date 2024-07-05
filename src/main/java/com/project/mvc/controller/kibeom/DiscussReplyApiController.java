@@ -10,6 +10,7 @@ import com.project.mvc.service.kibeom.DiscussionReplyService;
 import com.project.mvc.service.kibeom.DiscussionService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -28,6 +29,7 @@ public class DiscussReplyApiController {
     private final DiscussReplyMapper discussReplyMapper;
     private final DiscussionReplyService discussionReplyService;
     private final DiscussionService discussionService;
+
 
     @GetMapping("/{dno}")
     public ResponseEntity<?> getReplies(@PathVariable("dno") long dno, HttpSession session) {
@@ -60,5 +62,41 @@ public class DiscussReplyApiController {
         return ResponseEntity.ok().body(dto);
     }
 
+    @DeleteMapping("/{rno}")
+    public ResponseEntity<?> deleteReply(@PathVariable("rno") long rno, HttpSession session) {
+        log.info("/api/v1/discuss/reply : DELETE");
+        log.debug("delete parameter: {}", rno);
+        long dno = discussionReplyService.findDiscussByRno(rno);
+        discussionReplyService.remove(rno);
+
+        // 삭제 후 재 렌더링
+        List<DiscussReply> all = discussReplyMapper.findAll(dno);
+        List<DiscussReplyResponseDto> list = discussionService.convertToDto(all);
+        LoginUserInfoDto login = (LoginUserInfoDto)session.getAttribute("login");
+
+        ReplyFinalDto dto = ReplyFinalDto.builder()
+                .dtoList(list)
+                .loginUserDto(login)
+                .build();
+
+        if (list == null) {
+            String message = "댓글 없다.";
+            log.warn(message);
+            return ResponseEntity.badRequest().body(message);
+        }
+        return ResponseEntity.ok().body(dto);
+
+    }
+
+
+    @PutMapping
+    public ResponseEntity<?> modifyReply(@RequestBody DiscussionCommentRequestDto dto) {
+        log.info("/api/v1/discuss/reply : PUT");
+        log.debug("update parameter: {}", dto);
+        discussionReplyService.update(dto);
+
+        return ResponseEntity.ok().body(".");
+    }
 
 }
+

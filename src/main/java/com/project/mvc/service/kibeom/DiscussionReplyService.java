@@ -51,4 +51,10 @@ public class DiscussionReplyService {
     public void update(DiscussionCommentRequestDto dto) {
         discussReplyMapper.update(dto);
     }
+
+    public long findDiscussByRno(long rno) {
+        return discussReplyMapper.getDiscussNoByRno(rno);
+    }
+
+
 }

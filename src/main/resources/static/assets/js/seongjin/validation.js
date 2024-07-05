@@ -51,7 +51,6 @@ async function fetchDuplicateCheck(nicknameValue) {
 $nicknameInput.addEventListener(
     "keyup",
     debounce(async (e) => {
-        // 아이디 검사 정규표현식
         
 
         // 입력값 읽어오기

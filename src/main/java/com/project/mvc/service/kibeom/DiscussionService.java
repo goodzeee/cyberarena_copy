@@ -1,13 +1,11 @@
 package com.project.mvc.service.kibeom;
 
-import com.project.mvc.common.jihye.Page;
 import com.project.mvc.common.zyo.Search;
 import com.project.mvc.dto.request.kibeom.DiscussionModifyDto;
 import com.project.mvc.dto.request.kibeom.MakeDiscussionDto;
-import com.project.mvc.dto.response.kibeom.DiscussFindAllDto;
-import com.project.mvc.dto.response.kibeom.DiscussReplyResponseDto;
-import com.project.mvc.dto.response.kibeom.DiscussResponseDto;
-import com.project.mvc.dto.response.kibeom.DiscussionDetailResponseDto;
+import com.project.mvc.dto.response.kibeom.*;
+import com.project.mvc.dto.seongjin.DiscussMyPageDto;
+import com.project.mvc.dto.seongjin.LoginUserInfoDto;
 import com.project.mvc.entity.DiscussReply;
 import com.project.mvc.entity.Discussion;
 import com.project.mvc.entity.Media;
@@ -19,8 +17,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
+import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -107,5 +104,30 @@ public class DiscussionService {
                 .collect(Collectors.toList());
 
         return list;
+    }
+
+    public List<DiscussMyPageDto> findMyDiscuss(String email) {
+
+        return discussionMapper.findByEmail(email).stream().map(dto -> {
+            if (dto.getDiscussionTitle().length() > 9) {
+                dto.setShortTitle(dto.getDiscussionTitle().substring(0, 8) + "...");
+            } else {
+                dto.setShortTitle(dto.getDiscussionTitle());
+            }
+            return dto;
+        }).collect(Collectors.toList());
+    }
+
+
+    public List<DiscussAsideListDto> findAsideList() {
+        return discussionMapper.findAsideList();
+    }
+
+    public List<DiscussResponseDto> getSortedDiscussions(String sort) {
+        List<DiscussFindAllDto> list = discussionMapper.getSortedDiscussion(sort);
+        List<DiscussResponseDto> dtoList = list.stream()
+                .map(d -> new DiscussResponseDto(d))
+                .collect(Collectors.toList());
+        return dtoList;
     }
 }

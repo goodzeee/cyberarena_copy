@@ -1,13 +1,15 @@
+@import url('https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css');
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Arial", sans-serif;
 }
 
 body {
     color: #333;
-    background-color: #e0e0e0;
+    /*background-color: #e0e0e0;*/
+    background-color: #F2F2F2 !important;
 }
 
 header {
@@ -73,7 +75,6 @@ header i {
 
 main {
     padding: 20px;
-
     width: 80%;
     margin: 0 auto;
 }
@@ -276,28 +277,28 @@ header .menu-open .lnr-menu {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 60%;
+    width: 950px;
+    height: 99%;
     flex-wrap: wrap;
     position: fixed;
     z-index: 9999;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    /* cursor: pointer; */
     background: lightgray;
-    /* border: 1px solid #000; */
-
+    border-radius: 15px;
 }
 
 .modal-wrap .img-wrap {
     width: 47%;
 }
 .modal-wrap .img-wrap img {
-    width: 80%;
-    height: 80%;
+    margin: 20px 0px 0px 20px;
+    width: 70%;
+    height: 70%;
     background: center/cover no-repeat fixed;
     overflow: hidden;
-
+    object-fit: cover;
 }
 
 .modal-wrap .media-info {
@@ -307,18 +308,17 @@ header .menu-open .lnr-menu {
 .modal-wrap .modal-close {
     width: 6%;
     position: relative;
-    bottom: 170px;
+    bottom: 230px;
     right: 20px;
-    border: 1px solid #000;
     justify-content: center;
     align-items: center;
     display: flex;
-    background: gray;
+    background: #212529;
     color: white;
     border-radius: 20px;
     font-size: 12px;
+    border-radius: 15px;
     cursor: pointer;
-
 }
 
 .media-info h2 {
@@ -340,10 +340,78 @@ header .menu-open .lnr-menu {
 }
 
 .modal-wrap .reviews {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
     width: 100%;
-    border-top: 1px solid #000;
     margin-top: 30px;
 }
+.reviews>h2 {
+    position: absolute;
+    font-size: 20px;
+    font-weight: 600;
+    margin: -15px 865px 0 0;
+}
+.reviews>a {
+    position: absolute;
+    font-size: 15px;
+    font-weight: 600;
+    margin: -10px 0 0 860px;
+    text-decoration-line: none;
+    color: #212529;
+}
+.reviews>a:hover {
+    color: #000;
+}
+.reviews>a>i {
+    margin-left: 3px;
+    color: #212529;
+}
+
+.review-title {
+    background-color: #fff;
+    border-radius: 6px;
+    padding: 10px 10px;
+    margin: 15px auto;
+    width: 200px;
+    height: 150px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.review-title h2 {
+    position: absolute;
+    font-size: large;
+    font-weight: 500;
+}
+
+.review-title>span {
+    height: 20px;
+    display: flex;
+    align-items: center;
+    margin-left: 135px;
+    padding: 0px 5px;
+    border: 1px solid;
+    border-radius: 20px;
+}
+.review-title>span>i {
+    font-size: 12px;
+    margin-right: 5px;
+}
+.review-list {
+    border-top: 1px solid;
+    margin-top: 10px;
+}
+
+.review-content {
+    margin-top: 10px;
+    font-size: 15px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+}
+
 
 .none {
     display: none;

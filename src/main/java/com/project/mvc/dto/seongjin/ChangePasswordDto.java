@@ -1,5 +1,6 @@
 package com.project.mvc.dto.seongjin;
 
+
 import lombok.*;
 
 @Getter
@@ -8,8 +9,8 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class FollowExistsDto {
+public class ChangePasswordDto {
     private String email;
-    private String nickname;
-    private boolean exist;
+    @Setter
+    private String password;
 }

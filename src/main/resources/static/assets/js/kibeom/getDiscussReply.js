@@ -1,4 +1,5 @@
 // callApi 함수 정의
+
 const callApi = async (url, method = 'GET', payload = null) => {
     const requestInfo = {
         method,
@@ -123,12 +124,13 @@ document.addEventListener('DOMContentLoaded', function () {
                     minute: '2-digit'
                 })}</span>
                     </div>
-<div id="modify-delete-btn">
-
+            <div id="modify-delete-btn" class="modifyAndDeleteBtn">
                     <button class="deleteBtn" data-rno="${comment.discussionReplyNo}">삭제</button>
-
                     <button class="modifyBtn" data-rno="${comment.discussionReplyNo}" data-email="${comment.email}">수정</button>
-
+            </div>
+            <div id="cancle-clear-btn" class="cancleAndClearBtn">
+                    <button class="cancleBtn" data-rno="${comment.discussionReplyNo}">취소</button>
+                    <button class="clearBtn" data-rno="${comment.discussionReplyNo}" data-email="${comment.email}">삭제</button>
             </div>`;
             } else { // 내가 쓴 글이 수정되지 않았을 때
                 tag += `
@@ -141,13 +143,15 @@ document.addEventListener('DOMContentLoaded', function () {
                     minute: '2-digit'
                 })}</span>
                     </div>
-<div id="modify-delete-btn">
-
+            <div id="modify-delete-btn" class="modifyAndDeleteBtn">
                     <button class="deleteBtn" data-rno="${comment.discussionReplyNo}">삭제</button>
-
                     <button class="modifyBtn" data-rno="${comment.discussionReplyNo}" data-email="${comment.email}">수정</button>
-
-            </div>`;
+            </div>
+            <div id="cancle-clear-btn" class="cancleAndClearBtn">
+                    <button class="cancleBtn" data-rno="${comment.discussionReplyNo}">취소</button>
+                    <button class="clearBtn" data-rno="${comment.discussionReplyNo}" data-email="${comment.email}">삭제</button>
+            </div>
+`;
             }
 
             tag += `
@@ -191,6 +195,12 @@ document.addEventListener('DOMContentLoaded', function () {
             </div>`;
         }
 
+        // if (isLoggedIn) {
+        //     tag = `<div class="comment-body">
+        //         <p class="reply-comment">${comment.discussionReplyContent}</p>
+        //     </div>`
+        // }
+
         commentElement.innerHTML = tag;
 
         commentsContainer.appendChild(commentElement);
@@ -199,12 +209,12 @@ document.addEventListener('DOMContentLoaded', function () {
     fetchComments();
     submitCommentButton.addEventListener('click', submitComment);
 
-    commentsContainer.addEventListener('click', async (e) => {
-        if (e.target.matches('.deleteBtn')) {
-            const rno = e.target.getAttribute('data-rno');
-            await removeComment(rno);
-        }
-    });
+    // commentsContainer.addEventListener('click', async (e) => {
+    //     if (e.target.matches('.deleteBtn')) {
+    //         const rno = e.target.getAttribute('data-rno');
+    //         await removeComment(rno);
+    //     }
+    // });
 
 
 

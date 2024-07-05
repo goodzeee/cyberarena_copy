@@ -64,7 +64,7 @@
             <c:if test="${login != null}">
                 <div class="comment-form">
                     <form id="commentForm">
-                        <textarea id="reply-textarea" placeholder="댓글을 입력하세요..."
+                        <textarea id="reply-textarea" placeholder="댓글을 입력하세요... &#13;&#10; 타인에 대한 비방, 욕설, 성적인 발언 시 관리자 검토 하에 제한조치가 이뤄질 수 있습니다."
                                   name="discussionReplyContent"></textarea>
                         <input type="hidden" value="${found.discussionNo}" name="discussionNo">
                         <input type="hidden" value="${login.email}" name="email">

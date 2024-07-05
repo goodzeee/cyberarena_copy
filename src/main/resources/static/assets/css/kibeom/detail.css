@@ -5,11 +5,11 @@
     padding: 0;
     box-sizing: border-box;
     font-family: Arial, sans-serif;
+    color: #B6B6B6;
 }
 
 body {
-
-    color: #333;
+    background-color: black !important;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
@@ -58,6 +58,7 @@ aside {
     margin: 0;
     padding: 0 0 60px 0;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    background: #171717;
     /*box-shadow: rgba(100, 100, 111, 0.1) 0px 7px 29px 0px !important;*/
 }
 
@@ -69,7 +70,7 @@ aside {
 }
 .aside-p {
     padding-top: 20px;
-    border-top: 1px solid black;
+    border-top: 1px solid #636363;
     text-align: right;
     color: #636363;
     font-size: 14px;
@@ -107,7 +108,7 @@ aside ul li:hover {
 }
 
 .discussion-card {
-    background-color: #fff;
+    background-color: #222323;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -143,8 +144,8 @@ aside ul li:hover {
 }
 .discussion-body button {
     border: none;
-    background: white;
-    color: #8D8D8D;
+    background: none;
+    color: white;
 }
 
 .discussion-offer {
@@ -154,13 +155,19 @@ aside ul li:hover {
     border: 1px solid #c5c3c3;
     padding: 25px;
     border-radius: 15px;
-    box-shadow: 0 0 1px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 1px rgba(74, 74, 74, 0.2);
+    background: #393838;
 
 }
 
 .discussion-actions {
     display: flex;
     gap: 10px;
+}
+
+#commentForm {
+    width: 90%;
+    margin: 0 auto;
 }
 
 .like-btn, .comment-btn {
@@ -175,18 +182,23 @@ aside ul li:hover {
 .comment-section {
     width: 100%;
     max-width: 800px;
+    /*background: #393838;*/
+    background: #222323;
 }
 
 .comment-section h2 {
     font-size: 20px;
     margin-bottom: 10px;
+    text-indent: 30px;
 }
-
+#comments {
+    background: #222323;
+}
 .comment-card {
-    background-color: #fff;
+    background-color: #222323;
     padding: 15px;
     border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px rgba(80, 79, 79, 0.1);
     margin-bottom: 10px;
 }
 
@@ -204,12 +216,16 @@ aside ul li:hover {
     position: relative;
 }
 
-#modify-delete-btn {
+#modify-delete-btn,
+#cancle-clear-btn {
     text-align: right;
     width: 97.5%;
-
+    background: #222323 !important;
+    color: #ABABAB !important;
 }
-
+.cancleAndClearBtn {
+    display: none;
+}
 
 .reply-comment {
     margin-top: 6px;
@@ -225,17 +241,10 @@ aside ul li:hover {
     border-radius: 5px;
     resize: none;
     margin-bottom: 10px;
+    background: #393838;
 }
 
-.submit-comment {
-    background-color: lightgray;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    align-self: flex-end;
-}
+
 div.modify-and-delete {
     /*left: 82%;*/
     /*position: relative;*/
@@ -329,18 +338,18 @@ div.modify-and-delete {
     /*background-color: #f0f8ff;*/
 }
 
-.modifyBtn {
+.modifyBtn, .clearBtn {
     cursor: pointer;
     margin-left: 5px;
     border: none;
-    background: white;
-    color: #8D8D8D;
+    background: none;
+    color: white;
 }
-.deleteBtn {
+.deleteBtn, .cancleBtn {
     cursor: pointer;
     border: none;
-    background: white;
-    color: #8D8D8D;
+    background: none;
+    color: white;
 
 }
 
@@ -366,9 +375,27 @@ div.comment-header-self {
 .comment-form {
     display: flex;
     flex-direction: column;
-    margin-top: 20px;
+    padding-top: 20px;
     width: 100%;
     position: relative;
+    padding-bottom: 20px;
+    border-radius: 10px;
+}
+.message {
+    text-align: center;
+}
+div.button-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.button-wrap button {
+    text-align: center;
+    background: #393838;
+    padding: 10px 20px;
+    border-radius: 15px;
 }
 
 #reply-textarea {
@@ -384,31 +411,34 @@ div.comment-header-self {
     bottom: 40px;
     border-radius: 15px;
     height: 70px;
+    color: white;
+    background: #acaaaa !important;
+    border: none;
+    padding: 10px 20px;
+    align-self: flex-end;
 }
 
 @keyframes vivid-btn {
     from {
-        background: #D3D3D3;
+        background: #acaaaa;
     }
     to {
-        background: #1d81ed;
+        background: #393838;
     }
 }
 
 
 .list-btn {
-    background-color: #f0f0f0;
+    background-color: #393838;
     border: 0;
-    color: #242424;
+    color: white;
     border-radius: 0.5em;
     font-size: 15px;
     padding: 0.375em 1em;
     font-weight: 600;
-    text-shadow: 0 0.0625em 0 #fff;
-    box-shadow: inset 0 0.0625em 0 0 #f4f4f4, 0 0.0625em 0 0 #efefef, 0 0.125em 0 0 #ececec, 0 0.25em 0 0 #e0e0e0, 0 0.3125em 0 0 #dedede, 0 0.375em 0 0 #dcdcdc, 0 0.425em 0 0 #cacaca, 0 0.425em 0.5em 0 #cecece;
     transition: 0.15s ease;
     cursor: pointer;
-    width: 5%;
+    width: 10%;
     height: 2%;
 }
 
@@ -420,6 +450,7 @@ div.comment-header-self {
 
 .aside-ul .aside-li {
     cursor: pointer;
+    background: #393838;
 }
 
 .aside-title {
@@ -441,4 +472,10 @@ div.comment-header-self {
     border-radius: 5px;
     padding: 5px 10px;
     font-size: 10px;
+}
+
+
+.discussion-media-name:hover, .nickname:hover {
+    font-weight: 700;
+    cursor: pointer;
 }

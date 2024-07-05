@@ -53,7 +53,7 @@ const $modify = document.getElementById('modify');
 const $backdrop = document.getElementById('backdrop')
 
 
-$modify.addEventListener('click', e =>  {
+$modify?.addEventListener('click', e =>  {
 
         console.log("modal ", $modalWrap)
 
@@ -69,7 +69,7 @@ $modify.addEventListener('click', e =>  {
 
 const $modalInput = document.querySelector('.modal-input');
 
-$title.addEventListener('keyup', e => {
+$title?.addEventListener('keyup', e => {
     if ($title.value !== '') {
         $title.style.backgroundColor = "#E7F0FE";
     } else {
@@ -77,7 +77,7 @@ $title.addEventListener('keyup', e => {
     }
 });
 
-$offer.addEventListener('keyup', e => {
+$offer?.addEventListener('keyup', e => {
     if ($offer.value !== '') {
         $offer.style.backgroundColor = "#E7F0FE";
     } else {

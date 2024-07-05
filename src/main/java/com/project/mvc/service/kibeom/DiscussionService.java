@@ -37,7 +37,6 @@ public class DiscussionService {
         List<DiscussResponseDto> dtoList = list.stream()
                 .map(d -> new DiscussResponseDto(d))
                 .collect(Collectors.toList());
-
         return dtoList;
     }
 

@@ -72,8 +72,8 @@
                     <h2 class="discussion-title">${d.discussionTitle}</h2>
 <%--                    <hr>--%>
                     <div class="main-content">
-                        <span class="media-title"><h3>${d.mediaTitle}</h3></span>
-                        <span class="nickname">작성자: ${d.nickname}</span>
+                        <span class="media-title" data-media-no="${d.mediaNo}"><h3>${d.mediaTitle}</h3></span>
+                        <span class="nickname" data-email="${d.email}">작성자: ${d.nickname}</span>
                     </div>
 <%--                    <p class="discussion-offer">세부내용: ${d.discussionOffer}</p>--%>
                     <p class="discuss-view-count"><i class="fas fa-eye"></i> ${d.viewCount}</p>

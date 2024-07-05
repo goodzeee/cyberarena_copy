@@ -37,7 +37,7 @@ public class ReviewPostDto {
         return Review.builder()
 //                .reviewNo(this.reviewNo)
                 .reviewText(this.reviewText)
-                .userRating(this.userRating)
+                .userRating((int) this.userRating)
                 .discussionStatus(this.discussionStatus)
                 .email(this.email)
                 .mediaNo(this.mediaNo)

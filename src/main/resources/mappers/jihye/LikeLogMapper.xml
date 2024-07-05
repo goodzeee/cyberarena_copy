@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.project.mvc.mapper.jihye.LikeLogMapper">
+
+    <insert id="save">
+        INSERT INTO like_log
+             (review_no, email)
+        VALUES
+             (#{reviewNo}, #{email})
+    </insert>
+
+    <delete id="delete">
+        DELETE FROM like_log
+        WHERE review_no = #{reviewNo}
+        AND email = #{email}
+    </delete>
+
+    <select id="findOne" resultType="likelog">
+        SELECT *
+        FROM like_log
+        WHERE review_no = #{reviewNo}
+        AND email = #{email}
+    </select>
+
+    <!--특정 리뷰에 총 좋아요 수 조회 ? 조건절 이렇게만 하면 되나-->
+    <select id="countLikes" resultType="int">
+        SELECT COUNT(*)
+        FROM like_log
+        WHERE review_no = #{reviewNo}
+    </select>
+</mapper>

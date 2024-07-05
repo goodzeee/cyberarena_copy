@@ -3,8 +3,6 @@ package com.project.mvc.dto.response.jihye;
 import com.project.mvc.common.jihye.PageMaker;
 import com.project.mvc.dto.seongjin.LoginUserInfoDto;
 import com.project.mvc.entity.DiscussionStatus;
-import com.project.mvc.entity.Media;
-import com.project.mvc.entity.Review;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -25,7 +23,13 @@ public class ReviewListDto {
     private DiscussionStatus discussionStatus;
     private LocalDateTime reviewCreatedAt;
 
-//    private Media media;
+    // 리뷰 목록 전체 조회에 들어왔을 때 초기 화면에 보여줄
+    @Setter
+    private int likeCount;  // 총 좋아요 수
+    @Setter
+    private String userReaction;   // 현재 리액션 상태
+
+
     private List<ReviewDetailDto> reviews;
 
     private PageMaker pageInfo;
@@ -44,3 +48,4 @@ public class ReviewListDto {
     }
 
 }
+

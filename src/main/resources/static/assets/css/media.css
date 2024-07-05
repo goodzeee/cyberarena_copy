@@ -18,6 +18,7 @@ body {
   background-color: #f8f8f8;
   color: #111;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 40px;
 }
 
 .rank {
@@ -252,16 +253,20 @@ body {
 }
 
 .card-content {
-  padding: 15px;
+  padding: 7px;
   flex-grow: 1;
   font-size: 14px;
   line-height: 1.4;
   background-color: #fff;
 }
+.card-content>img {
+  width: 80px;
+  height: 105px;
+}
 
 .card-content>span{
-    margin: -80px 0 0 70px;
-    width: 235px;
+    margin: -80px 0 0 91px;
+    width: 233px;
     position: absolute;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -270,29 +275,7 @@ body {
     -webkit-box-orient: vertical;
 }
 
-/* 카드 이미지 */
-.card-content img {
-  width: 60px;
-  height: 100px;
-  object-fit: cover;
-  border-bottom: 1px solid #e0e0e0;
-}
-
-/* 카드 하단의 상호작용 요소 */
-.interaction {
-  display: flex;
-  justify-content: space-between;
-  padding: 10px;
-  background-color: #f8f8f8;
-  border-top: 1px solid #e0e0e0;
-}
-
-.interaction div {
-  display: flex;
-  align-items: center;
-}
-
-.interaction .fa-thumbs-up,
-.interaction .fa-comment {
-  margin-right: 5px;
+.nickname:hover, .media-title h3:hover{
+  font-weight: 700;
+  cursor: pointer;
 }

@@ -1,9 +1,9 @@
 package com.project.mvc.mapper.kibeom;
 
-import com.project.mvc.common.jihye.Page;
 import com.project.mvc.common.zyo.Search;
 import com.project.mvc.dto.request.kibeom.DiscussionModifyDto;
 import com.project.mvc.dto.request.kibeom.MakeDiscussionDto;
+import com.project.mvc.dto.response.kibeom.DiscussAsideListDto;
 import com.project.mvc.dto.response.kibeom.DiscussFindAllDto;
 import com.project.mvc.dto.response.kibeom.DiscussResponseDto;
 import com.project.mvc.dto.seongjin.DiscussMyPageDto;
@@ -43,5 +43,7 @@ public interface DiscussionMapper {
     List<DiscussMyPageDto> findByEmail(String email);
 
 
+    List<DiscussAsideListDto> findAsideList();
 
+    List<DiscussFindAllDto> getSortedDiscussion(String sort);
 }

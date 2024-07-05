@@ -41,7 +41,19 @@
 
             </form>
         </div>
-        <button class="make-discussion" id="makeDiscussion">토론 생성하기</button>
+        <div class="button-wrap">
+            <button class="make-discussion" id="makeDiscussion">토론 생성하기</button>
+            <div id="sortDropdown" class="sort-dropdown">
+                <form id="sortForm">
+                    <select id="sortSelect" name="sort">
+                        <option value="new">최신순</option>
+                        <option value="view">조회순</option>
+                        <option value="hit">참여자순</option>
+                    </select>
+                </form>
+            </div>
+        </div>
+
     </div>
 
 
@@ -111,6 +123,7 @@
 
 <%--<script type="module" src="/assets/js/kibeom/getMedia.js"></script>--%>
 <script type="module" src="/assets/js/kibeom/list.js"></script>
+<script type="module" src="/assets/js/kibeom/listSort.js"></script>
 <script>
 
     function appendActivePage() {

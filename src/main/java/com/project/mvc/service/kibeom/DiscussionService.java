@@ -1,13 +1,9 @@
 package com.project.mvc.service.kibeom;
 
-import com.project.mvc.common.jihye.Page;
 import com.project.mvc.common.zyo.Search;
 import com.project.mvc.dto.request.kibeom.DiscussionModifyDto;
 import com.project.mvc.dto.request.kibeom.MakeDiscussionDto;
-import com.project.mvc.dto.response.kibeom.DiscussFindAllDto;
-import com.project.mvc.dto.response.kibeom.DiscussReplyResponseDto;
-import com.project.mvc.dto.response.kibeom.DiscussResponseDto;
-import com.project.mvc.dto.response.kibeom.DiscussionDetailResponseDto;
+import com.project.mvc.dto.response.kibeom.*;
 import com.project.mvc.dto.seongjin.DiscussMyPageDto;
 import com.project.mvc.dto.seongjin.LoginUserInfoDto;
 import com.project.mvc.entity.DiscussReply;
@@ -22,8 +18,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -122,5 +116,18 @@ public class DiscussionService {
             }
             return dto;
         }).collect(Collectors.toList());
+    }
+
+
+    public List<DiscussAsideListDto> findAsideList() {
+        return discussionMapper.findAsideList();
+    }
+
+    public List<DiscussResponseDto> getSortedDiscussions(String sort) {
+        List<DiscussFindAllDto> list = discussionMapper.getSortedDiscussion(sort);
+        List<DiscussResponseDto> dtoList = list.stream()
+                .map(d -> new DiscussResponseDto(d))
+                .collect(Collectors.toList());
+        return dtoList;
     }
 }

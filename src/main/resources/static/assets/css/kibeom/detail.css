@@ -1,3 +1,5 @@
+
+
 * {
     margin: 0;
     padding: 0;
@@ -13,14 +15,11 @@ body {
     min-height: 100vh;
 }
 
-header {
-    background-color: #333;
-    color: #333;
-    padding: 10px 20px;
+
+#whole {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 92%;
+    margin: 0 auto;
 }
 
 .content-wrap {
@@ -29,6 +28,82 @@ header {
     flex-direction: column;
     align-items: center;
     padding: 20px;
+    width: 50%;
+    margin: 0 auto;
+}
+
+aside {
+    width: 20%;
+    margin: 67px auto 0 auto;
+    position: sticky;
+    top: 20px;
+    height: calc(100vh - 67px - 20px);
+    overflow-y: auto;
+    border-radius: 15px;
+
+
+}
+
+#left-aside {
+    left: 0;
+}
+
+#right-aside {
+    right: 0;
+}
+
+.aside-wrap {
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    margin: 0;
+    padding: 0 0 60px 0;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    /*box-shadow: rgba(100, 100, 111, 0.1) 0px 7px 29px 0px !important;*/
+}
+
+.aside-header {
+    width: 70%;
+    /*text-align: center;*/
+    margin: 0 auto;
+    padding: 30px;
+}
+.aside-p {
+    padding-top: 20px;
+    border-top: 1px solid black;
+    text-align: right;
+    color: #636363;
+    font-size: 14px;
+    cursor: pointer;
+    text-underline: #444444;
+}
+.aside-p:hover {
+    font-weight: 700;
+}
+
+
+aside ul {
+    width: 70%;
+    margin: 0 auto;
+    list-style: none;
+    padding: 0;
+}
+
+aside ul li {
+    /*padding-top: 10px;*/
+    font-size: 15px;
+    font-weight: 400;
+    color: #504f4f;
+    padding: 15px 15px 5px 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    margin-bottom: 10px;
+    background: #FFFFFF;
+    transition: box-shadow 0.2s;
+    cursor: pointer;
+}
+
+aside ul li:hover {
+    box-shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.9);
 }
 
 .discussion-card {
@@ -341,4 +416,29 @@ div.comment-header-self {
     translate: 0 0.225em;
     box-shadow: inset 0 0.03em 0 0 #f4f4f4, 0 0.03em 0 0 #efefef, 0 0.0625em 0 0 #ececec, 0 0.125em 0 0 #e0e0e0, 0 0.125em 0 0 #dedede, 0 0.2em 0 0 #dcdcdc, 0 0.225em 0 0 #cacaca, 0 0.225em 0.375em 0 #cecece;
     cursor: pointer;
+}
+
+.aside-ul .aside-li {
+    cursor: pointer;
+}
+
+.aside-title {
+    font-size: 17px;
+}
+.aside-title:hover {
+    color: #0c70d6;
+    text-underline: #0c70d6;
+    scale: 1.1;
+    text-decoration: underline;
+}
+
+.live-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: red;
+    color: white;
+    border-radius: 5px;
+    padding: 5px 10px;
+    font-size: 10px;
 }

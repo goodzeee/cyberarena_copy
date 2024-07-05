@@ -109,8 +109,7 @@ public class UserService {
         );
     }
 
-    public List<ReviewLinkDto> getReviewList(HttpSession session) {
-        String email = ((LoginUserInfoDto) session.getAttribute("login")).getEmail();
+    public List<ReviewLinkDto> getReviewList(String email) {
 
         List<ReviewLinkDto> reviews = reviewMapper.findAllByEmail(email);
         reviews.forEach(dto -> {
@@ -146,5 +145,10 @@ public class UserService {
     public boolean changePassword(ChangePasswordDto dto) {
         dto.setPassword(passwordEncoder.encode(dto.getPassword()));
         return userMapper.changePassword(dto);
+    }
+
+    public LoginUserInfoDto findUserInfo(String targetEmail) {
+        User user = userMapper.findOne(targetEmail);
+        return new LoginUserInfoDto(user);
     }
 }

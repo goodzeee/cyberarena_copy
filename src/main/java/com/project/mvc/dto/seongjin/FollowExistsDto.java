@@ -10,5 +10,6 @@ import lombok.*;
 @Builder
 public class FollowExistsDto {
     private String email;
+    private String nickname;
     private boolean exist;
 }

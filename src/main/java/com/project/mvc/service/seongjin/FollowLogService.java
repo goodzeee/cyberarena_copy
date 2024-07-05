@@ -1,8 +1,10 @@
 package com.project.mvc.service.seongjin;
 
 import com.project.mvc.dto.seongjin.*;
+import com.project.mvc.entity.FollowLog;
 import com.project.mvc.mapper.seongjin.FollowLogMapper;
 import lombok.RequiredArgsConstructor;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,15 +17,15 @@ public class FollowLogService {
 
     private final FollowLogMapper followLogMapper;
 
-    public List<FollowExistsDto> getFollowList(HttpSession session, boolean type) {
-        LoginUserInfoDto user = (LoginUserInfoDto) session.getAttribute("login");
-        if (user == null) {
+    public List<FollowExistsDto> getFollowList(String email, boolean type) {
+
+        if (email == null) {
             return null;
         }
 
         return
                 followLogMapper.getList(FollowListDto.builder()
-                        .userEmail(user.getEmail())
+                        .userEmail(email)
                         .type(type)
                         .build());
     }
@@ -44,4 +46,10 @@ public class FollowLogService {
         return followLogMapper.unfollow(dto);
     }
 
+    public boolean wasFollow(String email, String targetEmail) {
+        return followLogMapper.followed(FollowLogRequestDto.builder()
+                        .targetEmail(targetEmail)
+                        .userEmail(email)
+                .build());
+    }
 }

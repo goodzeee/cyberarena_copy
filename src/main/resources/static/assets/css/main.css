@@ -278,7 +278,7 @@ header .menu-open .lnr-menu {
     justify-content: center;
     align-items: center;
     width: 950px;
-    height: 900px;
+    height: 99%;
     flex-wrap: wrap;
     position: fixed;
     z-index: 9999;

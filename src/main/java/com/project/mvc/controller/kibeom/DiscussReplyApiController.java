@@ -62,7 +62,6 @@ public class DiscussReplyApiController {
         return ResponseEntity.ok().body(dto);
     }
 
-
     @DeleteMapping("/{rno}")
     public ResponseEntity<?> deleteReply(@PathVariable("rno") long rno, HttpSession session) {
         log.info("/api/v1/discuss/reply : DELETE");
@@ -87,6 +86,16 @@ public class DiscussReplyApiController {
         }
         return ResponseEntity.ok().body(dto);
 
+    }
+
+
+    @PutMapping
+    public ResponseEntity<?> modifyReply(@RequestBody DiscussionCommentRequestDto dto) {
+        log.info("/api/v1/discuss/reply : PUT");
+        log.debug("update parameter: {}", dto);
+        discussionReplyService.update(dto);
+
+        return ResponseEntity.ok().body(".");
     }
 
 }

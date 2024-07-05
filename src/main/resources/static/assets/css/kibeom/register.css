@@ -6,8 +6,8 @@
 }
 
 body {
-    background-color: #f0f0f0;
-    color: #333;
+    background-color: black !important;
+    color: #A8A8A8;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
@@ -19,7 +19,7 @@ div.click {
     font-weight: 700;
     text-align: center;
     padding: 10px 20px 20px;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid #8E8E93;
 }
 
 main {
@@ -31,7 +31,7 @@ main {
 }
 
 .content-wrap {
-    background-color: #fff;
+    background-color: #222323;
     padding: 20px;
     border-radius: 25px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
@@ -41,7 +41,7 @@ main {
 }
 
 div.fetch-wrap {
-    background-color: #fff;
+    background-color: #222323;
     padding: 20px;
     border-radius: 25px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
@@ -58,21 +58,21 @@ div.fetch-wrap {
 .modal-content {
     display: flex;
     justify-content: space-between;
+    background: #222323;
 }
 
 .modal-left, .modal-right {
     padding: 20px;
     flex: 1;
+    background: #303030;
+    border-radius: 20px;
 }
 
-.modal-left {
-    border-right: 1px solid #ddd;
-}
 
 .modal-left h1, .modal-right h1 {
     margin-bottom: 15px;
     font-size: 27px;
-    border-bottom: 2px solid #333;
+    border-bottom: 2px solid #8E8E93;
     padding-bottom: 20px;
 }
 
@@ -114,13 +114,24 @@ div.fetch-wrap {
     margin-right: 10px;
 }
 
-
-#nickname {
-    background: #E7F0FE;
-    margin-bottom: 10px;
+input, textarea{
+    outline:none;
+    box-shadow:none;
 }
+#nickname {
+    color: #acaaaa !important;
+    margin-bottom: 10px;
+    background: #393838;
+}
+
+form input,
+form textarea {
+
+}
+
 #searchMediaInput {
     margin-bottom: 10px;
+    background: #393838;
 }
 #detail {
     margin-top: 10px;
@@ -129,7 +140,7 @@ div.fetch-wrap {
     height: 150px;
     border-color: #DDDDDD;
     border-radius: 5px;
-
+    background: #393838;
 
 }
 
@@ -148,6 +159,9 @@ footer {
     margin: 30px 0;
     display: flex;
     cursor: pointer;
+    padding: 10px;
+    border-right: 15px;
+    background: #393838;
 }
 .modal-right-wrap .modal-media-left {
     width: 50%;
@@ -159,7 +173,7 @@ footer {
 
 hr.line {
     font-size: 1px;
-    color: black;
+    color: white;
 }
 
 .modal-right-wrap .modal-media-left .modal-media-wrap {
@@ -174,11 +188,15 @@ hr.line {
 }
 
 #nickname {
-    background: #E7F0FE;
+    background: #393838;
 }
 
 #searchMediaInput {
     width: 100%;
+}
+
+#title {
+    background: #393838;
 }
 
 .modal-media-title h2 {
@@ -186,8 +204,8 @@ hr.line {
     font-size: 22px;
     padding-top: 5px;
     padding-bottom: 5px;
-    border-bottom: 1px solid black;
-    border-top: 1px solid black;
+    border-bottom: 1px solid #8E8E93;
+    border-top: 1px solid #8E8E93;
 }
 
 .bottom-wrap {

@@ -18,26 +18,26 @@ let isValidate = [false, false, false];
 
 $title.addEventListener('keyup', e => {
     if ($title.value !== '') {
-        $title.style.backgroundColor = "#E7F0FE";
+        $title.style.backgroundColor = "#9F9E9E";
     } else {
-        $title.style.backgroundColor = "white";
+        $title.style.backgroundColor = "#393838";
     }
 });
 
 $offer.addEventListener('keyup', e => {
 
     if ($offer.value !== '') {
-        $offer.style.backgroundColor = "#E7F0FE";
+        $offer.style.backgroundColor = "#9F9E9E";
     } else {
-        $offer.style.backgroundColor = "white";
+        $offer.style.backgroundColor = "#393838";
     }
 });
 
 $media.addEventListener('keyup', e => {
     if ($media.value !== '') {
-        $media.style.backgroundColor = "#E7F0FE";
+        $media.style.backgroundColor = "#9F9E9E";
     } else {
-        $media.style.backgroundColor = "white";
+        $media.style.backgroundColor = "#393838";
     }
 })
 
@@ -53,12 +53,12 @@ for (let i = 0; i < validate.length; i++) {
 
         if (isValidate[0] && isValidate[1] && isValidate[2]) {
             $finishBtn.style.cursor = 'pointer';
-            $finishBtn.style.backgroundColor = "#333";
+            $finishBtn.style.backgroundColor = "#9F9E9E";
             $finishBtn.setAttribute('type', 'submit');
         } else {
             $finishBtn.style.cursor = 'default';
             $finishBtn.style.width = '100px'
-            $finishBtn.style.backgroundColor = "#ccc";
+            $finishBtn.style.backgroundColor = "#393838";
             $finishBtn.setAttribute('type', 'button');
         }
     });

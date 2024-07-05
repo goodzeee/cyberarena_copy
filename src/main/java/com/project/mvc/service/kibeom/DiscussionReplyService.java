@@ -56,4 +56,5 @@ public class DiscussionReplyService {
         return discussReplyMapper.getDiscussNoByRno(rno);
     }
 
+
 }

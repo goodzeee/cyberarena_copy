@@ -15,15 +15,6 @@ body {
     min-height: 100vh;
 }
 
-header {
-    background-color: #333;
-    color: #333;
-    padding: 10px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
 
 #whole {
     display: flex;
@@ -49,7 +40,8 @@ aside {
     height: calc(100vh - 67px - 20px);
     overflow-y: auto;
     border-radius: 15px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+
+
 }
 
 #left-aside {
@@ -65,6 +57,7 @@ aside {
     border-radius: 15px;
     margin: 0;
     padding: 0 0 60px 0;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     /*box-shadow: rgba(100, 100, 111, 0.1) 0px 7px 29px 0px !important;*/
 }
 

@@ -41,17 +41,21 @@
 
             </form>
         </div>
-        <button class="make-discussion" id="makeDiscussion">토론 생성하기</button>
+        <div class="button-wrap">
+            <button class="make-discussion" id="makeDiscussion">토론 생성하기</button>
+            <div id="sortDropdown" class="sort-dropdown">
+                <form id="sortForm">
+                    <select id="sortSelect" name="sort">
+                        <option value="new">최신순</option>
+                        <option value="view">조회순</option>
+                        <option value="hit">참여자순</option>
+                    </select>
+                </form>
+            </div>
+        </div>
+
     </div>
-    <div id="sortDropdown" class="sort-dropdown">
-        <form id="sortForm">
-            <select id="sortSelect" name="sort">
-                <option value="new">최신순</option>
-                <option value="view">조회순</option>
-                <option value="hit">참여자순</option>
-            </select>
-        </form>
-    </div>
+
 
     <div id="whole-wrap">
         <c:if test="${dList.size() == 0}">

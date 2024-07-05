@@ -10,6 +10,7 @@ import java.time.format.DateTimeFormatter;
 @EqualsAndHashCode
 public class DiscussResponseDto {
 
+    private String email;
     private String nickname;
     private String discussionTitle;
     private String discussionOffer;
@@ -20,9 +21,11 @@ public class DiscussResponseDto {
     private long viewCount;
     private int replyCount;
     private String mediaTitle;
+    private long mediaNo;
 
 
     public DiscussResponseDto(DiscussFindAllDto dto) {
+        this.email = dto.getEmail();
         this.nickname = dto.getNickname();
         this.discussionTitle = dto.getDiscussionTitle();
         this.discussionOffer = makeShortContent(dto.getDiscussionOffer());
@@ -33,6 +36,7 @@ public class DiscussResponseDto {
         this.viewCount = dto.getViewCount();
         this.replyCount = dto.getReplyCount();
         this.mediaTitle = dto.getMediaTitle();
+        this.mediaNo = dto.getMediaNo();
     }
 
     private String dateFormatting(LocalDateTime regDateTime) {

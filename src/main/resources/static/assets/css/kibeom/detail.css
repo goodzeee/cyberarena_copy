@@ -473,8 +473,6 @@ div.button-wrap {
     padding: 5px 10px;
     font-size: 10px;
 }
-
-
 .discussion-media-name:hover, .nickname:hover {
     font-weight: 700;
     cursor: pointer;

@@ -14,7 +14,7 @@ import java.time.format.DateTimeFormatter;
 @Builder
 public class DiscussionDetailResponseDto {
 
-//    private String email;
+    private String email;
 //    private long reviewNo;
     private long discussionNo;
     private long mediaNo;
@@ -29,6 +29,7 @@ public class DiscussionDetailResponseDto {
 
 
     public DiscussionDetailResponseDto(Discussion d) {
+        this.email = d.getEmail();
         this.discussionNo = d.getDiscussionNo();
         this.mediaNo = d.getMediaNo();
         this.discussionTitle = d.getDiscussionTitle();

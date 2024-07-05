@@ -18,6 +18,7 @@ public class DiscussFindAllDto {
     D.review_no,
     D.discussion_no
  */
+    private String email;
     private String nickname;
     private String discussionTitle;
     private String discussionOffer;

@@ -52,8 +52,8 @@
                 </c:if>
 
             </div>
-            <div class="discussion-nickname">작성자: ${found.nickname}</div>
-            <div class="discussion-nickname">미디어: ${found.mediaTitle}</div>
+            <div class="discussion-nickname nickname" data-email="${found.email}">작성자: ${found.nickname}</div>
+            <div class="discussion-media-name" data-media-no="${found.mediaNo}">미디어: ${found.mediaTitle}</div>
 
 
             <br>
@@ -109,8 +109,23 @@
 <script>
 
     const $finishBtn = document.getElementById('finish');
-    $finishBtn.addEventListener('click', e => {
+    $finishBtn?.addEventListener('click', e => {
         window.location.href = "/discussion/modify"
+    })
+
+    document.querySelector("#whole").addEventListener("click", e => {
+        console.log("일단 눌렀을 경우")
+        if(e.target.matches(".nickname")) {
+            const email = e.target.dataset.email;
+            window.location.href= `/user/user-info/\${email}`;
+            return;
+        }
+        if(e.target.matches(".discussion-media-name")) {
+            const mediaNo = e.target.dataset.mediaNo;
+            window.location.href = `/review/list/\${mediaNo}`;
+            return;
+        }
+        console.log("안눌렸을 경우");
     })
 
 

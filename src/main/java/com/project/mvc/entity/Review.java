@@ -15,9 +15,9 @@ public class Review {
     private long mediaNo;
     @Setter
     private String reviewText;
-    private double userRating;
+    private int userRating;
     private DiscussionStatus discussionStatus;
     private LocalDateTime reviewCreatedAt;
 
-//    private String nickname; // 추가된 필드: 리뷰 작성자의 닉네임
+//    private int likeCount;  // 리뷰의 좋아요 수
 }

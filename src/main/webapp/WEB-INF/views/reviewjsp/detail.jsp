@@ -17,27 +17,46 @@
 <body>
     <%-- 공통 header 부분 include --%>
     <%@ include file="../include/header.jsp"%>
+<div id="whole">
+    <aside id="left-aside">
+        <div class="aside-wrap">
+            <h2 class="aside-header"> 🔥 최근 인기 토론 🔥</h2>
+            <ul>
+                    <li>#1 기생충에 대해..</li>
+                    <li>#2 독전에 대해..</li>
+                    <li>#3 타짜에 대해..</li>
+                    <li>#4 인사이드아웃2에 대해..</li>
+                    <li>#5 명량에 대해..</li>
+                    <li>#6 정처기에 대해..</li>
+                    <li>#7 실기에 대해..</li>
+            </ul>
+
+        </div>
+    </aside>
+
 
     <main>
         <div id="wrap" class="media-detail" data-mno="${media.mediaNo}">
-            <h2>${media.mediaTitle}</h2>
+    
             <div class="media-info">
                 <div class="media-image">
-                    <img src="${media.imageUrl}" alt="${media.mediaTitle} 이미지">
+                    <img src="${media.imageUrl}" alt="${media.mediaTitle} 이미지" >
                 </div>
                 <div class="media-description">
+                    <p><strong class="media-title">${media.mediaTitle}</strong></p>
                     <p><strong>제작자:</strong> ${media.creator}</p>
-                    <p><strong>평점:</strong> ${media.rating}</p>
+                    <p><strong>평점:</strong> ${media.rating}점</p>
                     <p><strong>설명:</strong> ${media.mediaDesc}</p>
-                    <p><strong>등록일:</strong> ${media.createdAt}</p>
+                    <p><strong>등록일:</strong> ${media.createdAt}년</p>
                 </div>
+                <button id="list-btn" style="margin-top: auto;"><a href="/media/movie"></a>목록</button>
             </div>
 
             <hr>
 
             <!-- 리뷰 등록 폼 -->
             <c:if test="${empty login}">
-                   <a href="/user/sign-in?redirect/review/list/${reviews.mediaNo}">리뷰 등록은 로그인 후 사용하실 수 있습니다 😏</a>
+                   <a href="/user/sign-in?redirect=/review/list?mno=${reviews.mediaNo}">리뷰 등록은 로그인 후 사용하실 수 있습니다 😏</a>
             </c:if>
 
             <c:if test = "${not empty login}">
@@ -49,22 +68,22 @@
                     <input type="hidden" id="email" name="email" value="${login.email}">
                     
                     <label for="reviewText">리뷰 내용:</label>
-                    <textarea id="reviewText" name="reviewText" placeholder="리뷰 내용을 입력해주세요." rows="4" cols="50" required></textarea><br><br>
+                    <textarea id="reviewText" name="reviewText" placeholder="리뷰 내용을 입력해주세요." rows="4" cols="50" required></textarea><br>
                     
                     <label for="nickname">작성자: </label>
-                    <input type="text" id="nickname" name="nickname" value="${login.nickname}" readonly>
+                    <input type="text" id="nickname" name="nickname" value="${login.nickname}" disabled>
                     
                                     
                     <label for="userRating">별점:</label>
                     <select id="userRating" name="userRating" required>
-                        <c:forEach var="i" begin="1" end="10">
+                        <c:forEach var="i" begin="1" end="5">
                             <option value="${i}">${i}</option>
                         </c:forEach>
-                    </select><br><br>
+                    </select>
                     
                     <label for="discussionStatus">토론신청 허용 여부:</label>
-                    <input type="checkbox" id="discussionStatus" name="discussionStatus" value="true">
-                    <label for="discussionStatus">허용</label><br>
+                    <p for="discussionStatus" style="display: inline;">허용 <input type="checkbox" id="discussionStatus" name="discussionStatus" value="true"></p>
+                    
                     
                     <button id="reviewBtn" type="button">등록</button>
                 </form>
@@ -79,7 +98,12 @@
             <c:set var="totalRating" value="0" />
                <c:set var="reviewCount" value="0" />
 
-               <c:forEach var="review" items="${reviews.reviews}">
+               <!-- 페이징 변수 설정 -->
+        <c:set var="currentPage" value="${not empty param.page ? param.page : 1}" />
+        <c:set var="reviewsPerPage" value="6" />
+        <c:set var="startIndex" value="${(currentPage - 1) * reviewsPerPage}" />
+
+               <c:forEach var="review" items="${reviews.reviews}"  begin="${startIndex}" end="${startIndex + reviewsPerPage - 1}">
                     <c:set var="totalRating" value="${totalRating + review.userRating}"/>
                     <c:set var="reviewCount" value="${reviewCount + 1}"/>
                </c:forEach>
@@ -87,17 +111,15 @@
                     <!-- 리뷰가 있을 때만 평균 별점 보여주기 -->
                 <c:if test="${reviewCount > 0}">
                     <c:set var="averageRating" value="${totalRating / reviewCount}" />
-                    <p class="review-average"><strong>미디어 리뷰 평균 별점:</strong> <fmt:formatNumber value="${averageRating}" type="number" maxFractionDigits="2" /></p>
+                    <p class="review-average"><strong>미디어 리뷰 평점: </strong> <fmt:formatNumber value="${averageRating}" type="number" maxFractionDigits="2" /> / 5</p>
                 </c:if>
 
-            <div class="review-list">
-
                 <c:forEach var="review" items="${reviews.reviews}">
-
-                    <div class="review-item">
-                        <p>${review.text}</p>
+                     <div class="review-list" data-rno="${review.reviewNo}" data-mno="${review.mediaNo}">
+                     <div class="review-item">
+                        <p id="reviewText">${review.text}</p>  <br>
                         <p><strong>작성자:</strong> ${review.nickname}</p>
-                        <p><strong>별점:</strong> ${review.userRating}</p>
+                        <p><strong>별점:</strong> ${review.userRating} / 5</p>
 
                      <!-- 토론 신청 허용 여부 조건에 따라 링크 또는 텍스트로 표시 -->
         <c:choose>
@@ -110,27 +132,47 @@
             </c:otherwise>
         </c:choose>
 
-                        <p><strong>작성일:</strong> ${review.reviewCreatedAt}</p>
+        <p><strong>작성일:</strong> ${review.reviewCreatedAt}</p>
+    
+        <!-- 좋아요 버튼 표시 -->
+        <div class="buttons">
+            <div class="reaction-buttons">
+                <button class="like-btn ${review.userReaction == 'like' ? 'active' : '' }" data-liked="${review.userReaction == 'like'}" data-rno="${review.reviewNo}">
+                    <i class="fas fa-thumbs-up"></i>like
+                    <span id="like-count">${review.likeCount}</span>
+                </button>
+            </div>
+        </div>
 
                         <!-- 본인이 쓴글에만 접근할 수 있게 조건 렌더링되도록 -->
                     <c:if test="${login.email == review.email}">
                         <div class="review-actions">
-                            <!-- 삭제 버튼 -->
-                            <button class="del-btn" onclick="deleteReview(${review.reviewNo})">삭제</button>
-                            <!-- <form id="deleteForm_${review.reviewNo}" method="post" action="/review/delete/${review.reviewNo}">
-                                <input type="hidden" name="_method" value="DELETE"> -->
-                            <!-- <button class="del-btn" onclick="deleteReview(${review.reviewNo})" data-reviewNo="${review.reviewNo}" type="button">삭제</button> -->
-                            <!-- </form> -->
-                            
+                            <!-- 삭제 버튼 onclick="deleteReview(${review.reviewNo})"--> 
+                            <button class="del-btn" onclick="deleteReview(${review.reviewNo}, ${review.mediaNo})">삭제</button>
                             <!-- 수정 버튼 -->
-                            <button onclick="openEditModal(${review.reviewNo}, '${review.text}', ${review.userRating}, '${review.discussionStatus}')">수정</button>
+                            <button class="mod-btn" onclick="openEditModal(${review.reviewNo}, '${review.text}', ${review.userRating}, '${review.discussionStatus}')">수정</button>
                         </div>
                     </c:if>
+                    <!-- <hr> -->
+
+                    <div class="bottom-section">
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination pagination-lg pagination-custom">
+                                <c:forEach var="i" begin="1" end="${pageMaker.finalPage}">
+                                    <li class="page-item ${currentPage == i ? 'active' : ''}">
+                                        <a class="page-link" href="/review/list/${media.mediaNo}?page=${i}">${i}</a>
+                                    </li>
+                                </c:forEach>
+                            </ul>
+                        </nav>
                     </div>
-                    <hr>
+
+                </div>
+                </div>
                 </c:forEach>
-            </div>
-        </div>
+                
+            <!-- </div> -->
+        <!-- </div> -->
 
         <!-- 리뷰 수정 모달 -->
         <div id="editModal" class="modal">
@@ -144,7 +186,7 @@
 
                     <label for="editUserRating">별점:</label>
                     <select id="editUserRating" name="userRating" required>
-                        <c:forEach var="i" begin="1" end="10">
+                        <c:forEach var="i" begin="1" end="5">
                             <option value="${i}">${i}</option>
                         </c:forEach>
                     </select><br><br>
@@ -160,7 +202,72 @@
 
     </main>
 
+    <aside id="right-aside">
+        <div class="aside-wrap">
+            <h2 class="aside-header"> 🔥 최근 인기 리뷰 🔥</h2>
+            <ul>
+                <li>#1 정처기 재밌음? </li>
+                <li>#2 타짜를 보고 왔는데..</li>
+                <li>#3 요즘 영화값 비싸요</li>
+                <li>#4 1987 보고 오신분!!</li>
+                <li>#5 명량에 대해..</li>
+                <li>#6 정처기에 대해..</li>
+                <li>#7 실기에 대해..</li>
+            </ul>
+
+        </div>
+    </aside>
+</div>
+
     <script>
+
+        // 서버에 좋아요 요청 보내는 함수
+async function sendReaction(like, rno, button) {
+
+    const res = await fetch(`/review/like?rno=\${rno}`);
+    // const data = await res.json();
+
+    // 응답 데이터에서 likeCount와 userReaction 추출
+    const { likeCount, userReaction } = await res.json();
+
+    // 리뷰의 부모 요소에서 해당 리뷰의 like-count 요소 찾아서 개별 리뷰글마다 처리
+    const reviewElement = button.closest('.review-list');
+    const likeCountElement = reviewElement.querySelector('#like-count');
+
+    // 해당 리뷰의 like-count 업데이트
+    likeCountElement.textContent = likeCount;
+
+    // 버튼 활성화 스타일 처리
+    updateReactionButtons(button, userReaction);
+}
+
+    // 좋아요 버튼 상태에 따라 배경색 변경
+    function updateReactionButtons(button, userReaction) {
+    console.log('Updating button state:', { button, userReaction });
+
+    // 좋아요 버튼이 눌렀을 경우
+    if (userReaction === 'like') {
+        button.classList.add('active');
+        button.dataset.liked = 'true'; // 데이터 속성 업데이트
+        console.log('Button is active:', button);
+    } else {
+        // 좋아요 버튼이 눌리지 않은 경우
+        button.classList.remove('active');
+        button.dataset.liked = 'false'; // 데이터 속성 업데이트
+        console.log('Button is not active:', button);
+    }
+}
+
+    // 모든 좋아요 버튼에 대해 클릭 이벤트 주기
+   document.querySelectorAll('.like-btn').forEach(button => {
+   button.addEventListener('click', e => {
+       const reviewElement = e.target.closest('.review-list');
+       const reviewNo = reviewElement.dataset.rno;
+    //    console.log('click: ', {reviewElement, reviewNo});
+       sendReaction('like', reviewNo, button);
+   });
+});
+
 
 function openEditModal(reviewNo, reviewText, userRating, discussionStatus) {
     document.getElementById('editReviewNo').value = reviewNo;
@@ -203,24 +310,45 @@ function submitEditForm() {
     .catch(error => console.error('Error:', error));
 }
 
-function deleteReview(reviewNo) {
+// 리뷰 삭제 함수
+// function deleteReview(reviewNo) {
+//     console.log(`delete reviewNo: ${reviewNo}`);
+//     if (confirm('정말 삭제하시겠습니까?')) {
+//         fetch(`/review/delete/${reviewNo}`, {
+//             method: 'DELETE',
+//             headers: {
+//                 'Content-Type': 'application/json'
+//             }
+//         })
+//         .then(response => {
+//             console.log(`Response received for delete reviewNo: ${reviewNo}`);
+//             if (response.ok) {
+//                 location.reload(); // 삭제 성공 시 페이지 새로고침
+//             } else {
+//                 // 응답 상태 코드 및 메시지 확인
+//                 response.text().then(text => {
+//                     console.error('Error response:', text);
+//                     alert('리뷰 삭제에 실패했습니다.');
+//                 });
+//             }
+//         })
+//         .catch(error => console.error('Error:', error));
+//     }
+// }
+
+// 리뷰 삭제 함수
+function deleteReview(reviewNo, mno) {
+    console.log(reviewNo, mno);
+    if (!reviewNo || !mno) {
+        alert('삭제할 리뷰 번호 또는 미디어 번호가 잘못되었습니다.');
+        return;
+    }
     if (confirm('정말 삭제하시겠습니까?')) {
-        fetch(`/review/delete/${reviewNo}`, {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-        .then(response => {
-            if (response.ok) {
-                location.reload(); // 삭제 성공 시 페이지 새로고침
-            } else {
-                alert('리뷰 삭제에 실패했습니다.');
-            }
-        })
-        .catch(error => console.error('Error:', error));
+        // GET 요청을 URL을 통해 보냅니다. `/review/delete/${mno}?reviewNo=${reviewNo}`
+        window.location.href = `/review/delete/\${mno}?reviewNo=\${reviewNo}`;
     }
 }
+
 
 document.getElementById('reviewBtn').addEventListener('click', function () {
     const mediaNo = document.querySelector('input[name="mediaNo"]').value;
@@ -254,182 +382,6 @@ document.getElementById('reviewBtn').addEventListener('click', function () {
     .catch(error => console.error('Error:', error));
 });
 
-
-// const delButtons = document.querySelectorAll('.del-btn');
-
-// delButtons.forEach(button => {
-//     button.addEventListener('click', function() {
-//         const reviewNo = this.getAttribute('data-reviewNo');
-
-//         if (confirm('정말 삭제하시겠습니까?')) {
-//             fetch(`/review/delete/${reviewNo}`, {
-//                 method: 'DELETE',
-//                 headers: {
-//                     'Content-Type': 'application/json'
-//                 }
-//             })
-//             .then(response => {
-//                 if (response.ok) {
-//                     location.reload(); // 삭제 성공 시 페이지 새로고침
-//                 } else {
-//                     alert('리뷰 삭제에 실패했습니다.');
-//                 }
-//             })
-//             .catch(error => console.error('Error:', error));
-//         }
-//     });
-// });
-
-
-// document.getElementById('reviewBtn').addEventListener('click', function () {
-//     const mediaNo = document.querySelector('input[name="mediaNo"]').value;
-//     const reviewText = document.getElementById('reviewText').value;
-//     const userRating = document.getElementById('userRating').value;
-//     const nickname = document.getElementById('nickname').value;
-//     const email = document.getElementById('email').value; // email 값 가져오기
-//     const discussionStatus = document.getElementById('discussionStatus').checked ? 'ALLOW' : 'DISALLOW';
-
-//     fetch('/review/add', {
-//         method: 'POST',
-//         headers: {
-//             'Content-Type': 'application/json'
-//         },
-//         body: JSON.stringify({
-//             mediaNo: mediaNo,
-//             reviewText: reviewText,
-//             userRating: userRating,
-//             nickname: nickname,
-//             email: email, // email 값 포함
-//             discussionStatus: discussionStatus
-//         })
-//     })
-//     .then(response => {
-//         if (response.ok) {
-//             location.reload();
-//         } else {
-//             alert('리뷰 등록에 실패했습니다.');
-//         }
-//     })
-//     .catch(error => console.error('Error:', error));
-// });
-
-
-        // 리뷰 등록 폼 submit 이벤트 리스너
-    // document.getElementById('reviewBtn').addEventListener('click', function () {
-    //     const formData = new FormData(document.getElementById('reviewForm'));
-
-    //     fetch('/review/add', {
-    //         method: 'POST',
-    //         body: formData
-    //     })
-    //     .then(response => {
-    //         if (response.ok) {
-    //             return response.json(); // 응답 JSON 데이터 파싱
-    //         } else {
-    //             throw new Error('리뷰 등록에 실패했습니다.');
-    //         }
-    //     })
-    //     .then(data => {
-    //         // 등록 성공 시 리뷰 목록에 추가
-    //         appendReviewToList(data);
-    //         // 입력 필드 초기화
-    //         document.getElementById('reviewText').value = '';
-    //         document.getElementById('userRating').value = '1';
-    //         document.getElementById('discussionStatus').checked = false;
-    //     })
-    //     .catch(error => {
-    //         alert(error.message);
-    //         console.error('Error:', error);
-    //     });
-    // });
-
-    // // 리뷰 목록에 리뷰 추가 함수
-    // function appendReviewToList(review) {
-    //     const reviewList = document.querySelector('.review-list');
-
-    //     const reviewItem = document.createElement('div');
-    //     reviewItem.classList.add('review-item');
-
-    //     reviewItem.innerHTML = `
-    //         <p>${review.reviewText}</p>
-    //         <p><strong>작성자:</strong> ${review.nickname}</p>
-    //         <p><strong>별점:</strong> ${review.userRating}</p>
-    //         <p><strong>토론신청 허용 여부:</strong> ${review.discussionStatus ? '허용' : '비허용'}</p>
-    //         <p><strong>작성일:</strong> ${review.reviewCreatedAt}</p>
-
-    //         <div class="review-actions">
-    //             <form id="deleteForm_${review.reviewNo}" method="post" action="/review/delete/${review.reviewNo}">
-    //                 <button type="button" onclick="deleteReview(${review.reviewNo});">삭제</button>
-    //             </form>
-    //             <button onclick="openEditModal(${review.reviewNo}, '${review.reviewText}', ${review.userRating}, '${review.discussionStatus}')">수정</button>
-    //         </div>
-    //         <hr>
-    //     `;
-
-    //     reviewList.prepend(reviewItem); // 최신 리뷰를 위로 추가
-    // }
-
-    //     // 리뷰 삭제 함수
-    //     function deleteReview(reviewNo) {
-    //         if (confirm('정말 삭제하시겠습니까?')) {
-    //             fetch(`/review/delete/${reviewNo}`, {
-    //                 method: 'DELETE'
-    //             })
-    //             .then(response => {
-    //                 if (response.ok) {
-    //                     location.reload(); // 삭제 성공 시 페이지 새로고침
-    //                 } else {
-    //                     alert('리뷰 삭제에 실패했습니다.');
-    //                 }
-    //             })
-    //             .catch(error => console.error('Error:', error));
-    //         }
-    //     }
-
-    //     // 리뷰 수정 모달 열기 함수
-    //     function openEditModal(reviewNo, reviewText, userRating, discussionStatus) {
-    //         document.getElementById('editReviewNo').value = reviewNo;
-    //         document.getElementById('editReviewText').value = reviewText;
-    //         document.getElementById('editUserRating').value = userRating;
-    //         document.getElementById('editDiscussionStatus').checked = discussionStatus === 'ALLOW';
-    //         document.getElementById('editModal').style.display = 'block';
-    //     }
-
-    //     // 리뷰 수정 모달 닫기 함수
-    //     function closeEditModal() {
-    //         document.getElementById('editModal').style.display = 'none';
-    //     }
-
-    //     // 리뷰 수정 폼 제출 함수
-    //     function submitEditForm() {
-    //         const reviewNo = document.getElementById('editReviewNo').value;
-    //         const reviewText = document.getElementById('editReviewText').value;
-    //         const userRating = document.getElementById('editUserRating').value;
-    //         const discussionStatus = document.getElementById('editDiscussionStatus').checked ? 'ALLOW' : 'DISALLOW';
-
-    //         fetch(`/review/modify`, {
-    //             method: 'POST', // 수정은 POST로 전송
-    //             headers: {
-    //                 'Content-Type': 'application/json'
-    //             },
-    //             body: JSON.stringify({
-    //                 reviewNo: reviewNo,
-    //                 reviewText: reviewText,
-    //                 userRating: userRating,
-    //                 discussionStatus: discussionStatus
-    //             })
-    //         })
-    //         .then(response => {
-    //             if (response.ok) {
-    //                 closeEditModal(); // 수정 저장 성공 시 모달창 닫기
-    //                 location.reload(); // 페이지 새로고침
-    //             } else {
-    //                 alert('리뷰 수정에 실패했습니다.');
-    //             }
-    //         })
-    //         .catch(error => console.error('Error:', error));
-    //     }
-    </script>
-
+</script>
 </body>
 </html>

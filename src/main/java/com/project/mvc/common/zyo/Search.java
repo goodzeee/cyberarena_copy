@@ -4,7 +4,7 @@ import com.project.mvc.common.jihye.Page;
 import lombok.*;
 
 @Getter @Setter @ToString
-@EqualsAndHashCode
+//@EqualsAndHashCode
 //@NoArgsConstructor
 @AllArgsConstructor
 @Builder

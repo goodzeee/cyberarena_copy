@@ -1,31 +1,21 @@
 package com.project.mvc.service.jihye;
 
 
-import com.project.mvc.common.jihye.Page;
-import com.project.mvc.common.jihye.PageMaker;
 import com.project.mvc.dto.request.jihye.ReviewModifyDto;
 import com.project.mvc.dto.request.jihye.ReviewPostDto;
 import com.project.mvc.dto.response.jihye.ReviewDetailDto;
 import com.project.mvc.dto.response.jihye.ReviewFindAllDto;
 import com.project.mvc.dto.response.jihye.ReviewListDto;
-import com.project.mvc.dto.seongjin.LoginDto;
 import com.project.mvc.dto.seongjin.LoginUserInfoDto;
+import com.project.mvc.entity.LikeLog;
 import com.project.mvc.entity.Review;
-import com.project.mvc.entity.User;
+import com.project.mvc.mapper.jihye.LikeLogMapper;
 import com.project.mvc.mapper.jihye.ReviewMapper;
-import com.project.mvc.mapper.zyo.MediaMapper;
-import com.project.mvc.service.seongjin.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.boot.autoconfigure.neo4j.Neo4jProperties;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.net.http.HttpRequest;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -34,20 +24,43 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class ReviewService {
 
-    private final MediaMapper mediaMapper;
     private final ReviewMapper reviewMapper;
-    private final UserService userService; // UserService를 주입 받음
+    private final LikeLogMapper likeLogMapper;
 
     // 1. 특정 미디어에 달린 리뷰 목록 조회 요청 중간처리
     public ReviewListDto findList(long mediaNo) {
-
         List<ReviewFindAllDto> reviews = reviewMapper.findAll(mediaNo);
+//        int totalReviewCount = reviewMapper.count(mediaNo);
 
+        // 리뷰 목록 전체 조회 초기 렌더링에 그려질 데이터
+//        ReviewDetailDto responseDto = new ReviewDetailDto((ReviewFindAllDto) reviews);
+//        responseDto.setLikeCount(likeLogMapper.countLikes(reviewNo));
+//
+//        LikeLog reaction = likeLogMapper.findOne(mediaNo);
+//
+//        String type = null;
+//        if (reaction != null) {
+//            type = "like";
+//        }
+//        responseDto.setUserReaction(type);
+
+//        log.info("email: {}", email);
         List<ReviewDetailDto> dtoList = reviews.stream()
-                .map(r -> new ReviewDetailDto(r))
+                .map(r -> {
+                    log.info("r: {}", r);
+                    ReviewDetailDto dto = new ReviewDetailDto(r);
+                    dto.setLikeCount(likeLogMapper.countLikes(r.getReviewNo()));
+                    LikeLog likeLog = likeLogMapper.findOne(r.getReviewNo(), r.getEmail());
+                    log.info("likeLog: {}", likeLog);
+                    dto.setUserReaction(likeLog != null ? "like" : null); // 사용자 리액션 상태 설정
+                    return dto;
+                })
                 .collect(Collectors.toList());
 
+//        log.info("{}", dtoList.get(0));
+
         return ReviewListDto.builder()
+                .mediaNo(mediaNo)
                 .reviews(dtoList)
                 .build();
     }
@@ -62,7 +75,7 @@ public class ReviewService {
         LoginUserInfoDto loginUser = (LoginUserInfoDto) session.getAttribute("login");
         loginUser.getEmail();
 
-            return reviewMapper.save(r);
+        return reviewMapper.save(r);
     }
 
     // 3. 리뷰 수정
@@ -73,15 +86,23 @@ public class ReviewService {
     }
 
     // 4. 리뷰 삭제
-    public ReviewListDto remove(long reviewNo) {
-        log.info("Removing review with reviewNo: {}", reviewNo);
+//    public boolean getRemove(long reviewNo) {
+//        return reviewMapper.delete(reviewNo);
+//    }
 
-        // 댓글 번호로 원본 미디어 번호 찾기
-        long mediaNo = reviewMapper.findMno(reviewNo);
+    // 4. 리뷰 삭제
+    public ReviewListDto getRemove(long reviewNo) {
+        log.info("Removing reviewNo: {}", reviewNo);
 
-        boolean deleted = reviewMapper.delete(reviewNo);
+        // 리뷰 번호로 원본 미디어 번호 찾기
+        long mno = (long)reviewMapper.findMno(reviewNo);
+        log.info("mno: {}", mno);
+        // 찾은 리뷰 번호 삭제
+        boolean flag = reviewMapper.delete(reviewNo);
 
-        return deleted ? findList(mediaNo) : null;
+        // 삭제 성공 시 해당 미디어의 리뷰 목록 반환
+        return flag ? findList(mno) : null;
     }
-
 }
+
+

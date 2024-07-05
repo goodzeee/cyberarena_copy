@@ -35,6 +35,7 @@
         ON r.email = u.email
         WHERE r.media_no = #{mediaNo}
         ORDER BY r.review_no desc
+<!--        LIMIT #{pageStart}, #{amount}-->
     </select>
 
     <!--특정 미디어에 리뷰 총 수-->

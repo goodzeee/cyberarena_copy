@@ -20,15 +20,18 @@
 <div id="whole">
     <aside id="left-aside">
         <div class="aside-wrap">
-            <h2 class="aside-header"> 🔥 최근 인기 토론 🔥</h2>
-            <ul>
-                    <li>#1 기생충에 대해..</li>
-                    <li>#2 독전에 대해..</li>
-                    <li>#3 타짜에 대해..</li>
-                    <li>#4 인사이드아웃2에 대해..</li>
-                    <li>#5 명량에 대해..</li>
-                    <li>#6 정처기에 대해..</li>
-                    <li>#7 실기에 대해..</li>
+            <h2 class="aside-header">지금 뜨는 토론 <i class="live-icon">LIVE</i></h2>
+            <ul class="aside-ul">
+                <p class="aside-p" onclick="window.location.href=`/discussion/list`">더보기</p>
+                <c:forEach var="a" items="${aList}" >
+                    <li data-dno="${a.discussionNo}" class="aside-li">
+                        <p onclick="window.location.href=`/discussion/detail?dno=${a.discussionNo}`">
+                                <%--                            <${status.index + 1}> <span class="aside-title">${a.discussionTitle}</span><br>--%>
+                            <span class="aside-title">${a.discussionTitle}</span><br>
+                            <i class="fas fa-eye"></i> ${a.viewCount}
+                        </p>
+                    </li>
+                </c:forEach>
             </ul>
 
         </div>
@@ -37,7 +40,7 @@
 
     <main>
         <div id="wrap" class="media-detail" data-mno="${media.mediaNo}">
-    
+
             <div class="media-info">
                 <div class="media-image">
                     <img src="${media.imageUrl}" alt="${media.mediaTitle} 이미지" >
@@ -66,29 +69,29 @@
                 <form id="reviewForm" action="/review/add" method="POST">
                     <input type="hidden" id="mediaNo" name="mediaNo" value="${media.mediaNo}">
                     <input type="hidden" id="email" name="email" value="${login.email}">
-                    
+
                     <label for="reviewText">리뷰 내용:</label>
                     <textarea id="reviewText" name="reviewText" placeholder="리뷰 내용을 입력해주세요." rows="4" cols="50" required></textarea><br>
-                    
+
                     <label for="nickname">작성자: </label>
                     <input type="text" id="nickname" name="nickname" value="${login.nickname}" disabled>
-                    
-                                    
+
+
                     <label for="userRating">별점:</label>
                     <select id="userRating" name="userRating" required>
                         <c:forEach var="i" begin="1" end="5">
                             <option value="${i}">${i}</option>
                         </c:forEach>
                     </select>
-                    
+
                     <label for="discussionStatus">토론신청 허용 여부:</label>
                     <p for="discussionStatus" style="display: inline;">허용 <input type="checkbox" id="discussionStatus" name="discussionStatus" value="true"></p>
-                    
-                    
+
+
                     <button id="reviewBtn" type="button">등록</button>
                 </form>
             </c:if>
-            
+
             </div>
 
             <!-- 리뷰 목록 영역 -->
@@ -133,7 +136,7 @@
         </c:choose>
 
         <p><strong>작성일:</strong> ${review.reviewCreatedAt}</p>
-    
+
         <!-- 좋아요 버튼 표시 -->
         <div class="buttons">
             <div class="reaction-buttons">
@@ -147,7 +150,7 @@
                         <!-- 본인이 쓴글에만 접근할 수 있게 조건 렌더링되도록 -->
                     <c:if test="${login.email == review.email}">
                         <div class="review-actions">
-                            <!-- 삭제 버튼 onclick="deleteReview(${review.reviewNo})"--> 
+                            <!-- 삭제 버튼 onclick="deleteReview(${review.reviewNo})"-->
                             <button class="del-btn" onclick="deleteReview(${review.reviewNo}, ${review.mediaNo})">삭제</button>
                             <!-- 수정 버튼 -->
                             <button class="mod-btn" onclick="openEditModal(${review.reviewNo}, '${review.text}', ${review.userRating}, '${review.discussionStatus}')">수정</button>
@@ -170,7 +173,7 @@
                 </div>
                 </div>
                 </c:forEach>
-                
+
             <!-- </div> -->
         <!-- </div> -->
 
@@ -204,15 +207,18 @@
 
     <aside id="right-aside">
         <div class="aside-wrap">
-            <h2 class="aside-header"> 🔥 최근 인기 리뷰 🔥</h2>
-            <ul>
-                <li>#1 정처기 재밌음? </li>
-                <li>#2 타짜를 보고 왔는데..</li>
-                <li>#3 요즘 영화값 비싸요</li>
-                <li>#4 1987 보고 오신분!!</li>
-                <li>#5 명량에 대해..</li>
-                <li>#6 정처기에 대해..</li>
-                <li>#7 실기에 대해..</li>
+            <h2 class="aside-header">지금 뜨는 리뷰 <i class="live-icon">LIVE</i></h2>
+            <ul class="aside-ul">
+                <%--                <p class="aside-p" onclick="window.location.href=`/discussion/list`">더보기</p>--%>
+                <c:forEach var="r" items="${rList}" >
+                    <li class="aside-li">
+                        <p onclick="window.location.href=`/review/list/${r.mediaNo}`">
+                                <%--                            <${status.index + 1}> <span class="aside-title">${a.discussionTitle}</span><br>--%>
+                            <span class="aside-title">${r.reviewText}</span><br>
+                                <%--                            <i class="fas fa-eye"></i> ${a.viewCount}--%>
+                        </p>
+                    </li>
+                </c:forEach>
             </ul>
 
         </div>

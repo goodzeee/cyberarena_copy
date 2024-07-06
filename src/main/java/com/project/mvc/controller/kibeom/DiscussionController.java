@@ -4,13 +4,11 @@ import com.project.mvc.common.jihye.PageMaker;
 import com.project.mvc.common.zyo.Search;
 import com.project.mvc.dto.request.kibeom.DiscussionModifyDto;
 import com.project.mvc.dto.request.kibeom.MakeDiscussionDto;
-import com.project.mvc.dto.response.kibeom.DiscussAsideListDto;
-import com.project.mvc.dto.response.kibeom.DiscussFindAllDto;
-import com.project.mvc.dto.response.kibeom.DiscussResponseDto;
-import com.project.mvc.dto.response.kibeom.DiscussionDetailResponseDto;
+import com.project.mvc.dto.response.kibeom.*;
 import com.project.mvc.entity.Media;
 import com.project.mvc.mapper.kibeom.DiscussionMapper;
 import com.project.mvc.mapper.zyo.MediaMapper;
+import com.project.mvc.service.jihye.ReviewService;
 import com.project.mvc.service.kibeom.DiscussionReplyService;
 import com.project.mvc.service.kibeom.DiscussionService;
 import lombok.RequiredArgsConstructor;
@@ -33,6 +31,7 @@ public class DiscussionController {
     private final DiscussionReplyService discussionReplyService;
     private final MediaMapper mediaMapper;
     private final DiscussionMapper discussionMapper;
+    private final ReviewService reviewService;
 
     @GetMapping("/list")
     public String discussionList(@ModelAttribute("s") Search page, Model model) {
@@ -72,6 +71,8 @@ public class DiscussionController {
         DiscussionDetailResponseDto foundDsc = discussionService.findOne(dno);
         page.setAmount(10);
         List<DiscussAsideListDto> asideList = discussionService.findAsideList();
+        List<ReviewAsideListDto> reviewList = reviewService.findAsideList();
+
         // 댓글 수
         long count = discussionReplyService.getCount(dno);
 
@@ -81,6 +82,7 @@ public class DiscussionController {
         model.addAttribute("count", count);
         model.addAttribute("found", foundDsc);
         model.addAttribute("aList", asideList);
+        model.addAttribute("rList", reviewList);
 
         String ref = request.getHeader("Referer");
         model.addAttribute("ref", ref);

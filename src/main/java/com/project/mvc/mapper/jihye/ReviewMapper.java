@@ -2,6 +2,7 @@ package com.project.mvc.mapper.jihye;
 
 import com.project.mvc.common.jihye.Page;
 import com.project.mvc.dto.response.jihye.ReviewFindAllDto;
+import com.project.mvc.dto.response.kibeom.ReviewAsideListDto;
 import com.project.mvc.dto.seongjin.ReviewLinkDto;
 import com.project.mvc.dto.zyo.ReviewRenderingDto;
 import com.project.mvc.entity.Review;
@@ -34,5 +35,8 @@ public interface ReviewMapper {
 
     // 리턴값 수정했음 -seongjin
     List<ReviewLinkDto> findAllByEmail(String email);
+
+    // 기범
+    List<ReviewAsideListDto> findAsideList();
 }
 

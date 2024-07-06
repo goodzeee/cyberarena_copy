@@ -87,15 +87,18 @@
     </div>
     <aside id="right-aside">
         <div class="aside-wrap">
-            <h2 class="aside-header"> 🔥 최근 인기 리뷰 🔥</h2>
-            <ul>
-                <li>#1 정처기 재밌음? </li>
-                <li>#2 타짜를 보고 왔는데..</li>
-                <li>#3 요즘 영화값 비싸요</li>
-                <li>#4 1987 보고 오신분!!</li>
-                <li>#5 명량에 대해..</li>
-                <li>#6 정처기에 대해..</li>
-                <li>#7 실기에 대해..</li>
+            <h2 class="aside-header">지금 뜨는 리뷰 <i class="live-icon">LIVE</i></h2>
+            <ul class="aside-ul">
+<%--                <p class="aside-p" onclick="window.location.href=`/discussion/list`">더보기</p>--%>
+                <c:forEach var="r" items="${rList}" >
+                    <li class="aside-li">
+                        <p onclick="window.location.href=`/review/list/${r.mediaNo}`">
+                                <%--                            <${status.index + 1}> <span class="aside-title">${a.discussionTitle}</span><br>--%>
+                            <span class="aside-title">${r.reviewText}</span><br>
+<%--                            <i class="fas fa-eye"></i> ${a.viewCount}--%>
+                        </p>
+                    </li>
+                </c:forEach>
             </ul>
 
         </div>

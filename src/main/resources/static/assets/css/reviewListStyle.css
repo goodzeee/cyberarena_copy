@@ -1,53 +1,109 @@
 /* 전체 레이아웃 설정 */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f7f7f7;
+    background-color: black !important;
     margin: 0;
     padding: 0;
+    color: #B6B6B6;
 }
 
 /* 컨테이너 */
+
 #whole {
     display: flex;
-    justify-content: space-between;
-    padding: 20px;
-    background-color: slategray
+    width: 92%;
+    margin: 0 auto;
 }
-
 /* 좌측 및 우측 사이드바 */
+
 aside {
-    height: 500px;
     width: 20%;
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 15px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin: 67px auto 0 auto;
+    position: sticky;
+    top: 20px;
+    height: calc(100vh - 67px - 20px);
+    overflow-y: auto;
+    border-radius: 15px;
+
+
 }
 
-aside h2 {
-    font-size: 18px;
-    margin-bottom: 10px;
+#left-aside {
+    left: 0;
 }
+
+#right-aside {
+    right: 0;
+}
+
+.aside-wrap {
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    margin: 0;
+    padding: 0 0 60px 0;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    background: #171717;
+    /*box-shadow: rgba(100, 100, 111, 0.1) 0px 7px 29px 0px !important;*/
+}
+
+.aside-header {
+    width: 70%;
+    /*text-align: center;*/
+    margin: 0 auto;
+    padding: 30px;
+}
+.aside-p {
+    padding-top: 20px;
+    border-top: 1px solid #636363;
+    text-align: right;
+    color: #636363;
+    font-size: 14px;
+    cursor: pointer;
+    text-underline: #444444;
+}
+.aside-p:hover {
+    font-weight: 700;
+}
+
 
 aside ul {
+    width: 70%;
+    margin: 0 auto;
     list-style: none;
     padding: 0;
 }
 
 aside ul li {
+    /*padding-top: 10px;*/
+    font-size: 15px;
+    font-weight: 400;
+    color: #504f4f;
+    padding: 15px 15px 5px 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     margin-bottom: 10px;
-    color: #555;
+    background: #393838;
+    transition: box-shadow 0.2s;
+    cursor: pointer;
 }
 
+aside ul li:hover {
+    box-shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.9);
+}
 /* 메인 섹션 */
 main {
-    width: 56%;
-    background-color: #fff;
+    width: 50%;
+    background-color: #222323;
     border: 1px solid #ddd;
     border-radius: 8px;
     padding: 20px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 67px 100px 0;
+
 }
 
 /* 미디어 정보 섹션 */
@@ -57,6 +113,9 @@ main {
     margin-bottom: 20px;
     /* border-bottom: 1px solid #ddd; */
     padding-bottom: 20px;
+}
+#wrap {
+    color: #B6B6B6 !important;
 }
 
 .media-image {
@@ -81,12 +140,12 @@ main {
 .media-description p {
     font-size: 18px;
     margin: 5px 0;
-    color: #333;
+    color: #B6B6B6;
 }
 
 .media-title {
     font-size: 24px;
-    color: #333;
+
 }
 
 #list-btn {
@@ -115,6 +174,17 @@ main {
     margin-bottom: 20px;
     /* border-bottom: 1px solid #ddd; */
     padding-bottom: 20px;
+    color: #B6B6B6;
+}
+.review-form > * {
+    color: #B6B6B6;
+}
+#reviewForm > * {
+    color: #B6B6B6;
+}
+
+.review-item > * {
+    color: #B6B6B6;
 }
 
 h3 {
@@ -135,6 +205,7 @@ h3.review-list {
 
 #reviewText {
     width: 100%;
+    background: #393838;
 }
 
 .review-form label {
@@ -177,15 +248,17 @@ h3.review-list {
 
 .review-item {
     margin-bottom: 10px;
+    color: #B6B6B6;
+    background: #393838;
 }
 
 .review-item p {
     margin: 5px 0;
-    color: #555;
+    color: #B6B6B6;
 }
 
 .review-item strong {
-    color: #333;
+    color: #B6B6B6;
 }
 
 /* 좋아요 버튼 스타일링 */

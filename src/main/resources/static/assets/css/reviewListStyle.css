@@ -1,9 +1,10 @@
 /* 전체 레이아웃 설정 */
 body {
     font-family: Arial, sans-serif;
-    background-color: black;
+    background-color: black !important;
     margin: 0;
     padding: 0;
+    color: #B6B6B6;
 }
 
 /* 컨테이너 */
@@ -81,7 +82,7 @@ aside ul li {
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     margin-bottom: 10px;
-    background: #FFFFFF;
+    background: #393838;
     transition: box-shadow 0.2s;
     cursor: pointer;
 }
@@ -92,7 +93,7 @@ aside ul li:hover {
 /* 메인 섹션 */
 main {
     width: 50%;
-    background-color: #fff;
+    background-color: #222323;
     border: 1px solid #ddd;
     border-radius: 8px;
     padding: 20px;
@@ -101,8 +102,7 @@ main {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 0 100px;
-
+    margin: 67px 100px 0;
 
 }
 
@@ -113,6 +113,9 @@ main {
     margin-bottom: 20px;
     /* border-bottom: 1px solid #ddd; */
     padding-bottom: 20px;
+}
+#wrap {
+    color: #B6B6B6 !important;
 }
 
 .media-image {
@@ -137,12 +140,12 @@ main {
 .media-description p {
     font-size: 18px;
     margin: 5px 0;
-    color: #333;
+    color: #B6B6B6;
 }
 
 .media-title {
     font-size: 24px;
-    color: #333;
+
 }
 
 #list-btn {
@@ -171,6 +174,17 @@ main {
     margin-bottom: 20px;
     /* border-bottom: 1px solid #ddd; */
     padding-bottom: 20px;
+    color: #B6B6B6;
+}
+.review-form > * {
+    color: #B6B6B6;
+}
+#reviewForm > * {
+    color: #B6B6B6;
+}
+
+.review-item > * {
+    color: #B6B6B6;
 }
 
 h3 {
@@ -191,6 +205,7 @@ h3.review-list {
 
 #reviewText {
     width: 100%;
+    background: #393838;
 }
 
 .review-form label {
@@ -233,15 +248,17 @@ h3.review-list {
 
 .review-item {
     margin-bottom: 10px;
+    color: #B6B6B6;
+    background: #393838;
 }
 
 .review-item p {
     margin: 5px 0;
-    color: #555;
+    color: #B6B6B6;
 }
 
 .review-item strong {
-    color: #333;
+    color: #B6B6B6;
 }
 
 /* 좋아요 버튼 스타일링 */

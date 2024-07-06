@@ -92,7 +92,7 @@
 <%--                <p class="aside-p" onclick="window.location.href=`/discussion/list`">더보기</p>--%>
                 <c:forEach var="r" items="${rList}" >
                     <li class="aside-li">
-                        <p onclick="window.location.href=`/review/list/${r.reviewNo}`">
+                        <p onclick="window.location.href=`/review/list/${r.mediaNo}`">
                                 <%--                            <${status.index + 1}> <span class="aside-title">${a.discussionTitle}</span><br>--%>
                             <span class="aside-title">${r.reviewText}</span><br>
 <%--                            <i class="fas fa-eye"></i> ${a.viewCount}--%>

@@ -110,6 +110,6 @@ public class MediaService {
         List<MediaAsideListDto> asideList = mediaMapper.findAsideList();
         Collections.shuffle(asideList);
 
-        return asideList.stream().limit(10).collect(Collectors.toList());
+        return asideList.stream().limit(20).collect(Collectors.toList());
     }
 }

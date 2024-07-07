@@ -14,7 +14,7 @@
 <div id="whole">
     <aside id="left-aside">
         <div class="aside-wrap">
-            <h2 class="aside-header">지금 뜨는 토론 <i class="live-icon">LIVE</i></h2>
+            <h2 class="aside-header"><i class="live-icon">LIVE</i> <br>지금 뜨는 토론 </h2>
             <ul class="aside-ul">
             <p class="aside-p" onclick="window.location.href=`/discussion/list`">더보기</p>
                 <c:forEach var="a" items="${aList}" >
@@ -87,8 +87,9 @@
     </div>
     <aside id="right-aside">
         <div class="aside-wrap">
-            <h2 class="aside-header">지금 뜨는 리뷰 <i class="live-icon">LIVE</i></h2>
+            <h2 class="aside-header"><i class="live-icon">LIVE</i> <br>지금 뜨는 작품 </h2>
             <ul class="aside-ul">
+                <hr>
 <%--                <p class="aside-p" onclick="window.location.href=`/discussion/list`">더보기</p>--%>
                 <c:forEach var="m" items="${mList}" >
                     <li class="aside-li" onclick="window.location.href=`/review/list/${m.mediaNo}`">
@@ -96,8 +97,8 @@
                             <div>
                                 <img src="${m.imageUrl}">
                             </div>
-                            <div>
-                                <p>${m.mediaTitle}</p>
+                            <div class="aside-div-right">
+                                <h3>${m.mediaTitle}</h3>
                                 <p>
                                     <c:choose>
                                         <c:when test="${m.categoryNo == 1}">

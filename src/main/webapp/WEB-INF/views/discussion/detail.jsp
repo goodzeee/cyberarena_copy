@@ -90,13 +90,33 @@
             <h2 class="aside-header">지금 뜨는 리뷰 <i class="live-icon">LIVE</i></h2>
             <ul class="aside-ul">
 <%--                <p class="aside-p" onclick="window.location.href=`/discussion/list`">더보기</p>--%>
-                <c:forEach var="r" items="${rList}" >
-                    <li class="aside-li">
-                        <p onclick="window.location.href=`/review/list/${r.mediaNo}`">
-                                <%--                            <${status.index + 1}> <span class="aside-title">${a.discussionTitle}</span><br>--%>
-                            <span class="aside-title">${r.reviewText}</span><br>
-<%--                            <i class="fas fa-eye"></i> ${a.viewCount}--%>
-                        </p>
+                <c:forEach var="m" items="${mList}" >
+                    <li class="aside-li" onclick="window.location.href=`/review/list/${m.mediaNo}`">
+                        <div class="aside-div">
+                            <div>
+                                <img src="${m.imageUrl}">
+                            </div>
+                            <div>
+                                <p>${m.mediaTitle}</p>
+                                <p>
+                                    <c:choose>
+                                        <c:when test="${m.categoryNo == 1}">
+                                            영화
+                                        </c:when>
+                                        <c:when test="${m.categoryNo == 2}">
+                                            시리즈
+                                        </c:when>
+                                        <c:when test="${m.categoryNo == 3}">
+                                            도서
+                                        </c:when>
+                                        <c:otherwise>
+                                            기타
+                                        </c:otherwise>
+                                    </c:choose>
+                                </p>
+                                <p>${m.rating}</p>
+                            </div>
+                        </div>
                     </li>
                 </c:forEach>
             </ul>

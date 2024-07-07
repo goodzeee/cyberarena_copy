@@ -126,5 +126,8 @@
     </select>
 
 
+    <select id="findAsideList" resultType="com.project.mvc.dto.response.kibeom.MediaAsideListDto">
+        SELECT * FROM media
+    </select>
 
 </mapper>

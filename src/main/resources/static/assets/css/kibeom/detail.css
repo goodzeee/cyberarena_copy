@@ -103,6 +103,22 @@ aside ul li {
     cursor: pointer;
 }
 
+aside ul li div.aside-div {
+    display: flex;
+    background: #504f4f;
+}
+aside ul li div.aside-div div {
+    width: 50%;
+}
+
+aside ul li div.aside-div div img {
+    /*width: 100%;*/
+    width: 70%;
+    height: 100%;
+    background: center/cover no-repeat fixed;
+    overflow: hidden;
+}
+
 aside ul li:hover {
     box-shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.9);
 }

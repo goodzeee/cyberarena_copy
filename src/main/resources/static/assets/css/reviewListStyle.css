@@ -419,3 +419,14 @@ p {
 }
 
 
+
+.live-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: red;
+    color: white;
+    border-radius: 5px;
+    padding: 5px 10px;
+    font-size: 10px;
+}

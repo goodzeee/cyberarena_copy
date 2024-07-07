@@ -128,6 +128,7 @@
 
     <select id="findAsideList" resultType="com.project.mvc.dto.response.kibeom.MediaAsideListDto">
         SELECT * FROM media
+        ORDER BY rating DESC
     </select>
 
 </mapper>

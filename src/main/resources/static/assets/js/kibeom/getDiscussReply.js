@@ -83,8 +83,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function renderComments(comments, loginUserDto) {
-        console.log(comments)
-        console.log(loginUserDto)
         commentsContainer.innerHTML = '';
         if (comments.length === 0) {
             const commentElement = document.createElement('div');
@@ -135,7 +133,7 @@ document.addEventListener('DOMContentLoaded', function () {
             </div>
             <div id="cancle-clear-btn" class="cancleAndClearBtn">
                     <button class="cancleBtn" data-rno="${comment.discussionReplyNo}">취소</button>
-                    <button class="clearBtn" data-rno="${comment.discussionReplyNo}" data-email="${comment.email}">삭제</button>
+                    <button class="clearBtn" data-rno="${comment.discussionReplyNo}" data-email="${comment.email}">완</button>
             </div>`;
             } else { // 내가 쓴 글이 수정되지 않았을 때
                 tag += `
@@ -154,7 +152,7 @@ document.addEventListener('DOMContentLoaded', function () {
             </div>
             <div id="cancle-clear-btn" class="cancleAndClearBtn">
                     <button class="cancleBtn" data-rno="${comment.discussionReplyNo}">취소</button>
-                    <button class="clearBtn" data-rno="${comment.discussionReplyNo}" data-email="${comment.email}">삭제</button>
+                    <button class="clearBtn" data-rno="${comment.discussionReplyNo}" data-email="${comment.email}">완료</button>
             </div>
 `;
             }
@@ -200,11 +198,6 @@ document.addEventListener('DOMContentLoaded', function () {
             </div>`;
         }
 
-        // if (isLoggedIn) {
-        //     tag = `<div class="comment-body">
-        //         <p class="reply-comment">${comment.discussionReplyContent}</p>
-        //     </div>`
-        // }
 
         commentElement.innerHTML = tag;
 
@@ -214,6 +207,14 @@ document.addEventListener('DOMContentLoaded', function () {
     fetchComments();
     submitCommentButton.addEventListener('click', submitComment);
 
+    // 댓글 삭제 기능
+    commentsContainer.addEventListener('click', e => {
+        if (e.target.matches('.deleteBtn')) {
+            const $parentNode = e.target.closest('.comment-card');
+            const rno = $parentNode.querySelector('.deleteBtn').dataset.rno;
+            removeComment(rno)
+        }
+    });
 
 
 
@@ -223,26 +224,35 @@ document.addEventListener('DOMContentLoaded', function () {
             const $parentNode = e.target.closest('.comment-card');
             const $modifyBtn = e.target;
             const $delBtn = $parentNode.querySelector('.deleteBtn');
+            const $cancelBtn = $parentNode.querySelector('.cancleBtn')
+            const $clearBtn = $parentNode.querySelector('.clearBtn')
             const $commentBody = $parentNode.querySelector('.comment-body');
             const $oldP = $commentBody.querySelector('.reply-comment');
+            const cancelAndClear = $parentNode.querySelector('.cancleAndClearBtn')
+            const modifyAndDel = $parentNode.querySelector('.modifyAndDeleteBtn')
             const originalText = $oldP.textContent;
 
             const $newInput = document.createElement('textarea');
             $newInput.value = originalText;
             $newInput.classList.add('modify-input');
 
+            console.log(cancelAndClear)
+            console.log(modifyAndDel)
+            modifyAndDel.style.display = "none";
+            cancelAndClear.style.display = "block";
+
             $commentBody.innerHTML = '';
             $commentBody.appendChild($newInput);
 
-            $modifyBtn.textContent = '완료';
-            $delBtn.textContent = '취소';
+            // $modifyBtn.textContent = '완료';
+            // $delBtn.textContent = '취소';
 
 
 
-            $modifyBtn.classList.add('saveBtn');
-            $delBtn.classList.add('cancelBtn');
-            $modifyBtn.classList.remove('modifyBtn');
-            $delBtn.classList.remove('deleteBtn');
+            // $modifyBtn.classList.add('saveBtn');
+            // $delBtn.classList.add('cancelBtn');
+            // $modifyBtn.classList.remove('modifyBtn');
+            // $delBtn.classList.remove('deleteBtn');
 
             // 완료 버튼 클릭 이벤트
             const saveHandler = (e) => {
@@ -296,13 +306,14 @@ document.addEventListener('DOMContentLoaded', function () {
             const cancelHandler = () => {
                 $delBtn.setAttribute("onclick", '')
                 $commentBody.innerHTML = `<p class="reply-comment">${originalText}</p>`;
-                $modifyBtn.textContent = '수정';
-                $delBtn.textContent = '삭제';
 
-                $modifyBtn.classList.add('modifyBtn');
-                $delBtn.classList.add('deleteBtn');
-                $modifyBtn.classList.remove('saveBtn');
-                $delBtn.classList.remove('cancelBtn');
+                cancelAndClear.style.display = "none";
+                modifyAndDel.style.display = "block";
+
+                // $modifyBtn.classList.add('modifyBtn');
+                // $delBtn.classList.add('deleteBtn');
+                // $modifyBtn.classList.remove('saveBtn');
+                // $delBtn.classList.remove('cancelBtn');
 
                 // 기존 이벤트 리스너를 제거하여 메모리 누수를 방지
                 $modifyBtn.removeEventListener('click', saveHandler);
@@ -311,9 +322,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
             // 기존 이벤트 리스너를 제거하고 새로 추가
             $modifyBtn.removeEventListener('click', saveHandler);
-            $delBtn.removeEventListener('click', cancelHandler);
-            $delBtn.addEventListener('click', cancelHandler);
-            $modifyBtn.addEventListener('click', saveHandler);
+            // $cancelBtn.removeEventListener('click', cancelHandler);
+            // $clearBtn.addEventListener('click', cancelHandler);
+            $clearBtn.addEventListener('click', saveHandler);
+            $cancelBtn.addEventListener('click', cancelHandler);
         }
+
     });
+
 });
+
+// 삭제 버튼 확인

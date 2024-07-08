@@ -171,10 +171,10 @@ main {
 }
 
 .media-image {
-    width: 300px; /* 너비를 더 크게 설정 */
+    width: 290px; /* 너비를 더 크게 설정 */
     height: 440px; /* 높이를 더 크게 설정 */
     overflow: hidden; /* 이미지가 넘칠 경우를 대비하여 숨김 처리 */
-    margin-right: 20px; /* 우측 여백 설정 */
+    margin-right: 15px; /* 우측 여백 설정 */
 }
 
 .media-image img {
@@ -185,14 +185,15 @@ main {
 }
 
 .media-description {
-    padding: 10px;
+    padding: 7px;
     display: grid;
 }
 
 .media-description p {
-    font-size: 18px;
+    font-size: 14px;
     margin: 5px 0;
     color: #B6B6B6;
+    letter-spacing: -1px;
 }
 
 .media-title {

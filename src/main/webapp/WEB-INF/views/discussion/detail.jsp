@@ -52,7 +52,7 @@
                 <span class="discussion-date">${found.formattedDiscussionCreatedAt}</span>
 
                 <c:if test="${login.nickname == found.nickname}">
-                    <button class="del-btn" data-href="/discussion/remove?dno=${found.discussionNo}">삭제</button>
+                    <button class="del-btn" onclick="window.location.href=`/discussion/remove?dno=${found.discussionNo}`">삭제</button>
                 </c:if>
 
             </div>
@@ -151,6 +151,8 @@
             return;
         }
     })
+
+
 
 
 </script>

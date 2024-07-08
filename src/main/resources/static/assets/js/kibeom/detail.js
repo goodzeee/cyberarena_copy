@@ -3,8 +3,11 @@ const $title = document.getElementById('title');
 const $offer = document.getElementById('detail');
 const $media = document.getElementById('media');
 const $modalWrap = document.querySelector('.modal-wrap');
+
 const $replySubmitBtn = document.getElementById('submitComment');
 const $replyTextArea = document.getElementById('reply-textarea');
+
+
 
 let isExist = false; // 댓글 등록창에 값이 있냐 없냐
 

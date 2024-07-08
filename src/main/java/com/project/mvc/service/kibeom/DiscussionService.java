@@ -53,11 +53,6 @@ public class DiscussionService {
                         .searchType("title")
                 .build());
         log.debug(byTitle.toString());
-        // 지금은 미디어 이름만 가지고 있는데,
-        // 미디어매퍼에서 이름으로 찾는 함수 만들어서
-        // 번호 받아와야 함.
-        // 받아옴, 이제 discumapper에서 insert.
-        // (필드로 mediaNo 가지고 있어야함.)
         for (Media media : byTitle) {
             dto.setMediaNo(media.getMediaNo());
         }
@@ -119,7 +114,14 @@ public class DiscussionService {
 
 
     public List<DiscussAsideListDto> findAsideList() {
-        return discussionMapper.findAsideList();
+
+        List<DiscussAsideListDto> asideList = discussionMapper.findAsideList();
+        for (DiscussAsideListDto dto : asideList) {
+            if (dto.getDiscussionTitle().length() > 15) {
+                dto.setDiscussionTitle(dto.getDiscussionTitle().substring(0, 15) + "...");
+            }
+        }
+        return asideList;
     }
 
     public List<DiscussResponseDto> getSortedDiscussions(String sort) {

@@ -261,7 +261,13 @@ div.aside-div .aside-div-right h3 {
 .cancleAndClearBtn {
     display: none;
 }
+aside::-webkit-scrollbar {
+    display: none;
+}
 
+body::-webkit-scrollbar {
+    display: none;
+}
 .reply-comment {
     margin-top: 6px;
     border: 1px solid #c5c3c3;

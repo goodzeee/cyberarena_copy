@@ -35,6 +35,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const response = await fetch(`/api/v1/discuss/reply/${discussionNo}`);
             if (!response.ok) throw new Error('댓글을 불러오는데 실패했습니다.');
             const { dtoList, loginUserDto } = await response.json();
+
             renderComments(dtoList, loginUserDto);
         } catch (error) {
             console.error(error);
@@ -81,6 +82,8 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function renderComments(comments, loginUserDto) {
+        console.log(comments)
+        console.log(loginUserDto)
         commentsContainer.innerHTML = '';
         if (comments.length === 0) {
             const commentElement = document.createElement('div');

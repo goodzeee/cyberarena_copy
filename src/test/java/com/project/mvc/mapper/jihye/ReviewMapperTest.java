@@ -36,7 +36,7 @@ class ReviewMapperTest {
             Review r = new Review();
             r.setMediaNo(mediaNo);
             r.setReviewText("테스트 리뷰 내용" + i);
-            r.setUserRating(random.nextDouble() * 10); // 0부터 10 사이의 랜덤 별점 설정
+//            r.setUserRating(random.nextDouble() * 10); // 0부터 10 사이의 랜덤 별점 설정
             r.setDiscussionStatus(DiscussionStatus.ALLOW);
 
 //            boolean save = reviewMapper.saveReview(r);

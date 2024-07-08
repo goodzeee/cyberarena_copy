@@ -294,37 +294,43 @@ input[id="select_box4"]:checked ~ div #imgbox .select4 {
 
 /* footer */
 footer {
-    background: #353535;
-    color: #999;
-    padding: 40px 40px 40px;
-    margin-top: 100px;
+    width: 100%;
+    margin: 0 auto;
+    background: #000;
+    color: white;
+    height: 200px;
+    bottom: 0;
 }
-footer ul {
+
+.footer-wrap {
+    width: 90%;
+    height: 100%;
+    margin: 0 auto;
     display: flex;
-    justify-content: space-around;
-    align-items: center;
+    justify-content: space-between;
 }
-footer ul li:nth-child(2) {
-    color: #eee;
-    font-size: 16px;
-    line-height: 2;
-}
-footer ul li:nth-child(2) span {
-    font-weight: 700;
-    margin-right: 10px;
-    color: #999;
+.footer-wrap .image-wrap {
+    margin: auto 0;
+    width: 70px;
+    height: 70px;
+    position: relative;
+    bottom: 7%;
 }
 
-footer .go-top {
-    color: #fff;
-    font-size: 50px;
-    position: fixed;
-    right: 50px;
-    bottom: 60px;
+.footer-wrap img {
+    width: 70px;
+    height: 70px;
+    cursor: pointer;
 }
-
-
-
+.footer-wrap .footer-text {
+    margin: auto 0;
+    color: #B6B6B6;
+    cursor: pointer;
+}
+.footer-wrap .footer-text:hover {
+    text-decoration: underline;
+    font-weight: 500;
+}
 
 /* 프로필 css */
 header .inner-header .profile-box {

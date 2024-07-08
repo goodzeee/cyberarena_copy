@@ -7,6 +7,7 @@ import com.project.mvc.dto.request.jihye.ReviewModifyDto;
 import com.project.mvc.dto.response.jihye.ReactionDto;
 import com.project.mvc.dto.response.jihye.ReviewListDto;
 import com.project.mvc.dto.response.kibeom.DiscussAsideListDto;
+import com.project.mvc.dto.response.kibeom.MediaAsideListDto;
 import com.project.mvc.dto.response.kibeom.ReviewAsideListDto;
 import com.project.mvc.dto.seongjin.LoginUserInfoDto;
 import com.project.mvc.mapper.zyo.MediaMapper;
@@ -58,9 +59,9 @@ public class ReviewController {
 //        String email = loginUser.getEmail();
         ReviewListDto reviewList = reviewService.findList(mno);
         List<DiscussAsideListDto> asideList = discussionService.findAsideList();
-        List<ReviewAsideListDto> reviewAsideList = reviewService.findAsideList();
+        List<MediaAsideListDto> mList = mediaService.findAsideList();
 
-        model.addAttribute("rList", reviewAsideList);
+        model.addAttribute("mList", mList);
         model.addAttribute("aList", asideList);
         model.addAttribute("media", media);
             model.addAttribute("reviews", reviewList);

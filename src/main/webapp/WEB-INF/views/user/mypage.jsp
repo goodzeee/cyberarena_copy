@@ -103,7 +103,17 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                 </div>
             </div>
         </div>
-        <%@ include file="../include/footer.jsp" %>
+        <footer class="main-footer">
+            <div class="footer-wrap">
+                <div class="image-wrap">
+                    <img class="main-logo" src="../assets/img/logo2.png"/>
+                </div>
+                <div class="footer-text">
+                    © cyber-arena-club 2024
+                    All Rights Reseved
+                </div>
+            </div>
+        </footer>
 
         <script>
             const $type = document.querySelector(".user-type");

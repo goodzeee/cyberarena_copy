@@ -6,11 +6,13 @@ const gnb = document.querySelector(".gnb");
 menuBtn.addEventListener("click", e => {
     e.preventDefault();
     gnb.classList.add("on");
+    menuBtn.classList.add("backout");
 });
 
 closeBtn.addEventListener("click", e => {
     e.preventDefault();
     gnb.classList.remove("on");
+    menuBtn.classList.remove("backout");
 });
 
 // 모달 띄우기

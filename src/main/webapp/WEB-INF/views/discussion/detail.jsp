@@ -48,7 +48,7 @@
                 </button>
 
             </div>
-            <div class="discussion-body">
+            <div class="discussion-body" data-disc-no="${found.discussionNo}">
                 <span class="discussion-date">${found.formattedDiscussionCreatedAt}</span>
 
                 <c:if test="${login.nickname == found.nickname}">
@@ -140,7 +140,6 @@
     })
 
     document.querySelector("#whole").addEventListener("click", e => {
-        console.log("일단 눌렀을 경우")
         if(e.target.matches(".nickname")) {
             const email = e.target.dataset.email;
             window.location.href= `/user/user-info/\${email}`;
@@ -151,7 +150,6 @@
             window.location.href = `/review/list/\${mediaNo}`;
             return;
         }
-        console.log("안눌렸을 경우");
     })
 
 

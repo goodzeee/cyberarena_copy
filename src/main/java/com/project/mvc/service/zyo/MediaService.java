@@ -108,7 +108,11 @@ public class MediaService {
 
     public List<MediaAsideListDto> findAsideList() {
         List<MediaAsideListDto> asideList = mediaMapper.findAsideList();
-//        Collections.shuffle(asideList);
+        for (MediaAsideListDto dto : asideList) {
+            if (dto.getMediaTitle().length() >= 5) {
+                dto.setMediaTitle(dto.getMediaTitle().substring(0, 5)+"...");
+            }
+        }
 
         return asideList.stream().limit(20).collect(Collectors.toList());
     }

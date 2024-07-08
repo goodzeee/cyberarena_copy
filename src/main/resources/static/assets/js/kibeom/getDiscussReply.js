@@ -25,7 +25,7 @@ const callApi = async (url, method = 'GET', payload = null) => {
 };
 
 document.addEventListener('DOMContentLoaded', function () {
-    const discussionNo = document.querySelector('input[name="discussionNo"]').value;
+    const discussionNo = document.querySelector('.discussion-body').dataset.discNo;
     const commentsContainer = document.getElementById('comments');
     const submitCommentButton = document.getElementById('submitComment');
     const commentForm = document.getElementById('commentForm');
@@ -35,6 +35,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const response = await fetch(`/api/v1/discuss/reply/${discussionNo}`);
             if (!response.ok) throw new Error('댓글을 불러오는데 실패했습니다.');
             const { dtoList, loginUserDto } = await response.json();
+
 
             renderComments(dtoList, loginUserDto);
         } catch (error) {
@@ -110,7 +111,8 @@ document.addEventListener('DOMContentLoaded', function () {
         commentElement.classList.add('comment-card');
         let tag;
 
-        if (loginUserDto.nickname === comment.nickname) {
+
+        if (loginUserDto && loginUserDto.nickname === comment.nickname) {
             // 내가 쓴 댓글
             tag = `
             <div class="comment-header self comment-header-self" data-replyNo="${comment.discussionReplyNo}">
@@ -212,12 +214,6 @@ document.addEventListener('DOMContentLoaded', function () {
     fetchComments();
     submitCommentButton.addEventListener('click', submitComment);
 
-    // commentsContainer.addEventListener('click', async (e) => {
-    //     if (e.target.matches('.deleteBtn')) {
-    //         const rno = e.target.getAttribute('data-rno');
-    //         await removeComment(rno);
-    //     }
-    // });
 
 
 

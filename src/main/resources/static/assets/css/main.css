@@ -318,6 +318,9 @@ header .gnb {
 header .gnb.on {
     right: 0;
 }
+header .menu-open.backout {
+  display: none;
+}
 
 header .gnb .close {
     display: block;

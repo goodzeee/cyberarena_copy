@@ -3,6 +3,7 @@ package com.project.mvc.mapper.jihye;
 import com.project.mvc.common.jihye.Page;
 import com.project.mvc.dto.response.jihye.ReviewFindAllDto;
 import com.project.mvc.dto.response.kibeom.ReviewAsideListDto;
+import com.project.mvc.dto.seongjin.ReviewAllowDto;
 import com.project.mvc.dto.seongjin.ReviewLinkDto;
 import com.project.mvc.dto.zyo.ReviewRenderingDto;
 import com.project.mvc.entity.Review;
@@ -42,5 +43,9 @@ public interface ReviewMapper {
     boolean updateMediaRating(long mediaNo);
 
     boolean updateRatingWhenDeleteLastReview(long mediaNo);
+
+    ReviewAllowDto getAllowDto(long reviewNo);
+
+
 }
 

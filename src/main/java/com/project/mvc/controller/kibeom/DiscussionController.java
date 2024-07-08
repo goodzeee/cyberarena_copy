@@ -5,6 +5,7 @@ import com.project.mvc.common.zyo.Search;
 import com.project.mvc.dto.request.kibeom.DiscussionModifyDto;
 import com.project.mvc.dto.request.kibeom.MakeDiscussionDto;
 import com.project.mvc.dto.response.kibeom.*;
+import com.project.mvc.dto.seongjin.ReviewAllowDto;
 import com.project.mvc.entity.Media;
 import com.project.mvc.mapper.kibeom.DiscussionMapper;
 import com.project.mvc.mapper.zyo.MediaMapper;
@@ -50,8 +51,16 @@ public class DiscussionController {
     }
 
     @GetMapping("/register")
-    public String register() {
+    public String register(@RequestParam(required = false)Long reviewNo, Model model) {
+        if(reviewNo == null) {
         return "discussion/register";
+        }
+        ReviewAllowDto dto = reviewService.allowReview(reviewNo);
+
+        model.addAttribute("dto", dto);
+        System.out.println("dto = " + dto);
+        return "discussion/register";
+
     }
 
 

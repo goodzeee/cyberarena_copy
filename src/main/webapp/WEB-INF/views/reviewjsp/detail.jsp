@@ -127,7 +127,7 @@
         <c:choose>
             <c:when test="${review.discussionStatus == 'ALLOW'}">
                 <!--href="/discussion/register" 토론 작성 페이지가 바로 뜨면 좋은데 ... -->
-                <p><strong>토론신청 허용 여부:</strong> <a href="/discussion/list">ALLOW</a></p>
+                <p><strong>토론신청 허용 여부:</strong> <a href="/discussion/register?reviewNo=${review.reviewNo}">ALLOW</a></p>
             </c:when>
             <c:otherwise>
                 <p><strong>토론신청 허용 여부:</strong> DISALLOW</p>

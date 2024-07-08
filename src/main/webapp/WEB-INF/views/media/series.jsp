@@ -83,7 +83,7 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
               <section class="link" data-reply-count="${discussions.replyCount}" onclick="location.href='/discussion/detail?dno=${discussions.discussionNo}'">
                 <h2>${discussions.discussionTitle}</h2>
                 <div class="poster_info">
-                  <span>${discussions.mediaTitle}</span>
+                  <span class="media-title" data-media-no="${discussions.mediaNo}">${discussions.mediaTitle}</span>
                   <p>${discussions.format}</p>
                 </div>
                 <div class="poster_count">
@@ -110,9 +110,9 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
               <div class="card-wrapper ">
                 <section class="card" data-review-no="${review.reviewNo}">
                   <div class="card-title-wrapper">
-                    <h2 class="card-title">${review.mediaTitle}</h2>
+                    <h2 class="card-title media-title" data-media-no="${review.mediaNo}">${review.mediaTitle}</h2>
                     <div class="time-view-wrapper">
-                      <div class="nickname">${review.nickname}</div>
+                      <div class="nickname" data-email="${review.email}">${review.nickname}</div>
                       <div
                         class="rating"
                         data-rating="${review.userRating}"
@@ -134,7 +134,7 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
       
       <!-- 작은이미지 추천 -->
       <div class="row">
-        <div class="row_title">영화 목록</div>
+        <div class="row_title">시리즈 목록</div>
         <div class="prev">
           <i class="fa-solid fa-angle-right prev-arrow"></i>
         </div>
@@ -171,7 +171,7 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
       <div class="modal-close">닫기</div>
       <div class="reviews">
         <div class="review-title">
-          <h2></h2>
+          <h2 class="nickname"></h2>
           <span></span>
           <div class="review-list">
             <span class="review-content"></span>
@@ -262,11 +262,11 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
         $reviews.innerHTML = `<h2>리뷰</h2>
                                <a href="/review/list/\${mediaNo}">더보기<i class="fa-solid fa-angle-right"></i></a>`;
         const latestReviews = reviewList.slice(0, 8);
-        latestReviews.forEach(({ nickname, text, userRating }) => {
+        latestReviews.forEach(({ nickname, text, userRating, email }) => {
 
           $reviews.innerHTML += `
           <div class="review-title">
-            <h2>\${nickname}</h2>
+            <h2 class=nickname data-email="\${email}">\${nickname}</h2>
             <span><i class="fa-solid fa-star filled"></i>\${userRating}</span>
             <div class="review-list">
               <span class="review-content">\${text}</span>
@@ -278,6 +278,19 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
       
       });
     });
+
+    document.addEventListener("click", e => {
+      if(e.target.matches(".nickname")) {
+        const email = e.target.dataset.email;
+        window.location.href = `/user/user-info/\${email}`;
+        return;
+      }
+      if(e.target.matches(".media-title")) {
+        const mediaNo = e.target.dataset.mediaNo;
+        window.location.href = `/review/list/\${mediaNo}`;
+        return;
+      }
+    })
 
     $closeBtn.addEventListener("click", (e) => {
       $modal.classList.add("none");

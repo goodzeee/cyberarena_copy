@@ -10,6 +10,7 @@ import java.time.format.DateTimeFormatter;
 @EqualsAndHashCode
 public class DiscussResponseDto {
 
+    private String email;
     private String nickname;
     private String discussionTitle;
     private String discussionOffer;
@@ -20,12 +21,14 @@ public class DiscussResponseDto {
     private long viewCount;
     private int replyCount;
     private String mediaTitle;
+    private long mediaNo;
 
 
     public DiscussResponseDto(DiscussFindAllDto dto) {
+        this.email = dto.getEmail();
         this.nickname = dto.getNickname();
-        this.discussionTitle = dto.getDiscussionTitle();
-        this.discussionOffer = makeShortContent(dto.getDiscussionOffer());
+        this.discussionTitle = makeShortContent(dto.getDiscussionTitle());
+        this.discussionOffer = dto.getDiscussionOffer();
         this.discussionCreatedAt = dto.getDiscussionCreatedAt();
         this.formattedDiscussionCreatedAt = dateFormatting(dto.getDiscussionCreatedAt()); // 포맷된 문자열 할당
         this.reviewNo = dto.getReviewNo();
@@ -33,6 +36,7 @@ public class DiscussResponseDto {
         this.viewCount = dto.getViewCount();
         this.replyCount = dto.getReplyCount();
         this.mediaTitle = dto.getMediaTitle();
+        this.mediaNo = dto.getMediaNo();
     }
 
     private String dateFormatting(LocalDateTime regDateTime) {
@@ -41,7 +45,7 @@ public class DiscussResponseDto {
     }
 
     private String makeShortContent(String content) {
-        return (content.length() > 30) ? content.substring(0, 30) + "..." : content;
+        return (content.length() > 15) ? content.substring(0, 15) + "..." : content;
     }
 
     private String makeShortTitle(String title) {

@@ -25,7 +25,7 @@ const callApi = async (url, method = 'GET', payload = null) => {
 };
 
 document.addEventListener('DOMContentLoaded', function () {
-    const discussionNo = document.querySelector('input[name="discussionNo"]').value;
+    const discussionNo = document.querySelector('.discussion-body').dataset.discNo;
     const commentsContainer = document.getElementById('comments');
     const submitCommentButton = document.getElementById('submitComment');
     const commentForm = document.getElementById('commentForm');
@@ -35,6 +35,8 @@ document.addEventListener('DOMContentLoaded', function () {
             const response = await fetch(`/api/v1/discuss/reply/${discussionNo}`);
             if (!response.ok) throw new Error('댓글을 불러오는데 실패했습니다.');
             const { dtoList, loginUserDto } = await response.json();
+
+
             renderComments(dtoList, loginUserDto);
         } catch (error) {
             console.error(error);
@@ -81,6 +83,8 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function renderComments(comments, loginUserDto) {
+        console.log(comments)
+        console.log(loginUserDto)
         commentsContainer.innerHTML = '';
         if (comments.length === 0) {
             const commentElement = document.createElement('div');
@@ -107,11 +111,12 @@ document.addEventListener('DOMContentLoaded', function () {
         commentElement.classList.add('comment-card');
         let tag;
 
-        if (loginUserDto.nickname === comment.nickname) {
+
+        if (loginUserDto && loginUserDto.nickname === comment.nickname) {
             // 내가 쓴 댓글
             tag = `
             <div class="comment-header self comment-header-self" data-replyNo="${comment.discussionReplyNo}">
-                <span class="comment-nickname" id="my-nickname">${comment.nickname || comment.email}</span> `;
+                <span class="comment-nickname nickname" id="my-nickname" data-email="${loginUserDto.email}">${comment.nickname || comment.email}</span> `;
 
             if (oldDate.getTime() + 1000 < newDate.getTime()) { // 내가 쓴 글이 수정됐을 때
                 tag += `
@@ -163,7 +168,7 @@ document.addEventListener('DOMContentLoaded', function () {
             // 남이 쓴 댓글
             tag = `
             <div class="comment-header" data-replyNo="${comment.discussionReplyNo}">
-                <span class="comment-nickname">${comment.nickname || comment.email}</span> `;
+                <span class="comment-nickname nickname" data-email="${comment.email}">${comment.nickname || comment.email}</span> `;
 
             if (oldDate.getTime() + 1000 < newDate.getTime()) { // 남이 쓴 글이 수정됐을 때
                 tag += `
@@ -209,12 +214,6 @@ document.addEventListener('DOMContentLoaded', function () {
     fetchComments();
     submitCommentButton.addEventListener('click', submitComment);
 
-    // commentsContainer.addEventListener('click', async (e) => {
-    //     if (e.target.matches('.deleteBtn')) {
-    //         const rno = e.target.getAttribute('data-rno');
-    //         await removeComment(rno);
-    //     }
-    // });
 
 
 

@@ -1,6 +1,7 @@
 package com.project.mvc.mapper.zyo;
 
 import com.project.mvc.common.zyo.Search;
+import com.project.mvc.dto.response.kibeom.MediaAsideListDto;
 import com.project.mvc.dto.zyo.DiscussRenderingDto;
 import com.project.mvc.dto.zyo.ReviewRenderingDto;
 import com.project.mvc.entity.Media;
@@ -32,4 +33,6 @@ public interface MediaMapper {
 
     Media findByMediaNo(long mediaNo);
 
+
+    List<MediaAsideListDto> findAsideList();
 }

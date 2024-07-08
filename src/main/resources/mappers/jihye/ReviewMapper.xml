@@ -68,4 +68,21 @@
         ORDER BY R.review_created_at
     </select>
 
+    <select id="findAsideList" resultType="com.project.mvc.dto.response.kibeom.ReviewAsideListDto">
+        SELECT
+            media_no,
+            review_text
+        FROM review
+        ORDER BY review_no ASC
+        LIMIT 0, 7
+    </select>
+    
+    <update id="updateMediaRating">
+        UPDATE media
+        SET rating = (SELECT avg(user_rating)
+                        FROM review
+                        WHERE media_no = #{mediaNo})
+        WHERE media_no = #{mediaNo}
+    </update>
+
 </mapper>

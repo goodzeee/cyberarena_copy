@@ -1,6 +1,7 @@
 package com.project.mvc.mapper;
 
 import com.project.mvc.common.zyo.Search;
+import com.project.mvc.dto.response.kibeom.MediaAsideListDto;
 import com.project.mvc.entity.Media;
 import com.project.mvc.mapper.zyo.MediaMapper;
 import org.junit.jupiter.api.DisplayName;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
+import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -26,6 +28,11 @@ class MediaMapperTest {
         List<Media> all = mediaMapper.findAll(null);
         //when
         System.out.println("all = " + all);
+        for (Media media : all) {
+            if (media.getCategoryNo() == 1) {
+                System.out.println(media.getMediaTitle());
+            }
+        }
 
         //then
     }
@@ -51,6 +58,10 @@ class MediaMapperTest {
         //then
 //        System.out.println(byTitle);
     }
+
+
+
+
 
     
     

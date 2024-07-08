@@ -1,31 +1,154 @@
 /* 전체 레이아웃 설정 */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f7f7f7;
+    background-color: black !important;
     margin: 0;
     padding: 0;
+    color: #B6B6B6;
 }
 
 /* 컨테이너 */
 #whole {
     display: flex;
-    justify-content: space-between;
+    width: 92%;
+    margin: 0 auto;
+    /* justify-content: space-between;
     padding: 20px;
-    background-color: slategray
+    background-color: slategray */
 }
 
 /* 좌측 및 우측 사이드바 */
 aside {
-    height: 500px;
+   /* height: 500px; */
     width: 20%;
-    background-color: #fff;
+    margin: 67px auto 0 auto;
+    position: sticky;
+    top: 20px;
+    height: calc(100vh - 67px - 20px);
+    overflow-y: auto;
+    border-radius: 15px;
+    /*background-color: #fff;
     border: 1px solid #ddd;
     border-radius: 8px;
     padding: 15px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);*/
 }
 
-aside h2 {
+#left-aside {
+    left: 0;
+}
+
+#right-aside {
+    right: 0;
+}
+
+.aside-wrap {
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    margin: 0;
+    padding: 0 0 60px 0;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    background: #171717;
+    /*box-shadow: rgba(100, 100, 111, 0.1) 0px 7px 29px 0px !important;*/
+}
+
+.aside-header {
+    width: 85%;
+    /*text-align: center;*/
+    margin: 0 auto;
+    padding: 30px;
+}
+#right-aside .aside-header {
+    padding-bottom: 20px;
+}
+.aside-p {
+    padding-top: 20px;
+    border-top: 1px solid #636363;
+    text-align: right;
+    color: #636363;
+    font-size: 14px;
+    cursor: pointer;
+    text-underline: #444444;
+}
+.aside-p:hover {
+    font-weight: 700;
+}
+
+
+aside ul {
+    width: 70%;
+    margin: 0 auto;
+    list-style: none;
+    padding: 0;
+}
+
+aside ul li {
+    /*padding-top: 10px;*/
+    font-size: 15px;
+    font-weight: 400;
+    color: #504f4f;
+    padding: 15px 15px 5px 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    margin-bottom: 10px;
+    background: #FFFFFF;
+    transition: box-shadow 0.2s;
+    cursor: pointer;
+}
+
+aside ul li div.aside-div {
+    display: flex;
+    background: #393838;
+}
+aside ul li div.aside-div div {
+    width: 50%;
+}
+
+aside ul li div.aside-div div img {
+    /*width: 100%;*/
+    width: 70%;
+    height: 100%;
+    background: center/cover no-repeat fixed;
+    overflow: hidden;
+}
+
+aside ul li:hover {
+    box-shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.9);
+}
+div.aside-div .aside-div-right > * {
+    margin-bottom: 0;
+}
+div.aside-div .aside-div-right h3 {
+    font-size: 20px;
+}
+
+.aside-ul hr {
+    color: #f1f0f0;
+    margin-bottom: 45px;
+
+}
+
+.aside-ul .aside-li {
+    cursor: pointer;
+    background: #393838;
+}
+
+.aside-title {
+    font-size: 17px;
+}
+.aside-title:hover {
+    color: #0c70d6;
+    text-underline: #0c70d6;
+    scale: 1.1;
+    text-decoration: underline;
+}
+.aside-div-right h3 {
+    color: #B6B6B6;
+    font-size: 20px;
+    font-weight: 400;
+}
+
+/* aside h2 {
     font-size: 18px;
     margin-bottom: 10px;
 }
@@ -38,16 +161,27 @@ aside ul {
 aside ul li {
     margin-bottom: 10px;
     color: #555;
-}
+} */
 
 /* 메인 섹션 */
 main {
-    width: 56%;
-    background-color: #fff;
+    width: 50%;
+    background-color: #222323;
     border: 1px solid #ddd;
     border-radius: 8px;
     padding: 20px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 67px 100px 0;
+    /*width: 56%;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);*/
 }
 
 .checkbox-container {
@@ -59,7 +193,7 @@ main {
     font-size: 16px;
     user-select: none;
   }
-  
+
   .custom-checkbox {
     position: absolute;
     opacity: 0;
@@ -67,7 +201,7 @@ main {
     height: 0;
     width: 0;
   }
-  
+
   .checkmark {
     position: absolute;
     top: 0;
@@ -79,7 +213,7 @@ main {
     transition: background-color 0.3s;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   }
-  
+
   .checkmark:after {
     content: "";
     position: absolute;
@@ -92,30 +226,30 @@ main {
     border-width: 0 3px 3px 0;
     transform: rotate(45deg);
   }
-  
+
   .custom-checkbox:checked ~ .checkmark {
     background-color: #2196F3;
     box-shadow: 0 3px 7px rgba(33, 150, 243, 0.3);
   }
-  
+
   .custom-checkbox:checked ~ .checkmark:after {
     display: block;
   }
-  
+
   @keyframes checkAnim {
     0% {
       height: 0;
     }
-  
+
     100% {
       height: 10px;
     }
   }
-  
+
   .custom-checkbox:checked ~ .checkmark:after {
     animation: checkAnim 0.2s forwards;
   }
-  
+
 
 /* 미디어 정보 섹션 */
 .media-info {
@@ -125,37 +259,41 @@ main {
     border-bottom: 1px solid #ddd;
     padding-bottom: 20px;
 }
+#wrap {
+    color: #B6B6B6 !important;
+}
 
 .media-image {
-    width: 300px;
-    height: 440px; 
-    overflow: hidden; 
-    /* margin-right: 20px; 우측 여백 설정 */
+    width: 300px; /* 너비를 더 크게 설정 */
+    height: 440px; /* 높이를 더 크게 설정 */
+    overflow: hidden; /* 이미지가 넘칠 경우를 대비하여 숨김 처리 */
+    margin-right: 20px; /* 우측 여백 설정 */
 }
 
 .media-image img {
-    width: 100%; 
+    width: 100%;
     height: auto;
-    object-fit: cover; 
+    object-fit: cover;
     border-radius: 5px;
-    margin-left: 20px; 
+    /*margin-left: 20px;*/
 }
 
 .media-description {
-    padding: 10px;
+    padding: 7px;
     display: grid;
     margin: auto;
 }
 
 .media-description p {
-    font-size: 18px;
-    /* margin: 5px 0; */
-    color: #333;
+    font-size: 14px;
+    margin: 5px 0;
+    color: #B6B6B6;
+    letter-spacing: -1px;
 }
 
 .media-title {
     font-size: 24px;
-    color: #333;
+/*color: #333;*/
 }
 
 #list-btn {
@@ -184,6 +322,17 @@ main {
     margin-bottom: 20px;
     border-bottom: 1px solid #ddd;
     padding-bottom: 20px;
+    color: #B6B6B6;
+}
+.review-form > * {
+    color: #B6B6B6;
+}
+#reviewForm > * {
+    color: #B6B6B6;
+}
+
+.review-item > * {
+    color: #B6B6B6;
 }
 
 h3 {
@@ -204,6 +353,7 @@ h3.review-list {
 
 #reviewText {
     width: 100%;
+    background: #393838;
 }
 
 .review-form label {
@@ -236,41 +386,32 @@ button#reviewBtn {
     height: 2.6em;
     text-shadow: 0 1px 0 rgb(0 0 0 / 40%);
     transition: box-shadow 0.15s ease, transform 0.15s ease;
-  }
-  
-  button#reviewBtn:hover {
-    box-shadow: 0px 0.1em 0.2em rgb(45 35 66 / 40%), 0px 0.4em 0.7em -0.1em rgb(45 35 66 / 30%), inset 0px -0.1em 0px #3c4fe0;
-    transform: translateY(-0.1em);
-  }
-  
-  button#reviewBtn:active {
-    box-shadow: inset 0px 0.1em 0.6em #30702a;
-    transform: translateY(0em);
-  }
-/* 
-#reviewBtn {
-    /* display: block; */
-    /* padding: 10px 15px;
+    /* display: block;
+    padding: 10px 15px;
     background-color: #28a745;
     color: #fff;
     border: none;
     border-radius: 4px;
     cursor: pointer;
     margin-left: 150px;
-    margin-top: 30px;
-} */
+    margin-top: 30px; */
+}
 
-/* #reviewBtn:hover {
+button#reviewBtn:hover {
+    box-shadow: 0px 0.1em 0.2em rgb(45 35 66 / 40%), 0px 0.4em 0.7em -0.1em rgb(45 35 66 / 30%), inset 0px -0.1em 0px #3c4fe0;
+    transform: translateY(-0.1em);
+  }
+
+button#reviewBtn:active {
+    box-shadow: inset 0px 0.1em 0.6em #30702a;
+    transform: translateY(0em);
+  }
+
+#reviewBtn:hover {
     background-color: #218838;
-} */
+}
 
-/* 리뷰 목록 영역 */
-/* .review-list-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-} */
-
+/* 리뷰 목록 섹션 */
 .review-list {
     width: calc(30% - 20px); /* 각 리뷰 항목의 너비를 33.33%로 설정하고 간격을 고려해 줍니다 */
     margin-right: 20px;
@@ -295,6 +436,8 @@ button#reviewBtn {
 /* 리뷰 항목 스타일링 */
 .review-item {
     margin-bottom: 10px;
+    color: #B6B6B6;
+    background: #393838;
 }
 
 /* 리뷰 내용 텍스트 스타일링 */
@@ -307,16 +450,12 @@ button#reviewBtn {
 /* 작성자, 별점, 작성일 등 텍스트 스타일링 */
 .review-item p {
     margin: 5px 0;
-    display: contents;
-}
-
-.review-item p.name {
-    margin-right: 30px;
+    color: #B6B6B6;
 }
 
 /* 강조된 텍스트 스타일링 */
 .review-item strong {
-    color: #555;
+    color: #B6B6B6;
 }
 
 /* 좋아요 버튼 스타일링 */
@@ -403,6 +542,20 @@ p {
     background-color: #66a1eef5;
 }
 
+/* .review-actions button {
+    margin-right: 10px;
+    padding: 5px 10px;
+    background-color: #c53f4cf5;
+    color: #333;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.review-actions button:hover {
+    background-color: #c73443;
+} */
+
 /* 리뷰 수정 모달 */
 .modal {
     display: none;
@@ -470,4 +623,24 @@ p {
     background-color: #0056b3;
 }
 
+
+
+.live-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: red;
+    color: white;
+    border-radius: 5px;
+    padding: 5px 10px;
+    font-size: 10px;
+    margin-bottom: 10px;
+}
+
+}
+
+.nickname:hover {
+    font-weight: 700;
+    cursor: pointer;
+}
 

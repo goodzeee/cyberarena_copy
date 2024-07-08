@@ -6,10 +6,14 @@ import com.project.mvc.dto.request.jihye.ReviewPostDto;
 import com.project.mvc.dto.request.jihye.ReviewModifyDto;
 import com.project.mvc.dto.response.jihye.ReactionDto;
 import com.project.mvc.dto.response.jihye.ReviewListDto;
+import com.project.mvc.dto.response.kibeom.DiscussAsideListDto;
+import com.project.mvc.dto.response.kibeom.MediaAsideListDto;
+import com.project.mvc.dto.response.kibeom.ReviewAsideListDto;
 import com.project.mvc.dto.seongjin.LoginUserInfoDto;
 import com.project.mvc.mapper.zyo.MediaMapper;
 import com.project.mvc.service.jihye.LikeLogService;
 import com.project.mvc.service.jihye.ReviewService;
+import com.project.mvc.service.kibeom.DiscussionService;
 import com.project.mvc.service.zyo.MediaService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -38,6 +42,7 @@ public class ReviewController {
     private final MediaService mediaService;
     private final LikeLogService likeLogService;
     private final MediaMapper mediaMapper;
+    private final DiscussionService discussionService;
 
     // 1. 리뷰 목록 조회 요청 : GET
     @GetMapping("/list/{mno}")
@@ -53,8 +58,12 @@ public class ReviewController {
 //        LoginUserInfoDto loginUser = (LoginUserInfoDto) session.getAttribute("login");
 //        String email = loginUser.getEmail();
         ReviewListDto reviewList = reviewService.findList(mno);
+        List<DiscussAsideListDto> asideList = discussionService.findAsideList();
+        List<MediaAsideListDto> mList = mediaService.findAsideList();
 
-            model.addAttribute("media", media);
+        model.addAttribute("mList", mList);
+        model.addAttribute("aList", asideList);
+        model.addAttribute("media", media);
             model.addAttribute("reviews", reviewList);
 
         // 리뷰 페이지로 이동

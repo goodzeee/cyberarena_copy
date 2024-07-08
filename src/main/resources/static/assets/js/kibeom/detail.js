@@ -18,17 +18,12 @@ $replySubmitBtn.style.backgroundColor = "#acaaaa";
 for(let i = 0; i < 1; i++) {
     $replyTextArea.addEventListener('keyup', e => {
 
-        if ($replyTextArea.value.trim().length > 0) {
-            isExist = true;
-        } else {
-            isExist = false;
-        }
+        isExist = $replyTextArea.value.trim().length > 0;
 
         if (isExist && $replyTextArea.value.length > 2) {
-
-            $replySubmitBtn.style.animation = "vivid-btn 0.7s"
-            $replySubmitBtn.style.animationFillMode = "forwards"
-            $replySubmitBtn.style.pointerEvents = "auto"
+            $replySubmitBtn.style.animation = "vivid-btn 0.7s";
+            $replySubmitBtn.style.animationFillMode = "forwards";
+            $replySubmitBtn.style.pointerEvents = "auto";
 
         } else {
 
@@ -52,6 +47,7 @@ const $modify = document.getElementById('modify');
 const $backdrop = document.getElementById('backdrop')
 
 
+
 // $modify.addEventListener('click', e =>  {
 //
 //         console.log("modal ", $modalWrap)
@@ -61,6 +57,7 @@ const $backdrop = document.getElementById('backdrop')
 //         $backdrop.classList.remove('none');
 //
 // });
+
 // });
 
 
@@ -68,17 +65,17 @@ const $backdrop = document.getElementById('backdrop')
 
 const $modalInput = document.querySelector('.modal-input');
 
-$title.addEventListener('keyup', e => {
+$title?.addEventListener('keyup', e => {
     if ($title.value !== '') {
-        $title.style.backgroundColor = "#E7F0FE";
+        $title.style.backgroundColor = "#303030";
     } else {
         $title.style.backgroundColor = "white";
     }
 });
 
-$offer.addEventListener('keyup', e => {
+$offer?.addEventListener('keyup', e => {
     if ($offer.value !== '') {
-        $offer.style.backgroundColor = "#E7F0FE";
+        $offer.style.backgroundColor = "#303030";
     } else {
         $offer.style.backgroundColor = "white";
     }

@@ -13,13 +13,23 @@ const $detail = document.getElementById('whole-wrap')
 $detail.addEventListener('click', e => {
 
     if (!e.target.closest('.card')) return;
+    if(e.target.matches(".nickname")) {
+        const email = e.target.dataset.email;
+        window.location.href = `/user/user-info/${email}`;
+        return;
+    }
+    if(e.target.closest(".media-title")) {
+        const mediaNo = e.target.closest(".media-title").dataset.mediaNo;
+        window.location.href = `/review/list/${mediaNo}`;
+        return;
+    }
 
     const dno = e.target.closest('.card').dataset.dno;
     window.location.href = '/discussion/detail?dno=' + dno;
 })
 
 
-$title.addEventListener('keyup', e => {
+$title?.addEventListener('keyup', e => {
     if ($title.value !== '') {
         $title.style.backgroundColor = "#E7F0FE";
     } else {
@@ -27,7 +37,7 @@ $title.addEventListener('keyup', e => {
     }
 });
 
-$offer.addEventListener('keyup', e => {
+$offer?.addEventListener('keyup', e => {
 
     if ($offer.value !== '') {
         $offer.style.backgroundColor = "#E7F0FE";
@@ -35,20 +45,6 @@ $offer.addEventListener('keyup', e => {
         $offer.style.backgroundColor = "white";
     }
 });
-
-
-
-$listWrap.addEventListener('click', e => {
-    // if (!e.target.matches('.card')) return
-    console.log("click")
-    const dno = e.target.closest('.card').dataset.dno;
-    window.location.href = "/discussion/detail?dno=" + dno;
-})
-
-
-
-
-
 
 const $backdrop = document.getElementById('backdrop')
 

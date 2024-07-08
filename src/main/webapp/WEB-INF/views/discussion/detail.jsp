@@ -14,7 +14,7 @@
 <div id="whole">
     <aside id="left-aside">
         <div class="aside-wrap">
-            <h2 class="aside-header">지금 뜨는 토론 <i class="live-icon">LIVE</i></h2>
+            <h2 class="aside-header"><i class="live-icon">LIVE</i> <br>지금 뜨는 토론 </h2>
             <ul class="aside-ul">
             <p class="aside-p" onclick="window.location.href=`/discussion/list`">더보기</p>
                 <c:forEach var="a" items="${aList}" >
@@ -35,7 +35,10 @@
         <div class="discussion-card">
 
             <div class="discussion-header">
-                <h1 class="discussion-title">${found.discussionTitle}</h1>
+                <h1 class="discussion-title">${found.discussionTitle}
+                    <div class="discussion-media-name" data-media-no="${found.mediaNo}">미디어 - ${found.mediaTitle}</div>
+                    <div class="discussion-nickname nickname" data-email="${found.email}"><i class="fas fa-user-edit" style="color: white"></i> &nbsp;&nbsp;${found.nickname}</div>
+                </h1>
                 <button
                         class="list-btn"
                         type="button"
@@ -43,8 +46,9 @@
                 >
                     목록
                 </button>
+
             </div>
-            <div class="discussion-body">
+            <div class="discussion-body" data-disc-no="${found.discussionNo}">
                 <span class="discussion-date">${found.formattedDiscussionCreatedAt}</span>
 
                 <c:if test="${login.nickname == found.nickname}">
@@ -52,8 +56,6 @@
                 </c:if>
 
             </div>
-            <div class="discussion-nickname">작성자: ${found.nickname}</div>
-            <div class="discussion-nickname">미디어: ${found.mediaTitle}</div>
 
 
             <br>
@@ -87,15 +89,39 @@
     </div>
     <aside id="right-aside">
         <div class="aside-wrap">
-            <h2 class="aside-header"> 🔥 최근 인기 리뷰 🔥</h2>
-            <ul>
-                <li>#1 정처기 재밌음? </li>
-                <li>#2 타짜를 보고 왔는데..</li>
-                <li>#3 요즘 영화값 비싸요</li>
-                <li>#4 1987 보고 오신분!!</li>
-                <li>#5 명량에 대해..</li>
-                <li>#6 정처기에 대해..</li>
-                <li>#7 실기에 대해..</li>
+            <h2 class="aside-header"><i class="live-icon">LIVE</i> <br>지금 뜨는 작품 </h2>
+            <ul class="aside-ul">
+                <hr>
+<%--                <p class="aside-p" onclick="window.location.href=`/discussion/list`">더보기</p>--%>
+                <c:forEach var="m" items="${mList}" >
+                    <li class="aside-li" onclick="window.location.href=`/review/list/${m.mediaNo}`">
+                        <div class="aside-div">
+                            <div>
+                                <img src="${m.imageUrl}">
+                            </div>
+                            <div class="aside-div-right">
+                                <h3>${m.mediaTitle}</h3>
+                                <p>
+                                    <c:choose>
+                                        <c:when test="${m.categoryNo == 1}">
+                                            영화
+                                        </c:when>
+                                        <c:when test="${m.categoryNo == 2}">
+                                            시리즈
+                                        </c:when>
+                                        <c:when test="${m.categoryNo == 3}">
+                                            도서
+                                        </c:when>
+                                        <c:otherwise>
+                                            기타
+                                        </c:otherwise>
+                                    </c:choose>
+                                </p>
+                                <p>${m.rating}</p>
+                            </div>
+                        </div>
+                    </li>
+                </c:forEach>
             </ul>
 
         </div>
@@ -109,8 +135,21 @@
 <script>
 
     const $finishBtn = document.getElementById('finish');
-    $finishBtn.addEventListener('click', e => {
+    $finishBtn?.addEventListener('click', e => {
         window.location.href = "/discussion/modify"
+    })
+
+    document.querySelector("#whole").addEventListener("click", e => {
+        if(e.target.matches(".nickname")) {
+            const email = e.target.dataset.email;
+            window.location.href= `/user/user-info/\${email}`;
+            return;
+        }
+        if(e.target.matches(".discussion-media-name")) {
+            const mediaNo = e.target.dataset.mediaNo;
+            window.location.href = `/review/list/\${mediaNo}`;
+            return;
+        }
     })
 
 

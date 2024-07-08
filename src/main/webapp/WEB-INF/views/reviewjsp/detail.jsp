@@ -20,24 +20,27 @@
 <div id="whole">
     <aside id="left-aside">
         <div class="aside-wrap">
-            <h2 class="aside-header"> 🔥 최근 인기 토론 🔥</h2>
-            <ul>
-                    <li>#1 기생충에 대해..</li>
-                    <li>#2 독전에 대해..</li>
-                    <li>#3 타짜에 대해..</li>
-                    <li>#4 인사이드아웃2에 대해..</li>
-                    <li>#5 명량에 대해..</li>
-                    <li>#6 정처기에 대해..</li>
-                    <li>#7 실기에 대해..</li>
+            <h2 class="aside-header"><i class="live-icon">LIVE</i><br>지금 뜨는 토론 </h2>
+            <ul class="aside-ul">
+                <p class="aside-p" onclick="window.location.href=`/discussion/list`">더보기</p>
+                <c:forEach var="a" items="${aList}" >
+                    <li data-dno="${a.discussionNo}" class="aside-li">
+                        <p onclick="window.location.href=`/discussion/detail?dno=${a.discussionNo}`">
+                                <%--                            <${status.index + 1}> <span class="aside-title">${a.discussionTitle}</span><br>--%>
+                            <span class="aside-title">${a.discussionTitle}</span><br>
+                            <i class="fas fa-eye"></i> ${a.viewCount}
+                        </p>
+                    </li>
+                </c:forEach>
             </ul>
 
         </div>
     </aside>
 
 
-    <main>
+    <main class="content-content">
         <div id="wrap" class="media-detail" data-mno="${media.mediaNo}">
-    
+
             <div class="media-info">
                 <div class="media-image">
                     <img src="${media.imageUrl}" alt="${media.mediaTitle} 이미지" >
@@ -53,6 +56,8 @@
                 </div>
                 <!-- <button id="list-btn" style="margin-top: auto;"><a href="/media/movie"></a>목록</button> -->
             </div>
+
+            <hr>
 
             <!-- 리뷰 등록 폼 -->
             <c:if test="${empty login}">
@@ -81,53 +86,36 @@
                         </c:forEach>
                     </select>
                     
-                    <label class="checkbox-container" for="discussionStatus">토론신청 허용 여부:</label>
-                    <p for="discussionStatus" style="display: inline;"> 허용
-                        <input type="checkbox" id="discussionStatus" name="discussionStatus" value="true">
-                        <!-- <span class="checkmark">허용</span> -->
-                    </p>
-                    
+                    <label for="discussionStatus">토론신청 허용 여부:</label>
+                    <p for="discussionStatus" style="display: inline;">허용 <input type="checkbox" id="discussionStatus" name="discussionStatus" value="true"></p>
+
+                    <!-- <label class="checkbox-container" for="discussionStatus">토론신청 허용 여부:</label>
+                                        <p for="discussionStatus" style="display: inline;"> 허용
+                                            <input type="checkbox" id="discussionStatus" name="discussionStatus" value="true">
+                                            <!-- <span class="checkmark">허용</span> -->
+                                        </p> -->
                     
                     <button id="reviewBtn" type="button">등록</button>
                 </form>
             </c:if>
-            
+
             </div>
 
             <!-- 리뷰 목록 영역 -->
             <h3>리뷰 목록</h3>
-
-            <c:set var="totalRating" value="0" />
-               <c:set var="reviewCount" value="0" />
-
-               <!-- 페이징 변수 설정 -->
-        <c:set var="currentPage" value="${not empty param.page ? param.page : 1}" />
-        <c:set var="reviewsPerPage" value="6" />
-        <c:set var="startIndex" value="${(currentPage - 1) * reviewsPerPage}" />
-
-               <c:forEach var="review" items="${reviews.reviews}"  begin="${startIndex}" end="${startIndex + reviewsPerPage - 1}">
-                    <c:set var="totalRating" value="${totalRating + review.userRating}"/>
-                    <c:set var="reviewCount" value="${reviewCount + 1}"/>
-               </c:forEach>
-
-                    <!-- 리뷰가 있을 때만 평균 별점 보여주기 -->
-                <c:if test="${reviewCount > 0}">
-                    <c:set var="averageRating" value="${totalRating / reviewCount}" />
-                    <p class="review-average"><strong>미디어 리뷰 평점: </strong> <fmt:formatNumber value="${averageRating}" type="number" maxFractionDigits="2" /> / 5</p>
-                </c:if>
-
+                <p class="review-average"><strong>미디어 리뷰 평점: </strong>${media.rating} / 5</p>
                 <c:forEach var="review" items="${reviews.reviews}">
-                     <div id="review-list-container" class="review-list" data-rno="${review.reviewNo}" data-mno="${review.mediaNo}">
+                     <div class="review-list" data-rno="${review.reviewNo}" data-mno="${review.mediaNo}">
                      <div class="review-item">
 
-                        <p class="name"><strong></strong> ${review.nickname}</p>
+                        <p class="name"><strong></strong> <span class="nickname" data-email="${review.email}">${review.nickname}</span></p>
 
-                        <p class="star"><strong>⭐</strong> ${review.userRating}</p> 
+                        <p class="star"><strong>⭐</strong> ${review.userRating}</p>
 
                         <!-- 좋아요 버튼 표시 -->
                         <!-- <c:if test="${empty login}">
                             <a>좋아요를 하고 싶으면 로그인 하세요. 😏</a> -->
-                        
+
         <div class="buttons" style="float: right;">
             <div class="reaction-buttons">
                 <button class="like-btn ${review.userReaction == 'like' ? 'active' : '' }" data-liked="${review.userReaction == 'like'}" data-rno="${review.reviewNo}">
@@ -138,22 +126,20 @@
         </div>
     <!-- </c:if> -->
         <hr>
-                        <p id="reviewText">${review.text}</p>  <br><br>
 
+                     <p id="reviewText">${review.text}</p>  <br><br>
 
                      <!-- 토론 신청 허용 여부 조건에 따라 링크 또는 텍스트로 표시 -->
         <c:choose>
             <c:when test="${review.discussionStatus == 'ALLOW'}">
                 <!--href="/discussion/register" 토론 작성 페이지가 바로 뜨면 좋은데 ... -->
-                <p><strong>토론신청 허용 여부:</strong> <a class="allow-link" href="/discussion/list">ALLOW</a></p>
+                <p><strong>토론신청 허용 여부:</strong> <a href="/discussion/list">ALLOW</a></p>
             </c:when>
             <c:otherwise>
                 <p><strong>토론신청 허용 여부:</strong> DISALLOW</p>
             </c:otherwise>
         </c:choose>
-
-        <br>
-
+<br>
         <p><strong></strong> ${review.reviewCreatedAt}</p>
 
                         <!-- 본인이 쓴글에만 접근할 수 있게 조건 렌더링되도록 -->
@@ -182,7 +168,7 @@
                 </div>
                 </div>
                 </c:forEach>
-                
+
             <!-- </div> -->
         <!-- </div> -->
 
@@ -216,20 +202,47 @@
 
     <aside id="right-aside">
         <div class="aside-wrap">
-            <h2 class="aside-header"> 🔥 최근 인기 리뷰 🔥</h2>
-            <ul>
-                <li>#1 정처기 재밌음? </li>
-                <li>#2 타짜를 보고 왔는데..</li>
-                <li>#3 요즘 영화값 비싸요</li>
-                <li>#4 1987 보고 오신분!!</li>
-                <li>#5 명량에 대해..</li>
-                <li>#6 정처기에 대해..</li>
-                <li>#7 실기에 대해..</li>
+            <h2 class="aside-header"><i class="live-icon">LIVE</i> <br>지금 뜨는 작품 </h2>
+            <ul class="aside-ul">
+                <hr>
+                <%--                <p class="aside-p" onclick="window.location.href=`/discussion/list`">더보기</p>--%>
+                <c:forEach var="m" items="${mList}" >
+                    <li class="aside-li" onclick="window.location.href=`/review/list/${m.mediaNo}`">
+                        <div class="aside-div">
+                            <div>
+                                <img src="${m.imageUrl}">
+                            </div>
+                            <div class="aside-div-right">
+                                <h3>${m.mediaTitle}</h3>
+                                <p>
+                                    <c:choose>
+                                        <c:when test="${m.categoryNo == 1}">
+                                            영화
+                                        </c:when>
+                                        <c:when test="${m.categoryNo == 2}">
+                                            시리즈
+                                        </c:when>
+                                        <c:when test="${m.categoryNo == 3}">
+                                            도서
+                                        </c:when>
+                                        <c:otherwise>
+                                            기타
+                                        </c:otherwise>
+                                    </c:choose>
+                                </p>
+                                <p>${m.rating}</p>
+                            </div>
+                        </div>
+                    </li>
+                </c:forEach>
             </ul>
 
         </div>
     </aside>
+
 </div>
+    <%@ include file="../include/footer.jsp" %>
+
 
     <script>
 
@@ -298,7 +311,7 @@ function submitEditForm() {
     const reviewText = document.getElementById('editReviewText').value;
     const userRating = document.getElementById('editUserRating').value;
     const discussionStatus = document.getElementById('editDiscussionStatus').checked ? 'ALLOW' : 'DISALLOW';
-
+    const mediaNo = document.querySelector(".media-detail").dataset.mno;
     fetch(`/review/modify`, {
         method: 'POST',
         headers: {
@@ -308,7 +321,8 @@ function submitEditForm() {
             reviewNo: reviewNo,
             reviewText: reviewText,
             userRating: userRating,
-            discussionStatus: discussionStatus
+            discussionStatus: discussionStatus,
+            mno: mediaNo
         })
     })
     .then(response => {
@@ -394,6 +408,13 @@ document.getElementById('reviewBtn').addEventListener('click', function () {
     .catch(error => console.error('Error:', error));
 });
 
+document.querySelector(".content-content").addEventListener("click", e => {
+    if(!e.target.matches(".nickname")) return;
+    const email = e.target.dataset.email;
+    window.location.href=`/user/user-info/\${email}`;
+})
+
 </script>
+
 </body>
 </html>

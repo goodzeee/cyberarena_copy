@@ -38,5 +38,7 @@ public interface ReviewMapper {
 
     // 기범
     List<ReviewAsideListDto> findAsideList();
+
+    boolean updateMediaRating(long mediaNo);
 }
 

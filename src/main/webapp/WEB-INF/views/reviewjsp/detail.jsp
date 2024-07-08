@@ -97,26 +97,7 @@
             <!-- 리뷰 목록 영역 -->
             <hr>
             <h3>리뷰 목록</h3>
-
-            <c:set var="totalRating" value="0" />
-               <c:set var="reviewCount" value="0" />
-
-               <!-- 페이징 변수 설정 -->
-        <c:set var="currentPage" value="${not empty param.page ? param.page : 1}" />
-        <c:set var="reviewsPerPage" value="6" />
-        <c:set var="startIndex" value="${(currentPage - 1) * reviewsPerPage}" />
-
-               <c:forEach var="review" items="${reviews.reviews}"  begin="${startIndex}" end="${startIndex + reviewsPerPage - 1}">
-                    <c:set var="totalRating" value="${totalRating + review.userRating}"/>
-                    <c:set var="reviewCount" value="${reviewCount + 1}"/>
-               </c:forEach>
-
-                    <!-- 리뷰가 있을 때만 평균 별점 보여주기 -->
-                <c:if test="${reviewCount > 0}">
-                    <c:set var="averageRating" value="${totalRating / reviewCount}" />
-                    <p class="review-average"><strong>미디어 리뷰 평점: </strong> <fmt:formatNumber value="${averageRating}" type="number" maxFractionDigits="2" /> / 5</p>
-                </c:if>
-
+                <p class="review-average"><strong>미디어 리뷰 평점: </strong>${media.rating} / 5</p>
                 <c:forEach var="review" items="${reviews.reviews}">
                      <div class="review-list" data-rno="${review.reviewNo}" data-mno="${review.mediaNo}">
                      <div class="review-item">
@@ -292,7 +273,7 @@ function submitEditForm() {
     const reviewText = document.getElementById('editReviewText').value;
     const userRating = document.getElementById('editUserRating').value;
     const discussionStatus = document.getElementById('editDiscussionStatus').checked ? 'ALLOW' : 'DISALLOW';
-
+    const mediaNo = document.querySelector(".media-detail").dataset.mno;
     fetch(`/review/modify`, {
         method: 'POST',
         headers: {
@@ -302,7 +283,8 @@ function submitEditForm() {
             reviewNo: reviewNo,
             reviewText: reviewText,
             userRating: userRating,
-            discussionStatus: discussionStatus
+            discussionStatus: discussionStatus,
+            mno: mediaNo
         })
     })
     .then(response => {

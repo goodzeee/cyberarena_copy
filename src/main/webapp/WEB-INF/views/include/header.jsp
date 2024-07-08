@@ -5,23 +5,18 @@
         list-style: none;
     }
 </style>
-<header>
+<head>
+    <link rel="stylesheet" href="/assets/css/header.css" />
+</head>
+<header class="main-header">
     <a href="/index">
-        <div class="logo">LOGO</div>
+        <div class="logo" >LOGO</div>
     </a>
     <c:if test="${login != null}">
         <div class="login-user"><a href="/user/mypage"> ${login.nickname} </a>님 환영합니다.</div>
     </c:if>
 
-    <div class="search-bar">
-        <i class="fas fa-search"></i>
-        <input type="text" placeholder="검색..." />
-        <button>검색</button>
-    </div>
-
-
     <a href="#" class="menu-open">
-        <span class="menu-txt">MENU</span>
         <span class="lnr lnr-menu"></span>
     </a>
   

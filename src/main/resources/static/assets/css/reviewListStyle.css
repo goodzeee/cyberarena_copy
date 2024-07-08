@@ -340,6 +340,7 @@ main {
 }
 
 h3 {
+    margin: 0;
     display: inline-block;
     font-size: 20px;
     margin-bottom: 30px;
@@ -544,7 +545,7 @@ p {
 /* 리뷰 액션 버튼들 (삭제 및 수정) */
 .review-actions {
     margin-top: 10px;
-    float: right;
+    float: none;
 }
 
 .del-btn {

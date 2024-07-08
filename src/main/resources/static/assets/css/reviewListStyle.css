@@ -285,7 +285,7 @@ main {
 }
 
 .media-description p {
-    font-size: 14px;
+    font-size: 18px;
     margin: 5px 0;
     color: #B6B6B6;
     letter-spacing: -1px;
@@ -294,6 +294,10 @@ main {
 .media-title {
     font-size: 24px;
 /*color: #333;*/
+}
+
+.login-info {
+    text-decoration: none;
 }
 
 #list-btn {
@@ -339,7 +343,7 @@ h3 {
     display: inline-block;
     font-size: 20px;
     margin-bottom: 30px;
-    color: #333;
+    color:  #B6B6B6;
     font-weight: 900;
 }
 
@@ -371,6 +375,37 @@ h3.review-list {
     border-radius: 4px;
 }
 
+button#modBtn {
+    font-size: 18px;
+    display: inline-block;
+    outline: 0;
+    border: 0;
+    cursor: pointer;
+    will-change: box-shadow,transform;
+    background: radial-gradient( 100% 100% at 100% 0%, #82dd87 0%, #41ac46 100% );
+    box-shadow: 0px 0.01em 0.01em rgb(45 35 66 / 40%), 0px 0.3em 0.7em -0.01em rgb(45 35 66 / 30%), inset 0px -0.01em 0px rgb(58 65 111 / 50%);
+    padding: 10px 15px;
+    border-radius: 0.3em;
+    color: #fff;
+    height: 2.6em;
+    text-shadow: 0 1px 0 rgb(0 0 0 / 40%);
+    transition: box-shadow 0.15s ease, transform 0.15s ease;
+}
+
+button#modBtn:hover {
+    box-shadow: 0px 0.1em 0.2em rgb(45 35 66 / 40%), 0px 0.4em 0.7em -0.1em rgb(45 35 66 / 30%), inset 0px -0.1em 0px #3c4fe0;
+    transform: translateY(-0.1em);
+}
+
+button#modBtn:active {
+    box-shadow: inset 0px 0.1em 0.6em #30702a;
+    transform: translateY(0em);
+}
+
+#modBtn:hover {
+    background-color: #218838;
+}
+
 button#reviewBtn {
     font-size: 18px;
     display: inline-block;
@@ -386,15 +421,6 @@ button#reviewBtn {
     height: 2.6em;
     text-shadow: 0 1px 0 rgb(0 0 0 / 40%);
     transition: box-shadow 0.15s ease, transform 0.15s ease;
-    /* display: block;
-    padding: 10px 15px;
-    background-color: #28a745;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-left: 150px;
-    margin-top: 30px; */
 }
 
 button#reviewBtn:hover {
@@ -413,20 +439,23 @@ button#reviewBtn:active {
 
 /* 리뷰 목록 섹션 */
 .review-list {
-    width: calc(30% - 20px); /* 각 리뷰 항목의 너비를 33.33%로 설정하고 간격을 고려해 줍니다 */
-    margin-right: 20px;
-    margin-top: 50px;
+    width: calc(35% - 20px); /*각 리뷰 항목의 너비를 33.33%로 설정하고 간격을 고려해 줍니다*/
+    /* margin-right: 20px; */
+    margin-top: 20px;
     /* margin-bottom: 20px; */
     display: inline-block;
     vertical-align: top; /* 상단 정렬 */
     box-sizing: border-box; /* 박스 모델의 경계 상자 및 패딩 값을 포함 */
     padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    background-color: #f9f9f9;
-    transition: transform 0.2s, box-shadow 0.2s;
+    /* border: 1px solid #ddd; */
+    /* border-radius: 8px; */
+    /* background-color: #f9f9f9; */
+    /* transition: transform 0.2s, box-shadow 0.2s; */
 }
 
+.review-date {
+    display: block;
+}
 
 .review-list:hover {
     transform: translateY(-4px);
@@ -435,6 +464,7 @@ button#reviewBtn:active {
 
 /* 리뷰 항목 스타일링 */
 .review-item {
+    padding: 7px;
     margin-bottom: 10px;
     color: #B6B6B6;
     background: #393838;
@@ -443,7 +473,7 @@ button#reviewBtn:active {
 /* 리뷰 내용 텍스트 스타일링 */
 #reviewText {
     font-size: 16px;
-    color: #333;
+    color: #B6B6B6;
     line-height: 1.5;
 }
 
@@ -451,6 +481,7 @@ button#reviewBtn:active {
 .review-item p {
     margin: 5px 0;
     color: #B6B6B6;
+    display: inline-block;
 }
 
 /* 강조된 텍스트 스타일링 */
@@ -597,13 +628,13 @@ p {
 }
 
 .modal-content label {
-    display: block;
+    /* display: block; */
     margin-bottom: 5px;
     color: #555;
 }
 
 .modal-content textarea, .modal-content input, .modal-content select {
-    width: 100%;
+    /* width: 100%; */
     padding: 10px;
     margin-bottom: 15px;
     border: 1px solid #ddd;
@@ -617,6 +648,7 @@ p {
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    float: inline-end;
 }
 
 .modal-content button:hover {
@@ -635,8 +667,6 @@ p {
     padding: 5px 10px;
     font-size: 10px;
     margin-bottom: 10px;
-}
-
 }
 
 .nickname:hover {

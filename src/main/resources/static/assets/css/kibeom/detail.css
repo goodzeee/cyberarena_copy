@@ -173,7 +173,7 @@ div.aside-div .aside-div-right h3 {
 }
 
 .discussion-body {
-    margin-bottom: 20px;
+    /*margin-bottom: 20px;*/
     display: flex;
     justify-content: space-between;
 }

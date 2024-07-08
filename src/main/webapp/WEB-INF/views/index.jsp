@@ -54,9 +54,11 @@
             토론을 기다립니다.</h2>
         </div>
         <div class="slide">
-          <input type="radio" name="img_select" id="select_box1" checked />
-          <input type="radio" name="img_select" id="select_box2" />
-          <input type="radio" name="img_select" id="select_box3" />
+          <input type="radio" name="img_select" id="select_box1" value="select_box1" class="img_select" checked />
+          <input type="radio" name="img_select" id="select_box2" value="select_box2"
+          class="img_select" />
+          <input type="radio" name="img_select" id="select_box3" value="select_box3"
+          class="img_select" />
           <div class="slide-nav">
             <label class="label1" for="select_box1"></label>
             <label class="label2" for="select_box2"></label>
@@ -90,9 +92,43 @@
 
 
 <!-- footer -->
-<%@ include file="include/footer.jsp" %>
+<footer class="main-footer">
+  <div class="footer-wrap">
+      <div class="image-wrap">
+          <img class="main-logo" src="../assets/img/logo2.png"/>
+      </div>
+      <div class="footer-text">
+          © cyber-arena-club 2024
+          All Rights Reseved
+      </div>
+  </div>
+</footer>
 <!-- footer end -->
 
 
 </body>
+<script>
+    document.addEventListener("click", e => {
+      if(!e.target.matches(".background")) return;
+      const imgList = document.querySelectorAll(".img_select");
+      if (imgList[0].checked) {
+        window.location.href = 'media/movie';
+      } else if (imgList[1].checked) {
+        window.location.href = 'media/series';
+      } else {
+        window.location.href = 'media/book';
+      }
+      console.log("document",e.target);
+    })
+
+
+    let currentIndex = 0;
+    const radioButtons = document.querySelectorAll('.img_select');
+    const totalImages = radioButtons.length;
+
+    setInterval(() => {
+      currentIndex = (currentIndex + 1) % totalImages;
+      radioButtons[currentIndex].checked = true;
+    }, 5000);
+</script>
 </html>

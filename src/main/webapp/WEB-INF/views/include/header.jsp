@@ -10,7 +10,7 @@
 </head>
 <header class="main-header">
     <a href="/index">
-        <div class="logo" >LOGO</div>
+        <div class="logo" ><img class="main-logo" src="../assets/img/logo2.png"/></div>
     </a>
     <c:if test="${login != null}">
         <div class="login-user"><a href="/user/mypage"> ${login.nickname} </a>님 환영합니다.</div>

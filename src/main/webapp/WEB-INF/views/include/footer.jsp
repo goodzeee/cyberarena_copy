@@ -6,7 +6,7 @@
 <footer>
     <div class="footer-wrap">
         <div class="image-wrap">
-            <img class="main-logo" src="../assets/img/logo.png"/>
+            <img class="main-logo" src="../assets/img/logo2.png"/>
         </div>
         <div class="footer-text">
             © cyber-arena-club 2024

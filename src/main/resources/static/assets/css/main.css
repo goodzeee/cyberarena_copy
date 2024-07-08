@@ -12,7 +12,7 @@
 body {
     color: #333;
     /*background-color: #e0e0e0;*/
-    background-color: #F2F2F2 !important;
+    background-color: #000 !important;
 }
 
 .main-header {
@@ -25,7 +25,8 @@ body {
 }
 header .login-user {
     position: absolute;
-    left: 15%;
+    left: 12%;
+    z-index: 1;
 }
 
 header a {
@@ -91,7 +92,7 @@ main {
   width: 60vw;
   flex-direction: row;
   left: 50%;
-  bottom: -70px;
+  bottom: -120px;
   transform: translateX(-50%);
 }
 
@@ -170,12 +171,11 @@ input[id="select_box3"]:checked ~ .slide-nav .label3 {
   position: absolute;
   width: 100vw;
   height: 100vh;
-  top: -455px;
-  right: 0px;
-  left: -215px;
-  bottom: 0;
   z-index: -9999;
-  pointer-events: none;
+  top: 13%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
 }
 
 .only-desktop {
@@ -253,12 +253,15 @@ input[id="select_box3"]:checked ~ div #imgbox .select3 {
 }
 
 /* footer */
+.main-footer {
+  position: fixed;
+}
 footer {
+    position: relative;
     width: 100%;
     margin: 0 auto;
     background: #000;
     color: white;
-    height: 200px;
     bottom: 0;
 }
 
@@ -271,21 +274,17 @@ footer {
 }
 .footer-wrap .image-wrap {
     margin: auto 0;
-    width: 70px;
-    height: 70px;
     position: relative;
-    bottom: 7%;
 }
 
 .footer-wrap img {
-    width: 70px;
-    height: 70px;
     cursor: pointer;
 }
 .footer-wrap .footer-text {
     margin: auto 0;
     color: #B6B6B6;
     cursor: pointer;
+    z-index: 1;
 }
 .footer-wrap .footer-text:hover {
     text-decoration: underline;
@@ -305,11 +304,11 @@ header .inner-header .profile-box img {
 }
 
 header .gnb {
-    background: #000;
-    color: #666;
+    background: rgb(0 0 0 / 80%);
+    color: #b6b6b6;
     height: 100vh;
     font-size: 30px;
-    padding: 70px 30px;
+    padding: 30px 20px;
     box-sizing: border-box;
 
     position: fixed;
@@ -324,7 +323,6 @@ header .gnb {
 
 header .gnb.on {
     right: 0;
-    width: 40%;
 }
 
 header .gnb .close {
@@ -332,8 +330,7 @@ header .gnb .close {
     color: #fff;
 }
 header .gnb ul {
-    margin-right: 200px;
-    width: 40%;
+    margin-right: 50px;
 }
 header .gnb ul li {
     font-weight: 700;
@@ -364,6 +361,7 @@ header .menu-open .lnr-menu {
     font-size: 33px;
     margin-left: 15px;
     text-shadow: 0 1px 10px rgba(0, 0, 0, 0.5);
+    z-index: 1;
 }
 
 .modal-wrap {

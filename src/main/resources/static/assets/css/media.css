@@ -15,8 +15,8 @@ body {
 /*banner*/
 .banner {
   margin-bottom: 50px;
-  background-color: #f8f8f8;
-  color: #111;
+  background-color: #393838;
+  color: #b6b6b6;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   border-radius: 40px;
 }
@@ -92,7 +92,7 @@ body {
 /* row */
 .row {
   position: relative;
-  color: #111;
+  color: #b6b6b6;
   margin-bottom: 10px;
 }
 .row_title {
@@ -196,7 +196,7 @@ body {
   height: 185px;
   cursor: pointer;
   transition: 0.5s;
-  border: 1px solid #e0e0e0;
+  border: 1px solid #393838;
   border-radius: 10px;
   overflow: hidden;
   background-color: #fff;
@@ -215,8 +215,8 @@ body {
 
 .card-title-wrapper {
   padding: 10px;
-  background-color: #f8f8f8;
-  border-bottom: 1px solid #e0e0e0;
+  background-color: #393838;
+  border-bottom: 1px solid #393838;
 }
 
 .card-title {

@@ -26,6 +26,9 @@ body {
     /*padding: 20px;*/
     color: white;
     background-color: transparent;
+    top: 40px;
+    position: relative;
+    margin-bottom: 50px;
 }
 header .login-user {
     position: absolute;
@@ -61,6 +64,7 @@ main {
   position: relative;
   text-align: left;
   z-index: 1;
+    top: 50px;
 }
 
 .main-logo {
@@ -363,7 +367,6 @@ header .menu-open .lnr-menu {
     text-shadow: 0 1px 10px rgba(0, 0, 0, 0.5);
     z-index: 1;
     position: absolute;
-    top: 24px;
 }
 
 .modal-wrap {

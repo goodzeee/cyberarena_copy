@@ -80,12 +80,14 @@ pageEncoding="UTF-8"%>
                                 />
                             </div>
                             <div class="hr"></div>
-                            <button id="find-id">
-                                이메일 찾기(식별코드 필요)
-                            </button>
-                            <button id="find-pw">
-                                비밀번호 찾기(식별코드 필요)
-                            </button>
+                            <div class="button-wrap">
+                                <button id="find-id">
+                                    이메일 찾기(식별코드 필요)
+                                </button>
+                                <button id="find-pw">
+                                    비밀번호 찾기(식별코드 필요)
+                                </button>
+                            </div>
                         </form>
                     </div>
                     <div class="sign-up-htm">

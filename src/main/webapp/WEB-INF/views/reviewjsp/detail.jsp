@@ -94,8 +94,10 @@
             </div>
 
             <!-- 리뷰 목록 영역 -->
-            <h3>리뷰 목록</h3>
+            <div>
+                <h3>리뷰 목록</h3>
                 <p class="review-average"><strong>(미디어 리뷰 평점: </strong>${media.rating} / 5)</p>
+            </div>
                 <c:forEach var="review" items="${reviews.reviews}">
                      <div class="review-list" data-rno="${review.reviewNo}" data-mno="${review.mediaNo}">
                      <div class="review-item">
@@ -121,9 +123,7 @@
         <c:choose>
             <c:when test="${review.discussionStatus == 'ALLOW'}">
                 <!--href="/discussion/register" 토론 작성 페이지가 바로 뜨면 좋은데 ... -->
-                <p><strong>토론신청 허용 여부:</strong> <a href="/discussion/register?reviewNo=${review.reviewNo}">ALLOW</a></p>
-
-
+                <p><strong>토론신청 허용 여부:</strong> <a class="allow-link" href="/discussion/write">ALLOW</a></p>
             </c:when>
             <c:otherwise>
                 <p><strong>토론신청 허용 여부:</strong> DISALLOW</p>

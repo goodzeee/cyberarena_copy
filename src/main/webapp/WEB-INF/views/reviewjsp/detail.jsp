@@ -86,12 +86,6 @@
                     
                     <label for="discussionStatus">토론신청 허용 여부:</label>
                     <p for="discussionStatus" style="display: inline;">허용 <input type="checkbox" id="discussionStatus" name="discussionStatus" value="true"></p>
-
-                    <!-- <label class="checkbox-container" for="discussionStatus">토론신청 허용 여부:</label>
-                                        <p for="discussionStatus" style="display: inline;"> 허용
-                                            <input type="checkbox" id="discussionStatus" name="discussionStatus" value="true">
-                                            <!-- <span class="checkmark">허용</span> -->
-                                        <!-- </p> -->
                     
                     <button id="reviewBtn" type="button">등록</button>
                 </form>
@@ -139,13 +133,10 @@
                         <!-- 본인이 쓴글에만 접근할 수 있게 조건 렌더링되도록 -->
                     <c:if test="${login.email == review.email}">
                         <div class="review-actions">
-                            <!-- 삭제 버튼 onclick="deleteReview(${review.reviewNo})"--> 
-                            <button class="del-btn" onclick="deleteReview(${review.reviewNo}, ${review.mediaNo})">삭제</button>
-                            <!-- 수정 버튼 -->
-                            <button class="mod-btn" onclick="openEditModal(${review.reviewNo}, '${review.text}', ${review.userRating}, '${review.discussionStatus}')">수정</button>
+                            <button class="del-btn" onclick="deleteReview('${review.reviewNo}', '${review.mediaNo}')">삭제</button>
+                            <button class="mod-btn" onclick="openEditModal('${review.reviewNo}', '${review.text}', '${review.userRating}', '${review.discussionStatus}')">수정</button>
                         </div>
                     </c:if>
-                    <!-- <hr> -->
 
                     <div class="bottom-section">
                         <nav aria-label="Page navigation example">

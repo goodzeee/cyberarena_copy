@@ -164,12 +164,13 @@ public class UserController {
                 .ok()
                 .body(flag);
     }
+
     @GetMapping("/verify")
     @ResponseBody
     public ResponseEntity<?> verify(HttpSession session) {
         LoginUserInfoDto loginUser = (LoginUserInfoDto) session.getAttribute("login");
 
-        if(loginUser.isVerified()) {
+        if (loginUser.isVerified()) {
 
             return ResponseEntity
                     .ok()
@@ -182,13 +183,14 @@ public class UserController {
                 .ok()
                 .body(code);
     }
+
     @PostMapping("/find-id")
     @ResponseBody
     public ResponseEntity<?> findId(@RequestBody Map<String, Object> requestMap) {
         String code = (String) requestMap.get("code");
 
         String email = userService.findEmail(code);
-        if(email == null) {
+        if (email == null) {
             return ResponseEntity
                     .status(403)
                     .body("올바르지 않은 식별코드 입니다.");
@@ -206,7 +208,7 @@ public class UserController {
         String email = (String) requestMap.get("email");
         String emailByCode = userService.findEmail(code);
 
-        if(!email.equals(emailByCode)) {
+        if (!email.equals(emailByCode)) {
             return ResponseEntity
                     .status(403)
                     .body("올바르지 않은 식별코드 입니다.");
@@ -221,7 +223,7 @@ public class UserController {
     @ResponseBody
     public ResponseEntity<?> changePassword(@RequestBody ChangePasswordDto dto) {
         boolean flag = userService.changePassword(dto);
-        if(flag) {
+        if (flag) {
             return ResponseEntity
                     .ok()
                     .body(flag);
@@ -230,15 +232,19 @@ public class UserController {
                 .status(403)
                 .body(flag);
     }
+
     @GetMapping("/user-info/{targetEmail}")
-    public String userInfoGet(@PathVariable String targetEmail ,Model model, HttpServletRequest request) {
+    public String userInfoGet(@PathVariable String targetEmail, Model model, HttpServletRequest request) {
         LoginUserInfoDto login = (LoginUserInfoDto) request.getSession().getAttribute("login");
-        if(login != null) {
-            if(login.getEmail().equals(targetEmail)) {
+        if (login != null) {
+            if (login.getEmail().equals(targetEmail)) {
                 return "redirect:/user/mypage";
             }
         }
-        boolean wasFollow = followLogService.wasFollow(login.getEmail(), targetEmail);
+        boolean wasFollow = false;
+        if (login != null) {
+            wasFollow = followLogService.wasFollow(login.getEmail(), targetEmail);
+        }
         int followerSize = followLogService.getFollowList(targetEmail, false).size();
         int followingSize = followLogService.getFollowList(targetEmail, true).size();
         LoginUserInfoDto userInfo = userService.findUserInfo(targetEmail);
@@ -252,9 +258,10 @@ public class UserController {
         model.addAttribute("reviews", reviewList);
         return "user/user-info";
     }
+
     @GetMapping("/user-info/follower/{targetEmail}")
     @ResponseBody
-    public ResponseEntity<?> userInfoFollowerListGet(@PathVariable String targetEmail , HttpServletRequest request) {
+    public ResponseEntity<?> userInfoFollowerListGet(@PathVariable String targetEmail, HttpServletRequest request) {
 
         List<FollowExistsDto> followList = followLogService.getFollowList(targetEmail, false);
 
@@ -262,9 +269,10 @@ public class UserController {
                 .ok()
                 .body(followList);
     }
+
     @GetMapping("/user-info/following/{targetEmail}")
     @ResponseBody
-    public ResponseEntity<?> userInfoFollowingListGet(@PathVariable String targetEmail , HttpServletRequest request) {
+    public ResponseEntity<?> userInfoFollowingListGet(@PathVariable String targetEmail, HttpServletRequest request) {
 
         List<FollowExistsDto> followList = followLogService.getFollowList(targetEmail, true);
 

@@ -3,7 +3,7 @@ header.main-header {
   justify-content: space-between;
   align-items: center;
   padding: 20px;
-  background-color: #222;
+  background-color: #000;
   color: white;
 }
 header .login-user {
@@ -28,11 +28,11 @@ header .inner-header .profile-box img {
 }
 
 header .gnb {
-  background: #000;
-  color: #666;
+  background: rgb(0 0 0 / 80%);
+  color: #b6b6b6;
   height: 100vh;
   font-size: 30px;
-  padding: 70px 30px;
+  padding: 30px 20px;
   box-sizing: border-box;
 
   position: fixed;
@@ -47,7 +47,6 @@ header .gnb {
 
 header .gnb.on {
   right: 0;
-  width: 40%;
 }
 
 header .gnb .close {
@@ -55,8 +54,7 @@ header .gnb .close {
   color: #fff;
 }
 header .gnb ul {
-  margin-right: 200px;
-  width: 40%;
+  margin-right: 50px;
 }
 header .gnb ul li {
   font-weight: 700;

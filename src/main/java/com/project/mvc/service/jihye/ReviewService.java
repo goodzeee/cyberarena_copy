@@ -77,7 +77,7 @@ public class ReviewService {
         loginUser.getEmail();
 
         boolean flag = reviewMapper.save(r);
-        if(flag) {
+        if (flag) {
             reviewMapper.updateMediaRating(r.getMediaNo());
         }
         return flag;
@@ -101,14 +101,19 @@ public class ReviewService {
         log.info("Removing reviewNo: {}", reviewNo);
 
         // 리뷰 번호로 원본 미디어 번호 찾기
-        long mno = (long)reviewMapper.findMno(reviewNo);
+        long mno = (long) reviewMapper.findMno(reviewNo);
         log.info("mno: {}", mno);
         // 찾은 리뷰 번호 삭제
         boolean flag = reviewMapper.delete(reviewNo);
-        reviewMapper.updateMediaRating(mno);
+        ReviewListDto list = findList(mno);
+        if (list.getReviews().isEmpty()) {
+            reviewMapper.updateRatingWhenDeleteLastReview(mno);
+        } else {
+            reviewMapper.updateMediaRating(mno);
+        }
 
         // 삭제 성공 시 해당 미디어의 리뷰 목록 반환
-        return flag ? findList(mno) : null;
+        return flag ? list : null;
     }
 
     public List<ReviewAsideListDto> findAsideList() {

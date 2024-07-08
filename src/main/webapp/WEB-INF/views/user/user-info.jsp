@@ -22,6 +22,9 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                     <div class="name" data-target-email="${userInfo.email}" >
                         <h1>${userInfo.nickname}
                             <c:choose>
+                                <c:when test="${login == null}">
+
+                                </c:when>
                                 <c:when test="${wasFollow}">
                                     <span class="follow-btn green">팔로잉</span>
                                 </c:when>

@@ -8,7 +8,7 @@
 }
 
 body {
-  background-color: #fff;
+  background-color: #000 !important;
   font-family: "NanumSquare", sans-serif;
   font-weight: 500;
 }
@@ -29,12 +29,12 @@ body {
 }
 
 .rank svg {
-  margin-right: 280px;
+  margin-right: 400px;
 }
 
 .poster_wrap {
   position: relative;
-  width: 250px;
+  width: 280px;
   margin-left: 180px;
   height: 200px;
   cursor: pointer;
@@ -43,11 +43,11 @@ body {
 }
 
 .poster_wrap:nth-last-child(2) {
-  margin-left: 240px
+  margin-left: 330px
 }
 
 .poster_wrap:last-child {
-  margin-left: 250px;
+  margin-left: 335px;
 }
 
 .poster_wrap section {
@@ -83,7 +83,7 @@ body {
 }
 
 .count01 {
-  margin-right: 35px;
+  margin-right: 75px;
 }
 
 .fa-user:before {
@@ -176,7 +176,7 @@ body {
 }
 .next i {
   position: absolute;
-  left: 96%;
+  left: 97%;
 }
 .slider {
   scroll-behavior: smooth;

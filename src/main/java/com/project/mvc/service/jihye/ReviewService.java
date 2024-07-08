@@ -8,10 +8,12 @@ import com.project.mvc.dto.response.jihye.ReviewFindAllDto;
 import com.project.mvc.dto.response.jihye.ReviewListDto;
 import com.project.mvc.dto.response.kibeom.ReviewAsideListDto;
 import com.project.mvc.dto.seongjin.LoginUserInfoDto;
+import com.project.mvc.dto.seongjin.ReviewAllowDto;
 import com.project.mvc.entity.LikeLog;
 import com.project.mvc.entity.Review;
 import com.project.mvc.mapper.jihye.LikeLogMapper;
 import com.project.mvc.mapper.jihye.ReviewMapper;
+import com.project.mvc.mapper.kibeom.DiscussionMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -27,6 +29,7 @@ public class ReviewService {
 
     private final ReviewMapper reviewMapper;
     private final LikeLogMapper likeLogMapper;
+    private final DiscussionMapper discussionMapper;
 
     // 1. 특정 미디어에 달린 리뷰 목록 조회 요청 중간처리
     public ReviewListDto findList(long mediaNo) {
@@ -118,6 +121,11 @@ public class ReviewService {
 
     public List<ReviewAsideListDto> findAsideList() {
         return reviewMapper.findAsideList();
+    }
+
+    public ReviewAllowDto allowReview(long reviewNo) {
+        ReviewAllowDto allowDto = reviewMapper.getAllowDto(reviewNo);
+        return allowDto;
     }
 }
 

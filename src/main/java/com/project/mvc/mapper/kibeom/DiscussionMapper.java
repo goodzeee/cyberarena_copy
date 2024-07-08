@@ -9,6 +9,7 @@ import com.project.mvc.dto.response.kibeom.DiscussResponseDto;
 import com.project.mvc.dto.seongjin.DiscussMyPageDto;
 import com.project.mvc.entity.Discussion;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -46,4 +47,6 @@ public interface DiscussionMapper {
     List<DiscussAsideListDto> findAsideList();
 
     List<DiscussFindAllDto> getSortedDiscussion(String sort);
+
+    void setReviewNo(@Param("reviewNo") long reviewNo, @Param("mediaNo") long mediaNo);
 }

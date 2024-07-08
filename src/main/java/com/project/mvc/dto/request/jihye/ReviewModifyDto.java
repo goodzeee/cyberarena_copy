@@ -36,5 +36,6 @@ public class ReviewModifyDto {
                 .email(this.email)
                 .mediaNo(this.mno)
                 .build();
+
     }
 }

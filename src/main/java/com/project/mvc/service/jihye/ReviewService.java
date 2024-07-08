@@ -76,13 +76,18 @@ public class ReviewService {
         LoginUserInfoDto loginUser = (LoginUserInfoDto) session.getAttribute("login");
         loginUser.getEmail();
 
-        return reviewMapper.save(r);
+        boolean flag = reviewMapper.save(r);
+        if(flag) {
+            reviewMapper.updateMediaRating(r.getMediaNo());
+        }
+        return flag;
     }
 
     // 3. 리뷰 수정
     public ReviewListDto modify(ReviewModifyDto dto) {
 
         reviewMapper.modify(dto.toEntity());
+        reviewMapper.updateMediaRating(dto.getMno());
         return findList(dto.getReviewNo());
     }
 
@@ -100,6 +105,7 @@ public class ReviewService {
         log.info("mno: {}", mno);
         // 찾은 리뷰 번호 삭제
         boolean flag = reviewMapper.delete(reviewNo);
+        reviewMapper.updateMediaRating(mno);
 
         // 삭제 성공 시 해당 미디어의 리뷰 목록 반환
         return flag ? findList(mno) : null;

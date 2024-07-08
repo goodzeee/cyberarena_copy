@@ -89,9 +89,19 @@ public class MediaService {
                 .sorted(Comparator.comparing(DiscussRenderingDto::getReplyCount).reversed())
                 .limit(3)
                 .collect(Collectors.toList());
+
         for (DiscussRenderingDto disc : allDiscussions) {
+            if (disc.getDiscussionTitle().length() > 8) {
+                disc.setDiscussionTitle(disc.getDiscussionTitle().substring(0, 8)+"...");
+            }
+
+            if (disc.getMediaTitle().length() > 15) {
+                disc.setMediaTitle(disc.getMediaTitle().substring(0, 15)+"...");
+            }
+
             disc.dateFormatting();
         }
+
         return allDiscussions;
     }
 

@@ -309,35 +309,35 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
     // 별점 효과
     document.addEventListener("DOMContentLoaded", function () {
-      var ratings = document.querySelectorAll(".rating");
+  var ratings = document.querySelectorAll(".rating");
 
-      ratings.forEach(function (ratingContainer) {
-        var rating = parseFloat(ratingContainer.getAttribute("data-rating"));
-        var starsHtml = "";
+  ratings.forEach(function (ratingContainer) {
+    var rating = parseFloat(ratingContainer.getAttribute("data-rating"));
+    var starsHtml = "";
 
-        // Calculate filled stars
-        var filledStars = Math.floor(rating / 2);
-        var halfStar = rating % 2 !== 0;
+    // 꽉 찬 별 계산
+    var filledStars = Math.floor(rating);
+    var halfStar = rating % 1 !== 0;
 
-        // Create filled stars
-        for (var i = 0; i < filledStars; i++) {
-          starsHtml += '<i class="fa-solid fa-star filled"></i>';
-        }
+    // 꽉 찬 별 생성
+    for (var i = 0; i < filledStars; i++) {
+      starsHtml += '<i class="fa-solid fa-star filled"></i>';
+    }
 
-        // Add half star if necessary
-        if (halfStar) {
-          starsHtml += '<i class="fa-solid fa-star-half-alt filled"></i>';
-        }
+    // 반별 추가
+    if (halfStar) {
+      starsHtml += '<i class="fa-solid fa-star-half-alt filled"></i>';
+    }
 
-        // Create empty stars to complete 5 stars
-        for (var i = filledStars + (halfStar ? 1 : 0); i < 5; i++) {
-          starsHtml += '<i class="fa-solid fa-star"></i>';
-        }
+    // 빈 별 생성
+    for (var i = filledStars + (halfStar ? 1 : 0); i < 5; i++) {
+      starsHtml += '<i class="fa-solid fa-star"></i>';
+    }
 
-        // Insert stars into the rating container
-        ratingContainer.innerHTML = starsHtml;
-      });
-    });
+    // 별점 컨테이너에 별 추가
+    ratingContainer.innerHTML = starsHtml;
+  });
+});
 
   </script>
 </html>

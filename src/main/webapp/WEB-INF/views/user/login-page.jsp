@@ -388,7 +388,7 @@ pageEncoding="UTF-8"%>
                 if (e.target.matches("#find-dialog")) $dialog.close();
             });
             $idBtn.addEventListener("click", findIdHandler);
-            $pwBtn.addEventListener("click", findPwHandler);
+            $pwBtn.addEventListener("click", findPwHandler.bind(null, ""));
         </script>
     </body>
 </html>

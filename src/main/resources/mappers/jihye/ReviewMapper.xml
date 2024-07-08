@@ -85,4 +85,10 @@
         WHERE media_no = #{mediaNo}
     </update>
 
+    <update id="updateRatingWhenDeleteLastReview">
+        UPDATE media
+        SET rating = 0
+        WHERE media_no = #{mediaNo}
+    </update>
+
 </mapper>

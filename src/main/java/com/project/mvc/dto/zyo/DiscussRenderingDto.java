@@ -17,12 +17,14 @@ public class DiscussRenderingDto {
     private String email;
     //discussion
     private long discussionNo;
+    @Setter
     private String discussionTitle;
     private LocalDateTime discussionCreatedAt;
     private long viewCount;
     private int replyCount;
     //media
     private long mediaNo;
+    @Setter
     private String mediaTitle;
     private String imageUrl;
 

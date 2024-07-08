@@ -29,7 +29,7 @@ body {
 }
 
 .rank svg {
-  margin-right: 400px;
+  margin-right: 370px;
 }
 
 .poster_wrap {
@@ -55,6 +55,9 @@ body {
   border: 1px solid #e0e0e0;
   box-shadow: 0 5px 0 #999;
   border-radius: 10px;
+}
+section.link:last-child {
+  margin-right: 16px;
 }
 
 .poster_wrap h2 {

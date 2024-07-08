@@ -23,7 +23,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px;
+    /*padding: 20px;*/
     color: white;
     background-color: transparent;
 }
@@ -362,6 +362,8 @@ header .menu-open .lnr-menu {
     margin-left: 15px;
     text-shadow: 0 1px 10px rgba(0, 0, 0, 0.5);
     z-index: 1;
+    position: absolute;
+    top: 24px;
 }
 
 .modal-wrap {

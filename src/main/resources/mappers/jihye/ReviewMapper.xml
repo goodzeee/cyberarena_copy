@@ -91,4 +91,20 @@
         WHERE media_no = #{mediaNo}
     </update>
 
+
+    <select id="getAllowDto" resultType="com.project.mvc.dto.seongjin.ReviewAllowDto">
+        SELECT
+            U.nickname,
+            R.email,
+            R.review_text,
+            R.media_no,
+            R.review_no,
+            M.media_title
+        FROM review R
+        INNER JOIN user U
+        USING(email)
+        INNER JOIN media M
+        USING(media_no)
+        WHERE review_no = #{reviewNo}
+    </select>
 </mapper>

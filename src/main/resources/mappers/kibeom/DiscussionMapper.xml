@@ -189,5 +189,10 @@
 <!--        LIMIT #{pageStart}, #{amount}-->
     </select>
 
+    <update id="setReviewNo">
+        UPDATE media set review_no = #{reviewNo}
+        WHERE media_no = #{mediaNo}
+    </update>
+
 
 </mapper>

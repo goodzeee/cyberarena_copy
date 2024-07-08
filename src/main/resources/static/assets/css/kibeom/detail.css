@@ -63,7 +63,7 @@ aside {
 }
 
 .aside-header {
-    width: 70%;
+    width: 85%;
     /*text-align: center;*/
     margin: 0 auto;
     padding: 30px;
@@ -103,9 +103,44 @@ aside ul li {
     cursor: pointer;
 }
 
+aside ul li div.aside-div {
+    display: flex;
+    background: #393838;
+}
+aside ul li div.aside-div div {
+    width: 50%;
+}
+
+aside ul li div.aside-div div img {
+    /*width: 100%;*/
+    width: 70%;
+    height: 100%;
+    background: center/cover no-repeat fixed;
+    overflow: hidden;
+}
+
 aside ul li:hover {
     box-shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.9);
 }
+div.aside-div .aside-div-right > * {
+    margin-bottom: 0;
+}
+div.aside-div .aside-div-right h3 {
+    font-size: 20px;
+    color: #B6B6B6;
+}
+
+.aside-ul hr {
+    color: #f1f0f0;
+    margin-bottom: 45px;
+
+}
+
+/*#right-aside li {*/
+/*    height: 118px;*/
+/*}*/
+
+
 
 .discussion-card {
     background-color: #222323;

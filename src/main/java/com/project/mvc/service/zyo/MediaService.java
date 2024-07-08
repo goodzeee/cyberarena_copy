@@ -1,15 +1,11 @@
 package com.project.mvc.service.zyo;
 
-import com.project.mvc.common.jihye.Page;
 import com.project.mvc.common.zyo.Search;
 import com.project.mvc.dto.request.jihye.MediaDetailDto;
-import com.project.mvc.dto.response.jihye.ReviewDetailDto;
 import com.project.mvc.dto.response.jihye.ReviewFindAllDto;
-import com.project.mvc.dto.response.kibeom.DiscussFindAllDto;
+import com.project.mvc.dto.response.kibeom.MediaAsideListDto;
 import com.project.mvc.dto.zyo.DiscussRenderingDto;
 import com.project.mvc.dto.zyo.ReviewRenderingDto;
-import com.project.mvc.entity.Category;
-import com.project.mvc.entity.Discussion;
 import com.project.mvc.entity.Media;
 import com.project.mvc.mapper.jihye.ReviewMapper;
 import com.project.mvc.mapper.kibeom.DiscussionMapper;
@@ -17,6 +13,7 @@ import com.project.mvc.mapper.zyo.MediaMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -109,4 +106,10 @@ public class MediaService {
     }
 
 
+    public List<MediaAsideListDto> findAsideList() {
+        List<MediaAsideListDto> asideList = mediaMapper.findAsideList();
+//        Collections.shuffle(asideList);
+
+        return asideList.stream().limit(20).collect(Collectors.toList());
+    }
 }

@@ -6,8 +6,9 @@ body {
 }
 
 h2 {
-    border-bottom: 2px solid #000;
-    padding-bottom: 5px;
+    padding-top: 30px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid;
 }
 #follow-dialog {
     position: absolute;
@@ -18,6 +19,9 @@ h2 {
     padding: 0;
     transform: translate(-50%, -50%);
     border-radius: 15px;
+    background: #393838;
+    color: #B6B6B6;
+
 }
 #follow-dialog .user-type {
     text-align: center;
@@ -38,9 +42,12 @@ i.done {
     justify-content: space-between;
     padding-right: 8px;
     border-bottom: #616161 solid 1px;
+    background: #222323;
+    margin-top: 20px;
 }
 #follow-dialog .users-info .user-list:nth-child(2n - 1) {
-    background-color: #ededed;
+    background-color: #393838;
+    margin-top: 20px;
 }
 #follow-dialog::backdrop {
     background-color: rgba(0, 0, 0, 0.5);
@@ -50,25 +57,34 @@ i.done {
     height: 100%;
     overflow-y: scroll;
 }
+#follow-dialog .users-info .user-list:last-child {
+    margin-bottom: 30px;
+}
+
 /* 새로운시작이야 */
 .outer-content-wrap {
-    width: 600px;
-    padding: 0 20px 100px;
-    margin: 40px auto 0;
-    background-color: #fff;
+    width: 700px;
+    padding: 110px 32px 100px;
+    margin: 150px auto 0;
+    background-color: #171717;
+    border-radius: 25px;
+    border: 1px solid #222323;
 }
+
 .inner-content-wrap {
-    border: 1px solid #ececec;
-    border-radius: 6px;
+    border: 1px solid #B6B6B6;
+    border-radius: 20px;
     width: 100%;
-    background-color: #f7f7f7;
+    background-color: #222323 !important;
+    color: #B6B6B6;
 }
 #user-info {
     box-sizing: border-box;
-    background-color: #fff;
+    background-color: #222323 !important;
     width: 100%;
     padding: 15px 15px 16px;
     margin-bottom: 12px;
+    border-radius: 25px;
 }
 .name {
     display: flex;
@@ -83,6 +99,7 @@ i.done {
     padding: 0;
     margin: 0;
     font-weight: 700;
+    white-space: nowrap
 }
 .name p {
     font-size: 13px;
@@ -94,6 +111,7 @@ i.done {
     display: flex;
     align-items: center;
     margin-top: 9px;
+    margin-bottom: 15px;
 }
 .wall {
     width: 1px;
@@ -105,7 +123,7 @@ i.done {
     font-size: 13px;
     line-height: 16px;
     text-decoration: none;
-    color: #343434;
+    color: #B6B6B6;
 }
 .user-relation a:hover {
     color: #000;
@@ -134,15 +152,22 @@ i.done {
     width: 100%;
 }
 .verify-code-wrap button {
-    border-color: #000;
+    border-color: #B6B6B6;
     border-radius: 4px;
     background-color: #888888;
     color: #000;
     border: 1px;
-    padding: 3px;
+    padding: 3px 15px;
+}
+.copy {
+    margin-left: 10px;
+}
+.top-wrap {
+    display: flex;
+    justify-content: space-between;
 }
 .verify-code-wrap button:hover {
-    border-color: #fff;
+    border-color: #B6B6B6;
     background-color: #000;
     color: #fff;
 }
@@ -150,6 +175,7 @@ i.done {
     font-size: 14px;
     width: 280px;
     margin-left: 10px;
+    background: #393838;
 }
 .verify-code-wrap div {
     font-size: 16px;
@@ -162,10 +188,13 @@ i.done {
     height: 60px;
     padding: 0 15px;
     border: 1px solid #a9a9a9;
-    background-color: #fff;
+    background-color: #393838 ;
+    color: #B6B6B6;
+    /*border-bottom-left-radius: 20px;*/
+    /*border-bottom-right-radius: 20px;*/
 }
 .title-btn {
-    color: #616161;
+    color: #B6B6B6;
     width: 265px;
     text-align: center;
 }
@@ -176,8 +205,10 @@ i.done {
 }
 .content-wrap {
     width: 100%;
-    background-color: #fff;
+    background-color: #222323;
     border: 1px solid #a9a9a9;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
 }
 #hidden-content {
     display: none;
@@ -185,35 +216,58 @@ i.done {
 .discuss-content {
     display: flex;
     flex-wrap: wrap;
+    background: #222323;
+    color: #B6B6B6;
+    border-radius: 20px;
 }
+.discuss-card:nth-child(1),
+.discuss-card:nth-child(2) {
+    margin-top: 30px;
+}
+.discuss-card:last-child {
+    margin-bottom: 30px;
+}
+
 .discuss-card {
-    border: 1px solid #ddd;
+    border: 1px solid #B6B6B6;
     border-radius: 10px;
-    background-color: #f8f8f8;
+    background: #393838;
     box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.2);
     transition: 0.2s;
     margin: 15px;
-    width: 42%;
+    width: 45.1%;
     padding: 25px 0;
     padding-left: 15px;
     border-radius: 20px;
     justify-content: flex-start;
 }
+.discuss-card:hover {
+    box-shadow: 0 30px 60px -30px rgb(255, 254, 254);
+}
+
 .discuss-card h2 {
     font-size: 22px;
 }
 .review-card {
-    border: 1px solid #ddd;
+    border: 1px solid #B6B6B6;
     border-radius: 10px;
-    background-color: #f8f8f8;
+    background-color: #393838;
     box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.2);
     transition: 0.2s;
-    margin: 15px auto;
+    margin: 35px auto;
     width: 90%;
     padding: 25px 0;
     padding-left: 15px;
     border-radius: 20px;
+    color: #B6B6B6;
 }
+.review-card:first-child {
+    margin-top: 30px;
+}
+.review-card:last-child {
+    margin-bottom: 30px;
+}
+
 .discuss-card:hover {
     box-shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.9);
 }
@@ -244,6 +298,7 @@ i.done {
 }
 .review-card .media-title {
     cursor: pointer;
+    font-size: 23px;
 }
 
 h2.no-content {
@@ -255,27 +310,29 @@ h2.no-content {
     display: inline-block;
     margin-left: 15px;
     border-radius: 5px;
-    font-size: 16px;
+    font-size: 14px;
     padding: 4px;
     width: 56.5px;
     text-align: center;
 }
 
 .follow-btn.green {
-    background-color: #00ee00;
-    border: 1px solid #00ff00;
+    background-color: #a3a3a3;
     transition: 400ms;
+    color: black;
 }
 .follow-btn.green:hover {
-    background-color: #ee0000;
+    background-color: #3e3d3d;
     transition: 400ms;
 }
 .follow-btn.gray {
-    background-color: #aaa;
-    border: 1px solid #444;
+    background-color: #3e3d3d;
+    border: 1px solid #B6B6B6;
     transition: 400ms;
+    color: white;
 }
 .follow-btn.gray:hover {
-    background-color: #00ee00;
+    background-color: #a3a3a3;
     transition: 400ms;
+    color: black;
 }

@@ -20,7 +20,12 @@ uri="http://java.sun.com/jsp/jstl/core" %>
             <div class="inner-content-wrap">
                 <div id="user-info">
                     <div class="name">
-                        <h1>${login.nickname}</h1>
+                        <div class="top-wrap">
+                            <h1>${login.nickname}</h1>
+                            <div class="sign-out-wrap">
+                                <a href="/user/sign-out">로그아웃</a>
+                            </div>
+                        </div>
                         <p>${login.email}</p>
                         <p>가입일: ${login.regDate}</p>
                     </div>
@@ -30,9 +35,6 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                         <a href="#" id="following">팔로잉(${following})명</a>
                     </div>
 
-                    <div class="sign-out-wrap">
-                        <a href="/user/sign-out">로그아웃</a>
-                    </div>
 
                     <div class="verify-code-wrap">
                         <c:choose>
@@ -67,7 +69,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                                 <c:forEach var="d" items="${discussions}">
                                     <div class="discuss-card" data-dno="${d.discussionNo}">
                                         <h2 class="discussion-title" onclick="window.location.href='/discussion/detail?dno=${d.discussionNo}'">${d.shortTitle}</h2>
-                                        <hr>
+<%--                                        <hr>--%>
                                         <div>
                                             <span class="media-title" onclick="window.location.href='/media/${d.mediaNo}'">
                                                 <h3>${d.mediaTitle}</h3>

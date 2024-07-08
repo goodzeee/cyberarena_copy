@@ -38,7 +38,7 @@
     </aside>
 
 
-    <main>
+    <main class="content-content">
         <div id="wrap" class="media-detail" data-mno="${media.mediaNo}">
 
             <div class="media-info">
@@ -121,7 +121,7 @@
                      <div class="review-list" data-rno="${review.reviewNo}" data-mno="${review.mediaNo}">
                      <div class="review-item">
                         <p id="reviewText">${review.text}</p>  <br>
-                        <p><strong>작성자:</strong> ${review.nickname}</p>
+                        <p><strong>작성자:</strong> <span class="nickname" data-email="${review.email}">${review.nickname}</span></p>
                         <p><strong>별점:</strong> ${review.userRating} / 5</p>
 
                      <!-- 토론 신청 허용 여부 조건에 따라 링크 또는 텍스트로 표시 -->
@@ -387,6 +387,12 @@ document.getElementById('reviewBtn').addEventListener('click', function () {
     })
     .catch(error => console.error('Error:', error));
 });
+
+document.querySelector(".content-content").addEventListener("click", e => {
+    if(!e.target.matches(".nickname")) return;
+    const email = e.target.dataset.email;
+    window.location.href=`/user/user-info/\${email}`;
+})
 
 </script>
 </body>

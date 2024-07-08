@@ -57,11 +57,9 @@
                 <!-- <button id="list-btn" style="margin-top: auto;"><a href="/media/movie"></a>목록</button> -->
             </div>
 
-            <hr>
-
             <!-- 리뷰 등록 폼 -->
             <c:if test="${empty login}">
-                   <a href="/user/sign-in?redirect=/review/list?mno=${reviews.mediaNo}">리뷰 등록과 좋아요는 로그인 후 사용하실 수 있습니다 😏</a>
+                   <a href="/user/sign-in?redirect=/review/list/${reviews.mediaNo}"><p class="login-info">리뷰 기능은 로그인 후 사용하실 수 있습니다 😏</p></a>
             </c:if>
 
             <c:if test = "${not empty login}">
@@ -91,13 +89,13 @@
                     
                     <button id="reviewBtn" type="button">등록</button>
                 </form>
-            </c:if>
+            
 
             </div>
 
             <!-- 리뷰 목록 영역 -->
             <h3>리뷰 목록</h3>
-                <p class="review-average"><strong>미디어 리뷰 평점: </strong>${media.rating} / 5</p>
+                <p class="review-average"><strong>(미디어 리뷰 평점: </strong>${media.rating} / 5)</p>
                 <c:forEach var="review" items="${reviews.reviews}">
                      <div class="review-list" data-rno="${review.reviewNo}" data-mno="${review.mediaNo}">
                      <div class="review-item">
@@ -105,12 +103,8 @@
                         <p class="name"><strong></strong> <span class="nickname" data-email="${review.email}">${review.nickname}</span></p>
 
                         <p class="star"><strong>⭐</strong> ${review.userRating}</p>
-
-                        <!-- 좋아요 버튼 표시 -->
-                        <!-- <c:if test="${empty login}">
-                            <a>좋아요를 하고 싶으면 로그인 하세요. 😏</a> -->
-
-        <div class="buttons" style="float: right;">
+                
+        <div class="buttons" style="float: right; padding: 4px;">
             <div class="reaction-buttons">
                 <button class="like-btn ${review.userReaction == 'like' ? 'active' : '' }" data-liked="${review.userReaction == 'like'}" data-rno="${review.reviewNo}">
                     <i class="fas fa-thumbs-up"></i>like
@@ -118,7 +112,7 @@
                 </button>
             </div>
         </div>
-    <!-- </c:if> -->
+
         <hr>
 
                      <p id="reviewText">${review.text}</p>  <br><br>
@@ -127,14 +121,14 @@
         <c:choose>
             <c:when test="${review.discussionStatus == 'ALLOW'}">
                 <!--href="/discussion/register" 토론 작성 페이지가 바로 뜨면 좋은데 ... -->
-                <p><strong>토론신청 허용 여부:</strong> <a href="/discussion/list">ALLOW</a></p>
+                <p><strong>토론신청 허용 여부:</strong> <a class="allow-link" href="/discussion/write">ALLOW</a></p>
             </c:when>
             <c:otherwise>
                 <p><strong>토론신청 허용 여부:</strong> DISALLOW</p>
             </c:otherwise>
         </c:choose>
-<br>
-        <p><strong></strong> ${review.reviewCreatedAt}</p>
+
+        <p class="review-date"><strong></strong> ${review.reviewCreatedAt}</p>
 
                         <!-- 본인이 쓴글에만 접근할 수 있게 조건 렌더링되도록 -->
                     <c:if test="${login.email == review.email}">
@@ -159,6 +153,7 @@
                 </div>
                 </div>
                 </c:forEach>
+                </c:if>
 
             <!-- </div> -->
         <!-- </div> -->
@@ -184,7 +179,7 @@
                     <input type="checkbox" id="editDiscussionStatus" name="discussionStatus" value="true">
                     <label for="editDiscussionStatus">허용</label><br>
 
-                    <button type="button" onclick="submitEditForm()">저장</button>
+                    <button id="modBtn" type="button" onclick="submitEditForm()">저장</button>
                 </form>
             </div>
         </div>
@@ -326,32 +321,6 @@ function submitEditForm() {
     })
     .catch(error => console.error('Error:', error));
 }
-
-// 리뷰 삭제 함수
-// function deleteReview(reviewNo) {
-//     console.log(`delete reviewNo: ${reviewNo}`);
-//     if (confirm('정말 삭제하시겠습니까?')) {
-//         fetch(`/review/delete/${reviewNo}`, {
-//             method: 'DELETE',
-//             headers: {
-//                 'Content-Type': 'application/json'
-//             }
-//         })
-//         .then(response => {
-//             console.log(`Response received for delete reviewNo: ${reviewNo}`);
-//             if (response.ok) {
-//                 location.reload(); // 삭제 성공 시 페이지 새로고침
-//             } else {
-//                 // 응답 상태 코드 및 메시지 확인
-//                 response.text().then(text => {
-//                     console.error('Error response:', text);
-//                     alert('리뷰 삭제에 실패했습니다.');
-//                 });
-//             }
-//         })
-//         .catch(error => console.error('Error:', error));
-//     }
-// }
 
 // 리뷰 삭제 함수
 function deleteReview(reviewNo, mno) {

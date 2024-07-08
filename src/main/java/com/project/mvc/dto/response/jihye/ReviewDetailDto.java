@@ -40,7 +40,7 @@ public class ReviewDetailDto {
         this.nickname = r.getNickname();
         this.userRating = (int) r.getUserRating();
         this.discussionStatus = r.getDiscussionStatus();
-        DateTimeFormatter pattern = DateTimeFormatter.ofPattern("yyyy년 MM월 dd일 a hh시 mm분");
+        DateTimeFormatter pattern = DateTimeFormatter.ofPattern("yy년 MM월 dd일 a hh시 mm분");
         this.reviewCreatedAt = pattern.format(r.getReviewCreatedAt());
         this.likeCount = r.getLikeCount();
     }

@@ -44,19 +44,19 @@
                 </div>
                 <div class="media-description">
                     <p><strong class="media-title">${media.mediaTitle}</strong></p>
+                    <div class="media-box">
                     <p><strong>제작자:</strong> ${media.creator}</p>
                     <p><strong>평점:</strong> ${media.rating}점</p>
                     <p><strong>설명:</strong> ${media.mediaDesc}</p>
                     <p><strong>등록일:</strong> ${media.createdAt}년</p>
+                    </div>
                 </div>
-                <button id="list-btn" style="margin-top: auto;"><a href="/media/movie"></a>목록</button>
+                <!-- <button id="list-btn" style="margin-top: auto;"><a href="/media/movie"></a>목록</button> -->
             </div>
-
-            <hr>
 
             <!-- 리뷰 등록 폼 -->
             <c:if test="${empty login}">
-                   <a href="/user/sign-in?redirect=/review/list?mno=${reviews.mediaNo}">리뷰 등록은 로그인 후 사용하실 수 있습니다 😏</a>
+                   <a href="/user/sign-in?redirect=/review/list?mno=${reviews.mediaNo}">리뷰 등록과 좋아요는 로그인 후 사용하실 수 있습니다 😏</a>
             </c:if>
 
             <c:if test = "${not empty login}">
@@ -81,8 +81,11 @@
                         </c:forEach>
                     </select>
                     
-                    <label for="discussionStatus">토론신청 허용 여부:</label>
-                    <p for="discussionStatus" style="display: inline;">허용 <input type="checkbox" id="discussionStatus" name="discussionStatus" value="true"></p>
+                    <label class="checkbox-container" for="discussionStatus">토론신청 허용 여부:</label>
+                    <p for="discussionStatus" style="display: inline;"> 허용
+                        <input type="checkbox" id="discussionStatus" name="discussionStatus" value="true">
+                        <!-- <span class="checkmark">허용</span> -->
+                    </p>
                     
                     
                     <button id="reviewBtn" type="button">등록</button>
@@ -92,7 +95,6 @@
             </div>
 
             <!-- 리뷰 목록 영역 -->
-            <hr>
             <h3>리뷰 목록</h3>
 
             <c:set var="totalRating" value="0" />
@@ -115,27 +117,18 @@
                 </c:if>
 
                 <c:forEach var="review" items="${reviews.reviews}">
-                     <div class="review-list" data-rno="${review.reviewNo}" data-mno="${review.mediaNo}">
+                     <div id="review-list-container" class="review-list" data-rno="${review.reviewNo}" data-mno="${review.mediaNo}">
                      <div class="review-item">
-                        <p id="reviewText">${review.text}</p>  <br>
-                        <p><strong>작성자:</strong> ${review.nickname}</p>
-                        <p><strong>별점:</strong> ${review.userRating} / 5</p>
 
-                     <!-- 토론 신청 허용 여부 조건에 따라 링크 또는 텍스트로 표시 -->
-        <c:choose>
-            <c:when test="${review.discussionStatus == 'ALLOW'}">
-                <!--href="/discussion/register" 토론 작성 페이지가 바로 뜨면 좋은데 ... -->
-                <p><strong>토론신청 허용 여부:</strong> <a href="/discussion/list">ALLOW</a></p>
-            </c:when>
-            <c:otherwise>
-                <p><strong>토론신청 허용 여부:</strong> DISALLOW</p>
-            </c:otherwise>
-        </c:choose>
+                        <p class="name"><strong></strong> ${review.nickname}</p>
 
-        <p><strong>작성일:</strong> ${review.reviewCreatedAt}</p>
-    
-        <!-- 좋아요 버튼 표시 -->
-        <div class="buttons">
+                        <p class="star"><strong>⭐</strong> ${review.userRating}</p> 
+
+                        <!-- 좋아요 버튼 표시 -->
+                        <!-- <c:if test="${empty login}">
+                            <a>좋아요를 하고 싶으면 로그인 하세요. 😏</a> -->
+                        
+        <div class="buttons" style="float: right;">
             <div class="reaction-buttons">
                 <button class="like-btn ${review.userReaction == 'like' ? 'active' : '' }" data-liked="${review.userReaction == 'like'}" data-rno="${review.reviewNo}">
                     <i class="fas fa-thumbs-up"></i>like
@@ -143,6 +136,25 @@
                 </button>
             </div>
         </div>
+    <!-- </c:if> -->
+        <hr>
+                        <p id="reviewText">${review.text}</p>  <br><br>
+
+
+                     <!-- 토론 신청 허용 여부 조건에 따라 링크 또는 텍스트로 표시 -->
+        <c:choose>
+            <c:when test="${review.discussionStatus == 'ALLOW'}">
+                <!--href="/discussion/register" 토론 작성 페이지가 바로 뜨면 좋은데 ... -->
+                <p><strong>토론신청 허용 여부:</strong> <a class="allow-link" href="/discussion/list">ALLOW</a></p>
+            </c:when>
+            <c:otherwise>
+                <p><strong>토론신청 허용 여부:</strong> DISALLOW</p>
+            </c:otherwise>
+        </c:choose>
+
+        <br>
+
+        <p><strong></strong> ${review.reviewCreatedAt}</p>
 
                         <!-- 본인이 쓴글에만 접근할 수 있게 조건 렌더링되도록 -->
                     <c:if test="${login.email == review.email}">

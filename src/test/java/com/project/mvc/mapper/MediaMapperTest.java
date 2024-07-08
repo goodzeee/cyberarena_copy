@@ -28,6 +28,11 @@ class MediaMapperTest {
         List<Media> all = mediaMapper.findAll(null);
         //when
         System.out.println("all = " + all);
+        for (Media media : all) {
+            if (media.getCategoryNo() == 1) {
+                System.out.print(media.getMediaTitle()+" ");
+            }
+        }
 
         //then
     }
@@ -55,29 +60,7 @@ class MediaMapperTest {
     }
 
 
-    @Test
-    @DisplayName("미디어 평점 수정")
-    void modifyRating() {
-        //given
-        List<Media> asideList = mediaMapper.findAll(null);
-        Random random = new Random();
-//        // 1.0 ~ 5.0 사이의 랜덤 소수 생성
-//        for (int i = 0; i < 20; i++) {
-//
-//            System.out.println("rating = " + rating);
-//        }
-        
-        //when
-        for (Media mediaAsideListDto : asideList) {
-            double rawRating = 1.0 + (4.0 * random.nextDouble());
-            double rating = Math.round(rawRating * 10.0) / 10.0;
-            mediaAsideListDto.setRating(rating);
-            System.out.println(mediaAsideListDto.getRating());
-        }
-        
 
-        //then
-    }
 
 
     

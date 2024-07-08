@@ -35,7 +35,10 @@
         <div class="discussion-card">
 
             <div class="discussion-header">
-                <h1 class="discussion-title">${found.discussionTitle}</h1>
+                <h1 class="discussion-title">${found.discussionTitle}
+                    <div class="discussion-media-name" data-media-no="${found.mediaNo}">미디어 - ${found.mediaTitle}</div>
+                    <div class="discussion-nickname nickname" data-email="${found.email}"><i class="fas fa-user-edit" style="color: white"></i> &nbsp;&nbsp;${found.nickname}</div>
+                </h1>
                 <button
                         class="list-btn"
                         type="button"
@@ -43,6 +46,7 @@
                 >
                     목록
                 </button>
+
             </div>
             <div class="discussion-body">
                 <span class="discussion-date">${found.formattedDiscussionCreatedAt}</span>
@@ -52,8 +56,6 @@
                 </c:if>
 
             </div>
-            <div class="discussion-nickname nickname" data-email="${found.email}">작성자: ${found.nickname}</div>
-            <div class="discussion-media-name" data-media-no="${found.mediaNo}">미디어: ${found.mediaTitle}</div>
 
 
             <br>

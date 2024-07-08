@@ -105,7 +105,7 @@ const debounce = (func, delay) => {
 const handleInput = async (event) => {
     const searchQuery = event.target.value;
     if (searchQuery.trim() === '') {
-        document.querySelector('.fetch-wrap').innerHTML = '<div>검색 결과가 없습니다.</div>';
+        document.querySelector('.fetch-wrap').innerHTML = '<div class="empty-list">검색 결과가 없습니다.</div>';
         return;
     }
     const encodedQuery = encodeURIComponent(searchQuery);

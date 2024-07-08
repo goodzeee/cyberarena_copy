@@ -125,7 +125,6 @@ public class ReviewService {
 
     public ReviewAllowDto allowReview(long reviewNo) {
         ReviewAllowDto allowDto = reviewMapper.getAllowDto(reviewNo);
-        discussionMapper.setReviewNo(allowDto.getReviewNo(), allowDto.getMediaNo());
         return allowDto;
     }
 }

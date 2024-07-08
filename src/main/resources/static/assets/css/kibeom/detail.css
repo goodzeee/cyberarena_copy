@@ -341,13 +341,14 @@ div.modify-and-delete {
     margin-top: 10px;
     width: 100%;
     resize: none;
-
     border-radius: 5px;
     text-indent: 10px;
-    border: 1px solid #9e9a9a;
-
-
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    border: 1px solid #c5c3c3;
+    padding: 25px;
+    background: #393838;
+    
+    
 }
 
 .comment-card {
@@ -392,14 +393,16 @@ div.modify-and-delete {
     cursor: pointer;
     margin-left: 5px;
     border: none;
-    background: white;
     color: #8D8D8D;
+    background: none;
 }
 .cancelBtn {
     cursor: pointer;
     border: none;
-    background: white;
     color: #8D8D8D;
+
+    background: none;
+
 }
 
 div.comment-header-self {
@@ -466,7 +469,7 @@ div.button-wrap {
 .list-btn {
     background-color: #393838;
     border: 0;
-    color: white;
+    color: #B6B6B6;
     border-radius: 0.5em;
     font-size: 15px;
     padding: 0.375em 1em;
@@ -507,8 +510,22 @@ div.button-wrap {
     border-radius: 5px;
     padding: 5px 10px;
     font-size: 10px;
+    margin-bottom: 10px;
 }
 .discussion-media-name:hover, .nickname:hover {
     font-weight: 700;
     cursor: pointer;
+}
+
+.discussion-title div {
+    font-size: 15px;
+}
+
+.discussion-title div:first-child {
+    margin-top: 25px;
+    margin-bottom: 15px;
+    font-size: 18px;
+}
+input, textarea {
+    outline: none !important;
 }

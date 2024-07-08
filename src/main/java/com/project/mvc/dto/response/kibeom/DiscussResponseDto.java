@@ -27,8 +27,8 @@ public class DiscussResponseDto {
     public DiscussResponseDto(DiscussFindAllDto dto) {
         this.email = dto.getEmail();
         this.nickname = dto.getNickname();
-        this.discussionTitle = dto.getDiscussionTitle();
-        this.discussionOffer = makeShortContent(dto.getDiscussionOffer());
+        this.discussionTitle = makeShortContent(dto.getDiscussionTitle());
+        this.discussionOffer = dto.getDiscussionOffer();
         this.discussionCreatedAt = dto.getDiscussionCreatedAt();
         this.formattedDiscussionCreatedAt = dateFormatting(dto.getDiscussionCreatedAt()); // 포맷된 문자열 할당
         this.reviewNo = dto.getReviewNo();
@@ -45,7 +45,7 @@ public class DiscussResponseDto {
     }
 
     private String makeShortContent(String content) {
-        return (content.length() > 30) ? content.substring(0, 30) + "..." : content;
+        return (content.length() > 15) ? content.substring(0, 15) + "..." : content;
     }
 
     private String makeShortTitle(String title) {

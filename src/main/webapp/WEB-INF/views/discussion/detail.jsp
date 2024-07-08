@@ -35,7 +35,10 @@
         <div class="discussion-card">
 
             <div class="discussion-header">
-                <h1 class="discussion-title">${found.discussionTitle}</h1>
+                <h1 class="discussion-title">${found.discussionTitle}
+                    <div class="discussion-media-name" data-media-no="${found.mediaNo}">미디어 - ${found.mediaTitle}</div>
+                    <div class="discussion-nickname nickname" data-email="${found.email}"><i class="fas fa-user-edit" style="color: white"></i> &nbsp;&nbsp;${found.nickname}</div>
+                </h1>
                 <button
                         class="list-btn"
                         type="button"
@@ -43,8 +46,9 @@
                 >
                     목록
                 </button>
+
             </div>
-            <div class="discussion-body">
+            <div class="discussion-body" data-disc-no="${found.discussionNo}">
                 <span class="discussion-date">${found.formattedDiscussionCreatedAt}</span>
 
                 <c:if test="${login.nickname == found.nickname}">
@@ -52,8 +56,6 @@
                 </c:if>
 
             </div>
-            <div class="discussion-nickname nickname" data-email="${found.email}">작성자: ${found.nickname}</div>
-            <div class="discussion-media-name" data-media-no="${found.mediaNo}">미디어: ${found.mediaTitle}</div>
 
 
             <br>
@@ -138,7 +140,6 @@
     })
 
     document.querySelector("#whole").addEventListener("click", e => {
-        console.log("일단 눌렀을 경우")
         if(e.target.matches(".nickname")) {
             const email = e.target.dataset.email;
             window.location.href= `/user/user-info/\${email}`;
@@ -149,7 +150,6 @@
             window.location.href = `/review/list/\${mediaNo}`;
             return;
         }
-        console.log("안눌렸을 경우");
     })
 
 

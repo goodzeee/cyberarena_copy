@@ -482,9 +482,13 @@ p {
     border-radius: 5px;
     padding: 5px 10px;
     font-size: 10px;
+    margin-bottom: 10px;
+}
+
 }
 
 .nickname:hover {
     font-weight: 700;
     cursor: pointer;
 }
+

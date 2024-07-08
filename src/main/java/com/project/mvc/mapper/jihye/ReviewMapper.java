@@ -40,5 +40,7 @@ public interface ReviewMapper {
     List<ReviewAsideListDto> findAsideList();
 
     boolean updateMediaRating(long mediaNo);
+
+    boolean updateRatingWhenDeleteLastReview(long mediaNo);
 }
 

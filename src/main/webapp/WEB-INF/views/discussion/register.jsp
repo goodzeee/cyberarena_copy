@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -23,7 +25,13 @@
                         <input class="mediaName" type="text" name="mediaName" id="searchMediaInput" placeholder="검색어를 입력해주세요." value="${dto.mediaTitle}">
                     </label>
                     <label>
-                        주제 :<br> <input type="text" id="title" name="discussionTitle" value="${dto.nickname}님에게 결투신청">
+                        주제 :<br>
+                        <c:if test="${param.reviewNo != null}">
+                            <input type="text" id="title" name="discussionTitle" value="${dto.nickname}님에게 결투신청">
+                        </c:if>
+                        <c:if test="${param.reviewNo == null}">
+                            <input type="text" id="title" name="discussionTitle">
+                        </c:if>
                     </label>
                     <br>
                     <label>

@@ -277,18 +277,11 @@ footer {
     position: relative;
 }
 
-.footer-wrap img {
-    cursor: pointer;
-}
+
 .footer-wrap .footer-text {
     margin: auto 0;
     color: #B6B6B6;
-    cursor: pointer;
     z-index: 1;
-}
-.footer-wrap .footer-text:hover {
-    text-decoration: underline;
-    font-weight: 500;
 }
 
 /* 프로필 css */

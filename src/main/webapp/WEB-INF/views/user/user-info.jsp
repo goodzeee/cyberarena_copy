@@ -69,7 +69,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                             </c:otherwise>
                         </c:choose>
                     </div>
-                    <div class="review-content">
+                    <div class="review-contents">
                         <c:choose>
                             <c:when test="${reviews.size() == 0}">
                                 <h2 class="no-content">작성한 리뷰가 없습니다.</h2>
@@ -104,7 +104,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
             const $discussBtn = document.querySelector(".discuss-btn");
             const $reviewBtn = document.querySelector(".review-btn");
             const $disc = document.querySelector(".discuss-content");
-            const $review = document.querySelector(".review-content");
+            const $review = document.querySelector(".review-contents");
             const $hidden = document.querySelector("#hidden-content");
             const $followBtn = document.querySelector(".follow-btn");
             const infoUserEmail = document.querySelector(".name").dataset.targetEmail;

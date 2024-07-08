@@ -29,7 +29,7 @@ class MediaMapperTest {
         //when
         System.out.println("all = " + all);
         for (Media media : all) {
-            if (media.getCategoryNo() == 1) {
+            if (media.getCategoryNo() == 2) {
                 System.out.println(media.getMediaTitle());
             }
         }

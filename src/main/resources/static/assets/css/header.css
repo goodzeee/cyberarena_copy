@@ -2,9 +2,9 @@ header.main-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px;
   background-color: #000;
   color: white;
+  min-height: 75px;
 }
 header .login-user {
   position: absolute;

@@ -355,6 +355,7 @@ header .menu-open {
     align-items: center;
     text-decoration-line: none;
     color: white;
+    margin-right: 20px;
 }
 header .menu-open .lnr-menu {
     font-size: 33px;

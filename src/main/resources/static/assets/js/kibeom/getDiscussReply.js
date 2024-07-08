@@ -133,7 +133,7 @@ document.addEventListener('DOMContentLoaded', function () {
             </div>
             <div id="cancle-clear-btn" class="cancleAndClearBtn">
                     <button class="cancleBtn" data-rno="${comment.discussionReplyNo}">취소</button>
-                    <button class="clearBtn" data-rno="${comment.discussionReplyNo}" data-email="${comment.email}">완</button>
+                    <button class="clearBtn" data-rno="${comment.discussionReplyNo}" data-email="${comment.email}">완료</button>
             </div>`;
             } else { // 내가 쓴 글이 수정되지 않았을 때
                 tag += `

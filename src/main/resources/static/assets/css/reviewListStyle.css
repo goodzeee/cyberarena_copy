@@ -24,8 +24,10 @@ aside {
     height: calc(100vh - 67px - 20px);
     overflow-y: auto;
     border-radius: 15px;
+}
 
-
+aside::-webkit-scrollbar {
+    display: none;
 }
 
 #left-aside {
@@ -485,7 +487,7 @@ p {
     margin-bottom: 10px;
 }
 
-}
+
 
 .nickname:hover {
     font-weight: 700;

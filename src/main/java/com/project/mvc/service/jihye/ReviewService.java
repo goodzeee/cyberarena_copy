@@ -51,12 +51,17 @@ public class ReviewService {
 //        log.info("email: {}", email);
         LoginUserInfoDto login = (LoginUserInfoDto) session.getAttribute("login");
 
+
         List<ReviewDetailDto> dtoList = reviews.stream()
                 .map(r -> {
+                    String loginUserEmail = "";
+                    if (login != null) {
+                        loginUserEmail = login.getEmail();
+                    }
                     log.info("r: {}", r);
                     ReviewDetailDto dto = new ReviewDetailDto(r);
                     dto.setLikeCount(likeLogMapper.countLikes(r.getReviewNo()));
-                    LikeLog likeLog = likeLogMapper.findOne(r.getReviewNo(), login.getEmail());
+                    LikeLog likeLog = likeLogMapper.findOne(r.getReviewNo(), loginUserEmail);
                     log.info("likeLog: {}", likeLog);
                     dto.setUserReaction(likeLog != null ? "like" : null); // 사용자 리액션 상태 설정
                     return dto;

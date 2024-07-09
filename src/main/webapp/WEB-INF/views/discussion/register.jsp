@@ -35,7 +35,12 @@
                     </label>
                     <br>
                     <label>
-                        세부 내용 : <br><textarea type="text" id="detail" name="discussionOffer" placeholder="&nbsp;cyber-arena는 토론 수정 기능을 제공하고 있지 않습니다. &#13;&#10;&nbsp;신중하게 본인의 의견을 작성해주시길 바랍니다.&#13;&#10;&nbsp;타인에 대한 비방, 욕설, 성적인 발언 시 관리자 검토 하에 제한조치가 이뤄질 수 있습니다.">${dto.nickname}: ${dto.reviewText}</textarea>
+                        <c:if test="${param.reviewNo != null}">
+                            세부 내용 : <br><textarea type="text" id="detail" name="discussionOffer" placeholder="&nbsp;cyber-arena는 토론 수정 기능을 제공하고 있지 않습니다. &#13;&#10;&nbsp;신중하게 본인의 의견을 작성해주시길 바랍니다.&#13;&#10;&nbsp;타인에 대한 비방, 욕설, 성적인 발언 시 관리자 검토 하에 제한조치가 이뤄질 수 있습니다.">${dto.nickname}: ${dto.reviewText}</textarea>
+                        </c:if>
+                        <c:if test="${param.reviewNo == null}">
+                            세부 내용 : <br><textarea type="text" id="detail" name="discussionOffer" placeholder="&nbsp;cyber-arena는 토론 수정 기능을 제공하고 있지 않습니다. &#13;&#10;&nbsp;신중하게 본인의 의견을 작성해주시길 바랍니다.&#13;&#10;&nbsp;타인에 대한 비방, 욕설, 성적인 발언 시 관리자 검토 하에 제한조치가 이뤄질 수 있습니다."></textarea>
+                        </c:if>
                     </label>
                     <br>
                     <label>

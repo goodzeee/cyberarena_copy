@@ -297,7 +297,28 @@ main {
 }
 
 .login-info {
-    text-decoration: none;
+    /* text-decoration: none; */
+    text-align: center;
+}
+
+.comment-form {
+    display: flex;
+    flex-direction: column;
+    padding-top: 20px;
+    width: 100%;
+    position: relative;
+    padding-bottom: 20px;
+    border-radius: 10px;
+}
+
+.comment-form .login-info {
+    color: antiquewhite;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: none;
+    margin-bottom: 10px;
+    background: #393838;
 }
 
 #list-btn {

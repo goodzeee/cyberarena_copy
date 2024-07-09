@@ -93,7 +93,9 @@
 
             <!-- 리뷰 등록 폼 -->
             <c:if test="${empty login}">
-                   <a href="/user/sign-in?redirect=/review/list/${reviews.mediaNo}"><p class="login-info">리뷰 기능은 로그인 후 사용하실 수 있습니다 😏</p></a>
+                <div class="comment-form">
+                   <a style="text-decoration: none;" href="/user/sign-in?redirect=/review/list/${reviews.mediaNo}"><div class="login-info">리뷰 기능은 로그인 후 사용하실 수 있습니다 😏</div></a>
+                </div>
             </c:if>
 
             <c:if test = "${not empty login}">
@@ -280,7 +282,6 @@
 
         // 서버에 좋아요 요청 보내는 함수
 async function sendReaction(like, rno, button) {
-
     const res = await fetch(`/review/like?rno=\${rno}`);
     // const data = await res.json();
 
@@ -298,6 +299,15 @@ async function sendReaction(like, rno, button) {
     updateReactionButtons(button, userReaction);
 }
 
+// <div class="buttons" style="float: right; padding: 4px;">
+//             <div class="reaction-buttons">
+//                 <button class="like-btn ${review.userReaction == 'like' ? 'active' : '' }" data-liked="${review.userReaction == 'like'}" data-rno="${review.reviewNo}">
+//                     <i class="fas fa-thumbs-up"></i>like
+//                     <span id="like-count">${review.likeCount}</span>
+//                 </button>
+//             </div>
+// </div>
+
     // 좋아요 버튼 상태에 따라 배경색 변경
     function updateReactionButtons(button, userReaction) {
     console.log('Updating button state:', { button, userReaction });
@@ -314,6 +324,7 @@ async function sendReaction(like, rno, button) {
         console.log('Button is not active:', button);
     }
 }
+
 
     // 모든 좋아요 버튼에 대해 클릭 이벤트 주기
    document.querySelectorAll('.like-btn').forEach(button => {

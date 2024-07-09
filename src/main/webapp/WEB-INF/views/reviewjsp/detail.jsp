@@ -11,6 +11,7 @@
     <title>리뷰 관리</title>
     <!-- CSS 파일 링크 -->
     <link rel="stylesheet" href="/assets/css/reviewListStyle.css">
+            <link rel="icon" type="image/png" href="../../assets/img/favicon.png">
         <link rel="stylesheet" href="/assets/css/header.css" />
     <!-- FontAwesome 라이브러리 -->
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>

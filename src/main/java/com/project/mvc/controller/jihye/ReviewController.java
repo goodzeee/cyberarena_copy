@@ -57,7 +57,7 @@ public class ReviewController {
 
 //        LoginUserInfoDto loginUser = (LoginUserInfoDto) session.getAttribute("login");
 //        String email = loginUser.getEmail();
-        ReviewListDto reviewList = reviewService.findList(mno);
+        ReviewListDto reviewList = reviewService.findList(mno, session);
         List<DiscussAsideListDto> asideList = discussionService.findAsideList();
         List<MediaAsideListDto> mList = mediaService.findAsideList();
 
@@ -86,7 +86,7 @@ public class ReviewController {
         boolean flag = reviewService.register(dto, session);
         if (flag) {
             log.info("Review successfully registered");
-            ReviewListDto reviewListDto = reviewService.findList(dto.getMediaNo());
+            ReviewListDto reviewListDto = reviewService.findList(dto.getMediaNo(), session);
             return ResponseEntity.ok(reviewListDto);
         } else {
             log.warn("Failed to register review");
@@ -107,7 +107,7 @@ public class ReviewController {
     // 3. 리뷰 수정 요청
 //    @RequestMapping(method = {RequestMethod.PUT, RequestMethod.PATCH})
     @PostMapping("/modify")
-    public ResponseEntity<?> modify(@Valid @RequestBody ReviewModifyDto dto, BindingResult result) {
+    public ResponseEntity<?> modify(@Valid @RequestBody ReviewModifyDto dto, BindingResult result, HttpSession session) {
         log.info("/review/modify : POST");
         log.debug("parameter - {}", dto);
 
@@ -119,19 +119,19 @@ public class ReviewController {
                     .body(errors);
         }
 
-        ReviewListDto reviewListDto = reviewService.modify(dto);
+        ReviewListDto reviewListDto = reviewService.modify(dto, session);
 
         return ResponseEntity.ok().body(reviewListDto);
     }
 
     // 4. 리뷰 삭제 처리 요청 (GET 방식)
     @GetMapping("/delete/{mno}")
-    public String getDelete(@RequestParam("reviewNo") long reviewNo, @PathVariable("mno") long mno) {
+    public String getDelete(@RequestParam("reviewNo") long reviewNo, @PathVariable("mno") long mno, HttpSession session) {
         System.out.println("/review/delete GET");
         log.info("reviewNo : {}", reviewNo);
         log.info("mno : {}", mno);
 
-        ReviewListDto removed = reviewService.getRemove(reviewNo);
+        ReviewListDto removed = reviewService.getRemove(reviewNo, session);
 
         return "redirect:/review/list/" + mno;
     }

@@ -32,7 +32,7 @@ public class ReviewService {
     private final DiscussionMapper discussionMapper;
 
     // 1. 특정 미디어에 달린 리뷰 목록 조회 요청 중간처리
-    public ReviewListDto findList(long mediaNo) {
+    public ReviewListDto findList(long mediaNo, HttpSession session) {
         List<ReviewFindAllDto> reviews = reviewMapper.findAll(mediaNo);
 //        int totalReviewCount = reviewMapper.count(mediaNo);
 
@@ -49,12 +49,14 @@ public class ReviewService {
 //        responseDto.setUserReaction(type);
 
 //        log.info("email: {}", email);
+        LoginUserInfoDto login = (LoginUserInfoDto) session.getAttribute("login");
+
         List<ReviewDetailDto> dtoList = reviews.stream()
                 .map(r -> {
                     log.info("r: {}", r);
                     ReviewDetailDto dto = new ReviewDetailDto(r);
                     dto.setLikeCount(likeLogMapper.countLikes(r.getReviewNo()));
-                    LikeLog likeLog = likeLogMapper.findOne(r.getReviewNo(), r.getEmail());
+                    LikeLog likeLog = likeLogMapper.findOne(r.getReviewNo(), login.getEmail());
                     log.info("likeLog: {}", likeLog);
                     dto.setUserReaction(likeLog != null ? "like" : null); // 사용자 리액션 상태 설정
                     return dto;
@@ -87,11 +89,11 @@ public class ReviewService {
     }
 
     // 3. 리뷰 수정
-    public ReviewListDto modify(ReviewModifyDto dto) {
+    public ReviewListDto modify(ReviewModifyDto dto, HttpSession session) {
 
         reviewMapper.modify(dto.toEntity());
         reviewMapper.updateMediaRating(dto.getMno());
-        return findList(dto.getReviewNo());
+        return findList(dto.getReviewNo(), session);
     }
 
     // 4. 리뷰 삭제
@@ -100,7 +102,7 @@ public class ReviewService {
 //    }
 
     // 4. 리뷰 삭제
-    public ReviewListDto getRemove(long reviewNo) {
+    public ReviewListDto getRemove(long reviewNo, HttpSession session) {
         log.info("Removing reviewNo: {}", reviewNo);
 
         // 리뷰 번호로 원본 미디어 번호 찾기
@@ -108,7 +110,7 @@ public class ReviewService {
         log.info("mno: {}", mno);
         // 찾은 리뷰 번호 삭제
         boolean flag = reviewMapper.delete(reviewNo);
-        ReviewListDto list = findList(mno);
+        ReviewListDto list = findList(mno, session);
         if (list.getReviews().isEmpty()) {
             reviewMapper.updateRatingWhenDeleteLastReview(mno);
         } else {

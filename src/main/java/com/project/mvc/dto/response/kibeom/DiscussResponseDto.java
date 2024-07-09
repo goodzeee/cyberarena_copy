@@ -45,7 +45,7 @@ public class DiscussResponseDto {
     }
 
     private String makeShortContent(String content) {
-        return (content.length() > 15) ? content.substring(0, 15) + "..." : content;
+        return (content.length() > 13) ? content.substring(0, 13) + "..." : content;
     }
 
     private String makeShortTitle(String title) {

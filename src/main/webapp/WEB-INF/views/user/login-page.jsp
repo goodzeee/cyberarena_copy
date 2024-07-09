@@ -201,7 +201,7 @@ pageEncoding="UTF-8"%>
                 const flag = !(newPwFlag && newPwChkFlag);
 
                 if (flag) {
-                    $submit.style.background = "gray";
+                    $submit.style.background = "#000";
                     $submit.disabled = true;
                 } else {
                     $submit.style.background = "#4CAF50";

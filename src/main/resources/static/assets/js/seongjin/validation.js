@@ -30,7 +30,7 @@ function checkPass() {
     // $submit.disabled = flag;
     if (flag) {
         // console.log("닫힘");
-        $submit.style.background = "gray";
+        $submit.style.background = "#000";
         $submit.disabled = true;
     } else {
         // console.log("열림");

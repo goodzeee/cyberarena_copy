@@ -55,6 +55,9 @@ div.fetch-wrap {
     right: 5%;
     display: none;
 }
+div.fetch-wrap::-webkit-scrollbar {
+    display: none;
+}
 
 
 .modal-content {

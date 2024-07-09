@@ -45,8 +45,8 @@
                     <br>
                     <label>
                         <div class="bottom-wrap">
-                            <input type="submit" id="finish" value="작성 완료">
-                            <button type="button" id="cancelButton" onclick="window.location.href='/discussion/list'">작성
+                            <input type="submit" id="finish" value="작성 완료" disabled>
+                            <button type="button" id="cancelButton" onclick="window.location.href='/discussion/list'" >작성
                                 취소
                             </button>
                         </div>

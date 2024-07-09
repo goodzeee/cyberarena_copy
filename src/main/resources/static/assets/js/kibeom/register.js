@@ -3,6 +3,8 @@ const $title = document.getElementById('title');
 const $offer = document.getElementById('detail');
 const $media = document.getElementById('searchMediaInput')
 const $fetchWrap = document.querySelector('.fetch-wrap');
+const $wrap = document.querySelector('.content-wrap')
+
 // const $media = document.getElementById('media');
 
 // const $modalWrap = document.querySelector('.modal-wrap');
@@ -19,7 +21,7 @@ if (reviewNo) {
     $title.style.backgroundColor = "#9F9E9E";
     $offer.style.backgroundColor = "#9F9E9E";
     $media.style.backgroundColor = "#9F9E9E";
-    let isValidate = [true, true, true];
+    $finishBtn.disabled = false;
 }
 
 
@@ -59,7 +61,7 @@ $media.addEventListener('keyup', e => {
 
 
 for (let i = 0; i < validate.length; i++) {
-    validate[i].addEventListener('keyup', e => {
+    $wrap.addEventListener('keyup', e => {
         if (validate[i].value !== '' ) {
             isValidate[i] = true;
         } else {
@@ -68,10 +70,12 @@ for (let i = 0; i < validate.length; i++) {
         // 미디어값 비어도 완료 들어감, 예외처리 해야함
 
         if (isValidate[0] && isValidate[1] && isValidate[2]) {
+            $finishBtn.disabled = false;
             $finishBtn.style.cursor = 'pointer';
             $finishBtn.style.backgroundColor = "#9F9E9E";
             $finishBtn.setAttribute('type', 'submit');
         } else {
+            $finishBtn.disabled = true;
             $finishBtn.style.cursor = 'default';
             $finishBtn.style.width = '100px'
             $finishBtn.style.backgroundColor = "#393838";

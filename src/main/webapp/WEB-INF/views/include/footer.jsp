@@ -11,7 +11,7 @@
         <div class="footer-text">
             © cyber-arena-club 2024
             All Rights Reseved
-        </div>
+        </div>₩
     </div>
 </footer>
 <!-- footer end -->

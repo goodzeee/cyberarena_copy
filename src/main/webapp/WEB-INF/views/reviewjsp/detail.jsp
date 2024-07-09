@@ -11,12 +11,46 @@
     <title>리뷰 관리</title>
     <!-- CSS 파일 링크 -->
     <link rel="stylesheet" href="/assets/css/reviewListStyle.css">
+        <link rel="stylesheet" href="/assets/css/header.css" />
     <!-- FontAwesome 라이브러리 -->
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <%-- 공통 header 부분 include --%>
-    <%@ include file="../include/header.jsp"%>
+    <header class="main-header">
+        <a href="/index">
+            <div class="logo" ><img class="main-logo" src="../../assets/img/logo2.png"/></div>
+        </a>
+        <c:if test="${login != null}">
+            <div class="login-user"><a href="/user/mypage"> ${login.nickname} </a>님 환영합니다.</div>
+        </c:if>
+
+        <a href="#" class="menu-open">
+            <span class="lnr lnr-menu"></span>
+        </a>
+
+        <nav class="gnb">
+            <a href="#" class="close">
+                <span class="lnr lnr-cross"></span>
+            </a>
+            <ul>
+                <c:choose>
+                    <c:when test="${login == null}">
+                        <li><a href="/user/sign-up">회원 가입</a></li>
+                        <li><a href="/user/sign-in">로그인</a></li>
+                    </c:when>
+                    <c:otherwise>
+                        <li><a href="/user/mypage">마이페이지</a></li>
+                        <li><a href="/user/sign-out">로그아웃</a></li>
+                    </c:otherwise>
+                </c:choose>
+                <li><a href="/media/movie">영화</a></li>
+                <li><a href="/media/series">시리즈</a></li>
+                <li><a href="/media/book">도서</a></li>
+                <li><a href="/discussion/list">토론 게시판</a></li>
+            </ul>
+        </nav>
+    </header>
 <div id="whole">
     <aside id="left-aside">
         <div class="aside-wrap">
@@ -59,7 +93,9 @@
 
             <!-- 리뷰 등록 폼 -->
             <c:if test="${empty login}">
-                   <a href="/user/sign-in?redirect=/review/list/${reviews.mediaNo}"><p class="login-info">리뷰 기능은 로그인 후 사용하실 수 있습니다 😏</p></a>
+                <div class="comment-form">
+                   <a style="text-decoration: none;" href="/user/sign-in?redirect=/review/list/${reviews.mediaNo}"><div class="login-info">리뷰 기능은 로그인 후 사용하실 수 있습니다 😏</div></a>
+                </div>
             </c:if>
 
             <c:if test = "${not empty login}">
@@ -123,7 +159,7 @@
         <c:choose>
             <c:when test="${review.discussionStatus == 'ALLOW'}">
                 <!--href="/discussion/register" 토론 작성 페이지가 바로 뜨면 좋은데 ... -->
-                <p><strong>토론신청 허용 여부:</strong> <a class="allow-link" href="/discussion/write">ALLOW</a></p>
+                <p><strong>토론신청 허용 여부:</strong> <a href="/discussion/register?reviewNo=${review.reviewNo}">ALLOW</a></p>
             </c:when>
             <c:otherwise>
                 <p><strong>토론신청 허용 여부:</strong> DISALLOW</p>
@@ -229,14 +265,23 @@
     </aside>
 
 </div>
-    <%@ include file="../include/footer.jsp" %>
+    <footer>
+        <div class="footer-wrap">
+            <div class="image-wrap">
+                <img class="main-logo" src="../../assets/img/logo2.png"/>
+            </div>
+            <div class="footer-text">
+                © cyber-arena-club 2024
+                All Rights Reseved
+            </div>
+        </div>
+    </footer>
 
 
     <script>
 
         // 서버에 좋아요 요청 보내는 함수
 async function sendReaction(like, rno, button) {
-
     const res = await fetch(`/review/like?rno=\${rno}`);
     // const data = await res.json();
 
@@ -254,6 +299,15 @@ async function sendReaction(like, rno, button) {
     updateReactionButtons(button, userReaction);
 }
 
+// <div class="buttons" style="float: right; padding: 4px;">
+//             <div class="reaction-buttons">
+//                 <button class="like-btn ${review.userReaction == 'like' ? 'active' : '' }" data-liked="${review.userReaction == 'like'}" data-rno="${review.reviewNo}">
+//                     <i class="fas fa-thumbs-up"></i>like
+//                     <span id="like-count">${review.likeCount}</span>
+//                 </button>
+//             </div>
+// </div>
+
     // 좋아요 버튼 상태에 따라 배경색 변경
     function updateReactionButtons(button, userReaction) {
     console.log('Updating button state:', { button, userReaction });
@@ -270,6 +324,7 @@ async function sendReaction(like, rno, button) {
         console.log('Button is not active:', button);
     }
 }
+
 
     // 모든 좋아요 버튼에 대해 클릭 이벤트 주기
    document.querySelectorAll('.like-btn').forEach(button => {

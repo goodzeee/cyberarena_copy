@@ -71,6 +71,7 @@ main {
   width: 180px;
   filter: invert();
   margin-bottom: 20px;
+    margin-left: 65px;
 }
 
 .main-box h2 {

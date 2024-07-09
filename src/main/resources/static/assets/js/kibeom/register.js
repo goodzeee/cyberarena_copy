@@ -7,6 +7,22 @@ const $fetchWrap = document.querySelector('.fetch-wrap');
 
 // const $modalWrap = document.querySelector('.modal-wrap');
 
+function getQueryParam(param) {
+    let urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(param);
+}
+
+// dno 값을 읽어와서 콘솔에 출력
+let reviewNo = getQueryParam('reviewNo');
+
+if (reviewNo) {
+    $title.style.backgroundColor = "#9F9E9E";
+    $offer.style.backgroundColor = "#9F9E9E";
+    $media.style.backgroundColor = "#9F9E9E";
+    let isValidate = [true, true, true];
+}
+
+
 $media.addEventListener('keydown', e => {
     $fetchWrap.style.display = 'block';
 })
